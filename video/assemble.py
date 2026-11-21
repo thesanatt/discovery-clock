@@ -32,7 +32,7 @@ BAD = "0xa1241a"
 MONO = "C\\:/Windows/Fonts/consolab.ttf"
 SANS = "C\\:/Windows/Fonts/segoeui.ttf"
 SANSB = "C\\:/Windows/Fonts/seguisb.ttf"
-GAP = 0.30          # silence after each line
+GAP = 0.20          # silence after each line
 ENC = ["-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p", "-r", str(FPS), "-an"]
 
 
@@ -105,7 +105,7 @@ def main() -> None:
     seg.mkdir(parents=True, exist_ok=True)
 
     # 1. cold open: the red row of the real app, slow push-in
-    still(app, seg / "01.mp4", d[0], crop="1200:560:400:130", zoom_to=1.06)
+    still(app, seg / "01.mp4", d[0], crop="1216:684:384:120", zoom_to=1.05)
     # 2. the phone recording that result came from
     phone(footage, seg / "02.mp4", d[1], 0.0, min(24.0, res["video"]["duration"] - 0.5), [
         ("PHONE RECORDING", 70, 26, MONO, INK),
@@ -115,7 +115,7 @@ def main() -> None:
         (f"Step {skipped['index'] + 1} never happens.", 250 + 44 * len(steps) + 30, 34, SANSB, BAD),
     ])
     # 3. the whole result page
-    still(app, seg / "03.mp4", d[2], zoom_to=1.0)
+    still(app, seg / "03.mp4", d[2], zoom_to=1.10)
     # 4. how it works, animated from the same result
     retime(OUT / "s4_math.mp4", seg / "04.mp4", d[3])
     # 5 + 6. results on held-out clips

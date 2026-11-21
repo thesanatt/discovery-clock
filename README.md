@@ -144,6 +144,23 @@ The rule makes every witness stricter. Against version 2 on the third split, rec
 
 The picture is the same on all four splits (418 held-out clips): the fused system ties the best single call on yes/no accuracy, is level or a few points better on timing, and is the only one that gives a probability.
 
+### Pushing length until it breaks
+
+Everything above is 10 to 35 second clips. As a stress test I ran version 3 on two CaptainCook4D kitchen recordings (head-mounted camera, human labels for every recipe step), 14 to 40 times longer. Two recordings is an anecdote, not a score; the per-step output is in `results/long_video.json`.
+
+| Recording | Length | Steps | Decisions ladder | Slowest witness | Steps done, read as done | Skipped step caught | Median start error |
+|-|-|-|-|-|-|-|-|
+| Microwave egg sandwich | 7.9 min | 12, one skipped | 20.7 s, 101K tokens, one time point every 12 s | 78 s, 163K tokens | 11 of 11 | 0 of 1 | 25 s |
+| Second recipe | 21.5 min | 16, none skipped | 40.1 s, 206K tokens, one time point every 33 s | 142 s, 445K tokens | 16 of 16 | none to catch | 6 s |
+
+What broke:
+- The one skipped step. In the 8 minute recording every witness and the fused system said the skipped step had happened.
+- Timing. Start times are off by 6 to 25 seconds at the median, against half a second on short clips.
+- The ladder. One Decisions call still holds a 21 minute video (206K of its 262K tokens), but with 16 steps it can only afford a time point every 33 seconds, so its own start times are off by more than a minute. A coarse pass followed by a fine pass on each step's window is the obvious next step and is not built.
+- Latency. The full read takes one to two and a half minutes, not twelve seconds.
+
+What held: nothing hit a context limit, and no step that was done was read as missing.
+
 ### The Carbon baseline
 
 One `gemini-4-carbon` call at high thinking, same prompt and output format. It is the most accurate single call on the clips it finished, and too slow to use live: about 110 seconds per clip at the median, and in my runs it timed out often enough that the wrapper fell back to Neon on a large share of clips. See `results/` for the exact counts at the time of the last run.
@@ -208,6 +225,7 @@ Per-clip outputs of every run are in `results/`.
 | `eval/` | Data loader and split rule, eval runner, parameter fitting, scoring and the final report. |
 | `results/` | Reports and per-clip outputs from the runs described above. |
 | `probe.py` | The first go or no-go test: does the Decisions model track time inside a video. |
+| `video/` | Scripts that build the one-minute demo video from a real run: animated charts, generated voice, assembly. |
 
 ## Data and licenses
 
@@ -226,6 +244,6 @@ Median input tokens per call on a 20 to 30 second clip, from `runs/calls.jsonl`:
 
 ## Limits
 
-- All scores are on benchmark clips of 10 to 35 seconds. Nothing here was measured on a real job site.
+- All scores are on benchmark clips of 10 to 35 seconds. On two recordings of 8 and 21 minutes it missed the one skipped step and its timing was 10 to 50 times worse. Nothing here was measured on a real job site.
 - It does not prove that a step was skipped. It ranks steps by how likely they are to have been skipped, and a person checks.
 - Labels in the benchmark are generic ("Putting something into something"). Typed checklists with specific objects may behave differently.

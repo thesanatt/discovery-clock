@@ -1,0 +1,196 @@
+[
+ {
+  "id": "1_10",
+  "recipe": "Microwave Egg Sandwich",
+  "minutes": 7.9,
+  "steps": 12,
+  "skipped_steps": [
+   2
+  ],
+  "calls": {
+   "ladder": {
+    "ok": true,
+    "seconds": 20.7,
+    "input_tokens": 101414,
+    "questions": 492,
+    "grid_step_s": 12
+   },
+   "hydrogen4": {
+    "ok": true,
+    "seconds": 55.9,
+    "model": "gemini-4-hydrogen",
+    "input_tokens": 163431
+   },
+   "hydrogen2": {
+    "ok": true,
+    "seconds": 54.1,
+    "model": "gemini-4-hydrogen",
+    "input_tokens": 90589
+   },
+   "neon4": {
+    "ok": true,
+    "seconds": 78.0,
+    "model": "gemini-4-neon",
+    "input_tokens": 163431
+   },
+   "hydrogen_1fps_low": {
+    "ok": true,
+    "seconds": 55.0,
+    "model": "gemini-4-hydrogen",
+    "input_tokens": 50380
+   }
+  },
+  "scores": {
+   "hydrogen4": {
+    "skipped_caught": 0,
+    "skipped_total": 1,
+    "done_read_done": 11,
+    "done_total": 11,
+    "within_10s": 2,
+    "within_30s": 7,
+    "median_start_error_s": 25.8
+   },
+   "hydrogen2": {
+    "skipped_caught": 0,
+    "skipped_total": 1,
+    "done_read_done": 11,
+    "done_total": 11,
+    "within_10s": 2,
+    "within_30s": 7,
+    "median_start_error_s": 24.3
+   },
+   "neon4": {
+    "skipped_caught": 0,
+    "skipped_total": 1,
+    "done_read_done": 11,
+    "done_total": 11,
+    "within_10s": 2,
+    "within_30s": 8,
+    "median_start_error_s": 25.8
+   },
+   "hydrogen_1fps_low": {
+    "skipped_caught": 0,
+    "skipped_total": 1,
+    "done_read_done": 11,
+    "done_total": 11,
+    "within_10s": 3,
+    "within_30s": 9,
+    "median_start_error_s": 24.3
+   },
+   "ladder": {
+    "skipped_caught": 0,
+    "skipped_total": 1,
+    "done_read_done": 11,
+    "done_total": 11,
+    "within_10s": 4,
+    "within_30s": 10,
+    "median_start_error_s": 17.2
+   },
+   "fused (witnesses that answered: hydrogen2, hydrogen4, neon4, ladder)": {
+    "skipped_caught": 0,
+    "skipped_total": 1,
+    "done_read_done": 11,
+    "done_total": 11,
+    "within_10s": 2,
+    "within_30s": 7,
+    "median_start_error_s": 25.3
+   }
+  }
+ },
+ {
+  "id": "2_17",
+  "recipe": "Dressed Up Meatballs",
+  "minutes": 21.5,
+  "steps": 16,
+  "skipped_steps": [],
+  "calls": {
+   "ladder": {
+    "ok": true,
+    "seconds": 40.1,
+    "input_tokens": 205508,
+    "questions": 656,
+    "grid_step_s": 33
+   },
+   "hydrogen4": {
+    "ok": true,
+    "seconds": 142.0,
+    "model": "gemini-4-hydrogen",
+    "input_tokens": 445230
+   },
+   "hydrogen2": {
+    "ok": true,
+    "seconds": 100.2,
+    "model": "gemini-4-hydrogen",
+    "input_tokens": 246262
+   },
+   "neon4": {
+    "ok": true,
+    "seconds": 116.0,
+    "model": "gemini-4-neon",
+    "input_tokens": 445230
+   },
+   "hydrogen_1fps_low": {
+    "ok": true,
+    "seconds": 101.1,
+    "model": "gemini-4-hydrogen",
+    "input_tokens": 136436
+   }
+  },
+  "scores": {
+   "hydrogen4": {
+    "skipped_caught": 0,
+    "skipped_total": 0,
+    "done_read_done": 16,
+    "done_total": 16,
+    "within_10s": 10,
+    "within_30s": 11,
+    "median_start_error_s": 7.7
+   },
+   "hydrogen2": {
+    "skipped_caught": 0,
+    "skipped_total": 0,
+    "done_read_done": 16,
+    "done_total": 16,
+    "within_10s": 10,
+    "within_30s": 10,
+    "median_start_error_s": 6.3
+   },
+   "neon4": {
+    "skipped_caught": 0,
+    "skipped_total": 0,
+    "done_read_done": 16,
+    "done_total": 16,
+    "within_10s": 10,
+    "within_30s": 10,
+    "median_start_error_s": 7.3
+   },
+   "hydrogen_1fps_low": {
+    "skipped_caught": 0,
+    "skipped_total": 0,
+    "done_read_done": 16,
+    "done_total": 16,
+    "within_10s": 9,
+    "within_30s": 10,
+    "median_start_error_s": 9.0
+   },
+   "ladder": {
+    "skipped_caught": 0,
+    "skipped_total": 0,
+    "done_read_done": 11,
+    "done_total": 16,
+    "within_10s": 0,
+    "within_30s": 2,
+    "median_start_error_s": 87.3
+   },
+   "fused (witnesses that answered: hydrogen2, hydrogen4, neon4, ladder)": {
+    "skipped_caught": 0,
+    "skipped_total": 0,
+    "done_read_done": 16,
+    "done_total": 16,
+    "within_10s": 10,
+    "within_30s": 10,
+    "median_start_error_s": 6.3
+   }
+  }
+ }
+]
