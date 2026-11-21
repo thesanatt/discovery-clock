@@ -292,7 +292,7 @@ Per-clip outputs of every run are in `results/`.
 | `eval/` | Data loader and split rule, eval runner, parameter fitting, scoring and the final report. |
 | `results/` | Reports and per-clip outputs from the runs described above. |
 | `probe.py` | The first go or no-go test: does the Decisions model track time inside a video. |
-| `video/` | Scripts that build the one-minute demo video from a real run: animated charts, generated voice, assembly. |
+| `video/` | Scripts that build the one-minute demo video from a real run: animated charts, on-screen captions, music generated with Google's Lyria 3.5 (`video/make_music.py`), assembly. An earlier cut used a generated voice (`video/make_voice.py`, Gemini TTS). |
 
 ## Data and licenses
 

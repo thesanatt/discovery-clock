@@ -7,8 +7,12 @@ Inputs (made by the other scripts in this folder, or recorded):
   video/out/vo_01.wav ... vo_09.wav                                  (video/make_voice.py, or a human recording)
 
   python video/assemble.py [--voice-dir video/out] [--out video/out/discovery_clock_demo.mp4]
+  python video/assemble.py --captions [--music video/out/music_1.wav] [--out ...]
 
-Each voice line sets the length of its picture. Everything shown is the real app or real data.
+Each voice line sets the length of its picture. With --captions there is no voice: the lines are
+shown as text in a band under the picture, each for the time in CAPTIONS, and --music lays a
+quiet music track under them (video/make_music.py makes one). Everything shown is the real app
+or real data.
 """
 from __future__ import annotations
 
@@ -29,15 +33,37 @@ W, H, FPS = 1280, 720, 30
 PAPER = "0x15171a"
 INK = "0xe6e2d8"
 BAD = "0xf08a7e"
-MONO = "C\\:/Windows/Fonts/consolab.ttf"
+MONO = "C\\:/Windows/Fonts/seguisb.ttf"   # labels; was a monospace face
 SANS = "C\\:/Windows/Fonts/segoeui.ttf"
 SANSB = "C\\:/Windows/Fonts/seguisb.ttf"
 GAP = 0.20          # silence after each line
+SERIF = "C\\:/Windows/Fonts/SitkaVF.ttf"
+RULE = "0x3b4047"
+# --captions: (seconds on screen, text). About 2.5 to 2.9 words a second, a comfortable reading pace.
+# The last picture is the end card, which carries its own words.
+CAPTIONS = [
+    (4.0, "This order shipped without the watch. The packing video already knew."),
+    (5.2, "Sellers film every order. Nobody watches until a customer says an item is missing."),
+    (10.0, "Discovery Clock checks a video against a typed checklist. First read in a few seconds: "
+           "one Gemini Decisions API call, seventy yes or no questions."),
+    (9.2, "Three Gemini 4 calls write their own timelines. Bayes' rule weighs each witness by "
+          "measured reliability: a probability and a start time per step."),
+    (7.0, "518 held-out clips from DeepMind's Perception Test. It catches skipped steps as well as "
+          "a single Gemini 4 call."),
+    (6.2, "What it adds is odds that hold up. Of the steps it rated above 80 percent, 97 percent had happened."),
+    (7.6, "People fake steps. Version 2 fell for it in 4 of 6 runs. Version 3, with a completion rule, in 2 of 14."),
+    (6.8, "It still makes mistakes, and the README lists them. It decides nothing. "
+          "It tells a person which four seconds to watch."),
+    (3.8, ""),
+]
+CAP_WRAP = 78        # characters per caption line
+MUSIC_MEAN_DB = -21.0
 ENC = ["-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p", "-r", str(FPS), "-an"]
 
 
 def run(args: list[str]) -> None:
-    res = subprocess.run([FF, "-y", "-loglevel", "error", *args], capture_output=True, text=True, errors="replace")
+    res = subprocess.run([FF, "-y", "-loglevel", "error", *args], capture_output=True, text=True, errors="replace",
+                         cwd=str(ROOT))
     if res.returncode != 0:
         raise RuntimeError(res.stderr[-600:])
 
@@ -84,17 +110,66 @@ def phone(src: Path, dst: Path, dur: float, start: float, length: float, lines: 
     run(["-i", str(src), "-filter_complex", fc, "-map", "[o]", "-t", f"{dur:.3f}", *ENC, str(dst)])
 
 
+def wrap(words: str) -> list[str]:
+    """One or two balanced lines of at most CAP_WRAP characters."""
+    if len(words) <= CAP_WRAP:
+        return [words] if words else []
+    parts, best = words.split(), None
+    for i in range(1, len(parts)):
+        a, b = " ".join(parts[:i]), " ".join(parts[i:])
+        if len(a) <= CAP_WRAP and len(b) <= CAP_WRAP and (best is None or abs(len(a) - len(b)) < abs(len(best[0]) - len(best[1]))):
+            best = (a, b)
+    if best is None:
+        raise ValueError(f"caption too long for two lines: {words}")
+    return list(best)
+
+
+def caption_band(src: Path, dst: Path, seg: Path) -> None:
+    """Shrink the picture a little and show each caption in a band under it, with a short fade."""
+    vf = [f"scale=1088:612:flags=lanczos,pad={W}:{H}:96:8:color={PAPER}",
+          f"drawbox=x=96:y=630:w=1088:h=1:color={RULE}:t=fill"]
+    t0 = 0.0
+    for i, (secs, words) in enumerate(CAPTIONS):
+        lines = wrap(words)
+        for j, line in enumerate(lines):
+            f = seg / f"cap_{i}_{j}.txt"
+            f.write_text(line, encoding="ascii")
+            y = 664 if len(lines) == 1 else 646 + 37 * j
+            a, b = t0 + 0.05, t0 + secs - 0.05
+            vf.append(f"drawtext=fontfile='{SERIF}':textfile='{f.relative_to(ROOT).as_posix()}':x=(w-text_w)/2:y={y}:"
+                      f"fontsize=28:fontcolor={INK}:alpha='min(1,min((t-{a:.2f})/0.3,({b:.2f}-t)/0.3))':"
+                      f"enable='between(t,{a:.2f},{b:.2f})'")
+        t0 += secs
+    run(["-i", str(src), "-vf", ",".join(vf), *ENC, str(dst)])
+
+
+def music_track(src: Path, dst: Path, total: float) -> None:
+    """Cut the music to the video's length, fade both ends and set a quiet, even level."""
+    probe = subprocess.run([FF, "-hide_banner", "-t", f"{total:.2f}", "-i", str(src), "-af", "volumedetect", "-f", "null", "-"],
+                           capture_output=True, text=True, errors="replace").stderr
+    mean = float(probe.split("mean_volume:")[1].split("dB")[0])
+    peak = float(probe.split("max_volume:")[1].split("dB")[0])
+    gain = min(MUSIC_MEAN_DB - mean, -2.0 - peak)
+    run(["-i", str(src), "-af", f"atrim=0:{total:.2f},afade=t=in:st=0:d=1.2,afade=t=out:st={total - 2.6:.2f}:d=2.6,volume={gain:.1f}dB",
+         "-ar", "48000", "-ac", "2", "-c:a", "pcm_s16le", str(dst)])
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--voice-dir", default=str(OUT))
     ap.add_argument("--out", default=str(OUT / "discovery_clock_demo.mp4"))
+    ap.add_argument("--captions", action="store_true", help="no voice: show the lines as text under the picture")
+    ap.add_argument("--music", default="", help="with --captions: a music file to lay under the text")
     args = ap.parse_args()
     vdir = Path(args.voice_dir)
     vo = [vdir / f"vo_{i:02d}.wav" for i in range(1, 10)]
-    for f in vo:
-        if not f.exists():
-            sys.exit(f"missing voice line {f}")
-    d = [media.duration_s(f) + GAP for f in vo]          # picture length for each line
+    if args.captions:
+        d = [secs for secs, _ in CAPTIONS]
+    else:
+        for f in vo:
+            if not f.exists():
+                sys.exit(f"missing voice line {f}")
+        d = [media.duration_s(f) + GAP for f in vo]          # picture length for each line
     app = ASSETS / "app_dark_1600x900.png"
     footage = ASSETS / "phone.mp4"
     res = json.load(open(ASSETS / "take4_result.json", encoding="ascii"))["fused"]
@@ -137,6 +212,24 @@ def main() -> None:
     order = ["01", "02", "03", "04", "0506", "07", "08", "09"]
     (seg / "list.txt").write_text("".join(f"file '{(seg / (n + '.mp4')).as_posix()}'\n" for n in order), encoding="ascii")
     run(["-f", "concat", "-safe", "0", "-i", str(seg / "list.txt"), "-c", "copy", str(seg / "picture.mp4")])
+
+    if args.captions:
+        caption_band(seg / "picture.mp4", seg / "captioned.mp4", seg)
+        total = media.duration_s(seg / "captioned.mp4")
+        has_music = bool(args.music) and Path(args.music).exists()
+        if has_music:
+            music_track(Path(args.music), seg / "music.wav", total)
+            run(["-i", str(seg / "captioned.mp4"), "-i", str(seg / "music.wav"), "-c:v", "copy", "-c:a", "aac", "-b:a", "192k",
+                 "-shortest", "-movflags", "+faststart", args.out])
+        else:
+            run(["-i", str(seg / "captioned.mp4"), "-f", "lavfi", "-t", f"{total:.2f}", "-i", "anullsrc=r=48000:cl=stereo",
+                 "-c:v", "copy", "-c:a", "aac", "-b:a", "96k", "-shortest", "-movflags", "+faststart", args.out])
+        total = media.duration_s(args.out)
+        print(f"written {args.out}: {total:.1f} s; captions, music {'yes' if has_music else 'no'}; "
+              f"line lengths {[round(x, 1) for x in d]}")
+        if total > 60.5:
+            print("WARNING: over one minute.")
+        return
 
     # voice track: each line padded to its picture length
     inputs, parts = [], []

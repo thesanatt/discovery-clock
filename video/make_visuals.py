@@ -50,8 +50,11 @@ BLUE = "#78b0e0"
 BAND = "#2e4f70"
 
 _F = "C:/Windows/Fonts/"
-MONO = font_manager.FontProperties(fname=_F + "consola.ttf")
-MONO_B = font_manager.FontProperties(fname=_F + "consolab.ttf")
+# Same faces as the app on this laptop: Sitka for titles, Segoe UI for labels and numbers.
+# The two names below are kept from when labels were set in a monospace face.
+MONO = font_manager.FontProperties(fname=_F + "segoeui.ttf")
+MONO_B = font_manager.FontProperties(fname=_F + "seguisb.ttf")
+SERIF = font_manager.FontProperties(fname=_F + "SitkaVF.ttf")
 SANS = font_manager.FontProperties(fname=_F + "segoeui.ttf")
 SANS_B = font_manager.FontProperties(fname=_F + "segoeuib.ttf")
 SANS_SB = font_manager.FontProperties(fname=_F + "seguisb.ttf")
@@ -167,7 +170,7 @@ def math_draw(cv: Canvas, st, fused, steps) -> None:
 
     cv.clear(PAPER)
     cv.text(40, 42, "STEP %d OF %d" % (s["index"] + 1, len(fused["steps"])), 22, MONO_B)
-    cv.text(40, 88, s["text"], 40, SANS_B)
+    cv.text(40, 88, s["text"], 42, SERIF)
     cv.line([40, 1240], [108, 108])
 
     ticks = [v for v in range(0, int(dur) + 1, 5)]
@@ -283,7 +286,7 @@ def results_draw(cv: Canvas, st, d) -> None:
     bar, same, beat2, cal = st
     words = {4: "four", 5: "five"}
     cv.clear(PAPER)
-    cv.text(40, 66, "%d held-out clips, DeepMind Perception Test" % d["total"], 40, SANS_B)
+    cv.text(40, 66, "%d held-out clips, DeepMind Perception Test" % d["total"], 42, SERIF)
     cv.text(40, 102, "%d clips across %s splits; these numbers are version 3 on its two splits, %d clips"
             % (d["total"], words[d["n_splits"]], d["clips"]), 22, SANS)
     cv.line([40, 1240], [122, 122])
@@ -359,7 +362,7 @@ def fooled_draw(cv: Canvas, st, statuses) -> None:
     n = len(statuses)
     done = sum(1 for x in statuses if x == "done")
     cv.clear(PAPER)
-    cv.text(40, 150, "People fake steps", 48, SANS_B)
+    cv.text(40, 150, "People fake steps", 52, SERIF)
     cv.text(40, 206, "Reach toward the bag, put it back on the table.", 30, SANS)
     cv.line([40, 1240], [244, 244])
 
@@ -388,7 +391,7 @@ def fooled_draw(cv: Canvas, st, statuses) -> None:
 
 def end_draw(cv: Canvas) -> None:
     cv.clear(PAPER)
-    cv.text(W / 2, 300, "DISCOVERY CLOCK", 76, MONO_B, ha="center")
+    cv.text(W / 2, 300, "Discovery Clock", 84, SERIF, ha="center")
     cv.line([W / 2 - 310, W / 2 + 310], [330, 330])
     cv.text(W / 2, 384, "Which step was skipped, and when.", 36, SANS, ha="center")
     cv.text(W / 2, 462, "github.com/thesanatt/discovery-clock", 30, MONO_B, BLUE, ha="center")
