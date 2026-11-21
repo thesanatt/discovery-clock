@@ -73,11 +73,7 @@ def tune() -> None:
         m = metrics(rows, "p_done", thr)
         if best is None or m["skip_f1"] > best[1]["skip_f1"]:
             best = (thr, m)
-    # start bias: the engine already subtracted its current bias, so add it back before refitting
-    cur = json.load(open(CAL))["start_bias_s"] if CAL.exists() else 1.0
-    signed = [r["time"] + cur - r["true_start"] for r in rows if r["present"] and r.get("time") is not None]
-    bias = round(statistics.median(signed), 2) if signed else cur
-    cal = {"done_at": best[0], "not_found_at": round(best[0] - 0.12, 2), "start_bias_s": bias,
+    cal = {"done_at": best[0], "not_found_at": round(best[0] - 0.12, 2),
            "fitted_on": [Path(f).name for f in files], "n_steps": len(rows), "tune_metrics": best[1]}
     json.dump(cal, open(CAL, "w", encoding="ascii"), indent=1)
     print("calibration written to", CAL)

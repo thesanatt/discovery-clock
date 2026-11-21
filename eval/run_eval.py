@@ -62,16 +62,27 @@ def run_clip(system: str, clip: dict, labels: list[str], truth: dict[str, float]
                          "p_done": s["p_done"], "p_any": s.get("p_any"), "p_end": s.get("p_end"),
                          "violation": s["violation"], "raw": s["raw"]})
         call = res["call"]
-    elif system == "carbon":
+    elif system in ("carbon", "neon", "hydrogen", "hydrogen4", "neonmed"):
         from clock import models
-        out = models.baseline_timeline(clip["path"], steps)
+        info: dict = {}
+        if system == "carbon":
+            out = models.baseline_timeline(clip["path"], steps, info=info)   # high thinking, the strongest single call
+        else:
+            from clock import witness
+            if system == "hydrogen4":      # Hydrogen again, but 4 frames per second at medium resolution
+                out = witness.timeline(clip["path"], steps, model="hydrogen", thinking="low", resolution="medium", fps=4.0, info=info, tag="witness_hydrogen4")
+            elif system == "neonmed":      # Neon at medium thinking
+                out = witness.timeline(clip["path"], steps, model="neon", thinking="medium", timeout_s=90.0, info=info, tag="witness_neonmed")
+            else:
+                out = witness.timeline(clip["path"], steps, model=system, thinking="low", info=info)
         by_index = {o["index"]: o for o in out}
         for i, label in enumerate(labels):
             o = by_index.get(i, {"happened": False, "start": None})
             rows.append({"label": label, "present": label in truth, "true_start": truth.get(label),
                          "status": "done" if o.get("happened") else "not_found", "time": o.get("start"),
                          "lo": None, "hi": None, "p_done": 1.0 if o.get("happened") else 0.0})
-        call = {"seconds": round(time.time() - t0, 2)}
+        # the wrapper may fall back to another model; record which one really answered
+        call = {"seconds": round(time.time() - t0, 2), "model": info.get("model"), "fallback": info.get("fallback")}
     else:
         raise ValueError(system)
     return {"id": clip["id"], "duration": clip["duration"], "rows": rows, "call": call, "wall": round(time.time() - t0, 2)}
@@ -80,10 +91,11 @@ def run_clip(system: str, clip: dict, labels: list[str], truth: dict[str, float]
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--split", required=True, choices=["tune", "test"])
-    ap.add_argument("--system", required=True, choices=["ladder", "carbon"])
+    ap.add_argument("--system", required=True, choices=["ladder", "carbon", "neon", "hydrogen", "hydrogen4", "neonmed"])
     ap.add_argument("--run", type=int, default=1)
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--resolution", default="low", choices=["low", "medium", "high"])
+    ap.add_argument("--workers", type=int, default=1, help="clips in flight at once")
     ap.add_argument("--name", default="", help="suffix for the output file, for side experiments on the tuning split")
     args = ap.parse_args()
 
@@ -101,17 +113,24 @@ def main() -> None:
         from clock import decide
         client = decide.client()
     print(f"{args.split} {args.system} run {args.run}: {len(clips)} clips, {len(done)} already done -> {path}")
-    for n, clip in enumerate(clips, 1):
-        if clip["id"] in done:
-            continue
+    import threading
+    from concurrent.futures import ThreadPoolExecutor
+    lock = threading.Lock()
+    todo = [c for c in clips if c["id"] not in done]
+
+    def work(clip: dict) -> None:
         labels, truth = checklist(clip, all_labels)
         try:
             rec = run_clip(args.system, clip, labels, truth, client, args.resolution)
         except Exception as e:  # noqa: BLE001 - keep going, record the failure
             rec = {"id": clip["id"], "error": f"{type(e).__name__}: {str(e)[:300]}", "rows": []}
-        with open(path, "a", encoding="ascii") as f:
-            f.write(json.dumps(rec) + "\n")
-        print(f"[{n}/{len(clips)}] {clip['id']} {'ERROR ' + rec['error'] if 'error' in rec else str(rec['wall']) + 's'}", flush=True)
+        with lock:
+            with open(path, "a", encoding="ascii") as f:
+                f.write(json.dumps(rec) + "\n")
+            print(f"{clip['id']} {'ERROR ' + rec['error'] if 'error' in rec else str(rec['wall']) + 's'}", flush=True)
+
+    with ThreadPoolExecutor(max_workers=max(1, args.workers)) as pool:
+        list(pool.map(work, todo))
 
 
 if __name__ == "__main__":

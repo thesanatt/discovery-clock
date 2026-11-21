@@ -1,22 +1,21 @@
 {
- "done_at": 0.44,
- "not_found_at": 0.32,
- "start_bias_s": 0.56,
+ "done_at": 0.58,
+ "not_found_at": 0.46,
  "fitted_on": [
-  "tune_ladder_run1.jsonl"
+  "tune_ladder_run3.jsonl"
  ],
  "n_steps": 153,
  "tune_metrics": {
   "steps_present": 93,
   "steps_phantom": 60,
-  "skip_precision": 0.778,
-  "skip_recall": 0.817,
-  "skip_f1": 0.797,
-  "auroc": 0.892,
-  "timed": 77,
-  "within_2s": 0.559,
-  "within_5s": 0.667,
-  "median_abs_err_s": 1.18,
-  "interval_coverage": 0.838
+  "skip_precision": 0.699,
+  "skip_recall": 0.967,
+  "skip_f1": 0.811,
+  "auroc": 0.912,
+  "timed": 68,
+  "within_2s": 0.505,
+  "within_5s": 0.591,
+  "median_abs_err_s": 1.06,
+  "interval_coverage": 0.824
  }
 }

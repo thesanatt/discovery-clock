@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Discovery Clock</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top">
+  <h1>Discovery Clock</h1>
+  <p class="what">Film a checklist job and type the steps. Read when each step started, or that it was not found.</p>
+  <p class="aid">Review aid. A person checks every flagged step and signs.</p>
+</header>
+
+<p id="sample" class="sample" hidden>SAMPLE DATA, not a real run</p>
+
+<main class="cols">
+
+  <section class="col left" aria-label="Video and checklist">
+    <h2><span class="num">1</span> Video</h2>
+    <div class="screen">
+      <video id="video" playsinline aria-label="Camera preview, the full video, or the clip for a step"></video>
+      <p id="screen-note" class="screen-note">No video yet. Record with the camera or choose a file.</p>
+      <p id="countdown" class="countdown" hidden></p>
+    </div>
+    <p id="caption" class="caption" aria-live="polite">&nbsp;</p>
+
+    <div class="controls">
+      <button id="cam" type="button">Camera on</button>
+      <button id="rec" type="button" class="primary">Record</button>
+      <label class="len" for="len">Length
+        <input id="len" type="number" min="15" max="45" step="1" value="25" inputmode="numeric">
+        <span>s</span>
+      </label>
+    </div>
+    <div class="controls">
+      <label class="file" for="file">Or a file (.mp4, .webm)</label>
+      <input id="file" type="file" accept="video/mp4,video/webm,.mp4,.webm">
+      <button id="full" type="button" hidden>Show full video</button>
+    </div>
+
+    <h2><span class="num">2</span> Checklist</h2>
+    <label class="hint" for="steps">One step per line, in the order the job should be done.</label>
+    <textarea id="steps" rows="5" spellcheck="false"
+      placeholder="pour water into the cup&#10;stir with the spoon&#10;put the lid on"></textarea>
+    <ol id="preview" class="preview" aria-label="Steps as they will be asked"></ol>
+
+    <label class="check" for="clock">
+      <input id="clock" type="checkbox">
+      Draw a running clock on the frames before the model reads them
+    </label>
+
+    <div class="controls">
+      <button id="run" type="button" class="primary big">Run</button>
+      <p id="status" class="status" role="status"></p>
+    </div>
+  </section>
+
+  <section class="col right" aria-label="Results">
+    <h2><span class="num">3</span> Step timeline</h2>
+    <p id="summary" class="summary">No run yet. Each step gets a start time with a range, or "Not found".</p>
+    <div id="results" class="results"></div>
+    <p id="legend" class="legend" hidden></p>
+    <p id="footer" class="footer"></p>
+
+    <h2><span class="num">4</span> One question</h2>
+    <form id="ask" class="ask">
+      <label for="q">When did</label>
+      <input id="q" type="text" maxlength="200" autocomplete="off" placeholder="the lid go on">
+      <span>happen?</span>
+      <button id="ask-btn" type="submit">Ask</button>
+    </form>
+    <p id="ask-status" class="status" role="status"></p>
+    <p id="answer-line" class="summary"></p>
+    <div id="answer" class="results"></div>
+
+    <p class="aid bottom">Review aid. A person checks every flagged step and signs.</p>
+  </section>
+
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>

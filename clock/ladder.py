@@ -102,39 +102,56 @@ class Fit:
     grid: list[int]
     raw: list[float]
     fitted: list[float]
-    t50: float | None          # estimated start, None when the curve never reaches 0.5
-    lo: float | None           # where the curve crosses 0.2
-    hi: float | None           # where the curve crosses 0.8
+    t50: float | None          # estimated start, None when the curve never rises
+    lo: float | None           # start of the range
+    hi: float | None           # end of the range
     p_end: float               # fitted probability at the last grid time
     p_any: float | None        # answer to the whole-video question, when asked
     violation: float           # total downward movement in the raw answers (0 = already monotone)
+    rise: float = 0.0          # how far the curve climbs from its floor
     found: bool = field(default=False)
 
 
-def _cross(grid: list[int], fitted: np.ndarray, level: float) -> float | None:
-    """First time the monotone curve reaches level, linearly interpolated. The curve starts at t=0, p=0."""
-    ts = np.concatenate([[0.0], np.asarray(grid, dtype=float)])
-    ps = np.concatenate([[0.0], fitted])
+# Estimator settings, chosen on the tuning split only (LEDGER row 53).
+FLOOR_CAP = 0.25     # "no" answers sit near 0.2, so a curve that starts above this already began at the start
+MIN_RISE = 0.15      # a curve that climbs less than this has no moment to report
+BIAS_STEPS = 0.25    # "clearly started by t" lands late by about a quarter of a grid step
+
+
+def _cross(ts: np.ndarray, ps: np.ndarray, level: float) -> float | None:
+    """First time the monotone curve reaches level, linearly interpolated."""
     idx = np.where(ps >= level)[0]
     if len(idx) == 0:
         return None
     k = int(idx[0])
     if k == 0:
-        return 0.0
+        return float(ts[0])
     p0, p1, t0, t1 = ps[k - 1], ps[k], ts[k - 1], ts[k]
     if p1 == p0:
         return float(t1)
     return float(t0 + (level - p0) / (p1 - p0) * (t1 - t0))
 
 
-def fit(grid: list[int], probs: list[float], p_any: float | None = None, found_at: float = 0.5) -> Fit:
+def fit(grid: list[int], probs: list[float], p_any: float | None = None) -> Fit:
+    """Monotone fit, then the half-rise point: the time the curve is halfway from its floor to its top."""
     raw = np.asarray(probs, dtype=float)
     fitted = IsotonicRegression(y_min=0.0, y_max=1.0, increasing=True).fit_transform(np.asarray(grid, dtype=float), raw)
     drops = np.clip(raw[:-1] - raw[1:], 0, None)
+    floor = min(float(fitted[0]), FLOOR_CAP)
+    top = float(fitted[-1])
+    rise = top - floor
+    step = float(grid[1] - grid[0]) if len(grid) > 1 else float(grid[0])
+    t50 = lo = hi = None
+    if rise >= MIN_RISE:
+        ts = np.concatenate([[0.0], np.asarray(grid, dtype=float)])
+        ps = np.concatenate([[floor], fitted])
+        mid = _cross(ts, ps, floor + 0.5 * rise)
+        t50 = max(0.0, mid - BIAS_STEPS * step)
+        lo = max(0.0, _cross(ts, ps, floor + 0.1 * rise) - step - BIAS_STEPS * step)
+        hi = max(t50, _cross(ts, ps, floor + 0.9 * rise))
     f = Fit(grid=list(grid), raw=[float(x) for x in raw], fitted=[float(x) for x in fitted],
-            t50=_cross(grid, fitted, 0.5), lo=_cross(grid, fitted, 0.2), hi=_cross(grid, fitted, 0.8),
-            p_end=float(fitted[-1]), p_any=p_any, violation=float(drops.sum()))
-    f.found = f.t50 is not None and f.p_end >= found_at
+            t50=t50, lo=lo, hi=hi, p_end=top, p_any=p_any, violation=float(drops.sum()), rise=rise)
+    f.found = t50 is not None
     return f
 
 

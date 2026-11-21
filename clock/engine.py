@@ -28,17 +28,15 @@ from . import decide, ladder, media
 ROOT = Path(__file__).resolve().parent.parent
 WORK = ROOT / "runs" / "prep"
 
-# Thresholds on p_done and the start bias. eval/score.py fits them on the tuning split only and
-# writes clock/calibration.json; the values below are the defaults used before that file exists.
-DONE_AT = 0.62
-NOT_FOUND_AT = 0.45
-# The ladder asks "clearly started by t", which lands a little late.
-START_BIAS_S = 1.0
+# Thresholds on p_done. eval/score.py fits them on the tuning split only and writes
+# clock/calibration.json; the values below are the defaults used before that file exists.
+DONE_AT = 0.5
+NOT_FOUND_AT = 0.38
 _CAL = Path(__file__).resolve().parent / "calibration.json"
 if _CAL.exists():
     import json as _json
     _c = _json.load(open(_CAL, encoding="ascii"))
-    DONE_AT, NOT_FOUND_AT, START_BIAS_S = _c["done_at"], _c["not_found_at"], _c["start_bias_s"]
+    DONE_AT, NOT_FOUND_AT = _c["done_at"], _c["not_found_at"]
 
 
 def p_done(fit: ladder.Fit) -> float:
@@ -65,15 +63,21 @@ def run(video_path: str | Path, steps: list[str], client=None, resolution: str =
     out_steps = []
     for i, (text, f) in enumerate(zip(steps, fits)):
         pd = p_done(f)
-        status = "done" if (pd >= DONE_AT and f.t50 is not None) else ("not_found" if pd < NOT_FOUND_AT else "unsure")
-        shift = (lambda x: None if x is None else max(0.0, x - START_BIAS_S))
+        if pd >= DONE_AT and f.t50 is not None:
+            status = "done"
+        elif pd < NOT_FOUND_AT:
+            status = "not_found"
+        else:
+            status = "unsure"
+        show = status != "not_found" and f.t50 is not None
         out_steps.append({
             "index": i, "text": text, "status": status,
-            "time": shift(f.t50) if status != "not_found" else None,
-            "lo": shift(f.lo) if status != "not_found" else None,
-            "hi": shift(f.hi) if status != "not_found" else None,
+            "time": round(f.t50, 2) if show else None,
+            "lo": round(f.lo, 2) if show else None,
+            "hi": round(f.hi, 2) if show else None,
             "p_done": round(pd, 3), "p_end": round(f.p_end, 3),
-            "p_any": None if f.p_any is None else round(f.p_any, 3), "violation": round(f.violation, 3),
+            "p_any": None if f.p_any is None else round(f.p_any, 3),
+            "rise": round(f.rise, 3), "violation": round(f.violation, 3),
             "raw": [round(x, 3) for x in f.raw], "fitted": [round(x, 3) for x in f.fitted],
         })
 

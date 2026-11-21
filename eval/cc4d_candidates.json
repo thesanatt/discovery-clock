@@ -1,0 +1,372 @@
+{
+ "comment": "Chosen by a fixed rule before any model output existed. Eligible = recordings with a GoPro 360p link and label_issues == 0 (see eval/cc4d.py). missing = at least one step tagged 'Missing Step' with no time. normal = is_error false and no skipped step. Each pool is sorted by the hex sha1 of the recording id and the first 20 are taken. est_mb is duration_s times a measured bitrate. Regenerate with: python -m eval.cc4d candidates",
+ "source": "CaptainCook4D. Data under Apache License 2.0 per the project site; annotations repo LICENSE file is MIT.",
+ "n_eligible_missing": 125,
+ "n_eligible_normal": 163,
+ "est_total_mb": 4268,
+ "total_minutes": 618.3,
+ "missing": [
+  {
+   "id": "16_26",
+   "recipe": "Scrambled Eggs",
+   "url": "https://utdallas.box.com/shared/static/fh17qxuzh283rhryu70wfjuisybyq7zr.mp4",
+   "n_steps": 23,
+   "n_skipped": 2,
+   "duration_s": 976.34,
+   "est_mb": 112
+  },
+  {
+   "id": "25_13",
+   "recipe": "Pan Fried Tofu",
+   "url": "https://utdallas.box.com/shared/static/0m73nsnmnq241z7h4skugz3ukx4knv05.mp4",
+   "n_steps": 19,
+   "n_skipped": 1,
+   "duration_s": 1234.57,
+   "est_mb": 142
+  },
+  {
+   "id": "3_34",
+   "recipe": "Microwave Mug Pizza",
+   "url": "https://utdallas.box.com/shared/static/3wsnqnafnitwystnn17h0cjx6zx9sjy7.mp4",
+   "n_steps": 14,
+   "n_skipped": 2,
+   "duration_s": 581.98,
+   "est_mb": 67
+  },
+  {
+   "id": "18_31",
+   "recipe": "Zoodles",
+   "url": "https://utdallas.box.com/shared/static/2tnhd7br2ta0owbvkccmdu438qmk3qwj.mp4",
+   "n_steps": 13,
+   "n_skipped": 4,
+   "duration_s": 442.18,
+   "est_mb": 51
+  },
+  {
+   "id": "2_46",
+   "recipe": "Dressed Up Meatballs",
+   "url": "https://utdallas.box.com/shared/static/6apmg3xw087eqi9hwm1db7fp3l1j8nbw.mp4",
+   "n_steps": 16,
+   "n_skipped": 3,
+   "duration_s": 671.7,
+   "est_mb": 77
+  },
+  {
+   "id": "13_32",
+   "recipe": "Butter Corn Cup",
+   "url": "https://utdallas.box.com/shared/static/nvansybsiusr8bgttkwjzohbdwqx503c.mp4",
+   "n_steps": 12,
+   "n_skipped": 3,
+   "duration_s": 483.15,
+   "est_mb": 56
+  },
+  {
+   "id": "26_46",
+   "recipe": "Mug Cake",
+   "url": "https://utdallas.box.com/shared/static/2iyu753qd2r7rb5bb3nsn07g0xmzjcmp.mp4",
+   "n_steps": 20,
+   "n_skipped": 3,
+   "duration_s": 782.11,
+   "est_mb": 90
+  },
+  {
+   "id": "17_40",
+   "recipe": "Cucumber Raita",
+   "url": "https://utdallas.box.com/shared/static/ylr7b2x3pdehpn51t7n0ocfq6jlarh27.mp4",
+   "n_steps": 11,
+   "n_skipped": 1,
+   "duration_s": 612.11,
+   "est_mb": 70
+  },
+  {
+   "id": "8_50",
+   "recipe": "Spiced Hot Chocolate",
+   "url": "https://utdallas.box.com/shared/static/6nhlydgaq8tp7uahzoxsbanlx30oevvy.mp4",
+   "n_steps": 7,
+   "n_skipped": 2,
+   "duration_s": 263.46,
+   "est_mb": 30
+  },
+  {
+   "id": "29_28",
+   "recipe": "Caprese Bruschetta",
+   "url": "https://utdallas.box.com/shared/static/1cd54gzdsv1ww5y95os5f5u2stk8t56e.mp4",
+   "n_steps": 11,
+   "n_skipped": 1,
+   "duration_s": 685.25,
+   "est_mb": 79
+  },
+  {
+   "id": "9_47",
+   "recipe": "Microwave French Toast",
+   "url": "https://utdallas.box.com/shared/static/5k3hanfmjuyk2k3eilc2gyyr4lonlzhp.mp4",
+   "n_steps": 11,
+   "n_skipped": 2,
+   "duration_s": 502.0,
+   "est_mb": 58
+  },
+  {
+   "id": "17_36",
+   "recipe": "Cucumber Raita",
+   "url": "https://utdallas.box.com/shared/static/dpdtc4omx6h2x4dw8qidtdjm80qlkvdz.mp4",
+   "n_steps": 11,
+   "n_skipped": 4,
+   "duration_s": 428.69,
+   "est_mb": 49
+  },
+  {
+   "id": "1_34",
+   "recipe": "Microwave Egg Sandwich",
+   "url": "https://utdallas.box.com/shared/static/mlswoa9n70ng6xv45xsv5vfscsvspfo9.mp4",
+   "n_steps": 12,
+   "n_skipped": 1,
+   "duration_s": 343.28,
+   "est_mb": 39
+  },
+  {
+   "id": "5_27",
+   "recipe": "Coffee",
+   "url": "https://utdallas.box.com/shared/static/bzx7btlvvwvjoirp3b005e7emzg6sigz.mp4",
+   "n_steps": 16,
+   "n_skipped": 1,
+   "duration_s": 1149.62,
+   "est_mb": 132
+  },
+  {
+   "id": "7_26",
+   "recipe": "Breakfast Burritos",
+   "url": "https://utdallas.box.com/shared/static/skkns9r8od4u8igflggswuetgq3hhayh.mp4",
+   "n_steps": 11,
+   "n_skipped": 2,
+   "duration_s": 379.61,
+   "est_mb": 44
+  },
+  {
+   "id": "12_26",
+   "recipe": "Tomato Mozzarella Salad",
+   "url": "https://utdallas.box.com/shared/static/wmcxq8z3si533xpfym47ciito8bg1zsq.mp4",
+   "n_steps": 9,
+   "n_skipped": 1,
+   "duration_s": 329.2,
+   "est_mb": 38
+  },
+  {
+   "id": "7_32",
+   "recipe": "Breakfast Burritos",
+   "url": "https://utdallas.box.com/shared/static/hh2f7bea8xmq6u1ps4xn75u7c1frbkgk.mp4",
+   "n_steps": 11,
+   "n_skipped": 2,
+   "duration_s": 351.78,
+   "est_mb": 40
+  },
+  {
+   "id": "13_12",
+   "recipe": "Butter Corn Cup",
+   "url": "https://utdallas.box.com/shared/static/8tg2qwbdj2hdkdn8ubolnj7wesxonkdx.mp4",
+   "n_steps": 12,
+   "n_skipped": 4,
+   "duration_s": 521.59,
+   "est_mb": 60
+  },
+  {
+   "id": "8_30",
+   "recipe": "Spiced Hot Chocolate",
+   "url": "https://utdallas.box.com/shared/static/3jyrynqmt90bnzstqkxz2hn5dwuwu219.mp4",
+   "n_steps": 7,
+   "n_skipped": 1,
+   "duration_s": 375.88,
+   "est_mb": 43
+  },
+  {
+   "id": "25_41",
+   "recipe": "Pan Fried Tofu",
+   "url": "https://utdallas.box.com/shared/static/iwx4rx9jawbgrbuxauunv1zxn1w3zgpk.mp4",
+   "n_steps": 19,
+   "n_skipped": 1,
+   "duration_s": 1015.91,
+   "est_mb": 117
+  }
+ ],
+ "normal": [
+  {
+   "id": "2_17",
+   "recipe": "Dressed Up Meatballs",
+   "url": "https://utdallas.box.com/shared/static/3saa9ngbzovu90cdfl8oy7dreb0jo58f.mp4",
+   "n_steps": 16,
+   "n_skipped": 0,
+   "duration_s": 1291.96,
+   "est_mb": 149
+  },
+  {
+   "id": "16_1",
+   "recipe": "Scrambled Eggs",
+   "url": "https://utdallas.box.com/shared/static/qy918t2606v594mba7ajqq0fs7s2oa3e.mp4",
+   "n_steps": 23,
+   "n_skipped": 0,
+   "duration_s": 1080.38,
+   "est_mb": 124
+  },
+  {
+   "id": "20_9",
+   "recipe": "Sauted Mushrooms",
+   "url": "https://utdallas.box.com/shared/static/fchpx3bijwyvz881drhobemwrlcihij1.mp4",
+   "n_steps": 18,
+   "n_skipped": 0,
+   "duration_s": 1866.1,
+   "est_mb": 215
+  },
+  {
+   "id": "25_9",
+   "recipe": "Pan Fried Tofu",
+   "url": "https://utdallas.box.com/shared/static/45n3lo0esr412nqscobpby3j5ljxqa2c.mp4",
+   "n_steps": 19,
+   "n_skipped": 0,
+   "duration_s": 1058.52,
+   "est_mb": 122
+  },
+  {
+   "id": "21_24",
+   "recipe": "Blender Banana Pancakes",
+   "url": "https://utdallas.box.com/shared/static/56f6nq2za4r2wozv4yzhwz3i2w54o1k1.mp4",
+   "n_steps": 14,
+   "n_skipped": 0,
+   "duration_s": 797.03,
+   "est_mb": 92
+  },
+  {
+   "id": "13_5",
+   "recipe": "Butter Corn Cup",
+   "url": "https://utdallas.box.com/shared/static/5vr8lqy4qy7eymyk3lgnx8qmib489jab.mp4",
+   "n_steps": 12,
+   "n_skipped": 0,
+   "duration_s": 1300.87,
+   "est_mb": 150
+  },
+  {
+   "id": "3_5",
+   "recipe": "Microwave Mug Pizza",
+   "url": "https://utdallas.box.com/shared/static/4kqt7xr5xiiskgxkzoltdzcr74h1jltx.mp4",
+   "n_steps": 14,
+   "n_skipped": 0,
+   "duration_s": 582.42,
+   "est_mb": 67
+  },
+  {
+   "id": "12_13",
+   "recipe": "Tomato Mozzarella Salad",
+   "url": "https://utdallas.box.com/shared/static/bl30fvhqrng1wax38rzy6fjo4sz3vgvq.mp4",
+   "n_steps": 9,
+   "n_skipped": 0,
+   "duration_s": 525.69,
+   "est_mb": 60
+  },
+  {
+   "id": "5_4",
+   "recipe": "Coffee",
+   "url": "https://utdallas.box.com/shared/static/gvssyyp5mcy4vmym71m3pz3kuxop1k0g.mp4",
+   "n_steps": 16,
+   "n_skipped": 0,
+   "duration_s": 797.7,
+   "est_mb": 92
+  },
+  {
+   "id": "28_16",
+   "recipe": "Spicy Tuna Avocado Wraps",
+   "url": "https://utdallas.box.com/shared/static/6njrarph80j4xhilrkbteizctz4oim65.mp4",
+   "n_steps": 17,
+   "n_skipped": 0,
+   "duration_s": 1087.82,
+   "est_mb": 125
+  },
+  {
+   "id": "3_18",
+   "recipe": "Microwave Mug Pizza",
+   "url": "https://utdallas.box.com/shared/static/9yapte0vlshxly0seu9bluu8a5d9fxn5.mp4",
+   "n_steps": 14,
+   "n_skipped": 0,
+   "duration_s": 954.72,
+   "est_mb": 110
+  },
+  {
+   "id": "23_18",
+   "recipe": "Broccoli Stir Fry",
+   "url": "https://utdallas.box.com/shared/static/u86oaql3t6fkhsbr946ulzjge2uhunby.mp4",
+   "n_steps": 25,
+   "n_skipped": 0,
+   "duration_s": 1961.43,
+   "est_mb": 226
+  },
+  {
+   "id": "28_10",
+   "recipe": "Spicy Tuna Avocado Wraps",
+   "url": "https://utdallas.box.com/shared/static/ch8ghz7i2hvz3456xt8vafg0fr4wxj6j.mp4",
+   "n_steps": 17,
+   "n_skipped": 0,
+   "duration_s": 1112.28,
+   "est_mb": 128
+  },
+  {
+   "id": "23_1",
+   "recipe": "Broccoli Stir Fry",
+   "url": "https://utdallas.box.com/shared/static/yyhude2w75n5cjhaf532x0cechwdci1p.mp4",
+   "n_steps": 25,
+   "n_skipped": 0,
+   "duration_s": 2356.59,
+   "est_mb": 271
+  },
+  {
+   "id": "25_1",
+   "recipe": "Pan Fried Tofu",
+   "url": "https://utdallas.box.com/shared/static/z08mhzff548ae3iinhp7dd5r8410m1lz.mp4",
+   "n_steps": 19,
+   "n_skipped": 0,
+   "duration_s": 1761.19,
+   "est_mb": 203
+  },
+  {
+   "id": "25_109",
+   "recipe": "Pan Fried Tofu",
+   "url": "https://utdallas.box.com/shared/static/qiu0plhm3ixqcfgu02qy9kmlp5tre6p2.mp4",
+   "n_steps": 19,
+   "n_skipped": 0,
+   "duration_s": 2126.96,
+   "est_mb": 245
+  },
+  {
+   "id": "4_9",
+   "recipe": "Ramen",
+   "url": "https://utdallas.box.com/shared/static/8dh29ejfh7oq9e5xo5cqrk4ohmalyrnb.mp4",
+   "n_steps": 15,
+   "n_skipped": 0,
+   "duration_s": 817.68,
+   "est_mb": 94
+  },
+  {
+   "id": "28_21",
+   "recipe": "Spicy Tuna Avocado Wraps",
+   "url": "https://utdallas.box.com/shared/static/2hu9b8dxj8tzuxc6t5t4q25wutjca65i.mp4",
+   "n_steps": 17,
+   "n_skipped": 0,
+   "duration_s": 949.78,
+   "est_mb": 109
+  },
+  {
+   "id": "21_15",
+   "recipe": "Blender Banana Pancakes",
+   "url": "https://utdallas.box.com/shared/static/zsf5mjegdaltce2c2r66txquzj4r796l.mp4",
+   "n_steps": 14,
+   "n_skipped": 0,
+   "duration_s": 606.01,
+   "est_mb": 70
+  },
+  {
+   "id": "16_20",
+   "recipe": "Scrambled Eggs",
+   "url": "https://utdallas.box.com/shared/static/btsy8iyqoztk0yt3006dqb4n5yfzj8rh.mp4",
+   "n_steps": 23,
+   "n_skipped": 0,
+   "duration_s": 1930.9,
+   "est_mb": 222
+  }
+ ]
+}
