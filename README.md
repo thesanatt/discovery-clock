@@ -189,6 +189,8 @@ Recordings made at the event on a phone, each with a known script, are in `resul
 
 Under version 3: 151 of 162 step verdicts right. Of 60 steps that were not done (never touched, faked, or put in and taken back out), 51 read "not found", 3 read "unsure" and 6 were wrongly read as done. Of 102 steps that were done, 100 read "done" and 2 were wrongly read as not found. All 6 wrong "done" verdicts are "unzip the bag" in two takes where the bag was already open and only touched. The 3 "unsure" are one fake-out where the 2 frames-per-second witness kept saying yes. The 2 wrong "not found" are an item packed out of order. The page shows three words from the fused probability: done at 0.65 or more, not found under 0.30, unsure between. The benchmark tables use the plain 0.5 cut.
 
+One more take, 4 seconds, tests whether a step can name a person by what they wear. The step "shake hands with the person wearing a black jacket" read done at 0.98. On the same video, the same step reworded to a red jacket, to a white shirt, to a fist bump, and to handing over a pen each read not found in 3 of 3 runs. The Decisions ladder alone leaned yes on the fist bump (0.63); the reasoning witnesses said no.
+
 ## Run it
 
 Requires Python 3.11 and a Gemini API key with access to the Gemini 4 models.
