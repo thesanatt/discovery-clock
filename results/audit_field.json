@@ -1,0 +1,3997 @@
+{
+ "steps": [
+  "unzip the bag",
+  "put the AirPods case in the bag",
+  "put the Hello Panda box in the bag",
+  "take off the watch and put it in the bag",
+  "zip the bag closed",
+  "knock on the table twice"
+ ],
+ "summary": {
+  "gemini-4-hydrogen": {
+   "audits": 16,
+   "audits_failed": 0,
+   "code_ran": 16,
+   "rules_agree": 16,
+   "wrong_done": 5,
+   "wrong_done_disputed": 2,
+   "wrong_done_cannot_tell": 3,
+   "wrong_done_confirmed": 0,
+   "right_done": 56,
+   "right_done_disputed": 0,
+   "right_done_cannot_tell": 44,
+   "right_done_confirmed": 12,
+   "unsure_not_done": 1,
+   "unsure_not_done_disputed": 0,
+   "unsure_done": 2,
+   "unsure_done_disputed": 0,
+   "right_not_found": 32,
+   "right_not_found_disputed": 0,
+   "wrong_not_found": 0,
+   "wrong_not_found_disputed": 0,
+   "seconds_median": 51.8,
+   "seconds_max": 67.2
+  },
+  "gemini-4-neon": {
+   "audits": 3,
+   "audits_failed": 0,
+   "code_ran": 3,
+   "rules_agree": 3,
+   "wrong_done": 2,
+   "wrong_done_disputed": 1,
+   "wrong_done_cannot_tell": 0,
+   "wrong_done_confirmed": 1,
+   "right_done": 6,
+   "right_done_disputed": 0,
+   "right_done_cannot_tell": 6,
+   "right_done_confirmed": 0,
+   "unsure_not_done": 0,
+   "unsure_not_done_disputed": 0,
+   "unsure_done": 0,
+   "unsure_done_disputed": 0,
+   "right_not_found": 10,
+   "right_not_found_disputed": 0,
+   "wrong_not_found": 0,
+   "wrong_not_found_disputed": 0,
+   "seconds_median": 108.8,
+   "seconds_max": 162.4
+  }
+ },
+ "interactions_created_this_run": 7,
+ "records": [
+  {
+   "take": "1",
+   "model": "gemini-4-hydrogen",
+   "file": "0598673be4fd.mp4",
+   "desc": "all six steps, in order",
+   "not_done": [],
+   "fused": {
+    "video": {
+     "path": "runs/uploads/0598673be4fd.mp4",
+     "sha256": "3a6c7687cef455b3e2c1c6adabf6e7b4c5202c1adc3a1dddddb2d0362f8bca72",
+     "duration": 33.5
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "unzip the bag",
+      "status": "done",
+      "p_done": 0.937,
+      "time": 1.75,
+      "lo": 1.0,
+      "hi": 2.5
+     },
+     {
+      "index": 1,
+      "text": "put the AirPods case in the bag",
+      "status": "done",
+      "p_done": 0.957,
+      "time": 6.5,
+      "lo": 5.75,
+      "hi": 7.25
+     },
+     {
+      "index": 2,
+      "text": "put the Hello Panda box in the bag",
+      "status": "done",
+      "p_done": 0.871,
+      "time": 11.0,
+      "lo": 10.0,
+      "hi": 12.0
+     },
+     {
+      "index": 3,
+      "text": "take off the watch and put it in the bag",
+      "status": "done",
+      "p_done": 0.968,
+      "time": 14.5,
+      "lo": 13.75,
+      "hi": 15.5
+     },
+     {
+      "index": 4,
+      "text": "zip the bag closed",
+      "status": "done",
+      "p_done": 0.984,
+      "time": 23.0,
+      "lo": 22.25,
+      "hi": 24.0
+     },
+     {
+      "index": 5,
+      "text": "knock on the table twice",
+      "status": "done",
+      "p_done": 0.718,
+      "time": 30.75,
+      "lo": 29.75,
+      "hi": 31.5
+     }
+    ],
+    "order_issues": [],
+    "seconds_total": 15.32
+   },
+   "ts": 1795289410.424547,
+   "audit": {
+    "ok": true,
+    "seconds": 60.1,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "unzip the bag",
+      "at_start": "no: Bag is zipped closed in front of person.",
+      "at_end": "cannot tell: Bag is out of frame below camera.",
+      "audit": "cannot tell",
+      "reason": "insufficient frame evidence to confirm or dispute",
+      "lasting": "bag is unzipped",
+      "start_in_place": "no",
+      "end_in_place": "cannot tell",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [
+       4
+      ],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 1,
+      "text": "put the AirPods case in the bag",
+      "at_start": "cannot tell: Closed bag blocks view; no AirPods case visible.",
+      "at_end": "cannot tell: Bag is out of frame; no AirPods case visible.",
+      "audit": "cannot tell",
+      "reason": "no lasting photo-verifiable state or start and end unclear",
+      "lasting": "AirPods case inside bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 2,
+      "text": "put the Hello Panda box in the bag",
+      "at_start": "cannot tell: Bag is closed; no Hello Panda box visible.",
+      "at_end": "cannot tell: Bag is out of frame; no box visible.",
+      "audit": "cannot tell",
+      "reason": "no lasting photo-verifiable state or start and end unclear",
+      "lasting": "Hello Panda box inside bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 3,
+      "text": "take off the watch and put it in the bag",
+      "at_start": "cannot tell: Left wrist is hidden behind the bag.",
+      "at_end": "cannot tell: Left wrist has no watch; bag out of frame.",
+      "audit": "cannot tell",
+      "reason": "no lasting photo-verifiable state or start and end unclear",
+      "lasting": "watch off wrist and in bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "no",
+      "after": "no",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 4,
+      "text": "zip the bag closed",
+      "at_start": "yes: Bag is already zipped closed.",
+      "at_end": "cannot tell: Bag is out of frame below camera.",
+      "audit": "cannot tell",
+      "reason": "insufficient frame evidence to confirm or dispute",
+      "lasting": "bag is zipped closed",
+      "start_in_place": "yes",
+      "end_in_place": "cannot tell",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 5,
+      "text": "knock on the table twice",
+      "at_start": "cannot tell: Knocking leaves no visible lasting state.",
+      "at_end": "cannot tell: Knocking leaves no visible lasting state.",
+      "audit": "cannot tell",
+      "reason": "no lasting photo-verifiable state or start and end unclear",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     }
+    ],
+    "sheet": "CHECKLIST AUDIT SIGN-OFF SHEET\n0. unzip the bag | reported=done | audit=cannot tell | insufficient frame evidence to confirm or dispute\n1. put the AirPods case in the bag | reported=done | audit=cannot tell | no lasting photo-verifiable state or start and end unclear\n2. put the Hello Panda box in the bag | reported=done | audit=cannot tell | no lasting photo-verifiable state or start and end unclear\n3. take off the watch and put it in the bag | reported=done | audit=cannot tell | no lasting photo-verifiable state or start and end unclear\n4. zip the bag closed | reported=done | audit=cannot tell | insufficient frame evidence to confirm or dispute\n5. knock on the table twice | reported=done | audit=cannot tell | no lasting photo-verifiable state or start and end unclear\norder: no pairs out of order\ncounts: confirm=0, dispute=0, cannot tell=6",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [],
+    "rules_agree": true,
+    "attempts": 1,
+    "frames": [
+     "START (t = 0.3 s)",
+     "END (t = 33.2 s)",
+     "STEP 0 BEFORE (t = 0.8 s)",
+     "STEP 0 AFTER (t = 4.2 s)",
+     "STEP 1 BEFORE (t = 5.5 s)",
+     "STEP 1 AFTER (t = 9.0 s)",
+     "STEP 2 BEFORE (t = 10.0 s)",
+     "STEP 2 AFTER (t = 13.5 s)",
+     "STEP 3 BEFORE (t = 13.5 s)",
+     "STEP 3 AFTER (t = 17.0 s)",
+     "STEP 4 BEFORE (t = 22.0 s)",
+     "STEP 4 AFTER (t = 25.5 s)",
+     "STEP 5 BEFORE (t = 29.8 s)",
+     "STEP 5 AFTER (t = 33.2 s)"
+    ],
+    "local_order_pairs": [],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 93183
+   }
+  },
+  {
+   "take": "1",
+   "model": "gemini-4-hydrogen",
+   "run": 2,
+   "file": "0598673be4fd.mp4",
+   "desc": "all six steps, in order",
+   "not_done": [],
+   "fused": {
+    "video": {
+     "path": "runs/uploads/0598673be4fd.mp4",
+     "sha256": "3a6c7687cef455b3e2c1c6adabf6e7b4c5202c1adc3a1dddddb2d0362f8bca72",
+     "duration": 33.5
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "unzip the bag",
+      "status": "done",
+      "p_done": 0.942,
+      "time": 1.75,
+      "lo": 1.0,
+      "hi": 2.5
+     },
+     {
+      "index": 1,
+      "text": "put the AirPods case in the bag",
+      "status": "done",
+      "p_done": 0.965,
+      "time": 6.25,
+      "lo": 5.75,
+      "hi": 7.0
+     },
+     {
+      "index": 2,
+      "text": "put the Hello Panda box in the bag",
+      "status": "done",
+      "p_done": 0.892,
+      "time": 10.75,
+      "lo": 9.75,
+      "hi": 11.5
+     },
+     {
+      "index": 3,
+      "text": "take off the watch and put it in the bag",
+      "status": "done",
+      "p_done": 0.969,
+      "time": 14.25,
+      "lo": 13.5,
+      "hi": 15.25
+     },
+     {
+      "index": 4,
+      "text": "zip the bag closed",
+      "status": "done",
+      "p_done": 0.986,
+      "time": 23.25,
+      "lo": 22.5,
+      "hi": 24.0
+     },
+     {
+      "index": 5,
+      "text": "knock on the table twice",
+      "status": "done",
+      "p_done": 0.75,
+      "time": 30.5,
+      "lo": 29.5,
+      "hi": 31.25
+     }
+    ],
+    "order_issues": [],
+    "seconds_total": 15.49
+   },
+   "ts": 1795289882.981334,
+   "audit": {
+    "ok": true,
+    "seconds": 46.08,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "unzip the bag",
+      "at_start": "no: Bag is closed at the top",
+      "at_end": "cannot tell: Bag is mostly out of frame at bottom",
+      "audit": "cannot tell",
+      "reason": "Frames do not conclusively confirm or dispute this credited step.",
+      "lasting": "bag is unzipped and open",
+      "start_in_place": "no",
+      "end_in_place": "cannot tell",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [
+       4
+      ],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 1,
+      "text": "put the AirPods case in the bag",
+      "at_start": "cannot tell: AirPods case and bag interior not visible",
+      "at_end": "cannot tell: Bag interior and table not visible",
+      "audit": "cannot tell",
+      "reason": "Start and end frames do not show the lasting result.",
+      "lasting": "AirPods case is inside the bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 2,
+      "text": "put the Hello Panda box in the bag",
+      "at_start": "cannot tell: Box and bag interior not visible",
+      "at_end": "cannot tell: Bag interior and table not visible",
+      "audit": "cannot tell",
+      "reason": "Start and end frames do not show the lasting result.",
+      "lasting": "Hello Panda box is inside the bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 3,
+      "text": "take off the watch and put it in the bag",
+      "at_start": "cannot tell: Left wrist is hidden behind the bag",
+      "at_end": "cannot tell: Left wrist and bag are not visible",
+      "audit": "cannot tell",
+      "reason": "Start and end frames do not show the lasting result.",
+      "lasting": "watch is off wrist and inside the bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "no",
+      "after": "no",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 4,
+      "text": "zip the bag closed",
+      "at_start": "yes: Bag is zipped closed at the top",
+      "at_end": "cannot tell: Bag is mostly out of frame at bottom",
+      "audit": "cannot tell",
+      "reason": "Frames do not conclusively confirm or dispute this credited step.",
+      "lasting": "bag is zipped closed",
+      "start_in_place": "yes",
+      "end_in_place": "cannot tell",
+      "before": "no",
+      "after": "no",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 5,
+      "text": "knock on the table twice",
+      "at_start": "cannot tell: Knocking leaves no lasting visual state",
+      "at_end": "cannot tell: Knocking leaves no lasting visual state",
+      "audit": "cannot tell",
+      "reason": "Step leaves no lasting visual state.",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     }
+    ],
+    "sheet": "Checklist Audit Sign-Off Sheet\n0. unzip the bag | reported: done | audit: cannot tell | Frames do not conclusively confirm or dispute this credited step.\n1. put the AirPods case in the bag | reported: done | audit: cannot tell | Start and end frames do not show the lasting result.\n2. put the Hello Panda box in the bag | reported: done | audit: cannot tell | Start and end frames do not show the lasting result.\n3. take off the watch and put it in the bag | reported: done | audit: cannot tell | Start and end frames do not show the lasting result.\n4. zip the bag closed | reported: done | audit: cannot tell | Frames do not conclusively confirm or dispute this credited step.\n5. knock on the table twice | reported: done | audit: cannot tell | Step leaves no lasting visual state.\norder: no pairs out of order\ncounts: confirm=0, dispute=0, cannot tell=6",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [],
+    "rules_agree": true,
+    "attempts": 1,
+    "frames": [
+     "START (t = 0.3 s)",
+     "END (t = 33.2 s)",
+     "STEP 0 BEFORE (t = 0.8 s)",
+     "STEP 0 AFTER (t = 4.2 s)",
+     "STEP 1 BEFORE (t = 5.2 s)",
+     "STEP 1 AFTER (t = 8.8 s)",
+     "STEP 2 BEFORE (t = 9.8 s)",
+     "STEP 2 AFTER (t = 13.2 s)",
+     "STEP 3 BEFORE (t = 13.2 s)",
+     "STEP 3 AFTER (t = 16.8 s)",
+     "STEP 4 BEFORE (t = 22.2 s)",
+     "STEP 4 AFTER (t = 25.8 s)",
+     "STEP 5 BEFORE (t = 29.5 s)",
+     "STEP 5 AFTER (t = 33.0 s)"
+    ],
+    "local_order_pairs": [],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 88356
+   }
+  },
+  {
+   "take": "2",
+   "model": "gemini-4-hydrogen",
+   "file": "59f28acbf16d.mp4",
+   "desc": "AirPods skipped",
+   "not_done": [
+    1
+   ],
+   "fused": {
+    "video": {
+     "path": "runs/uploads/59f28acbf16d.mp4",
+     "sha256": "d70d8405bc85e7fb4940140d9107badc3f2dd71621cbe08764e4bab8ab293c56",
+     "duration": 27.6
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "unzip the bag",
+      "status": "done",
+      "p_done": 0.985,
+      "time": 0.75,
+      "lo": 0.0,
+      "hi": 1.5
+     },
+     {
+      "index": 1,
+      "text": "put the AirPods case in the bag",
+      "status": "not_found",
+      "p_done": 0.174,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 2,
+      "text": "put the Hello Panda box in the bag",
+      "status": "done",
+      "p_done": 0.981,
+      "time": 6.5,
+      "lo": 5.75,
+      "hi": 7.0
+     },
+     {
+      "index": 3,
+      "text": "take off the watch and put it in the bag",
+      "status": "done",
+      "p_done": 0.981,
+      "time": 9.5,
+      "lo": 8.5,
+      "hi": 10.0
+     },
+     {
+      "index": 4,
+      "text": "zip the bag closed",
+      "status": "done",
+      "p_done": 0.986,
+      "time": 20.0,
+      "lo": 19.25,
+      "hi": 20.75
+     },
+     {
+      "index": 5,
+      "text": "knock on the table twice",
+      "status": "done",
+      "p_done": 0.897,
+      "time": 24.75,
+      "lo": 24.0,
+      "hi": 25.25
+     }
+    ],
+    "order_issues": [],
+    "seconds_total": 12.82
+   },
+   "ts": 1795289423.248986,
+   "audit": {
+    "ok": true,
+    "seconds": 53.45,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "unzip the bag",
+      "at_start": "no: Bag is zipped closed at the top",
+      "at_end": "no: Bag is zipped closed",
+      "audit": "confirm",
+      "reason": "lasting result was absent at start and present at end or reversed later",
+      "lasting": "bag is unzipped open",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [
+       4
+      ],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 1,
+      "text": "put the AirPods case in the bag",
+      "at_start": "cannot tell: No AirPods case visible; bag is closed",
+      "at_end": "cannot tell: No AirPods case visible; bag is closed",
+      "audit": "cannot tell",
+      "reason": "no lasting result or cannot tell at start and end",
+      "lasting": "AirPods case is inside the bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 2,
+      "text": "put the Hello Panda box in the bag",
+      "at_start": "cannot tell: Closed bag; no Hello Panda box visible",
+      "at_end": "cannot tell: Closed bag; no Hello Panda box visible",
+      "audit": "cannot tell",
+      "reason": "no lasting result or cannot tell at start and end",
+      "lasting": "Hello Panda box is inside the bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "no",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 3,
+      "text": "take off the watch and put it in the bag",
+      "at_start": "cannot tell: Left wrist not visible; bag is closed",
+      "at_end": "cannot tell: Left wrist not visible; bag is closed",
+      "audit": "cannot tell",
+      "reason": "no lasting result or cannot tell at start and end",
+      "lasting": "watch is off wrist and inside the bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "no",
+      "after": "no",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 4,
+      "text": "zip the bag closed",
+      "at_start": "yes: Bag is zipped closed",
+      "at_end": "yes: Bag is zipped closed",
+      "audit": "cannot tell",
+      "reason": "cannot tell from start and end states",
+      "lasting": "bag is zipped closed",
+      "start_in_place": "yes",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 5,
+      "text": "knock on the table twice",
+      "at_start": "cannot tell: No lasting state for knocking",
+      "at_end": "cannot tell: No lasting state for knocking",
+      "audit": "cannot tell",
+      "reason": "no lasting result or cannot tell at start and end",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     }
+    ],
+    "sheet": "Checklist Audit Sign-Off Sheet\n0. unzip the bag | reported: done | audit: confirm | lasting result was absent at start and present at end or reversed later\n1. put the AirPods case in the bag | reported: not_found | audit: cannot tell | no lasting result or cannot tell at start and end\n2. put the Hello Panda box in the bag | reported: done | audit: cannot tell | no lasting result or cannot tell at start and end\n3. take off the watch and put it in the bag | reported: done | audit: cannot tell | no lasting result or cannot tell at start and end\n4. zip the bag closed | reported: done | audit: cannot tell | cannot tell from start and end states\n5. knock on the table twice | reported: done | audit: cannot tell | no lasting result or cannot tell at start and end\norder: no pairs out of order\ncounts: confirm=1, dispute=0, cannot tell=5",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [],
+    "rules_agree": true,
+    "attempts": 1,
+    "frames": [
+     "START (t = 0.3 s)",
+     "END (t = 27.3 s)",
+     "STEP 0 BEFORE (t = 0.0 s)",
+     "STEP 0 AFTER (t = 3.2 s)",
+     "STEP 2 BEFORE (t = 5.5 s)",
+     "STEP 2 AFTER (t = 9.0 s)",
+     "STEP 3 BEFORE (t = 8.5 s)",
+     "STEP 3 AFTER (t = 12.0 s)",
+     "STEP 4 BEFORE (t = 19.0 s)",
+     "STEP 4 AFTER (t = 22.5 s)",
+     "STEP 5 BEFORE (t = 23.8 s)",
+     "STEP 5 AFTER (t = 27.2 s)"
+    ],
+    "local_order_pairs": [],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 81823
+   }
+  },
+  {
+   "take": "3",
+   "model": "gemini-4-hydrogen",
+   "file": "b8c33ec83154.mp4",
+   "desc": "Hello Panda skipped",
+   "not_done": [
+    2
+   ],
+   "fused": {
+    "video": {
+     "path": "runs/uploads/b8c33ec83154.mp4",
+     "sha256": "ad50c5bf1dac42c05737f26dd68e394a3ca7fa0b60995aa7cb51d0031bccd010",
+     "duration": 28.7
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "unzip the bag",
+      "status": "done",
+      "p_done": 0.95,
+      "time": 0.75,
+      "lo": 0.0,
+      "hi": 1.25
+     },
+     {
+      "index": 1,
+      "text": "put the AirPods case in the bag",
+      "status": "done",
+      "p_done": 0.92,
+      "time": 6.0,
+      "lo": 5.25,
+      "hi": 6.75
+     },
+     {
+      "index": 2,
+      "text": "put the Hello Panda box in the bag",
+      "status": "not_found",
+      "p_done": 0.091,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 3,
+      "text": "take off the watch and put it in the bag",
+      "status": "done",
+      "p_done": 0.956,
+      "time": 10.5,
+      "lo": 9.75,
+      "hi": 11.5
+     },
+     {
+      "index": 4,
+      "text": "zip the bag closed",
+      "status": "done",
+      "p_done": 0.976,
+      "time": 21.0,
+      "lo": 20.0,
+      "hi": 21.75
+     },
+     {
+      "index": 5,
+      "text": "knock on the table twice",
+      "status": "done",
+      "p_done": 0.915,
+      "time": 26.25,
+      "lo": 25.25,
+      "hi": 27.0
+     }
+    ],
+    "order_issues": [],
+    "seconds_total": 15.18
+   },
+   "ts": 1795289438.4290955,
+   "audit": {
+    "ok": true,
+    "seconds": 49.78,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "unzip the bag",
+      "at_start": "no: bag zipper is closed across the front",
+      "at_end": "cannot tell: bag mostly out of frame, zipper not visible",
+      "audit": "cannot tell",
+      "reason": "credited, but start/end evidence is insufficient to confirm or dispute.",
+      "lasting": "bag unzipped",
+      "start_in_place": "no",
+      "end_in_place": "cannot tell",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [
+       4
+      ],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 1,
+      "text": "put the AirPods case in the bag",
+      "at_start": "cannot tell: no AirPods case visible, bag is closed",
+      "at_end": "cannot tell: bag mostly out of frame, cannot see inside",
+      "audit": "cannot tell",
+      "reason": "no lasting visible state or both start and end are cannot tell",
+      "lasting": "AirPods case inside the bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 2,
+      "text": "put the Hello Panda box in the bag",
+      "at_start": "cannot tell: no Hello Panda box visible, bag is closed",
+      "at_end": "cannot tell: bag mostly out of frame, cannot see inside",
+      "audit": "cannot tell",
+      "reason": "no lasting visible state or both start and end are cannot tell",
+      "lasting": "Hello Panda box inside the bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 3,
+      "text": "take off the watch and put it in the bag",
+      "at_start": "no: metal watch is on person's left wrist",
+      "at_end": "yes: left wrist is bare, watch no longer visible",
+      "audit": "confirm",
+      "reason": "lasting result absent at START and present at END (or reversed later).",
+      "lasting": "watch off wrist and inside the bag",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "no",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 4,
+      "text": "zip the bag closed",
+      "at_start": "yes: bag zipper is closed across the front",
+      "at_end": "cannot tell: bag mostly out of frame, zipper not visible",
+      "audit": "cannot tell",
+      "reason": "credited, but start/end evidence is insufficient to confirm or dispute.",
+      "lasting": "bag zipped closed",
+      "start_in_place": "yes",
+      "end_in_place": "cannot tell",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 5,
+      "text": "knock on the table twice",
+      "at_start": "cannot tell: knocking leaves no lasting visible state",
+      "at_end": "cannot tell: knocking leaves no lasting visible state",
+      "audit": "cannot tell",
+      "reason": "no lasting visible state or both start and end are cannot tell",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     }
+    ],
+    "sheet": "CHECKLIST AUDIT SIGN-OFF SHEET\n0. unzip the bag | reported: done | audit: cannot tell | credited, but start/end evidence is insufficient to confirm or dispute.\n1. put the AirPods case in the bag | reported: done | audit: cannot tell | no lasting visible state or both start and end are cannot tell\n2. put the Hello Panda box in the bag | reported: not_found | audit: cannot tell | no lasting visible state or both start and end are cannot tell\n3. take off the watch and put it in the bag | reported: done | audit: confirm | lasting result absent at START and present at END (or reversed later).\n4. zip the bag closed | reported: done | audit: cannot tell | credited, but start/end evidence is insufficient to confirm or dispute.\n5. knock on the table twice | reported: done | audit: cannot tell | no lasting visible state or both start and end are cannot tell\norder: no pairs out of order\ncounts: confirm=1, dispute=0, cannot tell=5",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [],
+    "rules_agree": true,
+    "attempts": 1,
+    "frames": [
+     "START (t = 0.3 s)",
+     "END (t = 28.4 s)",
+     "STEP 0 BEFORE (t = 0.0 s)",
+     "STEP 0 AFTER (t = 3.2 s)",
+     "STEP 1 BEFORE (t = 5.0 s)",
+     "STEP 1 AFTER (t = 8.5 s)",
+     "STEP 3 BEFORE (t = 9.5 s)",
+     "STEP 3 AFTER (t = 13.0 s)",
+     "STEP 4 BEFORE (t = 20.0 s)",
+     "STEP 4 AFTER (t = 23.5 s)",
+     "STEP 5 BEFORE (t = 25.2 s)",
+     "STEP 5 AFTER (t = 28.2 s)"
+    ],
+    "local_order_pairs": [],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 81117
+   }
+  },
+  {
+   "take": "4",
+   "model": "gemini-4-hydrogen",
+   "file": "19b7f1b3417f.mp4",
+   "desc": "watch skipped",
+   "not_done": [
+    3
+   ],
+   "fused": {
+    "video": {
+     "path": "runs/uploads/19b7f1b3417f.mp4",
+     "sha256": "9eba259d4ae4fc87ba2aa07a2e03cd8d34ae95e4f2cd8c20a6100b16728dc4e9",
+     "duration": 26.0
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "unzip the bag",
+      "status": "done",
+      "p_done": 0.991,
+      "time": 1.0,
+      "lo": 0.5,
+      "hi": 1.75
+     },
+     {
+      "index": 1,
+      "text": "put the AirPods case in the bag",
+      "status": "done",
+      "p_done": 0.992,
+      "time": 6.75,
+      "lo": 6.0,
+      "hi": 7.25
+     },
+     {
+      "index": 2,
+      "text": "put the Hello Panda box in the bag",
+      "status": "done",
+      "p_done": 0.965,
+      "time": 10.5,
+      "lo": 9.75,
+      "hi": 11.25
+     },
+     {
+      "index": 3,
+      "text": "take off the watch and put it in the bag",
+      "status": "not_found",
+      "p_done": 0.045,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 4,
+      "text": "zip the bag closed",
+      "status": "done",
+      "p_done": 0.992,
+      "time": 15.75,
+      "lo": 14.75,
+      "hi": 17.0
+     },
+     {
+      "index": 5,
+      "text": "knock on the table twice",
+      "status": "done",
+      "p_done": 0.885,
+      "time": 23.0,
+      "lo": 22.25,
+      "hi": 23.75
+     }
+    ],
+    "order_issues": [],
+    "seconds_total": 12.37
+   },
+   "ts": 1795289450.796015,
+   "audit": {
+    "ok": true,
+    "seconds": 54.01,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "unzip the bag",
+      "at_start": "no: Bag is zipped closed at the top",
+      "at_end": "no: Bag is zipped closed at the top",
+      "audit": "confirm",
+      "reason": "Not in place at START and either in place at END or reversed by a later done step.",
+      "lasting": "bag is unzipped and open",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [
+       4
+      ],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 1,
+      "text": "put the AirPods case in the bag",
+      "at_start": "cannot tell: Bag is closed; no AirPods case visible in frame",
+      "at_end": "cannot tell: Bag is closed; cannot see inside or on table",
+      "audit": "cannot tell",
+      "reason": "No lasting visual result or cannot tell at both START and END.",
+      "lasting": "AirPods case is inside the bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 2,
+      "text": "put the Hello Panda box in the bag",
+      "at_start": "cannot tell: Bag is closed; no Hello Panda box visible",
+      "at_end": "cannot tell: Bag is closed; cannot see inside or on table",
+      "audit": "cannot tell",
+      "reason": "No lasting visual result or cannot tell at both START and END.",
+      "lasting": "Hello Panda box is inside the bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 3,
+      "text": "take off the watch and put it in the bag",
+      "at_start": "cannot tell: Wrists mostly hidden; bag is closed",
+      "at_end": "cannot tell: Right wrist has no watch; left wrist hidden",
+      "audit": "cannot tell",
+      "reason": "No lasting visual result or cannot tell at both START and END.",
+      "lasting": "watch is off wrist and inside the bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 4,
+      "text": "zip the bag closed",
+      "at_start": "yes: Bag is zipped closed at the top",
+      "at_end": "yes: Bag is zipped closed at the top",
+      "audit": "cannot tell",
+      "reason": "Credited, but frame evidence does not confirm or dispute.",
+      "lasting": "bag is zipped closed",
+      "start_in_place": "yes",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [
+       0
+      ],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 5,
+      "text": "knock on the table twice",
+      "at_start": "cannot tell: Hands on bag; knocking leaves no lasting mark",
+      "at_end": "cannot tell: Right hand near table; knocking leaves no mark",
+      "audit": "cannot tell",
+      "reason": "No lasting visual result or cannot tell at both START and END.",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     }
+    ],
+    "sheet": "AUDIT SIGN-OFF SHEET\n0. unzip the bag | reported: done | audit: confirm | reason: Not in place at START and either in place at END or reversed by a later done step.\n1. put the AirPods case in the bag | reported: done | audit: cannot tell | reason: No lasting visual result or cannot tell at both START and END.\n2. put the Hello Panda box in the bag | reported: done | audit: cannot tell | reason: No lasting visual result or cannot tell at both START and END.\n3. take off the watch and put it in the bag | reported: not_found | audit: cannot tell | reason: No lasting visual result or cannot tell at both START and END.\n4. zip the bag closed | reported: done | audit: cannot tell | reason: Credited, but frame evidence does not confirm or dispute.\n5. knock on the table twice | reported: done | audit: cannot tell | reason: No lasting visual result or cannot tell at both START and END.\norder: no pairs out of order\ncounts: confirm=1, dispute=0, cannot tell=5",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [],
+    "rules_agree": true,
+    "attempts": 1,
+    "frames": [
+     "START (t = 0.3 s)",
+     "END (t = 25.7 s)",
+     "STEP 0 BEFORE (t = 0.0 s)",
+     "STEP 0 AFTER (t = 3.5 s)",
+     "STEP 1 BEFORE (t = 5.8 s)",
+     "STEP 1 AFTER (t = 9.2 s)",
+     "STEP 2 BEFORE (t = 9.5 s)",
+     "STEP 2 AFTER (t = 13.0 s)",
+     "STEP 4 BEFORE (t = 14.8 s)",
+     "STEP 4 AFTER (t = 18.2 s)",
+     "STEP 5 BEFORE (t = 22.0 s)",
+     "STEP 5 AFTER (t = 25.5 s)"
+    ],
+    "local_order_pairs": [],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 80315
+   }
+  },
+  {
+   "take": "4",
+   "model": "gemini-4-hydrogen",
+   "run": 2,
+   "file": "19b7f1b3417f.mp4",
+   "desc": "watch skipped",
+   "not_done": [
+    3
+   ],
+   "fused": {
+    "video": {
+     "path": "runs/uploads/19b7f1b3417f.mp4",
+     "sha256": "9eba259d4ae4fc87ba2aa07a2e03cd8d34ae95e4f2cd8c20a6100b16728dc4e9",
+     "duration": 26.0
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "unzip the bag",
+      "status": "done",
+      "p_done": 0.96,
+      "time": 0.75,
+      "lo": 0.25,
+      "hi": 1.5
+     },
+     {
+      "index": 1,
+      "text": "put the AirPods case in the bag",
+      "status": "done",
+      "p_done": 0.965,
+      "time": 6.5,
+      "lo": 5.75,
+      "hi": 7.5
+     },
+     {
+      "index": 2,
+      "text": "put the Hello Panda box in the bag",
+      "status": "done",
+      "p_done": 0.876,
+      "time": 10.75,
+      "lo": 9.75,
+      "hi": 11.5
+     },
+     {
+      "index": 3,
+      "text": "take off the watch and put it in the bag",
+      "status": "not_found",
+      "p_done": 0.07,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 4,
+      "text": "zip the bag closed",
+      "status": "done",
+      "p_done": 0.976,
+      "time": 16.5,
+      "lo": 15.25,
+      "hi": 17.25
+     },
+     {
+      "index": 5,
+      "text": "knock on the table twice",
+      "status": "unsure",
+      "p_done": 0.647,
+      "time": 23.0,
+      "lo": 22.25,
+      "hi": 23.75
+     }
+    ],
+    "order_issues": [],
+    "seconds_total": 15.4
+   },
+   "ts": 1795289898.3837917,
+   "audit": {
+    "ok": true,
+    "seconds": 42.36,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "unzip the bag",
+      "at_start": "no: Bag is zipped closed at the start.",
+      "at_end": "no: Bag is zipped closed at the end.",
+      "audit": "confirm",
+      "reason": "Not in place at START and confirmed at END or reversed later.",
+      "lasting": "bag is unzipped open",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [
+       4
+      ],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 1,
+      "text": "put the AirPods case in the bag",
+      "at_start": "cannot tell: Bag is closed; no AirPods case visible outside.",
+      "at_end": "cannot tell: Bag is closed; no AirPods case visible outside.",
+      "audit": "cannot tell",
+      "reason": "No lasting visual result or cannot tell at start and end.",
+      "lasting": "AirPods case is inside the bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 2,
+      "text": "put the Hello Panda box in the bag",
+      "at_start": "cannot tell: Bag is closed; no Hello Panda box visible.",
+      "at_end": "cannot tell: Bag is closed; no Hello Panda box visible.",
+      "audit": "cannot tell",
+      "reason": "No lasting visual result or cannot tell at start and end.",
+      "lasting": "Hello Panda box is inside the bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 3,
+      "text": "take off the watch and put it in the bag",
+      "at_start": "cannot tell: Left wrist hidden behind bag; bag is closed.",
+      "at_end": "cannot tell: Left wrist hidden behind bag; bag is closed.",
+      "audit": "cannot tell",
+      "reason": "No lasting visual result or cannot tell at start and end.",
+      "lasting": "watch is off wrist and in bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 4,
+      "text": "zip the bag closed",
+      "at_start": "yes: Bag is already zipped closed at the start.",
+      "at_end": "yes: Bag is zipped closed at the end.",
+      "audit": "cannot tell",
+      "reason": "Credited, but start/end state does not confirm or dispute.",
+      "lasting": "bag is zipped closed",
+      "start_in_place": "yes",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [
+       0
+      ],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 5,
+      "text": "knock on the table twice",
+      "at_start": "cannot tell: No lasting visual state from knocking.",
+      "at_end": "cannot tell: No lasting visual state from knocking.",
+      "audit": "cannot tell",
+      "reason": "No lasting visual result or cannot tell at start and end.",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     }
+    ],
+    "sheet": "AUDIT SIGN-OFF SHEET\n0. unzip the bag | reported: done | audit: confirm | Not in place at START and confirmed at END or reversed later.\n1. put the AirPods case in the bag | reported: done | audit: cannot tell | No lasting visual result or cannot tell at start and end.\n2. put the Hello Panda box in the bag | reported: done | audit: cannot tell | No lasting visual result or cannot tell at start and end.\n3. take off the watch and put it in the bag | reported: not_found | audit: cannot tell | No lasting visual result or cannot tell at start and end.\n4. zip the bag closed | reported: done | audit: cannot tell | Credited, but start/end state does not confirm or dispute.\n5. knock on the table twice | reported: unsure | audit: cannot tell | No lasting visual result or cannot tell at start and end.\norder: no pairs out of order\ncounts: confirm=1, dispute=0, cannot tell=5",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [],
+    "rules_agree": true,
+    "attempts": 1,
+    "frames": [
+     "START (t = 0.3 s)",
+     "END (t = 25.7 s)",
+     "STEP 0 BEFORE (t = 0.0 s)",
+     "STEP 0 AFTER (t = 3.2 s)",
+     "STEP 1 BEFORE (t = 5.5 s)",
+     "STEP 1 AFTER (t = 9.0 s)",
+     "STEP 2 BEFORE (t = 9.8 s)",
+     "STEP 2 AFTER (t = 13.2 s)",
+     "STEP 4 BEFORE (t = 15.5 s)",
+     "STEP 4 AFTER (t = 19.0 s)",
+     "STEP 5 BEFORE (t = 22.0 s)",
+     "STEP 5 AFTER (t = 25.5 s)"
+    ],
+    "local_order_pairs": [],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 80260
+   }
+  },
+  {
+   "take": "5",
+   "model": "gemini-4-hydrogen",
+   "file": "1f3b5b67c424.mp4",
+   "desc": "Hello Panda before AirPods, knock skipped",
+   "not_done": [
+    5
+   ],
+   "fused": {
+    "video": {
+     "path": "runs/uploads/1f3b5b67c424.mp4",
+     "sha256": "e8d8b34f9d96ade22c7db1ce023654c43f363e04060a1e902d2ca0de8bdd053d",
+     "duration": 35.2
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "unzip the bag",
+      "status": "done",
+      "p_done": 0.965,
+      "time": 1.75,
+      "lo": 0.75,
+      "hi": 2.5
+     },
+     {
+      "index": 1,
+      "text": "put the AirPods case in the bag",
+      "status": "done",
+      "p_done": 0.985,
+      "time": 11.75,
+      "lo": 11.0,
+      "hi": 12.5
+     },
+     {
+      "index": 2,
+      "text": "put the Hello Panda box in the bag",
+      "status": "done",
+      "p_done": 0.691,
+      "time": 7.75,
+      "lo": 7.0,
+      "hi": 8.75
+     },
+     {
+      "index": 3,
+      "text": "take off the watch and put it in the bag",
+      "status": "done",
+      "p_done": 0.98,
+      "time": 15.75,
+      "lo": 15.0,
+      "hi": 16.5
+     },
+     {
+      "index": 4,
+      "text": "zip the bag closed",
+      "status": "done",
+      "p_done": 0.895,
+      "time": 26.25,
+      "lo": 25.5,
+      "hi": 27.25
+     },
+     {
+      "index": 5,
+      "text": "knock on the table twice",
+      "status": "not_found",
+      "p_done": 0.067,
+      "time": null,
+      "lo": null,
+      "hi": null
+     }
+    ],
+    "order_issues": [
+     {
+      "earlier": 2,
+      "later": 1
+     }
+    ],
+    "seconds_total": 15.52
+   },
+   "ts": 1795289466.4874618,
+   "audit": {
+    "ok": true,
+    "seconds": 51.34,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "unzip the bag",
+      "at_start": "no: bag zipper is closed",
+      "at_end": "no: bag zipper is closed",
+      "audit": "confirm",
+      "reason": "lasting result not at START and either present at END or reversed by a later done step",
+      "lasting": "bag unzipped",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [
+       4
+      ],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 1,
+      "text": "put the AirPods case in the bag",
+      "at_start": "cannot tell: bag closed, AirPods case not visible",
+      "at_end": "cannot tell: bag closed, AirPods case not visible",
+      "audit": "cannot tell",
+      "reason": "no lasting visual state or start and end are both cannot tell",
+      "lasting": "AirPods case in the bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 2,
+      "text": "put the Hello Panda box in the bag",
+      "at_start": "cannot tell: bag closed, Hello Panda box not visible",
+      "at_end": "cannot tell: bag closed, Hello Panda box not visible",
+      "audit": "cannot tell",
+      "reason": "no lasting visual state or start and end are both cannot tell",
+      "lasting": "Hello Panda box in the bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 3,
+      "text": "take off the watch and put it in the bag",
+      "at_start": "cannot tell: left wrist not visible, bag closed",
+      "at_end": "cannot tell: left wrist not visible, bag closed",
+      "audit": "cannot tell",
+      "reason": "no lasting visual state or start and end are both cannot tell",
+      "lasting": "watch off wrist and in the bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "no",
+      "after": "no",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 4,
+      "text": "zip the bag closed",
+      "at_start": "yes: bag zipper is closed",
+      "at_end": "yes: bag zipper is closed",
+      "audit": "cannot tell",
+      "reason": "credited, but start/end evidence is insufficient to confirm or dispute",
+      "lasting": "bag zipped closed",
+      "start_in_place": "yes",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [
+       0
+      ],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 5,
+      "text": "knock on the table twice",
+      "at_start": "cannot tell: no lasting visual state",
+      "at_end": "cannot tell: no lasting visual state",
+      "audit": "cannot tell",
+      "reason": "no lasting visual state or start and end are both cannot tell",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     }
+    ],
+    "sheet": "CHECKLIST AUDIT SIGN-OFF SHEET\n0. unzip the bag | reported: done | audit: confirm | reason: lasting result not at START and either present at END or reversed by a later done step\n1. put the AirPods case in the bag | reported: done | audit: cannot tell | reason: no lasting visual state or start and end are both cannot tell\n2. put the Hello Panda box in the bag | reported: done | audit: cannot tell | reason: no lasting visual state or start and end are both cannot tell\n3. take off the watch and put it in the bag | reported: done | audit: cannot tell | reason: no lasting visual state or start and end are both cannot tell\n4. zip the bag closed | reported: done | audit: cannot tell | reason: credited, but start/end evidence is insufficient to confirm or dispute\n5. knock on the table twice | reported: not_found | audit: cannot tell | reason: no lasting visual state or start and end are both cannot tell\norder: out of order pairs [[1, 2]]\ncounts: confirm=1, dispute=0, cannot tell=5",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [
+     [
+      1,
+      2
+     ]
+    ],
+    "rules_agree": true,
+    "attempts": 1,
+    "frames": [
+     "START (t = 0.3 s)",
+     "END (t = 34.9 s)",
+     "STEP 0 BEFORE (t = 0.8 s)",
+     "STEP 0 AFTER (t = 4.2 s)",
+     "STEP 1 BEFORE (t = 10.8 s)",
+     "STEP 1 AFTER (t = 14.2 s)",
+     "STEP 2 BEFORE (t = 6.8 s)",
+     "STEP 2 AFTER (t = 10.2 s)",
+     "STEP 3 BEFORE (t = 14.8 s)",
+     "STEP 3 AFTER (t = 18.2 s)",
+     "STEP 4 BEFORE (t = 25.2 s)",
+     "STEP 4 AFTER (t = 28.8 s)"
+    ],
+    "local_order_pairs": [
+     [
+      1,
+      2
+     ]
+    ],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 81665
+   }
+  },
+  {
+   "take": "5",
+   "model": "gemini-4-hydrogen",
+   "run": 2,
+   "file": "1f3b5b67c424.mp4",
+   "desc": "Hello Panda before AirPods, knock skipped",
+   "not_done": [
+    5
+   ],
+   "fused": {
+    "video": {
+     "path": "runs/uploads/1f3b5b67c424.mp4",
+     "sha256": "e8d8b34f9d96ade22c7db1ce023654c43f363e04060a1e902d2ca0de8bdd053d",
+     "duration": 35.2
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "unzip the bag",
+      "status": "done",
+      "p_done": 0.99,
+      "time": 1.75,
+      "lo": 1.0,
+      "hi": 2.5
+     },
+     {
+      "index": 1,
+      "text": "put the AirPods case in the bag",
+      "status": "done",
+      "p_done": 0.997,
+      "time": 11.75,
+      "lo": 11.0,
+      "hi": 12.25
+     },
+     {
+      "index": 2,
+      "text": "put the Hello Panda box in the bag",
+      "status": "unsure",
+      "p_done": 0.581,
+      "time": 7.75,
+      "lo": 7.0,
+      "hi": 8.75
+     },
+     {
+      "index": 3,
+      "text": "take off the watch and put it in the bag",
+      "status": "done",
+      "p_done": 0.996,
+      "time": 15.5,
+      "lo": 15.0,
+      "hi": 16.25
+     },
+     {
+      "index": 4,
+      "text": "zip the bag closed",
+      "status": "done",
+      "p_done": 0.971,
+      "time": 26.75,
+      "lo": 26.0,
+      "hi": 27.5
+     },
+     {
+      "index": 5,
+      "text": "knock on the table twice",
+      "status": "not_found",
+      "p_done": 0.043,
+      "time": null,
+      "lo": null,
+      "hi": null
+     }
+    ],
+    "order_issues": [],
+    "seconds_total": 14.85
+   },
+   "ts": 1795289913.23972,
+   "audit": {
+    "ok": true,
+    "seconds": 45.71,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "unzip the bag",
+      "at_start": "no: Bag zipper is closed across the front.",
+      "at_end": "no: Bag zipper is closed across the front.",
+      "audit": "confirm",
+      "reason": "lasting result not at START and matches END or later reversal",
+      "lasting": "bag unzipped open",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [
+       4
+      ],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 1,
+      "text": "put the AirPods case in the bag",
+      "at_start": "cannot tell: Bag is closed; AirPods case not visible.",
+      "at_end": "cannot tell: Bag is closed; AirPods case not visible.",
+      "audit": "cannot tell",
+      "reason": "no lasting photo-verifiable state at start and end",
+      "lasting": "AirPods case inside the bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 2,
+      "text": "put the Hello Panda box in the bag",
+      "at_start": "cannot tell: Bag is closed; Hello Panda box not visible.",
+      "at_end": "cannot tell: Bag is closed; Hello Panda box not visible.",
+      "audit": "cannot tell",
+      "reason": "no lasting photo-verifiable state at start and end",
+      "lasting": "Hello Panda box inside the bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 3,
+      "text": "take off the watch and put it in the bag",
+      "at_start": "cannot tell: Left wrist hidden behind closed bag.",
+      "at_end": "cannot tell: Left wrist out of view; bag is closed.",
+      "audit": "cannot tell",
+      "reason": "no lasting photo-verifiable state at start and end",
+      "lasting": "watch off wrist and inside the bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "no",
+      "after": "no",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 4,
+      "text": "zip the bag closed",
+      "at_start": "yes: Bag zipper is closed across the front.",
+      "at_end": "yes: Bag zipper is closed across the front.",
+      "audit": "cannot tell",
+      "reason": "credited but start/end state is inconclusive under rules",
+      "lasting": "bag zipped closed",
+      "start_in_place": "yes",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 5,
+      "text": "knock on the table twice",
+      "at_start": "cannot tell: Gesture/sound leaves no visible lasting state.",
+      "at_end": "cannot tell: Gesture/sound leaves no visible lasting state.",
+      "audit": "cannot tell",
+      "reason": "no lasting photo-verifiable state at start and end",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     }
+    ],
+    "sheet": "Checklist Audit Sign-Off Sheet\n0. unzip the bag | reported: done | audit: confirm | lasting result not at START and matches END or later reversal\n1. put the AirPods case in the bag | reported: done | audit: cannot tell | no lasting photo-verifiable state at start and end\n2. put the Hello Panda box in the bag | reported: unsure | audit: cannot tell | no lasting photo-verifiable state at start and end\n3. take off the watch and put it in the bag | reported: done | audit: cannot tell | no lasting photo-verifiable state at start and end\n4. zip the bag closed | reported: done | audit: cannot tell | credited but start/end state is inconclusive under rules\n5. knock on the table twice | reported: not_found | audit: cannot tell | no lasting photo-verifiable state at start and end\norder: no pairs out of order\ncounts: confirm=1, dispute=0, cannot tell=5",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [],
+    "rules_agree": true,
+    "attempts": 1,
+    "frames": [
+     "START (t = 0.3 s)",
+     "END (t = 34.9 s)",
+     "STEP 0 BEFORE (t = 0.8 s)",
+     "STEP 0 AFTER (t = 4.2 s)",
+     "STEP 1 BEFORE (t = 10.8 s)",
+     "STEP 1 AFTER (t = 14.2 s)",
+     "STEP 2 BEFORE (t = 6.8 s)",
+     "STEP 2 AFTER (t = 10.2 s)",
+     "STEP 3 BEFORE (t = 14.5 s)",
+     "STEP 3 AFTER (t = 18.0 s)",
+     "STEP 4 BEFORE (t = 25.8 s)",
+     "STEP 4 AFTER (t = 29.2 s)"
+    ],
+    "local_order_pairs": [],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 81985
+   }
+  },
+  {
+   "take": "6",
+   "model": "gemini-4-hydrogen",
+   "file": "05e358080485.mp4",
+   "desc": "fake-out: AirPods picked up, moved toward the bag, put back on the table; knock before zip",
+   "not_done": [
+    1
+   ],
+   "fused": {
+    "video": {
+     "path": "runs/uploads/05e358080485.mp4",
+     "sha256": "7b60d2c903f1f4ef3455bf2ca6b07f2bbd1eb6e14fa632c12e1d03487f6bb8e7",
+     "duration": 25.2
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "unzip the bag",
+      "status": "done",
+      "p_done": 0.903,
+      "time": 0.5,
+      "lo": 0.0,
+      "hi": 1.25
+     },
+     {
+      "index": 1,
+      "text": "put the AirPods case in the bag",
+      "status": "not_found",
+      "p_done": 0.284,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 2,
+      "text": "put the Hello Panda box in the bag",
+      "status": "done",
+      "p_done": 0.84,
+      "time": 7.75,
+      "lo": 6.75,
+      "hi": 8.5
+     },
+     {
+      "index": 3,
+      "text": "take off the watch and put it in the bag",
+      "status": "done",
+      "p_done": 0.945,
+      "time": 10.25,
+      "lo": 9.75,
+      "hi": 11.25
+     },
+     {
+      "index": 4,
+      "text": "zip the bag closed",
+      "status": "done",
+      "p_done": 0.905,
+      "time": 18.75,
+      "lo": 18.0,
+      "hi": 19.75
+     },
+     {
+      "index": 5,
+      "text": "knock on the table twice",
+      "status": "done",
+      "p_done": 0.945,
+      "time": 16.25,
+      "lo": 15.75,
+      "hi": 17.0
+     }
+    ],
+    "order_issues": [
+     {
+      "earlier": 5,
+      "later": 4
+     }
+    ],
+    "seconds_total": 17.1
+   },
+   "ts": 1795289483.5898697,
+   "audit": {
+    "ok": true,
+    "seconds": 67.19,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "unzip the bag",
+      "at_start": "no: bag zipper is closed, hand on zipper pull",
+      "at_end": "cannot tell: bag is mostly off-screen to the left, zipper not visible",
+      "audit": "cannot tell",
+      "reason": "END frame does not confirm lasting result",
+      "lasting": "bag unzipped",
+      "start_in_place": "no",
+      "end_in_place": "cannot tell",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [
+       4
+      ],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 1,
+      "text": "put the AirPods case in the bag",
+      "at_start": "cannot tell: no AirPods case visible outside or inside bag",
+      "at_end": "cannot tell: no AirPods case visible, bag mostly off-screen",
+      "audit": "cannot tell",
+      "reason": "START and END frames do not show the item",
+      "lasting": "AirPods case in the bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 2,
+      "text": "put the Hello Panda box in the bag",
+      "at_start": "cannot tell: no Hello Panda box visible outside or inside bag",
+      "at_end": "cannot tell: no Hello Panda box visible, bag mostly off-screen",
+      "audit": "cannot tell",
+      "reason": "START and END frames do not show the item",
+      "lasting": "Hello Panda box in the bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 3,
+      "text": "take off the watch and put it in the bag",
+      "at_start": "no: silver watch is on his left wrist",
+      "at_end": "yes: left wrist and table show no watch",
+      "audit": "confirm",
+      "reason": "absent at START and present at END",
+      "lasting": "watch off wrist and in the bag",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "no",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 4,
+      "text": "zip the bag closed",
+      "at_start": "yes: bag zipper is closed, hand on zipper pull",
+      "at_end": "cannot tell: bag is mostly off-screen to the left, zipper not visible",
+      "audit": "cannot tell",
+      "reason": "END frame does not confirm lasting result",
+      "lasting": "bag zipped closed",
+      "start_in_place": "yes",
+      "end_in_place": "cannot tell",
+      "before": "no",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 5,
+      "text": "knock on the table twice",
+      "at_start": "cannot tell: knocking leaves no lasting visible state",
+      "at_end": "cannot tell: knocking leaves no lasting visible state",
+      "audit": "cannot tell",
+      "reason": "step leaves no lasting visible result",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     }
+    ],
+    "sheet": "CHECKLIST AUDIT SIGN-OFF SHEET\n0. unzip the bag | reported: done | audit: cannot tell | END frame does not confirm lasting result\n1. put the AirPods case in the bag | reported: not_found | audit: cannot tell | START and END frames do not show the item\n2. put the Hello Panda box in the bag | reported: done | audit: cannot tell | START and END frames do not show the item\n3. take off the watch and put it in the bag | reported: done | audit: confirm | absent at START and present at END\n4. zip the bag closed | reported: done | audit: cannot tell | END frame does not confirm lasting result\n5. knock on the table twice | reported: done | audit: cannot tell | step leaves no lasting visible result\norder: out of order pairs: [4, 5]\ncounts: confirm=1, dispute=0, cannot tell=5",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [
+     [
+      4,
+      5
+     ]
+    ],
+    "rules_agree": true,
+    "attempts": 1,
+    "frames": [
+     "START (t = 0.3 s)",
+     "END (t = 24.9 s)",
+     "STEP 0 BEFORE (t = 0.0 s)",
+     "STEP 0 AFTER (t = 3.0 s)",
+     "STEP 2 BEFORE (t = 6.8 s)",
+     "STEP 2 AFTER (t = 10.2 s)",
+     "STEP 3 BEFORE (t = 9.2 s)",
+     "STEP 3 AFTER (t = 12.8 s)",
+     "STEP 4 BEFORE (t = 17.8 s)",
+     "STEP 4 AFTER (t = 21.2 s)",
+     "STEP 5 BEFORE (t = 15.2 s)",
+     "STEP 5 AFTER (t = 18.8 s)"
+    ],
+    "local_order_pairs": [
+     [
+      4,
+      5
+     ]
+    ],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 90842
+   }
+  },
+  {
+   "take": "6",
+   "model": "gemini-4-hydrogen",
+   "run": 2,
+   "file": "05e358080485.mp4",
+   "desc": "fake-out: AirPods picked up, moved toward the bag, put back on the table; knock before zip",
+   "not_done": [
+    1
+   ],
+   "fused": {
+    "video": {
+     "path": "runs/uploads/05e358080485.mp4",
+     "sha256": "7b60d2c903f1f4ef3455bf2ca6b07f2bbd1eb6e14fa632c12e1d03487f6bb8e7",
+     "duration": 25.2
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "unzip the bag",
+      "status": "done",
+      "p_done": 0.98,
+      "time": 0.5,
+      "lo": 0.0,
+      "hi": 1.0
+     },
+     {
+      "index": 1,
+      "text": "put the AirPods case in the bag",
+      "status": "not_found",
+      "p_done": 0.197,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 2,
+      "text": "put the Hello Panda box in the bag",
+      "status": "done",
+      "p_done": 0.955,
+      "time": 7.75,
+      "lo": 7.0,
+      "hi": 8.25
+     },
+     {
+      "index": 3,
+      "text": "take off the watch and put it in the bag",
+      "status": "done",
+      "p_done": 0.986,
+      "time": 10.5,
+      "lo": 10.0,
+      "hi": 11.25
+     },
+     {
+      "index": 4,
+      "text": "zip the bag closed",
+      "status": "done",
+      "p_done": 0.975,
+      "time": 19.25,
+      "lo": 18.5,
+      "hi": 19.75
+     },
+     {
+      "index": 5,
+      "text": "knock on the table twice",
+      "status": "done",
+      "p_done": 0.987,
+      "time": 16.5,
+      "lo": 15.75,
+      "hi": 17.0
+     }
+    ],
+    "order_issues": [
+     {
+      "earlier": 5,
+      "later": 4
+     }
+    ],
+    "seconds_total": 14.76
+   },
+   "ts": 1795289928.003991,
+   "audit": {
+    "ok": true,
+    "seconds": 57.28,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "unzip the bag",
+      "at_start": "no: Bag zipper is closed with hand on pull.",
+      "at_end": "cannot tell: Bag is mostly off-frame to the left.",
+      "audit": "cannot tell",
+      "reason": "credited, but end state cannot be determined",
+      "lasting": "bag is unzipped",
+      "start_in_place": "no",
+      "end_in_place": "cannot tell",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [
+       4
+      ],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 1,
+      "text": "put the AirPods case in the bag",
+      "at_start": "cannot tell: No AirPods case visible in frame.",
+      "at_end": "cannot tell: Bag mostly off-frame, no AirPods case visible.",
+      "audit": "cannot tell",
+      "reason": "start and end states cannot be determined",
+      "lasting": "AirPods case in the bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 2,
+      "text": "put the Hello Panda box in the bag",
+      "at_start": "cannot tell: No Hello Panda box visible in frame.",
+      "at_end": "cannot tell: Bag mostly off-frame, no box visible.",
+      "audit": "cannot tell",
+      "reason": "start and end states cannot be determined",
+      "lasting": "Hello Panda box in the bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 3,
+      "text": "take off the watch and put it in the bag",
+      "at_start": "no: Silver watch is worn on left wrist.",
+      "at_end": "yes: Left wrist is bare and watch is gone.",
+      "audit": "confirm",
+      "reason": "lasting result absent at start and present at end",
+      "lasting": "watch off wrist and in the bag",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "no",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 4,
+      "text": "zip the bag closed",
+      "at_start": "yes: Bag zipper appears closed across the top.",
+      "at_end": "cannot tell: Bag zipper is out of frame on left.",
+      "audit": "cannot tell",
+      "reason": "credited, but end state cannot be determined",
+      "lasting": "bag is zipped closed",
+      "start_in_place": "yes",
+      "end_in_place": "cannot tell",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 5,
+      "text": "knock on the table twice",
+      "at_start": "cannot tell: Action leaves no lasting visual state.",
+      "at_end": "cannot tell: Action leaves no lasting visual state.",
+      "audit": "cannot tell",
+      "reason": "step leaves no lasting visual result",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     }
+    ],
+    "sheet": "CHECKLIST AUDIT SIGN-OFF SHEET\n0. unzip the bag | reported: done | audit: cannot tell | credited, but end state cannot be determined\n1. put the AirPods case in the bag | reported: not_found | audit: cannot tell | start and end states cannot be determined\n2. put the Hello Panda box in the bag | reported: done | audit: cannot tell | start and end states cannot be determined\n3. take off the watch and put it in the bag | reported: done | audit: confirm | lasting result absent at start and present at end\n4. zip the bag closed | reported: done | audit: cannot tell | credited, but end state cannot be determined\n5. knock on the table twice | reported: done | audit: cannot tell | step leaves no lasting visual result\norder: out of order pairs [[4, 5]]\ncounts: confirm=1, dispute=0, cannot tell=5",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [
+     [
+      4,
+      5
+     ]
+    ],
+    "rules_agree": true,
+    "attempts": 1,
+    "frames": [
+     "START (t = 0.3 s)",
+     "END (t = 24.9 s)",
+     "STEP 0 BEFORE (t = 0.0 s)",
+     "STEP 0 AFTER (t = 3.0 s)",
+     "STEP 2 BEFORE (t = 6.8 s)",
+     "STEP 2 AFTER (t = 10.2 s)",
+     "STEP 3 BEFORE (t = 9.5 s)",
+     "STEP 3 AFTER (t = 13.0 s)",
+     "STEP 4 BEFORE (t = 18.2 s)",
+     "STEP 4 AFTER (t = 21.8 s)",
+     "STEP 5 BEFORE (t = 15.5 s)",
+     "STEP 5 AFTER (t = 19.0 s)"
+    ],
+    "local_order_pairs": [
+     [
+      4,
+      5
+     ]
+    ],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 85717
+   }
+  },
+  {
+   "take": "7",
+   "model": "gemini-4-hydrogen",
+   "file": "203296f29ce5.mp4",
+   "desc": "fake-out: Hello Panda moved toward the bag and put back; bag not zipped, no knock",
+   "not_done": [
+    2,
+    4,
+    5
+   ],
+   "fused": {
+    "video": {
+     "path": "runs/uploads/203296f29ce5.mp4",
+     "sha256": "bf447c5dcf5093232d42ecdc2dc3142e0dcb56128d203379cc7fe19a572fdce6",
+     "duration": 21.9
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "unzip the bag",
+      "status": "done",
+      "p_done": 0.941,
+      "time": 1.25,
+      "lo": 0.25,
+      "hi": 2.25
+     },
+     {
+      "index": 1,
+      "text": "put the AirPods case in the bag",
+      "status": "done",
+      "p_done": 0.931,
+      "time": 4.75,
+      "lo": 4.0,
+      "hi": 5.5
+     },
+     {
+      "index": 2,
+      "text": "put the Hello Panda box in the bag",
+      "status": "unsure",
+      "p_done": 0.629,
+      "time": 9.25,
+      "lo": 8.0,
+      "hi": 10.5
+     },
+     {
+      "index": 3,
+      "text": "take off the watch and put it in the bag",
+      "status": "done",
+      "p_done": 0.886,
+      "time": 14.0,
+      "lo": 12.75,
+      "hi": 15.75
+     },
+     {
+      "index": 4,
+      "text": "zip the bag closed",
+      "status": "not_found",
+      "p_done": 0.24,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 5,
+      "text": "knock on the table twice",
+      "status": "not_found",
+      "p_done": 0.075,
+      "time": null,
+      "lo": null,
+      "hi": null
+     }
+    ],
+    "order_issues": [],
+    "seconds_total": 15.11
+   },
+   "ts": 1795289498.6993585,
+   "audit": {
+    "ok": true,
+    "seconds": 53.36,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "unzip the bag",
+      "at_start": "no: Bag zipper is closed across the top.",
+      "at_end": "yes: Bag zipper is open with teeth parted.",
+      "audit": "confirm",
+      "reason": "Credited; lasting result absent at START and present at END.",
+      "lasting": "bag is unzipped",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [
+       4
+      ],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 1,
+      "text": "put the AirPods case in the bag",
+      "at_start": "cannot tell: Bag is closed; AirPods case and table not visible.",
+      "at_end": "cannot tell: Inside of bag and table are not visible.",
+      "audit": "cannot tell",
+      "reason": "Both START and END are cannot tell.",
+      "lasting": "AirPods case in the bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 2,
+      "text": "put the Hello Panda box in the bag",
+      "at_start": "cannot tell: Bag is closed; Hello Panda box not visible.",
+      "at_end": "cannot tell: Inside of bag and table are not visible.",
+      "audit": "cannot tell",
+      "reason": "Both START and END are cannot tell.",
+      "lasting": "Hello Panda box in the bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 3,
+      "text": "take off the watch and put it in the bag",
+      "at_start": "no: Watch is visible on person's left wrist.",
+      "at_end": "yes: Left wrist has no watch; watch not visible.",
+      "audit": "confirm",
+      "reason": "Credited; lasting result absent at START and present at END.",
+      "lasting": "watch off wrist and in the bag",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "cannot tell",
+      "after": "no",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 4,
+      "text": "zip the bag closed",
+      "at_start": "yes: Bag zipper is closed across the top.",
+      "at_end": "no: Bag zipper is open with teeth parted.",
+      "audit": "confirm",
+      "reason": "Not found; lasting result was already at START or absent at END without later reversal.",
+      "lasting": "bag is zipped closed",
+      "start_in_place": "yes",
+      "end_in_place": "no",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [
+       0
+      ],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 5,
+      "text": "knock on the table twice",
+      "at_start": "cannot tell: Table surface and knocking action not visible.",
+      "at_end": "cannot tell: Table surface and knocking action not visible.",
+      "audit": "cannot tell",
+      "reason": "Step leaves no lasting visual result.",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     }
+    ],
+    "sheet": "CHECKLIST AUDIT SIGN-OFF SHEET\n0. unzip the bag | reported=done | audit=confirm | Credited; lasting result absent at START and present at END.\n1. put the AirPods case in the bag | reported=done | audit=cannot tell | Both START and END are cannot tell.\n2. put the Hello Panda box in the bag | reported=unsure | audit=cannot tell | Both START and END are cannot tell.\n3. take off the watch and put it in the bag | reported=done | audit=confirm | Credited; lasting result absent at START and present at END.\n4. zip the bag closed | reported=not_found | audit=confirm | Not found; lasting result was already at START or absent at END without later reversal.\n5. knock on the table twice | reported=not_found | audit=cannot tell | Step leaves no lasting visual result.\norder: no pairs out of order\ncounts: confirm=3, dispute=0, cannot tell=3",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [],
+    "rules_agree": true,
+    "attempts": 1,
+    "frames": [
+     "START (t = 0.3 s)",
+     "END (t = 21.6 s)",
+     "STEP 0 BEFORE (t = 0.2 s)",
+     "STEP 0 AFTER (t = 3.8 s)",
+     "STEP 1 BEFORE (t = 3.8 s)",
+     "STEP 1 AFTER (t = 7.2 s)",
+     "STEP 2 BEFORE (t = 8.2 s)",
+     "STEP 2 AFTER (t = 11.8 s)",
+     "STEP 3 BEFORE (t = 13.0 s)",
+     "STEP 3 AFTER (t = 16.5 s)"
+    ],
+    "local_order_pairs": [],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 79253
+   }
+  },
+  {
+   "take": "7",
+   "model": "gemini-4-hydrogen",
+   "run": 2,
+   "file": "203296f29ce5.mp4",
+   "desc": "fake-out: Hello Panda moved toward the bag and put back; bag not zipped, no knock",
+   "not_done": [
+    2,
+    4,
+    5
+   ],
+   "fused": {
+    "video": {
+     "path": "runs/uploads/203296f29ce5.mp4",
+     "sha256": "bf447c5dcf5093232d42ecdc2dc3142e0dcb56128d203379cc7fe19a572fdce6",
+     "duration": 21.9
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "unzip the bag",
+      "status": "done",
+      "p_done": 0.962,
+      "time": 1.5,
+      "lo": 0.75,
+      "hi": 2.25
+     },
+     {
+      "index": 1,
+      "text": "put the AirPods case in the bag",
+      "status": "done",
+      "p_done": 0.946,
+      "time": 4.75,
+      "lo": 4.0,
+      "hi": 5.5
+     },
+     {
+      "index": 2,
+      "text": "put the Hello Panda box in the bag",
+      "status": "done",
+      "p_done": 0.657,
+      "time": 9.25,
+      "lo": 8.0,
+      "hi": 10.5
+     },
+     {
+      "index": 3,
+      "text": "take off the watch and put it in the bag",
+      "status": "done",
+      "p_done": 0.947,
+      "time": 13.75,
+      "lo": 12.75,
+      "hi": 14.25
+     },
+     {
+      "index": 4,
+      "text": "zip the bag closed",
+      "status": "not_found",
+      "p_done": 0.263,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 5,
+      "text": "knock on the table twice",
+      "status": "not_found",
+      "p_done": 0.084,
+      "time": null,
+      "lo": null,
+      "hi": null
+     }
+    ],
+    "order_issues": [],
+    "seconds_total": 15.47
+   },
+   "ts": 1795289943.47251,
+   "audit": {
+    "ok": true,
+    "seconds": 52.3,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "unzip the bag",
+      "at_start": "no: Bag zipper is closed across the front.",
+      "at_end": "yes: Bag zipper is open with sides separated.",
+      "audit": "confirm",
+      "reason": "credited, absent at START, and present at END",
+      "lasting": "bag is unzipped",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [
+       4
+      ],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 1,
+      "text": "put the AirPods case in the bag",
+      "at_start": "cannot tell: Bag is closed; AirPods case not visible anywhere.",
+      "at_end": "cannot tell: Cannot see inside bag; AirPods case not visible.",
+      "audit": "cannot tell",
+      "reason": "no lasting visual state or both start and end are cannot tell",
+      "lasting": "AirPods case is in the bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 2,
+      "text": "put the Hello Panda box in the bag",
+      "at_start": "cannot tell: Bag is closed; Hello Panda box not visible.",
+      "at_end": "cannot tell: Cannot see inside bag; box not visible.",
+      "audit": "cannot tell",
+      "reason": "no lasting visual state or both start and end are cannot tell",
+      "lasting": "Hello Panda box is in the bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 3,
+      "text": "take off the watch and put it in the bag",
+      "at_start": "no: Metallic watch is visible on left wrist.",
+      "at_end": "yes: Left wrist is bare; watch not visible anywhere.",
+      "audit": "confirm",
+      "reason": "credited, absent at START, and present at END",
+      "lasting": "watch is off wrist and in the bag",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "cannot tell",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 4,
+      "text": "zip the bag closed",
+      "at_start": "yes: Bag zipper is closed across the front.",
+      "at_end": "no: Bag zipper is open with sides separated.",
+      "audit": "confirm",
+      "reason": "not_found, and lasting result is absent at END without being reversed later",
+      "lasting": "bag is zipped closed",
+      "start_in_place": "yes",
+      "end_in_place": "no",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [
+       0
+      ],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 5,
+      "text": "knock on the table twice",
+      "at_start": "cannot tell: Knocking leaves no visible lasting state.",
+      "at_end": "cannot tell: Knocking leaves no visible lasting state.",
+      "audit": "cannot tell",
+      "reason": "no lasting visual state or both start and end are cannot tell",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     }
+    ],
+    "sheet": "Checklist Audit Sign-Off Sheet\n0. unzip the bag | reported=done | audit=confirm | credited, absent at START, and present at END\n1. put the AirPods case in the bag | reported=done | audit=cannot tell | no lasting visual state or both start and end are cannot tell\n2. put the Hello Panda box in the bag | reported=done | audit=cannot tell | no lasting visual state or both start and end are cannot tell\n3. take off the watch and put it in the bag | reported=done | audit=confirm | credited, absent at START, and present at END\n4. zip the bag closed | reported=not_found | audit=confirm | not_found, and lasting result is absent at END without being reversed later\n5. knock on the table twice | reported=not_found | audit=cannot tell | no lasting visual state or both start and end are cannot tell\norder: no pairs out of order\ncounts: confirm=3, dispute=0, cannot tell=3",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [],
+    "rules_agree": true,
+    "attempts": 1,
+    "frames": [
+     "START (t = 0.3 s)",
+     "END (t = 21.6 s)",
+     "STEP 0 BEFORE (t = 0.5 s)",
+     "STEP 0 AFTER (t = 4.0 s)",
+     "STEP 1 BEFORE (t = 3.8 s)",
+     "STEP 1 AFTER (t = 7.2 s)",
+     "STEP 2 BEFORE (t = 8.2 s)",
+     "STEP 2 AFTER (t = 11.8 s)",
+     "STEP 3 BEFORE (t = 12.8 s)",
+     "STEP 3 AFTER (t = 16.2 s)"
+    ],
+    "local_order_pairs": [],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 75876
+   }
+  },
+  {
+   "take": "8",
+   "model": "gemini-4-hydrogen",
+   "file": "81f8ea3a5269.mp4",
+   "desc": "watch fake-out only: starts to take the watch off, leaves it on; no other step done",
+   "not_done": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "fused": {
+    "video": {
+     "path": "runs/uploads/81f8ea3a5269.mp4",
+     "sha256": "bc27c26edd7c451fc05642340aa1d6d62d41c4f996ce5a530b7a82fdf0aa2a7f",
+     "duration": 10.5
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "unzip the bag",
+      "status": "done",
+      "p_done": 0.889,
+      "time": 0.5,
+      "lo": 0.0,
+      "hi": 1.25
+     },
+     {
+      "index": 1,
+      "text": "put the AirPods case in the bag",
+      "status": "not_found",
+      "p_done": 0.078,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 2,
+      "text": "put the Hello Panda box in the bag",
+      "status": "not_found",
+      "p_done": 0.067,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 3,
+      "text": "take off the watch and put it in the bag",
+      "status": "not_found",
+      "p_done": 0.211,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 4,
+      "text": "zip the bag closed",
+      "status": "not_found",
+      "p_done": 0.197,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 5,
+      "text": "knock on the table twice",
+      "status": "not_found",
+      "p_done": 0.066,
+      "time": null,
+      "lo": null,
+      "hi": null
+     }
+    ],
+    "order_issues": [],
+    "seconds_total": 15.07
+   },
+   "ts": 1795289513.7658875,
+   "audit": {
+    "ok": true,
+    "seconds": 53.15,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "unzip the bag",
+      "at_start": "no: bag zipper is closed across the front",
+      "at_end": "no: bag zipper is closed across the front",
+      "audit": "dispute",
+      "reason": "credited, but its lasting result is absent at END and no later step on the list reverses it.",
+      "lasting": "bag unzipped",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "no",
+      "after": "cannot tell",
+      "reversed_by": [
+       4
+      ],
+      "local_audit": "dispute"
+     },
+     {
+      "index": 1,
+      "text": "put the AirPods case in the bag",
+      "at_start": "no: white AirPods case is visible on the table",
+      "at_end": "no: white AirPods case is still on the table",
+      "audit": "confirm",
+      "reason": "not_found and frame evidence agrees",
+      "lasting": "AirPods case in the bag",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 2,
+      "text": "put the Hello Panda box in the bag",
+      "at_start": "cannot tell: no Hello Panda box is visible in frame",
+      "at_end": "cannot tell: no Hello Panda box is visible in frame",
+      "audit": "cannot tell",
+      "reason": "no lasting visual state or both START and END are cannot tell",
+      "lasting": "Hello Panda box in the bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 3,
+      "text": "take off the watch and put it in the bag",
+      "at_start": "cannot tell: left wrist is out of frame, bag interior hidden",
+      "at_end": "cannot tell: left wrist is out of frame, bag interior hidden",
+      "audit": "cannot tell",
+      "reason": "no lasting visual state or both START and END are cannot tell",
+      "lasting": "watch off wrist and in the bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 4,
+      "text": "zip the bag closed",
+      "at_start": "yes: bag zipper is closed across the front",
+      "at_end": "yes: bag zipper is closed across the front",
+      "audit": "confirm",
+      "reason": "not_found and frame evidence agrees",
+      "lasting": "bag zipped closed",
+      "start_in_place": "yes",
+      "end_in_place": "yes",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [
+       0
+      ],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 5,
+      "text": "knock on the table twice",
+      "at_start": "cannot tell: knocking leaves no lasting visual state",
+      "at_end": "cannot tell: knocking leaves no lasting visual state",
+      "audit": "cannot tell",
+      "reason": "no lasting visual state or both START and END are cannot tell",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     }
+    ],
+    "sheet": "Checklist Audit Sign-Off Sheet\n0. unzip the bag | reported: done | audit: dispute | credited, but its lasting result is absent at END and no later step on the list reverses it.\n1. put the AirPods case in the bag | reported: not_found | audit: confirm | not_found and frame evidence agrees\n2. put the Hello Panda box in the bag | reported: not_found | audit: cannot tell | no lasting visual state or both START and END are cannot tell\n3. take off the watch and put it in the bag | reported: not_found | audit: cannot tell | no lasting visual state or both START and END are cannot tell\n4. zip the bag closed | reported: not_found | audit: confirm | not_found and frame evidence agrees\n5. knock on the table twice | reported: not_found | audit: cannot tell | no lasting visual state or both START and END are cannot tell\norder: no pairs out of order\ncounts: confirm=2, dispute=1, cannot tell=3",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [],
+    "rules_agree": true,
+    "attempts": 1,
+    "frames": [
+     "START (t = 0.3 s)",
+     "END (t = 10.2 s)",
+     "STEP 0 BEFORE (t = 0.0 s)",
+     "STEP 0 AFTER (t = 3.0 s)"
+    ],
+    "local_order_pairs": [],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 52779
+   }
+  },
+  {
+   "take": "8",
+   "model": "gemini-4-hydrogen",
+   "run": 2,
+   "file": "81f8ea3a5269.mp4",
+   "desc": "watch fake-out only: starts to take the watch off, leaves it on; no other step done",
+   "not_done": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "fused": {
+    "video": {
+     "path": "runs/uploads/81f8ea3a5269.mp4",
+     "sha256": "bc27c26edd7c451fc05642340aa1d6d62d41c4f996ce5a530b7a82fdf0aa2a7f",
+     "duration": 10.5
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "unzip the bag",
+      "status": "done",
+      "p_done": 0.893,
+      "time": 0.75,
+      "lo": 0.25,
+      "hi": 1.5
+     },
+     {
+      "index": 1,
+      "text": "put the AirPods case in the bag",
+      "status": "not_found",
+      "p_done": 0.078,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 2,
+      "text": "put the Hello Panda box in the bag",
+      "status": "not_found",
+      "p_done": 0.067,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 3,
+      "text": "take off the watch and put it in the bag",
+      "status": "not_found",
+      "p_done": 0.211,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 4,
+      "text": "zip the bag closed",
+      "status": "not_found",
+      "p_done": 0.197,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 5,
+      "text": "knock on the table twice",
+      "status": "not_found",
+      "p_done": 0.066,
+      "time": null,
+      "lo": null,
+      "hi": null
+     }
+    ],
+    "order_issues": [],
+    "seconds_total": 15.28
+   },
+   "ts": 1795289958.7569695,
+   "audit": {
+    "ok": true,
+    "seconds": 48.22,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "unzip the bag",
+      "at_start": "no: Bag zipper is closed across the front.",
+      "at_end": "no: Bag zipper is closed across the front.",
+      "audit": "dispute",
+      "reason": "credited, but its lasting result is absent at END and no later step on the list reverses it.",
+      "lasting": "bag unzipped",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "no",
+      "after": "no",
+      "reversed_by": [
+       4
+      ],
+      "local_audit": "dispute"
+     },
+     {
+      "index": 1,
+      "text": "put the AirPods case in the bag",
+      "at_start": "no: White AirPods case sits outside at bottom center.",
+      "at_end": "no: White AirPods case still sits outside at bottom center.",
+      "audit": "confirm",
+      "reason": "not_found, and lasting result is either already in place at START or absent at END without later reversal.",
+      "lasting": "AirPods case in bag",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 2,
+      "text": "put the Hello Panda box in the bag",
+      "at_start": "cannot tell: No Hello Panda box visible; table and bag interior unseen.",
+      "at_end": "cannot tell: No Hello Panda box visible; table and bag interior unseen.",
+      "audit": "cannot tell",
+      "reason": "lasting is none or both START and END are cannot tell.",
+      "lasting": "Hello Panda box in bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 3,
+      "text": "take off the watch and put it in the bag",
+      "at_start": "cannot tell: Left wrist is out of frame; watch not visible.",
+      "at_end": "cannot tell: Left wrist is out of frame; watch not visible.",
+      "audit": "cannot tell",
+      "reason": "lasting is none or both START and END are cannot tell.",
+      "lasting": "watch off wrist and in bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 4,
+      "text": "zip the bag closed",
+      "at_start": "yes: Bag zipper is already closed across the front.",
+      "at_end": "yes: Bag zipper is closed across the front.",
+      "audit": "confirm",
+      "reason": "not_found, and lasting result is either already in place at START or absent at END without later reversal.",
+      "lasting": "bag zipped closed",
+      "start_in_place": "yes",
+      "end_in_place": "yes",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [
+       0
+      ],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 5,
+      "text": "knock on the table twice",
+      "at_start": "cannot tell: Knocking leaves no visible state in a still frame.",
+      "at_end": "cannot tell: Knocking leaves no visible state in a still frame.",
+      "audit": "cannot tell",
+      "reason": "lasting is none or both START and END are cannot tell.",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     }
+    ],
+    "sheet": "CHECKLIST AUDIT SIGN-OFF SHEET\n0. unzip the bag | reported=done | audit=dispute | credited, but its lasting result is absent at END and no later step on the list reverses it.\n1. put the AirPods case in the bag | reported=not_found | audit=confirm | not_found, and lasting result is either already in place at START or absent at END without later reversal.\n2. put the Hello Panda box in the bag | reported=not_found | audit=cannot tell | lasting is none or both START and END are cannot tell.\n3. take off the watch and put it in the bag | reported=not_found | audit=cannot tell | lasting is none or both START and END are cannot tell.\n4. zip the bag closed | reported=not_found | audit=confirm | not_found, and lasting result is either already in place at START or absent at END without later reversal.\n5. knock on the table twice | reported=not_found | audit=cannot tell | lasting is none or both START and END are cannot tell.\norder: no pairs out of order\ncounts: confirm=2, dispute=1, cannot tell=3",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [],
+    "rules_agree": true,
+    "attempts": 1,
+    "frames": [
+     "START (t = 0.3 s)",
+     "END (t = 10.2 s)",
+     "STEP 0 BEFORE (t = 0.0 s)",
+     "STEP 0 AFTER (t = 3.2 s)"
+    ],
+    "local_order_pairs": [],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 56430
+   }
+  },
+  {
+   "take": "9",
+   "model": "gemini-4-hydrogen",
+   "file": "428cb05ba955.mp4",
+   "desc": "AirPods put in the bag, then taken back out; watch fiddled with but left on; no unzip, zip or knock",
+   "not_done": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "fused": {
+    "video": {
+     "path": "runs/uploads/428cb05ba955.mp4",
+     "sha256": "9a469e1f7dfc6b4437f4c9bd5659dfb940e2e7bfc077c3e2485babb6d1872c42",
+     "duration": 17.8
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "unzip the bag",
+      "status": "done",
+      "p_done": 0.826,
+      "time": 1.25,
+      "lo": 0.5,
+      "hi": 2.25
+     },
+     {
+      "index": 1,
+      "text": "put the AirPods case in the bag",
+      "status": "not_found",
+      "p_done": 0.198,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 2,
+      "text": "put the Hello Panda box in the bag",
+      "status": "not_found",
+      "p_done": 0.051,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 3,
+      "text": "take off the watch and put it in the bag",
+      "status": "not_found",
+      "p_done": 0.197,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 4,
+      "text": "zip the bag closed",
+      "status": "not_found",
+      "p_done": 0.153,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 5,
+      "text": "knock on the table twice",
+      "status": "not_found",
+      "p_done": 0.133,
+      "time": null,
+      "lo": null,
+      "hi": null
+     }
+    ],
+    "order_issues": [],
+    "seconds_total": 15.18
+   },
+   "ts": 1795289528.942448,
+   "audit": {
+    "ok": true,
+    "seconds": 47.7,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "unzip the bag",
+      "at_start": "no: Bag top held closed with right hand at zipper",
+      "at_end": "cannot tell: Bag top folded down; zipper opening not visible",
+      "audit": "cannot tell",
+      "reason": "credited, but end state is cannot tell",
+      "lasting": "bag unzipped",
+      "start_in_place": "no",
+      "end_in_place": "cannot tell",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [
+       4
+      ],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 1,
+      "text": "put the AirPods case in the bag",
+      "at_start": "no: White AirPods case visible on table at bottom right",
+      "at_end": "no: White AirPods case still visible on table at bottom",
+      "audit": "confirm",
+      "reason": "not_found, and lasting result is absent at end with no later reversal",
+      "lasting": "AirPods case in bag",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 2,
+      "text": "put the Hello Panda box in the bag",
+      "at_start": "cannot tell: No Hello Panda box visible in frame or bag",
+      "at_end": "cannot tell: No Hello Panda box visible in frame or bag",
+      "audit": "cannot tell",
+      "reason": "start and end are both cannot tell",
+      "lasting": "Hello Panda box in bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 3,
+      "text": "take off the watch and put it in the bag",
+      "at_start": "cannot tell: Left wrist hidden behind bag; watch not visible",
+      "at_end": "cannot tell: Left wrist off-frame at bottom right; watch not visible",
+      "audit": "cannot tell",
+      "reason": "start and end are both cannot tell",
+      "lasting": "watch off wrist and in bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 4,
+      "text": "zip the bag closed",
+      "at_start": "yes: Bag top closed together with hand on zipper",
+      "at_end": "cannot tell: Bag top folded down; zipper state not visible",
+      "audit": "confirm",
+      "reason": "not_found, and lasting result was already in place at start",
+      "lasting": "bag zipped closed",
+      "start_in_place": "yes",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [
+       0
+      ],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 5,
+      "text": "knock on the table twice",
+      "at_start": "cannot tell: Knocking leaves no lasting visual state",
+      "at_end": "cannot tell: Knocking leaves no lasting visual state",
+      "audit": "cannot tell",
+      "reason": "lasting result is none",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     }
+    ],
+    "sheet": "Checklist Audit Sign-Off Sheet\n0. unzip the bag | reported: done | audit: cannot tell | credited, but end state is cannot tell\n1. put the AirPods case in the bag | reported: not_found | audit: confirm | not_found, and lasting result is absent at end with no later reversal\n2. put the Hello Panda box in the bag | reported: not_found | audit: cannot tell | start and end are both cannot tell\n3. take off the watch and put it in the bag | reported: not_found | audit: cannot tell | start and end are both cannot tell\n4. zip the bag closed | reported: not_found | audit: confirm | not_found, and lasting result was already in place at start\n5. knock on the table twice | reported: not_found | audit: cannot tell | lasting result is none\norder: no pairs out of order\ncounts: confirm=2, dispute=0, cannot tell=4",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [],
+    "rules_agree": true,
+    "attempts": 1,
+    "frames": [
+     "START (t = 0.3 s)",
+     "END (t = 17.5 s)",
+     "STEP 0 BEFORE (t = 0.2 s)",
+     "STEP 0 AFTER (t = 3.8 s)"
+    ],
+    "local_order_pairs": [],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 56633
+   }
+  },
+  {
+   "take": "9",
+   "model": "gemini-4-hydrogen",
+   "run": 2,
+   "file": "428cb05ba955.mp4",
+   "desc": "AirPods put in the bag, then taken back out; watch fiddled with but left on; no unzip, zip or knock",
+   "not_done": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "fused": {
+    "video": {
+     "path": "runs/uploads/428cb05ba955.mp4",
+     "sha256": "9a469e1f7dfc6b4437f4c9bd5659dfb940e2e7bfc077c3e2485babb6d1872c42",
+     "duration": 17.8
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "unzip the bag",
+      "status": "done",
+      "p_done": 0.823,
+      "time": 1.0,
+      "lo": 0.25,
+      "hi": 1.75
+     },
+     {
+      "index": 1,
+      "text": "put the AirPods case in the bag",
+      "status": "not_found",
+      "p_done": 0.198,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 2,
+      "text": "put the Hello Panda box in the bag",
+      "status": "not_found",
+      "p_done": 0.051,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 3,
+      "text": "take off the watch and put it in the bag",
+      "status": "not_found",
+      "p_done": 0.197,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 4,
+      "text": "zip the bag closed",
+      "status": "not_found",
+      "p_done": 0.153,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 5,
+      "text": "knock on the table twice",
+      "status": "not_found",
+      "p_done": 0.133,
+      "time": null,
+      "lo": null,
+      "hi": null
+     }
+    ],
+    "order_issues": [],
+    "seconds_total": 13.55
+   },
+   "ts": 1795289972.30918,
+   "audit": {
+    "ok": true,
+    "seconds": 44.82,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "unzip the bag",
+      "at_start": "cannot tell: Bag front visible, top zipper opening not visible.",
+      "at_end": "cannot tell: Bag front visible, top zipper opening not visible.",
+      "audit": "cannot tell",
+      "reason": "no lasting visual result or insufficient frame evidence",
+      "lasting": "bag is unzipped",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [
+       4
+      ],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 1,
+      "text": "put the AirPods case in the bag",
+      "at_start": "no: White AirPods case is visible on table at bottom right.",
+      "at_end": "no: White AirPods case is still visible on the table.",
+      "audit": "confirm",
+      "reason": "not_found and lasting result is absent at END",
+      "lasting": "AirPods case is in the bag",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 2,
+      "text": "put the Hello Panda box in the bag",
+      "at_start": "cannot tell: No Hello Panda box visible in frame.",
+      "at_end": "cannot tell: No Hello Panda box visible in frame.",
+      "audit": "cannot tell",
+      "reason": "no lasting visual result or insufficient frame evidence",
+      "lasting": "Hello Panda box is in the bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 3,
+      "text": "take off the watch and put it in the bag",
+      "at_start": "cannot tell: Left wrist is hidden behind the bag.",
+      "at_end": "cannot tell: Left wrist is cropped off at bottom right.",
+      "audit": "cannot tell",
+      "reason": "no lasting visual result or insufficient frame evidence",
+      "lasting": "watch is off wrist and in bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 4,
+      "text": "zip the bag closed",
+      "at_start": "cannot tell: Bag front visible, top zipper state not visible.",
+      "at_end": "cannot tell: Bag front visible, top zipper state not visible.",
+      "audit": "cannot tell",
+      "reason": "no lasting visual result or insufficient frame evidence",
+      "lasting": "bag is zipped closed",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [
+       0
+      ],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 5,
+      "text": "knock on the table twice",
+      "at_start": "cannot tell: Gesture leaves no lasting visual state.",
+      "at_end": "cannot tell: Gesture leaves no lasting visual state.",
+      "audit": "cannot tell",
+      "reason": "no lasting visual result or insufficient frame evidence",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     }
+    ],
+    "sheet": "Checklist Audit Sign-Off Sheet\n0. unzip the bag | reported: done | audit: cannot tell | no lasting visual result or insufficient frame evidence\n1. put the AirPods case in the bag | reported: not_found | audit: confirm | not_found and lasting result is absent at END\n2. put the Hello Panda box in the bag | reported: not_found | audit: cannot tell | no lasting visual result or insufficient frame evidence\n3. take off the watch and put it in the bag | reported: not_found | audit: cannot tell | no lasting visual result or insufficient frame evidence\n4. zip the bag closed | reported: not_found | audit: cannot tell | no lasting visual result or insufficient frame evidence\n5. knock on the table twice | reported: not_found | audit: cannot tell | no lasting visual result or insufficient frame evidence\norder: no pairs out of order\ncounts: confirm=1, dispute=0, cannot tell=5",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [],
+    "rules_agree": true,
+    "attempts": 1,
+    "frames": [
+     "START (t = 0.3 s)",
+     "END (t = 17.5 s)",
+     "STEP 0 BEFORE (t = 0.0 s)",
+     "STEP 0 AFTER (t = 3.5 s)"
+    ],
+    "local_order_pairs": [],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 52956
+   }
+  },
+  {
+   "take": "1",
+   "model": "gemini-4-neon",
+   "file": "0598673be4fd.mp4",
+   "desc": "all six steps, in order",
+   "not_done": [],
+   "fused": {
+    "video": {
+     "path": "runs/uploads/0598673be4fd.mp4",
+     "sha256": "3a6c7687cef455b3e2c1c6adabf6e7b4c5202c1adc3a1dddddb2d0362f8bca72",
+     "duration": 33.5
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "unzip the bag",
+      "status": "done",
+      "p_done": 0.937,
+      "time": 1.75,
+      "lo": 1.0,
+      "hi": 2.5
+     },
+     {
+      "index": 1,
+      "text": "put the AirPods case in the bag",
+      "status": "done",
+      "p_done": 0.957,
+      "time": 6.5,
+      "lo": 5.75,
+      "hi": 7.25
+     },
+     {
+      "index": 2,
+      "text": "put the Hello Panda box in the bag",
+      "status": "done",
+      "p_done": 0.871,
+      "time": 11.0,
+      "lo": 10.0,
+      "hi": 12.0
+     },
+     {
+      "index": 3,
+      "text": "take off the watch and put it in the bag",
+      "status": "done",
+      "p_done": 0.968,
+      "time": 14.5,
+      "lo": 13.75,
+      "hi": 15.5
+     },
+     {
+      "index": 4,
+      "text": "zip the bag closed",
+      "status": "done",
+      "p_done": 0.984,
+      "time": 23.0,
+      "lo": 22.25,
+      "hi": 24.0
+     },
+     {
+      "index": 5,
+      "text": "knock on the table twice",
+      "status": "done",
+      "p_done": 0.718,
+      "time": 30.75,
+      "lo": 29.75,
+      "hi": 31.5
+     }
+    ],
+    "order_issues": [],
+    "seconds_total": 15.32
+   },
+   "ts": 1795289591.141468,
+   "audit": {
+    "ok": true,
+    "seconds": 162.36,
+    "model": "gemini-4-neon",
+    "steps": [
+     {
+      "index": 0,
+      "text": "unzip the bag",
+      "at_start": "no: bag is closed on the table",
+      "at_end": "cannot tell: bag is out of frame so zipper not visible",
+      "audit": "cannot tell",
+      "reason": "insufficient START/END frame evidence to confirm or dispute",
+      "lasting": "bag is unzipped and open",
+      "start_in_place": "no",
+      "end_in_place": "cannot tell",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [
+       4
+      ],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 1,
+      "text": "put the AirPods case in the bag",
+      "at_start": "cannot tell: AirPods case not visible and bag blocks table",
+      "at_end": "cannot tell: bag and AirPods case are not visible",
+      "audit": "cannot tell",
+      "reason": "lasting result cannot be verified at START or END",
+      "lasting": "AirPods case is inside the bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 2,
+      "text": "put the Hello Panda box in the bag",
+      "at_start": "cannot tell: Hello Panda box not visible and bag blocks table",
+      "at_end": "cannot tell: bag and Hello Panda box are not visible",
+      "audit": "cannot tell",
+      "reason": "lasting result cannot be verified at START or END",
+      "lasting": "Hello Panda box is inside the bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 3,
+      "text": "take off the watch and put it in the bag",
+      "at_start": "cannot tell: left wrist out of frame so watch not visible",
+      "at_end": "cannot tell: left wrist partly behind right arm and bag gone",
+      "audit": "cannot tell",
+      "reason": "lasting result cannot be verified at START or END",
+      "lasting": "watch is off wrist and in the bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "no",
+      "after": "no",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 4,
+      "text": "zip the bag closed",
+      "at_start": "yes: bag is closed on the table",
+      "at_end": "cannot tell: bag is out of frame so zipper not visible",
+      "audit": "cannot tell",
+      "reason": "insufficient START/END frame evidence to confirm or dispute",
+      "lasting": "bag is zipped closed",
+      "start_in_place": "yes",
+      "end_in_place": "cannot tell",
+      "before": "no",
+      "after": "cannot tell",
+      "reversed_by": [
+       0
+      ],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 5,
+      "text": "knock on the table twice",
+      "at_start": "cannot tell: knocking leaves no lasting visual state",
+      "at_end": "cannot tell: knocking leaves no lasting visual state",
+      "audit": "cannot tell",
+      "reason": "step leaves no lasting state visible in stills",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     }
+    ],
+    "sheet": "CHECKLIST AUDIT SIGN-OFF SHEET\n0. unzip the bag | reported: done | audit: cannot tell | reason: insufficient START/END frame evidence to confirm or dispute\n1. put the AirPods case in the bag | reported: done | audit: cannot tell | reason: lasting result cannot be verified at START or END\n2. put the Hello Panda box in the bag | reported: done | audit: cannot tell | reason: lasting result cannot be verified at START or END\n3. take off the watch and put it in the bag | reported: done | audit: cannot tell | reason: lasting result cannot be verified at START or END\n4. zip the bag closed | reported: done | audit: cannot tell | reason: insufficient START/END frame evidence to confirm or dispute\n5. knock on the table twice | reported: done | audit: cannot tell | reason: step leaves no lasting state visible in stills\norder: no pairs out of order\ncounts: confirm=0, dispute=0, cannot tell=6",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [],
+    "rules_agree": true,
+    "attempts": 1,
+    "frames": [
+     "START (t = 0.3 s)",
+     "END (t = 33.2 s)",
+     "STEP 0 BEFORE (t = 0.8 s)",
+     "STEP 0 AFTER (t = 4.2 s)",
+     "STEP 1 BEFORE (t = 5.5 s)",
+     "STEP 1 AFTER (t = 9.0 s)",
+     "STEP 2 BEFORE (t = 10.0 s)",
+     "STEP 2 AFTER (t = 13.5 s)",
+     "STEP 3 BEFORE (t = 13.5 s)",
+     "STEP 3 AFTER (t = 17.0 s)",
+     "STEP 4 BEFORE (t = 22.0 s)",
+     "STEP 4 AFTER (t = 25.5 s)",
+     "STEP 5 BEFORE (t = 29.8 s)",
+     "STEP 5 AFTER (t = 33.2 s)"
+    ],
+    "local_order_pairs": [],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 108269
+   }
+  },
+  {
+   "take": "8",
+   "model": "gemini-4-neon",
+   "file": "81f8ea3a5269.mp4",
+   "desc": "watch fake-out only: starts to take the watch off, leaves it on; no other step done",
+   "not_done": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "fused": {
+    "video": {
+     "path": "runs/uploads/81f8ea3a5269.mp4",
+     "sha256": "bc27c26edd7c451fc05642340aa1d6d62d41c4f996ce5a530b7a82fdf0aa2a7f",
+     "duration": 10.5
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "unzip the bag",
+      "status": "done",
+      "p_done": 0.889,
+      "time": 0.5,
+      "lo": 0.0,
+      "hi": 1.25
+     },
+     {
+      "index": 1,
+      "text": "put the AirPods case in the bag",
+      "status": "not_found",
+      "p_done": 0.078,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 2,
+      "text": "put the Hello Panda box in the bag",
+      "status": "not_found",
+      "p_done": 0.067,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 3,
+      "text": "take off the watch and put it in the bag",
+      "status": "not_found",
+      "p_done": 0.211,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 4,
+      "text": "zip the bag closed",
+      "status": "not_found",
+      "p_done": 0.197,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 5,
+      "text": "knock on the table twice",
+      "status": "not_found",
+      "p_done": 0.066,
+      "time": null,
+      "lo": null,
+      "hi": null
+     }
+    ],
+    "order_issues": [],
+    "seconds_total": 15.07
+   },
+   "ts": 1795289591.141468,
+   "audit": {
+    "ok": true,
+    "seconds": 86.19,
+    "model": "gemini-4-neon",
+    "steps": [
+     {
+      "index": 0,
+      "text": "unzip the bag",
+      "at_start": "no: bag zipper is closed across the bottom",
+      "at_end": "no: bag zipper is still closed across the bottom",
+      "audit": "dispute",
+      "reason": "credited, but its lasting result is absent at END and no later step on the list reverses it",
+      "lasting": "bag is unzipped",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "no",
+      "after": "no",
+      "reversed_by": [
+       4
+      ],
+      "local_audit": "dispute"
+     },
+     {
+      "index": 1,
+      "text": "put the AirPods case in the bag",
+      "at_start": "no: white AirPods case sits on table in front of bag",
+      "at_end": "no: white AirPods case still sits on table in front of bag",
+      "audit": "confirm",
+      "reason": "not_found confirmed because lasting result is absent at END and not reversed later",
+      "lasting": "AirPods case is in the bag",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 2,
+      "text": "put the Hello Panda box in the bag",
+      "at_start": "cannot tell: Hello Panda box is not visible anywhere in frame",
+      "at_end": "cannot tell: Hello Panda box is not visible anywhere in frame",
+      "audit": "cannot tell",
+      "reason": "lasting result cannot be determined at START or END",
+      "lasting": "Hello Panda box is in the bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 3,
+      "text": "take off the watch and put it in the bag",
+      "at_start": "cannot tell: left wrist is out of frame so watch not visible",
+      "at_end": "cannot tell: left wrist is out of frame so watch not visible",
+      "audit": "cannot tell",
+      "reason": "lasting result cannot be determined at START or END",
+      "lasting": "watch is off wrist and in the bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 4,
+      "text": "zip the bag closed",
+      "at_start": "yes: bag zipper is already closed across the bottom",
+      "at_end": "yes: bag zipper is closed across the bottom",
+      "audit": "confirm",
+      "reason": "not_found confirmed because lasting result was already in place at START",
+      "lasting": "bag is zipped closed",
+      "start_in_place": "yes",
+      "end_in_place": "yes",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [
+       0
+      ],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 5,
+      "text": "knock on the table twice",
+      "at_start": "cannot tell: knocking leaves no visible lasting result in frame",
+      "at_end": "cannot tell: knocking leaves no visible lasting result in frame",
+      "audit": "cannot tell",
+      "reason": "step leaves no lasting visible result",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     }
+    ],
+    "sheet": "CHECKLIST AUDIT SIGN-OFF SHEET\n0. unzip the bag | reported: done | audit: dispute | credited, but its lasting result is absent at END and no later step on the list reverses it\n1. put the AirPods case in the bag | reported: not_found | audit: confirm | not_found confirmed because lasting result is absent at END and not reversed later\n2. put the Hello Panda box in the bag | reported: not_found | audit: cannot tell | lasting result cannot be determined at START or END\n3. take off the watch and put it in the bag | reported: not_found | audit: cannot tell | lasting result cannot be determined at START or END\n4. zip the bag closed | reported: not_found | audit: confirm | not_found confirmed because lasting result was already in place at START\n5. knock on the table twice | reported: not_found | audit: cannot tell | step leaves no lasting visible result\norder: no pairs out of order\ncounts: confirm=2, dispute=1, cannot tell=3",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [],
+    "rules_agree": true,
+    "attempts": 1,
+    "frames": [
+     "START (t = 0.3 s)",
+     "END (t = 10.2 s)",
+     "STEP 0 BEFORE (t = 0.0 s)",
+     "STEP 0 AFTER (t = 3.0 s)"
+    ],
+    "local_order_pairs": [],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 59800
+   }
+  },
+  {
+   "take": "9",
+   "model": "gemini-4-neon",
+   "file": "428cb05ba955.mp4",
+   "desc": "AirPods put in the bag, then taken back out; watch fiddled with but left on; no unzip, zip or knock",
+   "not_done": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "fused": {
+    "video": {
+     "path": "runs/uploads/428cb05ba955.mp4",
+     "sha256": "9a469e1f7dfc6b4437f4c9bd5659dfb940e2e7bfc077c3e2485babb6d1872c42",
+     "duration": 17.8
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "unzip the bag",
+      "status": "done",
+      "p_done": 0.826,
+      "time": 1.25,
+      "lo": 0.5,
+      "hi": 2.25
+     },
+     {
+      "index": 1,
+      "text": "put the AirPods case in the bag",
+      "status": "not_found",
+      "p_done": 0.198,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 2,
+      "text": "put the Hello Panda box in the bag",
+      "status": "not_found",
+      "p_done": 0.051,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 3,
+      "text": "take off the watch and put it in the bag",
+      "status": "not_found",
+      "p_done": 0.197,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 4,
+      "text": "zip the bag closed",
+      "status": "not_found",
+      "p_done": 0.153,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 5,
+      "text": "knock on the table twice",
+      "status": "not_found",
+      "p_done": 0.133,
+      "time": null,
+      "lo": null,
+      "hi": null
+     }
+    ],
+    "order_issues": [],
+    "seconds_total": 15.18
+   },
+   "ts": 1795289591.1424675,
+   "audit": {
+    "ok": true,
+    "seconds": 108.78,
+    "model": "gemini-4-neon",
+    "steps": [
+     {
+      "index": 0,
+      "text": "unzip the bag",
+      "at_start": "no: bag zipper is closed across the front",
+      "at_end": "yes: bag zipper is open with a dark gap under handle",
+      "audit": "confirm",
+      "reason": "credited and lasting result changed from absent at START to present at END",
+      "lasting": "bag zipper is open",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "no",
+      "reversed_by": [
+       4
+      ],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 1,
+      "text": "put the AirPods case in the bag",
+      "at_start": "no: white AirPods case is visible on table at bottom right",
+      "at_end": "no: white AirPods case is still on table at bottom center",
+      "audit": "confirm",
+      "reason": "not_found matches frame evidence at START and END",
+      "lasting": "AirPods case is in the bag",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 2,
+      "text": "put the Hello Panda box in the bag",
+      "at_start": "cannot tell: no Hello Panda box visible and bag interior hidden",
+      "at_end": "cannot tell: no Hello Panda box visible and bag interior hidden",
+      "audit": "cannot tell",
+      "reason": "no observable lasting result or both start and end are cannot tell",
+      "lasting": "Hello Panda box is in the bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 3,
+      "text": "take off the watch and put it in the bag",
+      "at_start": "cannot tell: left wrist is hidden behind bag so watch not visible",
+      "at_end": "cannot tell: left wrist is out of frame and bag interior hidden",
+      "audit": "cannot tell",
+      "reason": "no observable lasting result or both start and end are cannot tell",
+      "lasting": "watch is off wrist and in the bag",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 4,
+      "text": "zip the bag closed",
+      "at_start": "yes: bag zipper is closed across the front",
+      "at_end": "no: bag zipper is open with a dark gap under handle",
+      "audit": "confirm",
+      "reason": "not_found matches frame evidence at START and END",
+      "lasting": "bag is zipped closed",
+      "start_in_place": "yes",
+      "end_in_place": "no",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [
+       0
+      ],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 5,
+      "text": "knock on the table twice",
+      "at_start": "cannot tell: knocking leaves no visible lasting state",
+      "at_end": "cannot tell: knocking leaves no visible lasting state",
+      "audit": "cannot tell",
+      "reason": "no observable lasting result or both start and end are cannot tell",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     }
+    ],
+    "sheet": "Checklist Audit Sign-Off Sheet\n0. unzip the bag | reported: done | audit: confirm | reason: credited and lasting result changed from absent at START to present at END\n1. put the AirPods case in the bag | reported: not_found | audit: confirm | reason: not_found matches frame evidence at START and END\n2. put the Hello Panda box in the bag | reported: not_found | audit: cannot tell | reason: no observable lasting result or both start and end are cannot tell\n3. take off the watch and put it in the bag | reported: not_found | audit: cannot tell | reason: no observable lasting result or both start and end are cannot tell\n4. zip the bag closed | reported: not_found | audit: confirm | reason: not_found matches frame evidence at START and END\n5. knock on the table twice | reported: not_found | audit: cannot tell | reason: no observable lasting result or both start and end are cannot tell\norder: no pairs out of order\ncounts: confirm=3, dispute=0, cannot tell=3",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [],
+    "rules_agree": true,
+    "attempts": 1,
+    "frames": [
+     "START (t = 0.3 s)",
+     "END (t = 17.5 s)",
+     "STEP 0 BEFORE (t = 0.2 s)",
+     "STEP 0 AFTER (t = 3.8 s)"
+    ],
+    "local_order_pairs": [],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 56108
+   }
+  }
+ ]
+}

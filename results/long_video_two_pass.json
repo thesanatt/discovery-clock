@@ -1,0 +1,241 @@
+[
+ {
+  "id": "1_10",
+  "minutes": 7.9,
+  "grid_step_s": 12,
+  "coarse_seconds": 19.9,
+  "zoom_seconds": 10.3,
+  "coarse": {
+   "timed": 11,
+   "of": 11,
+   "within_5s": 2,
+   "within_10s": 4,
+   "within_30s": 10,
+   "median_err_s": 17.2
+  },
+  "two_pass": {
+   "timed": 11,
+   "of": 11,
+   "within_5s": 1,
+   "within_10s": 2,
+   "within_30s": 8,
+   "median_err_s": 23.9
+  },
+  "rows": [
+   {
+    "true": 11.749052505026611,
+    "coarse": 28.93998322136622,
+    "fine": 33.65,
+    "ok": true,
+    "slow": 1.0
+   },
+   {
+    "true": 49.51386412832644,
+    "coarse": 75.0432635461822,
+    "fine": 78.56,
+    "ok": true,
+    "slow": 1.0
+   },
+   {
+    "true": 276.10273386812537,
+    "coarse": 302.6413762617659,
+    "fine": 309.97,
+    "ok": true,
+    "slow": 1.0
+   },
+   {
+    "true": 91.4747659319929,
+    "coarse": 98.89345319414394,
+    "fine": 96.71,
+    "ok": true,
+    "slow": 1.0
+   },
+   {
+    "true": 138.19123660674157,
+    "coarse": 167.53734719331163,
+    "fine": 177.78,
+    "ok": true,
+    "slow": 1.0
+   },
+   {
+    "true": 228.82678450266116,
+    "coarse": 256.2889734056669,
+    "fine": 257.58,
+    "ok": true,
+    "slow": 1.0
+   },
+   {
+    "true": 330.6519062128918,
+    "coarse": 334.9888952942572,
+    "fine": 341.19,
+    "ok": true,
+    "slow": 1.0
+   },
+   {
+    "true": 372.89254736191606,
+    "coarse": 147.32515246206177,
+    "fine": 140.98,
+    "ok": true,
+    "slow": 1.0
+   },
+   {
+    "true": 412.0560557120047,
+    "coarse": 411.32585374328835,
+    "fine": 425.0,
+    "ok": true,
+    "slow": 1.0
+   },
+   {
+    "true": 433.3162459591957,
+    "coarse": 443.8847920511724,
+    "fine": 457.24,
+    "ok": true,
+    "slow": 1.0
+   },
+   {
+    "true": 462.10210688759724,
+    "coarse": 457.00887324315926,
+    "fine": 459.29,
+    "ok": true,
+    "slow": 1.0
+   }
+  ]
+ },
+ {
+  "id": "2_17",
+  "minutes": 21.5,
+  "grid_step_s": 33,
+  "coarse_seconds": 66.9,
+  "zoom_seconds": 38.1,
+  "coarse": {
+   "timed": 14,
+   "of": 16,
+   "within_5s": 0,
+   "within_10s": 0,
+   "within_30s": 2,
+   "median_err_s": 129.3
+  },
+  "two_pass": {
+   "timed": 14,
+   "of": 16,
+   "within_5s": 1,
+   "within_10s": 1,
+   "within_30s": 2,
+   "median_err_s": 118.5
+  },
+  "rows": [
+   {
+    "true": 6.268,
+    "coarse": 41.58611041554539,
+    "fine": 8.98,
+    "ok": true,
+    "slow": 1.0
+   },
+   {
+    "true": 401.027,
+    "coarse": 73.27251397281793,
+    "fine": 72.47,
+    "ok": true,
+    "slow": 1.0
+   },
+   {
+    "true": 521.222,
+    "coarse": 48.3759249951534,
+    "fine": 40.96,
+    "ok": true,
+    "slow": 1.0
+   },
+   {
+    "true": 723.36,
+    "coarse": 768.5773967273924,
+    "fine": 771.02,
+    "ok": true,
+    "slow": 1.0
+   },
+   {
+    "true": 322.295,
+    "coarse": 344.46908956237087,
+    "fine": 354.47,
+    "ok": true,
+    "slow": 1.0
+   },
+   {
+    "true": 464.21500000000003,
+    "coarse": 612.5178840849204,
+    "fine": 624.25,
+    "ok": true,
+    "slow": 1.0
+   },
+   {
+    "true": 449.196,
+    "coarse": 338.9727985923742,
+    "fine": 354.72,
+    "ok": true,
+    "slow": 1.0
+   },
+   {
+    "true": 118.219,
+    "coarse": 183.712318677047,
+    "fine": 200.05,
+    "ok": true,
+    "slow": 1.0
+   },
+   {
+    "true": 567.203,
+    "coarse": 361.84029447649624,
+    "fine": 357.7,
+    "ok": true,
+    "slow": 1.0
+   },
+   {
+    "true": 620.685,
+    "coarse": 383.9205445589618,
+    "fine": 383.9205445589618,
+    "ok": true,
+    "slow": 1.0
+   },
+   {
+    "true": 886.205,
+    "coarse": 798.9203732151748,
+    "fine": 798.9203732151748,
+    "ok": true,
+    "slow": 1.0
+   },
+   {
+    "true": 917,
+    "coarse": 890.7086623272553,
+    "fine": 930.92,
+    "ok": true,
+    "slow": 1.0
+   },
+   {
+    "true": 1030,
+    "coarse": null,
+    "fine": null,
+    "ok": false,
+    "slow": 1.0
+   },
+   {
+    "true": 1065.299,
+    "coarse": 890.7441292962549,
+    "fine": 922.79,
+    "ok": true,
+    "slow": 1.0
+   },
+   {
+    "true": 1169.3,
+    "coarse": null,
+    "fine": null,
+    "ok": false,
+    "slow": 1.0
+   },
+   {
+    "true": 1198.65,
+    "coarse": 1003.6181652029206,
+    "fine": 1016.04,
+    "ok": true,
+    "slow": 1.0
+   }
+  ]
+ }
+]

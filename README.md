@@ -19,6 +19,7 @@ A single Gemini call can already watch a video and list which steps happened. Wh
 3. `clock/fusion.py` combines them. For each step it compares two hypotheses, "happened, starting at time tau" and "never happened". Each witness contributes a likelihood: its hit rate, its false alarm rate, and a Laplace error around the true start time with a small share of gross errors. The ladder contributes a Gaussian score and its own time estimate. The posterior over tau gives the start time and its range. One temperature on the log odds corrects for the fact that the witnesses watch the same video and so make related mistakes.
 4. `clock/engine.py` runs all of this with a timeout on every call and a deadline for the whole read. After 15 seconds it returns as soon as two witnesses have answered. A witness that fails or is late is left out. The Decisions ladder alone is the fallback and is shown as the "first read" while the others are still watching.
 5. `app/` is the web page: record on a phone or upload a file, type the checklist, read the step table. Each row shows the verdict, the start time with its range, the posterior curve on a shared time axis, what each witness said, and a 4 second clip.
+6. `clock/auditor.py` is an optional third stage that runs after the full read: a Gemini Managed Agent (Antigravity, with a Google-hosted sandbox) gets still frames from the start, the end, and just before and after each reported step. It writes down whether each step's lasting result is in place in each frame, then writes and runs a Python file in its sandbox that applies fixed rules to those observations, and returns "confirm", "dispute" or "cannot tell" per step with a plain-text sign-off sheet. The file also prints a SHA-256 over a one-time code and the verdicts; a matching hash shows the sandbox run really happened. The same rules run again on this machine as a cross-check. The audit never changes the full read. It adds a flag for a person.
 
 Model jobs:
 
@@ -27,6 +28,7 @@ Model jobs:
 | `gemini-decision-1` (Decisions API) | The ladder: steps x time points in one call. First read in about a second, and a graded score that the yes/no witnesses lack. |
 | `gemini-4-hydrogen` | Two fast timelines of the whole video, at 4 and at 2 frames per second. |
 | `gemini-4-neon` | A third timeline from a stronger model. |
+| `antigravity-preview-09-2026` (Managed Agent, driven by `gemini-4-hydrogen`) | The auditor: checks start and end frames against each verdict and runs the rules in a sandbox. Optional, about 50 seconds. |
 | `gemini-4-carbon` | The baseline: one call at high thinking, asked for the same output. Not part of the system. |
 
 ## Does it work
@@ -171,7 +173,7 @@ One `gemini-4-carbon` call at high thinking, same prompt and output format. It i
 - Steps every witness misses. When all four sources miss a real step the fused probability is near zero, and 13 percent of those steps were real. A person still has to check flagged steps.
 - The Decisions ladder on real phone footage. On the first field recording it scored three of five real steps low; the reasoning models carried the verdict.
 - Which object did it. At low resolution a witness can see that something went into the bag and credit the wrong item. Version 2 reduced this on my takes; it is not measured at scale.
-- A result that was already in place. In two field takes the bag was already open and was only touched, and "unzip the bag" was called done in every run. The system reads the state and credits the step.
+- A result that was already in place. In two field takes the bag was already open and was only touched, and "unzip the bag" was called done in every run. The system reads the state and credits the step. The optional audit stage disputes this when the starting state is visible in the first frame, and not otherwise (see the audit section below).
 - An item packed out of order. In one field take the second item was packed before the first; under the completion rule the second item was wrongly flagged in 2 of 3 runs.
 
 ### Things I tried that did not help (tuning split)
@@ -193,6 +195,25 @@ Under version 3: 151 of 162 step verdicts right. Of 60 steps that were not done 
 One more take, 4 seconds, tests whether a step can name a person by what they wear. The step "shake hands with the person wearing a black jacket" read done at 0.98. On the same video, the same step reworded to a red jacket, to a white shirt, to a fist bump, and to handing over a pen each read not found in 3 of 3 runs. The Decisions ladder alone leaned yes on the fist bump (0.63); the reasoning witnesses said no.
 
 A sound take, 8 seconds: clap, hold hands together, snap fingers, knock three times, with "say the word pineapple" left out. The skipped spoken word read not found at 0.09, and the snap and the knock read done. Counts are only checked when the list makes them matter: with "clap twice" as the only clap line, one clap was accepted as done; with "clap once", "clap twice" and "clap three times" all on the list, only "clap once" read done, and "knock on the table once" read not found against three knocks.
+
+### Audit by a Managed Agent (field takes)
+
+The one error class left on my takes is a step whose result was already in place: an open bag read as "unzipped". A frame from the start of the video shows that directly, so I gave that check to a Managed Agent (`clock/auditor.py`, step 6 above) and ran it on the nine field takes: 16 audits with `gemini-4-hydrogen` driving the agent, one fused read each. Records are in `results/audit_field.json`.
+
+| Full read said | Truth | Steps | Audit disputes | Audit confirms | Audit cannot tell |
+|-|-|-|-|-|-|
+| done | done | 56 | 0 | 12 | 44 |
+| done | not done | 5 | 2 | 0 | 3 |
+| not found | not done | 32 | 0 | 9 | 23 |
+| unsure | either | 3 | 0 | 0 | 3 |
+
+- It never disputed a correct verdict (0 of 88).
+- It disputed 2 of the 5 wrong "done" verdicts: "unzip the bag" in both audits of take 8. For the same error in take 9 it said "cannot tell" both times, and it said "cannot tell" for a faked item that one full read credited in take 7.
+- Most steps come back "cannot tell". Items inside a bag and a knock leave nothing a still frame can show, and the rules say so instead of guessing.
+- All 16 audits returned, all 16 carried a matching sandbox hash, and the local re-run of the rules agreed 16 of 16. Median 52 seconds, longest 67, about 81,000 tokens each at the median.
+- With `gemini-4-neon` driving the agent (3 audits) it took 86 to 162 seconds and confirmed one wrong verdict. Not used.
+
+This is 16 audits of nine recordings I made myself, so it is a check that the stage does no harm and catches the case it was built for when the camera sees it. It is not a benchmark score.
 
 ## Run it
 
@@ -217,6 +238,7 @@ python -m eval.fit_fusion                        (fits clock/fusion_params.json 
 python -m eval.run_eval --split test4 --system ladder --run 1
 python -m eval.run_eval --split test4 --system hydrogen4 --name v3  (then hydrogen2, neon4)
 python -m eval.final_report --split test4
+python -m eval.audit_field                       (the Managed Agent audit on the field takes; needs the recordings)
 ```
 
 Per-clip outputs of every run are in `results/`.
@@ -225,7 +247,7 @@ Per-clip outputs of every run are in `results/`.
 
 | Path | What it is |
 |-|-|
-| `clock/` | The engine: video prep, the question ladder, the Decisions API call, model wrappers, witnesses, fusion. |
+| `clock/` | The engine: video prep, the question ladder, the Decisions API call, model wrappers, witnesses, fusion, and the Managed Agent auditor. |
 | `app/` | FastAPI server and the page. |
 | `eval/` | Data loader and split rule, eval runner, parameter fitting, scoring and the final report. |
 | `results/` | Reports and per-clip outputs from the runs described above. |
