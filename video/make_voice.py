@@ -69,9 +69,9 @@ LINES = [
     "step started.",
     "Then three Gemini 4 calls write their own timelines. Bayes' rule weighs each witness by "
     "how reliable it measured, and gives every step a probability and a start time.",
-    "On 418 held-out clips from DeepMind's Perception Test, it catches skipped steps as well "
+    "On 518 held-out clips from DeepMind's Perception Test, it catches skipped steps as well "
     "as the best single Gemini call.",
-    "What it adds is odds that hold up. Of the steps it rated above 80 percent, 98 percent "
+    "What it adds is odds that hold up. Of the steps it rated above 80 percent, 97 percent "
     "had happened.",
     "People try to fake a step. Version two fell for it in four of six runs. With a completion "
     "rule, version three no longer reads the fake as done.",

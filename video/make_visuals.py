@@ -8,7 +8,8 @@ Outputs go to video/out/ as 1280x720, 30 fps, H.264 yuv420p, no audio.
 
 Every number on screen is read from a file in this repository:
     s4_math     video/assets/take4_result.json  (key "fused")
-    s6_results  results/test4_report.json, and the clip counts of all results/test*_report.json
+    s6_results  results/v3_pooled_report.json (version 3 over its two held-out splits), and the clip
+                counts of all results/test*_report.json
     s7_fooled   results/field.json, plus the two version 2 counts marked FIXED below
     s8_end      text only
 Numbers are rounded half up, the same way the app prints them (JavaScript toFixed).
@@ -261,11 +262,11 @@ def math_draw(cv: Canvas, st, fused, steps) -> None:
 # ---------------------------------------------------------------- s6_results
 
 def results_load():
-    rep = json.loads((ROOT / "results" / "test4_report.json").read_text())
+    rep = json.loads((ROOT / "results" / "v3_pooled_report.json").read_text())
     splits = sorted((ROOT / "results").glob("test*_report.json"))
     total = sum(json.loads(p.read_text())["clips"] for p in splits)
     single = rep["systems"]["Hydrogen 4 fps, one call"]
-    fused = next(v for k, v in rep["systems"].items() if k.startswith("FUSED"))
+    fused = rep["systems"]["fused v3"]
     bins = {b["bin"]: b for b in rep["calibration"]["bins"]}
     return {"total": total, "n_splits": len(splits), "clips": rep["clips"], "single": single, "fused": fused,
             "hi": bins["0.8-1.0"], "lo": bins["0.0-0.2"]}
@@ -279,10 +280,10 @@ def results_state(t: float):
 
 def results_draw(cv: Canvas, st, d) -> None:
     bar, same, beat2, cal = st
-    words = {4: "four"}
+    words = {4: "four", 5: "five"}
     cv.clear(PAPER)
     cv.text(40, 66, "%d held-out clips, DeepMind Perception Test" % d["total"], 40, SANS_B)
-    cv.text(40, 102, "%d clips across %s splits; this table is the fourth split, %d clips"
+    cv.text(40, 102, "%d clips across %s splits; these numbers are version 3 on its two splits, %d clips"
             % (d["total"], words[d["n_splits"]], d["clips"]), 22, SANS)
     cv.line([40, 1240], [122, 122])
 
