@@ -311,6 +311,6 @@ Median input tokens per call on a 20 to 30 second clip, from `runs/calls.jsonl`:
 
 ## Limits
 
-- All scores are on benchmark clips of 10 to 35 seconds. On two recordings of 8 and 21 minutes it missed the one skipped step and its timing was 10 to 50 times worse. Nothing here was measured on a real job site.
+- All scores are on benchmark clips of 10 to 35 seconds. On two recordings of 8 and 21 minutes its timing was 10 to 50 times worse, and in the 8 minute one it missed the one skipped step (the other had none). Nothing here was measured on a real job site.
 - It does not prove that a step was skipped. It ranks steps by how likely they are to have been skipped, and a person checks.
 - Labels in the benchmark are generic ("Putting something into something"). Typed checklists with specific objects may behave differently.
