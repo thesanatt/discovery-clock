@@ -121,6 +121,8 @@ const CASES = {
 const caseKey = (name) => "clock.steps." + name;
 const caseText = {};      // each tab's text, also held in memory, so a switch loses nothing in private mode
 let activeCase = "packing";
+// By default the checklist is one free-text box. The use-case tabs with their starting lists show only with ?cases=1.
+const SHOW_CASES = new URLSearchParams(location.search).get("cases") === "1";
 let caseReady = false;    // false until the first tab is on screen, so the empty box is not saved over a list
 
 const recWord = () => CASES[activeCase].rec;
@@ -916,7 +918,8 @@ if (WATCH) {
   watchLoop();
 } else {
   moveOldSteps();
-  setCase(CASES[CASE_PARAM] ? CASE_PARAM : store("clock.case"), Boolean(CASES[CASE_PARAM]));
+  if (!SHOW_CASES) document.body.classList.add("free");
+  setCase(!SHOW_CASES ? "own" : (CASES[CASE_PARAM] ? CASE_PARAM : store("clock.case")), SHOW_CASES && Boolean(CASES[CASE_PARAM]));
   document.querySelectorAll("#cases button").forEach((b) => {
     b.addEventListener("click", () => setCase(b.dataset.case, true));
   });

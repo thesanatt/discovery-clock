@@ -561,6 +561,7 @@ textarea { display: block; width: 100%; resize: vertical; line-height: 1.45; }
 /* Use cases: one tab per kind of job. Each tab keeps its own checklist. */
 
 .cases { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0 0 0.45rem; }
+.free .cases, .free .case-line { display: none; }   /* free-text checklist: no use-case tabs */
 
 button.case {
   min-height: 2.3rem;
