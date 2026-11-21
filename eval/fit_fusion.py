@@ -29,17 +29,21 @@ TAGGED = {"hydrogen4", "hydrogen2", "neon4"}
 MAX_POINTS = 20
 
 
+LADDER2 = False      # True: read the two-pass ladder runs (eval/zoom_eval.py) and use their fine times
+
+
 def load_all(split: str = "tune", ladder_run: str = "run3") -> dict:
     """clip id -> {duration, steps: {label: {present, true_start, grid, raw, p_any, w: {model: obs}}}}"""
     data: dict = {}
-    for rec in score.load(str(OUT / f"{split}_ladder_{ladder_run}.jsonl")):
+    ladder_file = OUT / (f"{split}_ladder2_run1.jsonl" if LADDER2 else f"{split}_ladder_{ladder_run}.jsonl")
+    for rec in score.load(str(ladder_file)):
         if "error" in rec:
             continue
         grid = ladder.time_grid(rec["duration"], MAX_POINTS)
         steps = {}
         for r in rec["rows"]:
             steps[r["label"]] = {"present": r["present"], "true_start": r["true_start"], "grid": grid,
-                                 "raw": r["raw"], "p_any": r["p_any"], "w": {}}
+                                 "raw": r["raw"], "p_any": r["p_any"], "t_fine": r.get("t_fine") if LADDER2 else None, "w": {}}
         data[rec["id"]] = {"duration": rec["duration"], "steps": steps}
     for name in WITNESSES:
         path = OUT / f"{split}_{name}{WITNESS_TAG if name in TAGGED else ''}_run1.jsonl"
@@ -151,11 +155,12 @@ def fit(clips: list[dict]) -> dict:
         for s in c["steps"].values():
             f = ladder.fit(s["grid"], s["raw"], s["p_any"])
             u = float(fusion.logit([0.5 * (f.p_end + s["p_any"])])[0])
+            t_hat = s.get("t_fine") if (s.get("t_fine") is not None and f.t50 is not None) else f.t50
             if s["present"]:
                 u1.append(u)
                 has1.append(f.t50 is not None)
-                if f.t50 is not None:
-                    terr.append(f.t50 - s["true_start"])
+                if t_hat is not None:
+                    terr.append(t_hat - s["true_start"])
             else:
                 u0.append(u)
                 has0.append(f.t50 is not None)
@@ -175,7 +180,8 @@ def predict(clips: list[dict], params: dict, use_ladder: bool, names: list[str])
         for label, s in c["steps"].items():
             w = {n: s["w"][n] for n in names if n in s["w"]}
             post = fusion.posterior(s["grid"] if use_ladder else None, s["raw"] if use_ladder else None,
-                                    s["p_any"] if use_ladder else None, c["duration"], w, params)
+                                    s["p_any"] if use_ladder else None, c["duration"], w, params,
+                                    ladder_time=s.get("t_fine") if use_ladder else None)
             rows.append({"label": label, "present": s["present"], "true_start": s["true_start"],
                          "p_done": post["p_done"], "log_odds": post["log_odds"],
                          "time": post["time"], "lo": post["lo"], "hi": post["hi"],

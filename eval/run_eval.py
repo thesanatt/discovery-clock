@@ -101,7 +101,7 @@ def run_clip(system: str, clip: dict, labels: list[str], truth: dict[str, float]
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--split", required=True, choices=["tune", "test", "test2", "test3", "test4"])
+    ap.add_argument("--split", required=True, choices=["tune", "test", "test2", "test3", "test4", "test5"])
     ap.add_argument("--system", required=True, choices=["ladder", "carbon", "neon", "hydrogen", "hydrogen4", "neonmed", "hydrogenhd", "neonhd", "neon4", "hydrogen2"])
     ap.add_argument("--run", type=int, default=1)
     ap.add_argument("--limit", type=int, default=0)

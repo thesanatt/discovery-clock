@@ -71,12 +71,14 @@ def _gauss_offset_loglik(r: np.ndarray, d: np.ndarray, sb: float) -> float:
 
 
 def posterior(grid: list[int] | None, raw: list[float] | None, p_any: float | None, duration: float,
-              witnesses: dict | None = None, params: dict | None = None) -> dict:
+              witnesses: dict | None = None, params: dict | None = None, ladder_time: float | None = None) -> dict:
     """Posterior over the start time of one step, and the probability that it happened at all.
 
     witnesses maps a model name ("hydrogen", "neon", "carbon") to its report for this step,
     {"happened": bool, "start": float | None}. Each witness has its own fitted reliability.
     Pass grid=None and raw=None to leave the ladder out (witnesses only).
+    ladder_time, if given, is the ladder's start time from the two-pass zoom (clock/zoom.py) and
+    replaces the one-pass half-rise time.
     """
     p = params or load_params()
     use_ladder = grid is not None and raw is not None
@@ -112,9 +114,10 @@ def posterior(grid: list[int] | None, raw: list[float] | None, p_any: float | No
 
         ll0 = norm_ll(u, lw["m0"], lw["s0"])
         ll_tau = np.full(len(taus), norm_ll(u, lw["m1"], lw["s1"]))
-        if f.t50 is not None:
+        t_hat = ladder_time if (ladder_time is not None and f.t50 is not None) else f.t50
+        if t_hat is not None:
             ll0 += math.log(lw["has_time0"]) + math.log(1.0 / T)
-            lap = np.exp(-np.abs(f.t50 - taus - lw["shift"]) / lw["scale"]) / (2 * lw["scale"])
+            lap = np.exp(-np.abs(t_hat - taus - lw["shift"]) / lw["scale"]) / (2 * lw["scale"])
             ll_tau = ll_tau + math.log(lw["has_time1"]) + np.log((1 - lw["gross"]) * lap + lw["gross"] / T)
         else:
             ll0 += math.log(1 - lw["has_time0"])

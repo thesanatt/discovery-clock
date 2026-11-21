@@ -92,7 +92,7 @@ def calibration(rows: list[dict], bins: int = 5) -> tuple[list[dict], float, flo
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--split", default="test", choices=["test", "test2", "test3", "test4", "tune"])
+    ap.add_argument("--split", default="test", choices=["test", "test2", "test3", "test4", "test5", "tune"])
     args = ap.parse_args()
     split = args.split
     params = dict(fusion.load_params(), ladder_mode="summary")

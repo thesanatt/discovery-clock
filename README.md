@@ -182,6 +182,7 @@ One `gemini-4-carbon` call at high thinking, same prompt and output format. It i
 - A change-point likelihood over the raw ladder answers. Worse timing than the simple half-rise estimate.
 - Shorter question wording for the ladder. Fewer tokens, clearly worse answers.
 - A clock burned into the video frames. No better than plain video: the Decisions model already tracks time.
+- A second, slow-motion Decisions pass (`clock/zoom.py`): cut a few seconds around each estimate, slow them down four times so one sampled frame is a quarter second of the scene, and ask the ladder again. On the tuning clips the ladder's own median timing error fell from 1.0 to 0.8 seconds and steps within 1 second rose from 48 to 56 percent. The fused result did not change (the reasoning witnesses already time more tightly), and on the 8 minute recording it made timing worse (median error 17 s to 24 s). Not used.
 
 ### Field check
 
@@ -190,6 +191,8 @@ Recordings made at the event on a phone, each with a known script, are in `resul
 Under version 3: 151 of 162 step verdicts right. Of 60 steps that were not done (never touched, faked, or put in and taken back out), 51 read "not found", 3 read "unsure" and 6 were wrongly read as done. Of 102 steps that were done, 100 read "done" and 2 were wrongly read as not found. All 6 wrong "done" verdicts are "unzip the bag" in two takes where the bag was already open and only touched. The 3 "unsure" are one fake-out where the 2 frames-per-second witness kept saying yes. The 2 wrong "not found" are an item packed out of order. The page shows three words from the fused probability: done at 0.65 or more, not found under 0.30, unsure between. The benchmark tables use the plain 0.5 cut.
 
 One more take, 4 seconds, tests whether a step can name a person by what they wear. The step "shake hands with the person wearing a black jacket" read done at 0.98. On the same video, the same step reworded to a red jacket, to a white shirt, to a fist bump, and to handing over a pen each read not found in 3 of 3 runs. The Decisions ladder alone leaned yes on the fist bump (0.63); the reasoning witnesses said no.
+
+A sound take, 8 seconds: clap, hold hands together, snap fingers, knock three times, with "say the word pineapple" left out. The skipped spoken word read not found at 0.09, and the snap and the knock read done. Counts are only checked when the list makes them matter: with "clap twice" as the only clap line, one clap was accepted as done; with "clap once", "clap twice" and "clap three times" all on the list, only "clap once" read done, and "knock on the table once" read not found against three knocks.
 
 ## Run it
 
