@@ -292,7 +292,7 @@ def results_draw(cv: Canvas, st, d) -> None:
     if bar >= 0:
         cv.text(40, 160, "SKIP F1, 0 TO 1", 22, MONO_B)
         x0, x1 = 400, 1040
-        rows = (("Best single Gemini call", d["single"]["skip_f1"], BAND, 204),
+        rows = (("One Hydrogen call", d["single"]["skip_f1"], BAND, 204),
                 ("Discovery Clock", d["fused"]["skip_f1"], BLUE, 254))
         for label, v, color, c in rows:
             cv.text(40, c + 10, label, 28, SANS_SB)
