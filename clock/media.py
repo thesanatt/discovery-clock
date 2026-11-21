@@ -33,7 +33,8 @@ def prep(src: str | Path, dst: str | Path, height: int = 360, fps: int = 10,
     """Write a small H.264 copy of src. With timecode=True a running clock is drawn on every frame."""
     dst = Path(dst)
     dst.parent.mkdir(parents=True, exist_ok=True)
-    vf = f"scale=-2:{height}"
+    # height is the SHORT side: a portrait phone video keeps 360 px of width instead of shrinking to 202
+    vf = f"scale='if(gt(iw,ih),-2,{height})':'if(gt(iw,ih),{height},-2)'"
     if timecode:
         vf += (f",drawtext=fontfile='{FONT}':text='%{{pts\\:hms}}':x=8:y=8:fontsize=26:"
                "fontcolor=white:box=1:boxcolor=black@0.75:boxborderw=6")

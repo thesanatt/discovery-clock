@@ -64,6 +64,7 @@
   "done_at": 0.5,
   "not_done_at": 0.3,
   "range_scale": 1.0,
+  "temperature": 3.0,
   "ladder_summary": {
    "m1": 0.7651853260956447,
    "s1": 0.8108722324447606,

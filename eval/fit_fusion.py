@@ -173,7 +173,8 @@ def predict(clips: list[dict], params: dict, use_ladder: bool, names: list[str])
             post = fusion.posterior(s["grid"] if use_ladder else None, s["raw"] if use_ladder else None,
                                     s["p_any"] if use_ladder else None, c["duration"], w, params)
             rows.append({"label": label, "present": s["present"], "true_start": s["true_start"],
-                         "p_done": post["p_done"], "time": post["time"], "lo": post["lo"], "hi": post["hi"],
+                         "p_done": post["p_done"], "log_odds": post["log_odds"],
+                         "time": post["time"], "lo": post["lo"], "hi": post["hi"],
                          "status": "done" if post["p_done"] >= 0.5 else "not_found"})
     return rows
 
@@ -211,6 +212,22 @@ def main() -> None:
         print(f"  {name:36s}", json.dumps(summarize(cv_rows[name])))
     params = fit([data[i] for i in ids])
     params["ladder_mode"] = "summary"
+    # temperature: one number, chosen to maximise the likelihood of the cross-validated predictions
+    import math
+    sysrows = cv_rows[SYSTEM[0]]
+    best_t = None
+    for k in range(10, 301):
+        t = k / 10
+        nll = 0.0
+        for r in sysrows:
+            lo = max(min(r["log_odds"] / t, 30.0), -30.0)
+            pr = 1.0 / (1.0 + math.exp(-lo))
+            nll -= math.log(pr if r["present"] else 1.0 - pr)
+        if best_t is None or nll < best_t[1]:
+            best_t = (t, nll)
+    params["temperature"] = best_t[0]
+    print(f"temperature {best_t[0]} (cross-validated NLL {best_t[1]:.1f}; at 1.0 it is "
+          f"{sum(-math.log((1/(1+math.exp(-max(min(r['log_odds'],30),-30)))) if r['present'] else 1-(1/(1+math.exp(-max(min(r['log_odds'],30),-30))))) for r in sysrows):.1f})")
     params["fitted_on"] = f"{len(ids)} tuning clips"
     params["cv"] = {name: summarize(cv_rows[name]) for name, _, _ in CONFIGS}
     json.dump({"params": params}, open(fusion.PARAMS_FILE, "w", encoding="ascii"), indent=1)

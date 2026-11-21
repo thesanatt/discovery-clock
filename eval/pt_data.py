@@ -37,6 +37,7 @@ ZIP_URL = "https://storage.googleapis.com/dm-perception-test/zip_data/valid_vide
 TIMEOUT = (15, 60)  # connect and read timeouts in seconds, handed to requests by remotezip
 MIN_ACTIONS = 4
 N_TUNE, N_TEST = 30, 120
+N_TEST2 = 100    # a second held-out split, the next ids in the same sha1 order, added after the first test was scored
 
 _local = threading.local()
 _lock = threading.Lock()
@@ -79,9 +80,15 @@ def write_splits() -> dict:
 
 
 def split_ids(split: str) -> list[str]:
-    """Ids of "tune" or "test" from splits.json. Fails if the file no longer matches the rule."""
-    if split not in ("tune", "test"):
-        raise ValueError(f'split must be "tune" or "test", got {split!r}')
+    """Ids of "tune" or "test" from splits.json. Fails if the file no longer matches the rule.
+
+    "test2" is the next N_TEST2 ids in the same order: a fresh held-out set for changes made
+    after the first test split had been scored.
+    """
+    if split not in ("tune", "test", "test2"):
+        raise ValueError(f'split must be "tune", "test" or "test2", got {split!r}')
+    if split == "test2":
+        return eligible()[N_TUNE + N_TEST:N_TUNE + N_TEST + N_TEST2]
     rule = make_splits()
     if not SPLITS.exists():
         write_splits()
@@ -272,7 +279,7 @@ def main(argv: list[str] | None = None) -> int:
     sub = ap.add_subparsers(dest="cmd", required=True)
     sub.add_parser("split", help="write eval/splits.json from the fixed sha1 rule")
     f = sub.add_parser("fetch", help="download a split and write 360p copies")
-    f.add_argument("--split", choices=["tune", "test"], required=True)
+    f.add_argument("--split", choices=["tune", "test", "test2"], required=True)
     f.add_argument("--limit", type=int, default=None, help="only the first N ids of the split")
     f.add_argument("--workers", type=int, default=4)
     c = sub.add_parser("check", help="compare file durations with the labels")

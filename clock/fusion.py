@@ -40,6 +40,10 @@ DEFAULTS = {
     "a0": -1.3, "sa0": 0.7, "a1": 0.9, "sa1": 1.0,
     "witness": {},
     "prior": 0.5, "done_at": 0.5, "not_done_at": 0.3, "range_scale": 1.0,
+    # The witnesses watch the same video, so their errors are not independent and the raw
+    # posterior is overconfident. Dividing the log odds by a temperature (fitted on the tuning
+    # split by cross-validated likelihood) corrects that without changing any ranking.
+    "temperature": 1.0,
 }
 TAU_STEP = 0.25
 
@@ -140,6 +144,7 @@ def posterior(grid: list[int] | None, raw: list[float] | None, p_any: float | No
     w = np.exp(ll_tau - m)
     ll1 = m + math.log(float(np.mean(w)))
     log_odds = math.log(p["prior"] / (1 - p["prior"])) + ll1 - ll0
+    log_odds = log_odds / max(1.0, float(p.get("temperature", 1.0)))
     p_done = 1.0 / (1.0 + math.exp(-max(min(log_odds, 60.0), -60.0)))
 
     post = w / float(np.sum(w))

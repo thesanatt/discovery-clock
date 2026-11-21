@@ -2,25 +2,30 @@
 
 Start it from the project root:
     .venv/Scripts/python.exe -m uvicorn app.server:app --port 8765
-Then open http://localhost:8765/
+Then open http://localhost:8765/ to record, or http://localhost:8765/?watch=1 for the watch view.
+
+A run goes in two stages. POST /api/run stores the video, starts engine.run_fused on a
+background thread and answers at once. GET /api/result is polled by the page: first the fast
+read arrives (one Decisions call), then the full read (ladder plus three model timelines).
 
 Set CLOCK_STUB=1 to get sample data without any model call. The page labels it as sample data.
+Set PUBLIC_URL to the public address of the app when it sits behind a tunnel (used for the QR code).
 """
 from __future__ import annotations
 
-import asyncio
-import inspect
+import io
 import json
 import math
 import os
 import re
 import sys
 import threading
+import time
 import uuid
 from pathlib import Path
 
-from fastapi import FastAPI, File, Form, HTTPException, UploadFile
-from fastapi.responses import FileResponse
+from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile
+from fastapi.responses import FileResponse, Response
 from fastapi.staticfiles import StaticFiles
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -31,18 +36,27 @@ from clock import engine, ladder, media  # noqa: E402
 
 UPLOADS = ROOT / "runs" / "uploads"
 CLIPS = ROOT / "runs" / "clips"
+TUNNEL_LOG = ROOT / "runs" / "tunnel.log"
 STATIC = Path(__file__).resolve().parent / "static"
 
-RUN_TIMEOUT_S = 90
+RUN_DEADLINE_S = 75         # a run with no full read by then is reported as an error
+MAX_ACTIVE_RUNS = 2
+MAX_KEPT_RUNS = 40
 MAX_UPLOAD_BYTES = 200 * 1024 * 1024
 MAX_STEPS = 20              # 20 steps x 21 questions stays inside one Decisions call
 MAX_STEP_CHARS = 200
 CLIP_BEFORE_S = 1.5         # the clip runs from 1.5 s before the estimate to 2.5 s after it
 CLIP_LENGTH_S = 4.0
 EMPTY_CLIP_BYTES = 500      # ffmpeg writes a 261 byte file when the start is past the end
+STUB_FAST_S = 1.0
+STUB_FUSED_S = 4.0
+VIDEO_EXTS = (".webm", ".mp4", ".mov", ".m4v", ".mkv")
+EXT_BY_TYPE = {"video/mp4": ".mp4", "video/quicktime": ".mov", "video/webm": ".webm",
+               "video/x-matroska": ".mkv", "video/x-m4v": ".m4v"}
 
 app = FastAPI(title="Discovery Clock")
-_run_lock = threading.Lock()    # one model call at a time
+_runs: dict[str, dict] = {}     # run id -> state; insertion order is start order
+_runs_lock = threading.Lock()
 _clip_lock = threading.Lock()
 
 
@@ -67,8 +81,11 @@ def parse_steps(raw: str) -> list[str]:
 
 async def save_upload(video: UploadFile, run_id: str) -> Path:
     ext = Path(video.filename or "").suffix.lower()
-    if ext not in (".webm", ".mp4"):
-        raise HTTPException(400, "The video must be a .webm or .mp4 file.")
+    if ext not in VIDEO_EXTS:
+        # some phone browsers send a name without an extension; the content type still says what it is
+        ext = EXT_BY_TYPE.get((video.content_type or "").split(";")[0].strip().lower(), "")
+    if ext not in VIDEO_EXTS:
+        raise HTTPException(400, "The video must be a .mp4, .mov, .webm, .m4v or .mkv file.")
     UPLOADS.mkdir(parents=True, exist_ok=True)
     path = UPLOADS / f"{run_id}{ext}"
     size = 0
@@ -99,53 +116,145 @@ def plain_error(e: Exception) -> str:
         return "No API key is set on the server. Put GEMINI_API_KEY in .env and restart."
     if "ffmpeg" in text or "no duration" in text:
         return "The video could not be read. Record again or use an .mp4 file."
+    if "No model answered" in text:
+        return "No model answered. Check the network, then run again."
     if "timeout" in text.lower() or "timed out" in text.lower():
         return "The model did not answer in time. Run again."
     return "The run failed. " + text[:300]
 
 
-def stub_result(path: Path, steps: list[str]) -> dict:
-    """Sample timeline in the engine's result shape, made without a model call.
+def scrub(value):
+    """Take the project folder and the API key out of every string in a result (model error texts)."""
+    if isinstance(value, dict):
+        return {k: scrub(v) for k, v in value.items()}
+    if isinstance(value, list):
+        return [scrub(v) for v in value]
+    if isinstance(value, str):
+        for root in (str(ROOT), ROOT.as_posix()):
+            value = value.replace(root, ".")
+        for name in ("GEMINI_API_KEY", "GOOGLE_API_KEY"):
+            key = os.environ.get(name)
+            if key:
+                value = value.replace(key, "[key]")
+    return value
 
-    The answers are synthetic curves pushed through the real fit. With three or more steps
-    two of them are swapped, with four or more the last is not found, with five or more
-    the fourth is unsure, so the page can show every state. The unsure curve sits halfway
-    between the engine's two thresholds, so it stays unsure when the calibration file changes.
+
+def public_view(result: dict, run_id: str, name: str, stub: bool) -> dict:
+    """The result as the page gets it: no absolute local path, plus what the page needs to draw."""
+    out = scrub(result)
+    out["video"] = dict(result.get("video") or {}, path=f"runs/uploads/{name}")
+    out.update({"run": run_id, "stub": stub,
+                "thresholds": {"done_at": engine.DONE_AT, "not_found_at": engine.NOT_FOUND_AT},
+                "clip": {"before": CLIP_BEFORE_S, "length": CLIP_LENGTH_S}})
+    return out
+
+
+# ---------- sample data (CLOCK_STUB=1) ----------
+
+def _order_issues(steps: list[dict]) -> list[dict]:
+    done = [s for s in steps if s["status"] == "done"]
+    return [{"earlier": b["index"], "later": a["index"]} for a in done for b in done
+            if b["index"] > a["index"] and b["hi"] is not None and a["lo"] is not None and b["hi"] < a["lo"]]
+
+
+def stub_results(path: Path, steps: list[str]) -> tuple[dict, dict]:
+    """Sample fast and full results in the engine's shapes, made without a model call.
+
+    The ladder answers are synthetic curves pushed through the real fit and the real fusion.
+    With three or more steps two of them are swapped, with four or more the last is not found,
+    with five or more the fourth is unsure, and one sample witness disagrees on the first step,
+    so the page can show every state. The unsure step is set by hand in the full sample, because
+    what the fusion makes of a half-sure step depends on the video length.
     """
     try:
         duration = media.duration_s(path)
     except ValueError:
         duration = 25.0     # browser recordings often carry no duration in the header
-    points = inspect.signature(engine.run).parameters.get("max_points")
-    grid = ladder.time_grid(duration, max_points=points.default if points is not None and isinstance(points.default, int) else 20)
+    grid = ladder.time_grid(duration, max_points=20)
     n = len(steps)
     unsure_top = (engine.DONE_AT + engine.NOT_FOUND_AT) / 2
     starts = [duration * (i + 1) / (n + 1) for i in range(n)]
     if n >= 3:
         starts[1], starts[2] = starts[2], starts[1]
-    out = []
+    missing = n - 1 if n >= 4 else -1
+    shaky = 3 if n >= 5 else -1
+    fits, fast_steps = [], []
     for i, text in enumerate(steps):
-        top = 0.08 if (n >= 4 and i == n - 1) else unsure_top if (n >= 5 and i == 3) else 0.93
+        top = 0.08 if i == missing else unsure_top if i == shaky else 0.93
         raw = [min(1.0, max(0.0, top / (1 + math.exp((starts[i] - t) / 0.7)) + 0.04 * math.sin(5 * t + i)))
                for t in grid]
         f = ladder.fit(grid, raw, p_any=top)
+        fits.append(f)
         pd = engine.p_done(f)
-        found = pd >= engine.DONE_AT and f.t50 is not None
-        status = "done" if found else ("not_found" if pd < engine.NOT_FOUND_AT else "unsure")
-        t, lo, hi = [None if (x is None or status == "not_found") else max(0.0, x - engine.START_BIAS_S)
-                     for x in (f.t50, f.lo, f.hi)]
-        out.append({"index": i, "text": text, "status": status, "time": t, "lo": lo, "hi": hi,
-                    "p_done": round(pd, 3), "p_end": round(f.p_end, 3), "p_any": round(top, 3),
-                    "violation": round(f.violation, 3),
-                    "raw": [round(x, 3) for x in f.raw], "fitted": [round(x, 3) for x in f.fitted]})
-    done = [s for s in out if s["status"] == "done"]
-    order = [{"earlier": b["index"], "later": a["index"]} for a in done for b in done
-             if b["index"] > a["index"] and b["hi"] is not None and a["lo"] is not None and b["hi"] < a["lo"]]
-    return {
-        "video": {"path": str(path), "sha256": media.sha256(path), "duration": round(duration, 2)},
-        "grid": grid, "steps": out, "order_issues": order,
-        "call": {"seconds": 0.0, "input_tokens": 0, "n_questions": n * (len(grid) + 1)},
-    }
+        status = ("done" if pd >= engine.DONE_AT and f.t50 is not None
+                  else "not_found" if pd < engine.NOT_FOUND_AT else "unsure")
+        show = status != "not_found" and f.t50 is not None
+        fast_steps.append({"index": i, "text": text, "status": status,
+                           "time": round(f.t50, 2) if show else None,
+                           "lo": round(f.lo, 2) if show else None, "hi": round(f.hi, 2) if show else None,
+                           "p_done": round(pd, 3),
+                           "raw": [round(x, 3) for x in f.raw], "fitted": [round(x, 3) for x in f.fitted]})
+    video = {"path": str(path), "sha256": media.sha256(path), "duration": round(duration, 2)}
+    call = {"seconds": 0.0, "input_tokens": 0, "n_questions": n * (len(grid) + 1)}
+    fast = {"video": video, "grid": grid, "steps": fast_steps, "order_issues": _order_issues(fast_steps),
+            "call": call, "stage": "fast", "seconds_total": STUB_FAST_S}
+
+    def says(name: str, i: int, shift: float) -> dict:
+        happened = i != missing and not (i == shaky and name != "hydrogen")
+        if name == "neon" and i == 0 and n >= 2:
+            happened = False                # one witness disagrees with the verdict
+        start = round(min(duration, max(0.0, starts[i] + shift)), 1) if happened else None
+        return {"index": i, "happened": happened, "start": start}
+
+    reports = {name: [says(name, i, shift) for i in range(n)]
+               for name, shift in (("hydrogen", -0.4), ("hydrogen4", -0.2), ("neon", 0.5))}
+    fused_steps = engine.fuse_steps(steps, grid, fits, duration, reports)
+    if shaky >= 0 and fused_steps[shaky]["status"] != "unsure":
+        fused_steps[shaky].update(status="unsure", p_done=0.35)
+    fused = {"video": video, "grid": grid, "steps": fused_steps, "order_issues": _order_issues(fused_steps),
+             "call": call, "stage": "fused",
+             "witness_calls": {name: {"ok": True, "seconds": 0.0, "model": "sample"} for name in reports},
+             "seconds_total": STUB_FUSED_S}
+    return fast, fused
+
+
+# ---------- runs ----------
+
+def _active_count() -> int:
+    return sum(1 for r in _runs.values() if r["active"])
+
+
+def _work(run_id: str, path: Path, steps: list[str], stub: bool) -> None:
+    run = _runs[run_id]
+
+    def on_fast(fast: dict) -> None:
+        with _runs_lock:
+            run["fast"] = public_view(fast, run_id, path.name, stub)
+            if run["stage"] == "pending":
+                run["stage"] = "fast"
+
+    try:
+        if stub:
+            fast, fused = stub_results(path, steps)
+            time.sleep(max(0.0, run["t0"] + STUB_FAST_S - time.time()))
+            on_fast(fast)
+            time.sleep(max(0.0, run["t0"] + STUB_FUSED_S - time.time()))
+        else:
+            fused = engine.run_fused(path, steps, on_fast=on_fast, tag=f"app:{run_id}")
+        with _runs_lock:
+            if run["stage"] != "error":     # after the deadline the run stays an error
+                run["fused"] = public_view(fused, run_id, path.name, stub)
+                run["stage"] = "fused"
+                run["t1"] = time.time()
+    except Exception as e:  # noqa: BLE001 - every failure becomes one plain sentence
+        with _runs_lock:
+            if run["stage"] != "error":
+                run["stage"] = "error"
+                run["error"] = plain_error(e)
+                run["t1"] = time.time()
+    finally:
+        with _runs_lock:
+            run["active"] = False
 
 
 @app.get("/api/health")
@@ -154,50 +263,75 @@ def health() -> dict:
 
 
 @app.post("/api/run")
-async def api_run(video: UploadFile = File(...), steps: str = Form(...), clock: str = Form("")) -> dict:
+async def api_run(video: UploadFile = File(...), steps: str = Form(...)) -> dict:
     step_list = parse_steps(steps)
+    busy = HTTPException(429, "Two runs are already going. Wait a few seconds, then run again.")
+    with _runs_lock:
+        if _active_count() >= MAX_ACTIVE_RUNS:
+            raise busy
     run_id = uuid.uuid4().hex[:12]
     path = await save_upload(video, run_id)
-    timecode = clock.strip().lower() in ("1", "true", "on", "yes")
     stub = stub_on()
-    loop = asyncio.get_running_loop()
+    with _runs_lock:
+        if _active_count() >= MAX_ACTIVE_RUNS:      # another upload finished first
+            path.unlink(missing_ok=True)
+            raise busy
+        _runs[run_id] = {"stage": "pending", "fast": None, "fused": None, "error": None,
+                         "t0": time.time(), "t1": None, "active": True, "stub": stub}
+        for old in [k for k, r in _runs.items() if not r["active"]][:max(0, len(_runs) - MAX_KEPT_RUNS)]:
+            del _runs[old]
+    threading.Thread(target=_work, args=(run_id, path, step_list, stub), daemon=True).start()
+    return {"run": run_id, "status": "started", "stub": stub}
 
-    if stub:
-        work = lambda: stub_result(path, step_list)  # noqa: E731
-    else:
-        if not _run_lock.acquire(blocking=False):
-            raise HTTPException(429, "Another run is still going. Wait for it to finish, then run again.")
 
-        def work() -> dict:
-            # The lock is released when the engine really returns, also after a timeout on the page side.
-            try:
-                return engine.run(path, step_list, timecode=timecode, tag=f"app:{run_id}")
-            finally:
-                _run_lock.release()
+@app.get("/api/result")
+def api_result(run: str) -> dict:
+    with _runs_lock:
+        r = _runs.get(run)
+        if r is None:
+            raise HTTPException(404, "No run with that id. The server may have restarted. Run again.")
+        now = time.time()
+        if r["stage"] in ("pending", "fast") and now - r["t0"] > RUN_DEADLINE_S:
+            r["stage"] = "error"
+            r["t1"] = r["t0"] + RUN_DEADLINE_S
+            r["error"] = (f"No full read after {RUN_DEADLINE_S} seconds. "
+                          + ("The first read is shown." if r["fast"] else "Try a shorter video or fewer steps."))
+        return {"run": run, "stage": r["stage"], "fast": r["fast"], "fused": r["fused"], "error": r["error"],
+                "elapsed": round((r["t1"] or now) - r["t0"], 2), "stub": r["stub"]}
 
-    # asyncio.wait, not wait_for: a TimeoutError raised inside the engine (a network read that
-    # timed out early) must not be reported as the 90 second limit.
-    job = loop.run_in_executor(None, work)
-    job.add_done_callback(lambda f: f.cancelled() or f.exception())    # a late failure is already reported
-    done, _ = await asyncio.wait({job}, timeout=RUN_TIMEOUT_S)
-    if not done:
-        raise HTTPException(504, f"No result after {RUN_TIMEOUT_S} seconds. Try a shorter video or fewer steps.")
-    try:
-        result = job.result()
-    except Exception as e:  # noqa: BLE001 - every failure becomes one plain sentence
-        raise HTTPException(502, plain_error(e))
 
-    result["video"]["path"] = f"runs/uploads/{path.name}"     # no absolute local path leaves the server
-    result.update({"run": run_id, "stub": stub, "bias_s": engine.START_BIAS_S,
-                   "clip": {"before": CLIP_BEFORE_S, "length": CLIP_LENGTH_S}})
-    return result
+@app.get("/api/latest")
+def api_latest() -> dict:
+    with _runs_lock:
+        return {"run": next(reversed(_runs), None), "stub": stub_on()}
+
+
+def public_url(request: Request) -> str:
+    url = (os.environ.get("PUBLIC_URL") or "").strip()
+    if not url and TUNNEL_LOG.exists():
+        found = re.search(r"https://[a-z0-9-]+\.trycloudflare\.com", TUNNEL_LOG.read_text(errors="replace"))
+        url = found.group(0) if found else ""
+    return (url or str(request.base_url)).rstrip("/") + "/"
+
+
+@app.get("/api/qr")
+def api_qr(request: Request) -> Response:
+    import segno
+
+    url = public_url(request)
+    buf = io.BytesIO()
+    segno.make(url, error="m").save(buf, kind="svg", scale=10, border=3, dark="#14181b", light="#ffffff",
+                                    xmldecl=False, title="QR code for " + url)
+    # the address also travels in a header so the page can print it under the code
+    return Response(buf.getvalue(), media_type="image/svg+xml",
+                    headers={"Cache-Control": "no-store", "X-Public-Url": url})
 
 
 @app.get("/api/clip")
 def api_clip(run: str, t: float) -> FileResponse:
     if not re.fullmatch(r"[0-9a-f]{12}", run) or not math.isfinite(t) or not 0 <= t <= 36000:
         raise HTTPException(400, "Bad clip request.")
-    src = next(iter(sorted(UPLOADS.glob(run + ".*"))), None)
+    src = next((p for p in sorted(UPLOADS.glob(run + ".*")) if p.suffix.lower() in VIDEO_EXTS), None)
     if src is None:
         raise HTTPException(404, "No video is stored for that run.")
     start = max(0.0, round(t - CLIP_BEFORE_S, 1))

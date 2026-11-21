@@ -62,14 +62,21 @@ def run_clip(system: str, clip: dict, labels: list[str], truth: dict[str, float]
                          "p_done": s["p_done"], "p_any": s.get("p_any"), "p_end": s.get("p_end"),
                          "violation": s["violation"], "raw": s["raw"]})
         call = res["call"]
-    elif system in ("carbon", "neon", "hydrogen", "hydrogen4", "neonmed"):
+    elif system in ("carbon", "neon", "hydrogen", "hydrogen4", "neonmed", "hydrogenhd", "neonhd"):
         from clock import models
         info: dict = {}
         if system == "carbon":
             out = models.baseline_timeline(clip["path"], steps, info=info)   # high thinking, the strongest single call
         else:
             from clock import witness
-            if system == "hydrogen4":      # Hydrogen again, but 4 frames per second at medium resolution
+            if system in ("hydrogenhd", "neonhd"):
+                # same model, but it sees a 720p copy cut from the original recording, at high media resolution
+                from clock import media
+                raw = Path(clip["path"]).parent.parent / "valid" / (clip["id"] + ".mp4")
+                hd = media.prep(raw, ROOT / "runs" / "prep_hd" / (clip["id"] + ".mp4"), height=720, fps=12)
+                out = witness.timeline(hd, steps, model=system[:-2], thinking="low", resolution="high", fps=4.0,
+                                       timeout_s=90.0, info=info, tag="witness_" + system)
+            elif system == "hydrogen4":      # Hydrogen again, but 4 frames per second at medium resolution
                 out = witness.timeline(clip["path"], steps, model="hydrogen", thinking="low", resolution="medium", fps=4.0, info=info, tag="witness_hydrogen4")
             elif system == "neonmed":      # Neon at medium thinking
                 out = witness.timeline(clip["path"], steps, model="neon", thinking="medium", timeout_s=90.0, info=info, tag="witness_neonmed")
@@ -90,8 +97,8 @@ def run_clip(system: str, clip: dict, labels: list[str], truth: dict[str, float]
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--split", required=True, choices=["tune", "test"])
-    ap.add_argument("--system", required=True, choices=["ladder", "carbon", "neon", "hydrogen", "hydrogen4", "neonmed"])
+    ap.add_argument("--split", required=True, choices=["tune", "test", "test2"])
+    ap.add_argument("--system", required=True, choices=["ladder", "carbon", "neon", "hydrogen", "hydrogen4", "neonmed", "hydrogenhd", "neonhd"])
     ap.add_argument("--run", type=int, default=1)
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--resolution", default="low", choices=["low", "medium", "high"])
