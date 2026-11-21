@@ -28,16 +28,18 @@ STEPS = [
     "knock on the table twice",
 ]
 
-# take -> (description, indexes of steps that were NOT done, note)
+# take -> (what was really done, indexes of steps NOT done, whether the order was changed, note)
+# The takes are numbered in the order they were recorded. The script for each take was decided
+# before recording, except take 5, which is logged as what the person reported doing.
 TAKES = {
-    "1": ("all six steps, in order", [], ""),
-    "2": ("AirPods skipped", [1], ""),
-    "3": ("Hello Panda skipped", [2], ""),
-    "4": ("watch skipped", [3], ""),
-    "5": ("bag not zipped", [4], ""),
-    "6": ("knock skipped", [5], ""),
-    "7": ("all six, Hello Panda before AirPods", [], "order swapped"),
-    "8": ("fake-out: AirPods picked up, moved toward the bag, put back on the table", [1], "hard negative"),
+    "1": ("all six steps, in order", [], False, "used to choose version 2"),
+    "2": ("AirPods skipped", [1], False, "used to choose version 2"),
+    "3": ("Hello Panda skipped", [2], False, ""),
+    "4": ("watch skipped", [3], False, ""),
+    "5": ("Hello Panda before AirPods, knock skipped", [5], True, ""),
+    "6": ("bag not zipped", [4], False, ""),
+    "7": ("all six, Hello Panda before AirPods", [], True, ""),
+    "8": ("fake-out: AirPods picked up, moved toward the bag, put back on the table", [1], False, "hard negative"),
 }
 
 
@@ -47,7 +49,7 @@ def main() -> None:
     records = []
     for a in args:
         file, take = a.split("=", 1)
-        desc, not_done, note = TAKES[take]
+        desc, not_done, swapped, note = TAKES[take]
         for run in range(1, runs + 1):
             t0 = time.time()
             try:
@@ -63,6 +65,7 @@ def main() -> None:
                              "p_done": s["p_done"], "time": s["time"], "correct": said_done == truth_done and s["status"] != "unsure",
                              "witnesses": s["witnesses"]})
             records.append({"take": take, "run": run, "desc": desc, "note": note, "file": Path(file).name,
+                            "order_expected": swapped,
                             "duration": res["video"]["duration"], "seconds": res["seconds_total"],
                             "order_issues": res["order_issues"], "witness_calls": res["witness_calls"], "rows": rows,
                             "wall": round(time.time() - t0, 1)})
@@ -81,8 +84,8 @@ def main() -> None:
              "Takes 1 and 2 were used to choose the version 2 witness settings; later takes were not.",
              "The checklist was the same six steps every time:", ""]
     lines += [f"{i + 1}. {s}" for i, s in enumerate(STEPS)]
-    lines += ["", "| Take | Script | Run | Steps flagged as not done or unsure | Verdicts right | Order flag | Seconds |", "|-|-|-|-|-|-|-|"]
-    ok_steps = total_steps = caught = planted = 0
+    lines += ["", "| Take | What was done | Run | Steps flagged as not done or unsure | Verdicts right | Order flag (expected) | Seconds |", "|-|-|-|-|-|-|-|"]
+    ok_steps = total_steps = caught = planted = order_ok = order_n = 0
     for r in allrec:
         if "error" in r:
             lines.append(f"| {r['take']} | | {r['run']} | error: {r['error']} | | | |")
@@ -95,9 +98,14 @@ def main() -> None:
             if x["truth"] == "skipped":
                 planted += 1
                 caught += x["status"] == "not_found"
+        expected = bool(r.get("order_expected", False))
+        got = bool(r["order_issues"])
+        order_n += 1
+        order_ok += got == expected
         lines.append(f"| {r['take']} | {r['desc']} | {r['run']} | {'; '.join(flagged) or 'none'} | {right} of {len(r['rows'])} | "
-                     f"{'yes' if r['order_issues'] else 'no'} | {r['seconds']} |")
-    lines += ["", f"Step verdicts right: {ok_steps} of {total_steps}. Skipped steps caught as not found: {caught} of {planted}."]
+                     f"{'yes' if got else 'no'} ({'yes' if expected else 'no'}) | {r['seconds']} |")
+    lines += ["", f"Step verdicts right: {ok_steps} of {total_steps}. Skipped steps caught as not found: {caught} of {planted}. "
+              f"Order flag as expected: {order_ok} of {order_n} runs."]
     (OUT / "field.md").write_text("\n".join(lines) + "\n", encoding="ascii")
     print("written", OUT / "field.md")
 
