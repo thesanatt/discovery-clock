@@ -10,7 +10,8 @@ Every number on screen is read from a file in this repository:
     s4_math     video/assets/take4_result.json  (key "fused")
     s6_results  results/v3_pooled_report.json (version 3 over its two held-out splits), and the clip
                 counts of all results/test*_report.json
-    s7_fooled   results/field.json, plus the two version 2 counts marked FIXED below
+    s7_fooled   every version 3 run of the two fake-out takes: results/field.json, results/audit_field.json
+                and results/demo_list_check.json; plus the two version 2 counts marked FIXED below
     s8_end      text only
 Numbers are rounded half up, the same way the app prints them (JavaScript toFixed).
 """
@@ -336,6 +337,16 @@ def fooled_load():
         assert len(rows) == 1 and rows[0]["truth"] == "skipped", (run["take"], rows)
         statuses.append(rows[0]["status"])
     assert len(statuses) == V2_FAKE_RUNS, statuses
+    # later version 3 runs of the same two takes: the audit check (six-line list) ...
+    six_line = {"6": 1, "7": 2}        # position of the faked item in the six-line list
+    for rec in json.loads((ROOT / "results" / "audit_field.json").read_text())["records"]:
+        if rec["take"] in six_line and "hydrogen" in rec["model"]:
+            statuses.append(rec["fused"]["steps"][six_line[rec["take"]]]["status"])
+    # ... and the five-line demo list
+    five_line = {"6": 0, "7": 1}
+    for run in json.loads((ROOT / "results" / "demo_list_check.json").read_text())["fake_takes"]:
+        if run["take"] in five_line:
+            statuses.append(run["rows"][five_line[run["take"]]][0])
     return statuses
 
 
@@ -352,22 +363,22 @@ def fooled_draw(cv: Canvas, st, statuses) -> None:
     cv.text(40, 206, "Reach toward the bag, put it back on the table.", 30, SANS)
     cv.line([40, 1240], [244, 244])
 
-    def squares(y: float, filled: int) -> None:
-        for i in range(n):
+    def squares(y: float, filled: int, total: int) -> None:
+        for i in range(total):
             x = 40 + i * 38
             cv.rect(x, y - 26, 28, 28, RED if i < filled else PANEL, RED if i < filled else RULE, 1.5)
 
     if v2:
-        squares(330, V2_FAKE_DONE)
-        cv.text(290, 330, "Version 2: read as done in %d of %d runs" % (V2_FAKE_DONE, V2_FAKE_RUNS), 30, MONO_B, RED)
+        squares(330, V2_FAKE_DONE, V2_FAKE_RUNS)
+        cv.text(600, 330, "Version 2: read as done in %d of %d runs" % (V2_FAKE_DONE, V2_FAKE_RUNS), 30, MONO_B, RED)
     if v3:
-        squares(424, done)
-        cv.text(290, 424, "Version 3, completion rule: read as done in %d of %d runs" % (done, n), 30, MONO_B,
+        squares(424, done, n)
+        cv.text(600, 424, "Version 3, completion rule: %d of %d" % (done, n), 30, MONO_B,
                 GREEN)
-        parts = ["%s in %d" % (name.replace("_", " "), sum(1 for x in statuses if x == name))
+        parts = ["%s %d" % (name.replace("_", " "), sum(1 for x in statuses if x == name))
                  for name in ("not_found", "unsure") if name in statuses]
         if parts:
-            cv.text(290, 462, "Version 3 readings: " + ", ".join(parts), 22, MONO)
+            cv.text(600, 462, "Readings: " + ", ".join(parts + ["done %d" % done]), 22, MONO)
     if last:
         cv.line([40, 1240], [522, 522])
         cv.text(40, 576, "Still wrong: credits a step whose result was already in place.", 26, SANS)

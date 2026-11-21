@@ -1,0 +1,570 @@
+{
+ "what": "The five-line live demo list on the stored field takes, two runs each, version 3. skip_takes: takes 1 to 4. fake_takes: takes 6 to 9. Indices are positions in steps, from 0.",
+ "steps": [
+  "put the AirPods case in the bag",
+  "put the Hello Panda box in the bag",
+  "put the watch in the bag",
+  "zip the bag closed",
+  "knock on the table twice"
+ ],
+ "skip_takes": [
+  {
+   "take": "1",
+   "run": 1,
+   "skipped": [],
+   "rows": [
+    [
+     "done",
+     0.96
+    ],
+    [
+     "done",
+     0.86
+    ],
+    [
+     "done",
+     0.7
+    ],
+    [
+     "done",
+     0.98
+    ],
+    [
+     "done",
+     0.68
+    ]
+   ],
+   "all_right": true,
+   "seconds": 16.2,
+   "desc": "all done"
+  },
+  {
+   "take": "1",
+   "run": 2,
+   "skipped": [],
+   "rows": [
+    [
+     "done",
+     0.95
+    ],
+    [
+     "done",
+     0.86
+    ],
+    [
+     "done",
+     0.85
+    ],
+    [
+     "done",
+     0.98
+    ],
+    [
+     "done",
+     0.68
+    ]
+   ],
+   "all_right": true,
+   "seconds": 17.5,
+   "desc": "all done"
+  },
+  {
+   "take": "2",
+   "run": 1,
+   "skipped": [
+    0
+   ],
+   "rows": [
+    [
+     "not_found",
+     0.25
+    ],
+    [
+     "done",
+     0.89
+    ],
+    [
+     "done",
+     0.89
+    ],
+    [
+     "done",
+     0.89
+    ],
+    [
+     "done",
+     0.89
+    ]
+   ],
+   "all_right": true,
+   "seconds": 18.1,
+   "desc": "AirPods skipped"
+  },
+  {
+   "take": "2",
+   "run": 2,
+   "skipped": [
+    0
+   ],
+   "rows": [
+    [
+     "not_found",
+     0.17
+    ],
+    [
+     "done",
+     0.98
+    ],
+    [
+     "done",
+     0.95
+    ],
+    [
+     "done",
+     0.99
+    ],
+    [
+     "done",
+     0.9
+    ]
+   ],
+   "all_right": true,
+   "seconds": 13.8,
+   "desc": "AirPods skipped"
+  },
+  {
+   "take": "3",
+   "run": 1,
+   "skipped": [
+    1
+   ],
+   "rows": [
+    [
+     "done",
+     0.97
+    ],
+    [
+     "not_found",
+     0.16
+    ],
+    [
+     "done",
+     0.9
+    ],
+    [
+     "done",
+     0.97
+    ],
+    [
+     "done",
+     0.97
+    ]
+   ],
+   "all_right": true,
+   "seconds": 14.5,
+   "desc": "Hello Panda skipped"
+  },
+  {
+   "take": "3",
+   "run": 2,
+   "skipped": [
+    1
+   ],
+   "rows": [
+    [
+     "done",
+     0.97
+    ],
+    [
+     "not_found",
+     0.05
+    ],
+    [
+     "done",
+     0.91
+    ],
+    [
+     "done",
+     0.98
+    ],
+    [
+     "done",
+     0.91
+    ]
+   ],
+   "all_right": true,
+   "seconds": 13.1,
+   "desc": "Hello Panda skipped"
+  },
+  {
+   "take": "4",
+   "run": 1,
+   "skipped": [
+    2
+   ],
+   "rows": [
+    [
+     "done",
+     0.99
+    ],
+    [
+     "done",
+     0.97
+    ],
+    [
+     "not_found",
+     0.04
+    ],
+    [
+     "done",
+     0.99
+    ],
+    [
+     "done",
+     0.95
+    ]
+   ],
+   "all_right": true,
+   "seconds": 13.1,
+   "desc": "watch skipped"
+  },
+  {
+   "take": "4",
+   "run": 2,
+   "skipped": [
+    2
+   ],
+   "rows": [
+    [
+     "done",
+     0.99
+    ],
+    [
+     "done",
+     0.97
+    ],
+    [
+     "not_found",
+     0.04
+    ],
+    [
+     "done",
+     0.99
+    ],
+    [
+     "done",
+     0.95
+    ]
+   ],
+   "all_right": true,
+   "seconds": 11.6,
+   "desc": "watch skipped"
+  }
+ ],
+ "fake_takes": [
+  {
+   "take": "6",
+   "desc": "fake AirPods; knock before zip",
+   "run": 1,
+   "not_done": [
+    0
+   ],
+   "rows": [
+    [
+     "not_found",
+     0.27
+    ],
+    [
+     "done",
+     0.83
+    ],
+    [
+     "done",
+     0.8
+    ],
+    [
+     "done",
+     0.89
+    ],
+    [
+     "done",
+     0.94
+    ]
+   ],
+   "wrong_done": [],
+   "unsure": [],
+   "wrong_not_found": [],
+   "order_issues": true,
+   "seconds": 15.5
+  },
+  {
+   "take": "6",
+   "desc": "fake AirPods; knock before zip",
+   "run": 2,
+   "not_done": [
+    0
+   ],
+   "rows": [
+    [
+     "not_found",
+     0.27
+    ],
+    [
+     "done",
+     0.82
+    ],
+    [
+     "done",
+     0.8
+    ],
+    [
+     "done",
+     0.89
+    ],
+    [
+     "done",
+     0.94
+    ]
+   ],
+   "wrong_done": [],
+   "unsure": [],
+   "wrong_not_found": [],
+   "order_issues": true,
+   "seconds": 15.0
+  },
+  {
+   "take": "7",
+   "desc": "fake Hello Panda; no zip, no knock",
+   "run": 1,
+   "not_done": [
+    1,
+    3,
+    4
+   ],
+   "rows": [
+    [
+     "done",
+     0.94
+    ],
+    [
+     "done",
+     0.66
+    ],
+    [
+     "done",
+     0.74
+    ],
+    [
+     "not_found",
+     0.28
+    ],
+    [
+     "not_found",
+     0.08
+    ]
+   ],
+   "wrong_done": [
+    1
+   ],
+   "unsure": [],
+   "wrong_not_found": [],
+   "order_issues": false,
+   "seconds": 17.4
+  },
+  {
+   "take": "7",
+   "desc": "fake Hello Panda; no zip, no knock",
+   "run": 2,
+   "not_done": [
+    1,
+    3,
+    4
+   ],
+   "rows": [
+    [
+     "done",
+     0.98
+    ],
+    [
+     "unsure",
+     0.52
+    ],
+    [
+     "done",
+     0.76
+    ],
+    [
+     "not_found",
+     0.17
+    ],
+    [
+     "not_found",
+     0.05
+    ]
+   ],
+   "wrong_done": [],
+   "unsure": [
+    1
+   ],
+   "wrong_not_found": [],
+   "order_issues": false,
+   "seconds": 12.7
+  },
+  {
+   "take": "8",
+   "desc": "watch fake only; nothing done",
+   "run": 1,
+   "not_done": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "rows": [
+    [
+     "not_found",
+     0.05
+    ],
+    [
+     "not_found",
+     0.04
+    ],
+    [
+     "not_found",
+     0.04
+    ],
+    [
+     "not_found",
+     0.15
+    ],
+    [
+     "not_found",
+     0.04
+    ]
+   ],
+   "wrong_done": [],
+   "unsure": [],
+   "wrong_not_found": [],
+   "order_issues": false,
+   "seconds": 9.3
+  },
+  {
+   "take": "8",
+   "desc": "watch fake only; nothing done",
+   "run": 2,
+   "not_done": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "rows": [
+    [
+     "not_found",
+     0.05
+    ],
+    [
+     "not_found",
+     0.04
+    ],
+    [
+     "not_found",
+     0.04
+    ],
+    [
+     "not_found",
+     0.15
+    ],
+    [
+     "not_found",
+     0.04
+    ]
+   ],
+   "wrong_done": [],
+   "unsure": [],
+   "wrong_not_found": [],
+   "order_issues": false,
+   "seconds": 11.2
+  },
+  {
+   "take": "9",
+   "desc": "AirPods in then out; watch fiddled; nothing else",
+   "run": 1,
+   "not_done": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "rows": [
+    [
+     "not_found",
+     0.23
+    ],
+    [
+     "not_found",
+     0.05
+    ],
+    [
+     "not_found",
+     0.06
+    ],
+    [
+     "not_found",
+     0.14
+    ],
+    [
+     "not_found",
+     0.14
+    ]
+   ],
+   "wrong_done": [],
+   "unsure": [],
+   "wrong_not_found": [],
+   "order_issues": false,
+   "seconds": 12.9
+  },
+  {
+   "take": "9",
+   "desc": "AirPods in then out; watch fiddled; nothing else",
+   "run": 2,
+   "not_done": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "rows": [
+    [
+     "not_found",
+     0.23
+    ],
+    [
+     "not_found",
+     0.05
+    ],
+    [
+     "not_found",
+     0.06
+    ],
+    [
+     "not_found",
+     0.14
+    ],
+    [
+     "not_found",
+     0.14
+    ]
+   ],
+   "wrong_done": [],
+   "unsure": [],
+   "wrong_not_found": [],
+   "order_issues": false,
+   "seconds": 9.7
+  }
+ ]
+}

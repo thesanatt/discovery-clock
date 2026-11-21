@@ -74,7 +74,7 @@ LINES = [
     "What it adds is odds that hold up. Of the steps it rated above 80 percent, 97 percent "
     "had happened.",
     "People try to fake a step. Version two fell for it in four of six runs. With a completion "
-    "rule, version three no longer reads the fake as done.",
+    "rule, version three fell for it in two of fourteen.",
     "It still makes mistakes, and the README lists them. So it decides nothing. It tells a "
     "person which four seconds to watch.",
     "Discovery Clock. Built today at the Gemini 4 NYC hackathon.",
