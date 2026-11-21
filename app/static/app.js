@@ -7,6 +7,9 @@
 const $ = (id) => document.getElementById(id);
 const SVG_NS = "http://www.w3.org/2000/svg";
 const WATCH = new URLSearchParams(location.search).get("watch") === "1";
+// ?list=NAME keeps a second remembered checklist, so two tabs on one phone can hold two lists.
+const LIST = (new URLSearchParams(location.search).get("list") || "").replace(/[^a-z0-9]/gi, "").slice(0, 12);
+const STEPS_KEY = "clock.steps" + (LIST ? "." + LIST : "");
 const POLL_MS = 500;
 const GIVE_UP_MS = 95000;     // the server calls a run an error at 75 s; the page waits a little longer
 const AUDIT_POLL_MS = 1000;   // the audit comes 45 to 70 s after the full read, so it is polled slowly
@@ -90,7 +93,7 @@ function readSteps() {
 function stepsChanged() {
   const n = readSteps().length;
   $("count").textContent = n ? n + (n === 1 ? " step." : " steps.") : "";
-  store("clock.steps", $("steps").value);
+  store(STEPS_KEY, $("steps").value);
 }
 
 function clipLength() {
@@ -837,7 +840,7 @@ if (WATCH) {
   loadQr();
   watchLoop();
 } else {
-  $("steps").value = store("clock.steps") || "";
+  $("steps").value = store(STEPS_KEY) || "";
   $("len").value = store("clock.len") || "25";
   clipLength();
   stepsChanged();

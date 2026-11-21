@@ -1,0 +1,316 @@
+{
+ "what": "Second handshake take (5.3 s, a different person, white knit sleeve; hands and sleeves only). controls: the true line plus five false lines, three runs. wording: three garment words for the true line and three false colours on one list, two runs. Rows are text, status, P(done), and per-witness yes/no where stored.",
+ "controls": {
+  "video": "second handshake take, 5.3 s",
+  "steps": [
+   "shake hands with a person wearing white tshirt",
+   "shake hands with a person wearing a red tshirt",
+   "shake hands with a person wearing a green jacket",
+   "shake hands with a person wearing a black tshirt",
+   "bump fists with a person wearing white tshirt",
+   "hand a pen to a person wearing white tshirt"
+  ],
+  "runs": [
+   {
+    "run": 1,
+    "seconds": 9.1,
+    "rows": [
+     [
+      "shake hands with a person wearing white tshirt",
+      "done",
+      0.98,
+      {
+       "hydrogen4": true,
+       "hydrogen2": true,
+       "neon4": true,
+       "ladder": null
+      }
+     ],
+     [
+      "shake hands with a person wearing a red tshirt",
+      "not_found",
+      0.03,
+      {
+       "hydrogen4": false,
+       "hydrogen2": false,
+       "neon4": false,
+       "ladder": null
+      }
+     ],
+     [
+      "shake hands with a person wearing a green jacket",
+      "not_found",
+      0.03,
+      {
+       "hydrogen4": false,
+       "hydrogen2": false,
+       "neon4": false,
+       "ladder": null
+      }
+     ],
+     [
+      "shake hands with a person wearing a black tshirt",
+      "not_found",
+      0.03,
+      {
+       "hydrogen4": false,
+       "hydrogen2": false,
+       "neon4": false,
+       "ladder": null
+      }
+     ],
+     [
+      "bump fists with a person wearing white tshirt",
+      "not_found",
+      0.25,
+      {
+       "hydrogen4": false,
+       "hydrogen2": false,
+       "neon4": false,
+       "ladder": null
+      }
+     ],
+     [
+      "hand a pen to a person wearing white tshirt",
+      "not_found",
+      0.06,
+      {
+       "hydrogen4": false,
+       "hydrogen2": false,
+       "neon4": false,
+       "ladder": null
+      }
+     ]
+    ]
+   },
+   {
+    "run": 2,
+    "seconds": 13.5,
+    "rows": [
+     [
+      "shake hands with a person wearing white tshirt",
+      "done",
+      0.98,
+      {
+       "hydrogen4": true,
+       "hydrogen2": true,
+       "neon4": true,
+       "ladder": null
+      }
+     ],
+     [
+      "shake hands with a person wearing a red tshirt",
+      "not_found",
+      0.03,
+      {
+       "hydrogen4": false,
+       "hydrogen2": false,
+       "neon4": false,
+       "ladder": null
+      }
+     ],
+     [
+      "shake hands with a person wearing a green jacket",
+      "not_found",
+      0.03,
+      {
+       "hydrogen4": false,
+       "hydrogen2": false,
+       "neon4": false,
+       "ladder": null
+      }
+     ],
+     [
+      "shake hands with a person wearing a black tshirt",
+      "not_found",
+      0.03,
+      {
+       "hydrogen4": false,
+       "hydrogen2": false,
+       "neon4": false,
+       "ladder": null
+      }
+     ],
+     [
+      "bump fists with a person wearing white tshirt",
+      "not_found",
+      0.25,
+      {
+       "hydrogen4": false,
+       "hydrogen2": false,
+       "neon4": false,
+       "ladder": null
+      }
+     ],
+     [
+      "hand a pen to a person wearing white tshirt",
+      "not_found",
+      0.06,
+      {
+       "hydrogen4": false,
+       "hydrogen2": false,
+       "neon4": false,
+       "ladder": null
+      }
+     ]
+    ]
+   },
+   {
+    "run": 3,
+    "seconds": 9.1,
+    "rows": [
+     [
+      "shake hands with a person wearing white tshirt",
+      "done",
+      0.98,
+      {
+       "hydrogen4": true,
+       "hydrogen2": true,
+       "neon4": true,
+       "ladder": null
+      }
+     ],
+     [
+      "shake hands with a person wearing a red tshirt",
+      "not_found",
+      0.03,
+      {
+       "hydrogen4": false,
+       "hydrogen2": false,
+       "neon4": false,
+       "ladder": null
+      }
+     ],
+     [
+      "shake hands with a person wearing a green jacket",
+      "not_found",
+      0.03,
+      {
+       "hydrogen4": false,
+       "hydrogen2": false,
+       "neon4": false,
+       "ladder": null
+      }
+     ],
+     [
+      "shake hands with a person wearing a black tshirt",
+      "not_found",
+      0.03,
+      {
+       "hydrogen4": false,
+       "hydrogen2": false,
+       "neon4": false,
+       "ladder": null
+      }
+     ],
+     [
+      "bump fists with a person wearing white tshirt",
+      "not_found",
+      0.25,
+      {
+       "hydrogen4": false,
+       "hydrogen2": false,
+       "neon4": false,
+       "ladder": null
+      }
+     ],
+     [
+      "hand a pen to a person wearing white tshirt",
+      "not_found",
+      0.06,
+      {
+       "hydrogen4": false,
+       "hydrogen2": false,
+       "neon4": false,
+       "ladder": null
+      }
+     ]
+    ]
+   }
+  ]
+ },
+ "wording": {
+  "steps": [
+   "shake hands with the person wearing a white shirt",
+   "shake hands with the person wearing a white top",
+   "shake hands with the person wearing a white sweater",
+   "shake hands with the person wearing a blue shirt",
+   "shake hands with the person wearing an orange shirt",
+   "shake hands with the person wearing a grey shirt"
+  ],
+  "runs": [
+   {
+    "run": 1,
+    "seconds": 12.3,
+    "rows": [
+     [
+      "shake hands with the person wearing a white shirt",
+      "unsure",
+      0.49
+     ],
+     [
+      "shake hands with the person wearing a white top",
+      "done",
+      0.96
+     ],
+     [
+      "shake hands with the person wearing a white sweater",
+      "done",
+      0.99
+     ],
+     [
+      "shake hands with the person wearing a blue shirt",
+      "not_found",
+      0.17
+     ],
+     [
+      "shake hands with the person wearing an orange shirt",
+      "not_found",
+      0.03
+     ],
+     [
+      "shake hands with the person wearing a grey shirt",
+      "not_found",
+      0.18
+     ]
+    ]
+   },
+   {
+    "run": 2,
+    "seconds": 15.0,
+    "rows": [
+     [
+      "shake hands with the person wearing a white shirt",
+      "unsure",
+      0.49
+     ],
+     [
+      "shake hands with the person wearing a white top",
+      "unsure",
+      0.55
+     ],
+     [
+      "shake hands with the person wearing a white sweater",
+      "done",
+      0.99
+     ],
+     [
+      "shake hands with the person wearing a blue shirt",
+      "not_found",
+      0.17
+     ],
+     [
+      "shake hands with the person wearing an orange shirt",
+      "not_found",
+      0.03
+     ],
+     [
+      "shake hands with the person wearing a grey shirt",
+      "not_found",
+      0.18
+     ]
+    ]
+   }
+  ]
+ }
+}
