@@ -1,0 +1,22 @@
+{
+ "done_at": 0.44,
+ "not_found_at": 0.32,
+ "start_bias_s": 0.56,
+ "fitted_on": [
+  "tune_ladder_run1.jsonl"
+ ],
+ "n_steps": 153,
+ "tune_metrics": {
+  "steps_present": 93,
+  "steps_phantom": 60,
+  "skip_precision": 0.778,
+  "skip_recall": 0.817,
+  "skip_f1": 0.797,
+  "auroc": 0.892,
+  "timed": 77,
+  "within_2s": 0.559,
+  "within_5s": 0.667,
+  "median_abs_err_s": 1.18,
+  "interval_coverage": 0.838
+ }
+}

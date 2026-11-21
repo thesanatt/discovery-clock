@@ -1,0 +1,27 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Session files. They hold personal notes and must stay out of the public repo.
+CLAUDE.md
+STANDARDS.md
+PREP_INPUT.md
+STATUS.md
+LEDGER.md
+NEEDS_YOU.md
+DRAFT_*.md
+
+# Tooling
+__pycache__/
+*.pyc
+.venv/
+venv/
+node_modules/
+.DS_Store
+
+# Datasets (downloaded, never committed; see README for licenses)
+data/
+
+# Run outputs and call logs
+runs/
