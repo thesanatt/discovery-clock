@@ -49,15 +49,18 @@ if _CAL.exists():
 # "not found" when the ladder is far down; anything in between is "unsure" until the full read.
 NOT_FOUND_AT = 0.25
 
-# Full read: the reasoning-model witnesses. Chosen on the tuning split (see eval/fit_fusion.py).
+# Full read: the reasoning-model witnesses. Every one sees medium resolution: at low resolution
+# and 1 frame per second Hydrogen mixed up which object an action belonged to on real phone
+# footage (results/field.md). Reliabilities are fitted on the tuning split (eval/fit_fusion.py).
 #   name        model       thinking  resolution  frames per second
 WITNESSES = {
-    "hydrogen": ("hydrogen", "low", "low", None),
     "hydrogen4": ("hydrogen", "low", "medium", 4.0),
-    "neon": ("neon", "low", "low", None),
+    "hydrogen2": ("hydrogen", "low", "medium", 2.0),
+    "neon4": ("neon", "low", "medium", 4.0),
 }
 WITNESS_TIMEOUT_S = 30.0     # per model call
-FUSED_DEADLINE_S = 45.0      # the full read never waits longer than this for witnesses
+FUSED_DEADLINE_S = 32.0      # the full read never waits longer than this for witnesses
+FUSED_SOFT_DEADLINE_S = 15.0 # after this, the full read returns as soon as two witnesses have answered
 FUSED_DONE_AT = 0.5
 FUSED_NOT_DONE_AT = 0.2
 
@@ -195,7 +198,17 @@ def run_fused(video_path: str | Path, steps: list[str], client=None, max_points:
     except Exception as e:  # noqa: BLE001 - the witnesses can still answer without the ladder
         call["error"] = f"{type(e).__name__}: {str(e)[:200]}"
 
-    wait(list(jobs.values()), timeout=max(1.0, FUSED_DEADLINE_S - (time.time() - t0)))
+    # Wait for every witness up to the soft deadline. After that, two witnesses are enough:
+    # the fusion works on any subset, and one slow call must not hold a live demo.
+    pending = set(jobs.values())
+    while pending:
+        elapsed = time.time() - t0
+        if elapsed >= FUSED_DEADLINE_S:
+            break
+        answered = sum(1 for j in jobs.values() if j.done() and j.exception() is None)
+        if elapsed >= FUSED_SOFT_DEADLINE_S and answered >= 2:
+            break
+        _, pending = wait(pending, timeout=0.5)
     reports: dict[str, list[dict]] = {}
     witness_calls: dict[str, dict] = {}
     for name, job in jobs.items():

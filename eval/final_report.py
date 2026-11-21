@@ -19,13 +19,14 @@ from eval import fit_fusion, score
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "runs" / "eval"
-FAST = ["hydrogen", "hydrogen4", "neon"]
+FAST = ["hydrogen4", "hydrogen2", "neon4"]      # the witnesses of the shipped system (v2)
+V1 = ["hydrogen", "hydrogen4", "neon"]
 VAGUE = {"Moving object(s) around", "Holding something in a state"}
 
 
 def single_rows(split: str, name: str, strict: bool = True) -> tuple[list[dict], list[float], int, int]:
     """Rows from one model's own timeline. strict keeps only clips that model itself answered."""
-    base = {"hydrogen4": "hydrogen", "neonmed": "neon"}.get(name, name)
+    base = {"hydrogen4": "hydrogen", "hydrogen2": "hydrogen", "neonmed": "neon", "neon4": "neon"}.get(name, name)
     path = OUT / f"{split}_{name}_run1.jsonl"
     if not path.exists():
         return [], [], 0, 0
@@ -90,7 +91,7 @@ def calibration(rows: list[dict], bins: int = 5) -> tuple[list[dict], float, flo
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--split", default="test", choices=["test", "test2", "tune"])
+    ap.add_argument("--split", default="test", choices=["test", "test2", "test3", "tune"])
     args = ap.parse_args()
     split = args.split
     params = dict(fusion.load_params(), ladder_mode="summary")
@@ -107,16 +108,19 @@ def main() -> None:
 
     lad = fused_rows(data, params, True, [])
     systems["ladder alone (Decisions API)"] = (lad, 0.5)
-    for name in FAST + ["carbon"]:
+    for name in ["hydrogen", "neon"] + FAST + ["carbon"]:
         rows, secs, n_used, n_fallback = single_rows(split, name)
         if rows:
-            label = {"hydrogen": "Hydrogen, one call", "hydrogen4": "Hydrogen 4 fps, one call", "neon": "Neon, one call",
-                     "carbon": "Carbon high thinking, one call"}[name]
+            label = {"hydrogen": "Hydrogen low res 1 fps, one call", "neon": "Neon low res 1 fps, one call",
+                     "hydrogen4": "Hydrogen 4 fps, one call", "hydrogen2": "Hydrogen 2 fps, one call",
+                     "neon4": "Neon 4 fps, one call", "carbon": "Carbon high thinking, one call"}[name]
             systems[label] = (rows, None)
             table.append((label, n_used, n_fallback, secs))
     fused = fused_rows(data, params, True, FAST)
-    systems["FUSED: ladder + Hydrogen x2 + Neon"] = (fused, 0.5)
-    systems["witnesses only: Hydrogen x2 + Neon"] = (fused_rows(data, params, False, FAST), 0.5)
+    systems["FUSED v2: ladder + Hydrogen 4 fps + Hydrogen 2 fps + Neon 4 fps"] = (fused, 0.5)
+    systems["v2 witnesses without the ladder"] = (fused_rows(data, params, False, FAST), 0.5)
+    if all(any(n in s["w"] for c in data.values() for s in c["steps"].values()) for n in V1):
+        systems["fused v1 (low-res Hydrogen and Neon)"] = (fused_rows(data, params, True, V1), 0.5)
 
     # latency of the fused system: the slowest of its parallel calls, per clip
     per_clip = {}

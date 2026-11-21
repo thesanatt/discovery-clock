@@ -20,7 +20,7 @@ from eval import score
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "runs" / "eval"
-WITNESSES = ["hydrogen", "neon", "carbon", "hydrogen4", "neonmed"]
+WITNESSES = ["hydrogen", "neon", "carbon", "hydrogen4", "neonmed", "neon4", "hydrogen2"]
 ALL_WITNESSES = WITNESSES + ["zoom"]
 MAX_POINTS = 20
 
@@ -45,7 +45,7 @@ def load_all(split: str = "tune", ladder_run: str = "run3") -> dict:
             if "error" in rec or rec["id"] not in data:
                 continue
             answered_by = (rec.get("call") or {}).get("model", "")
-            base = {"hydrogen4": "hydrogen", "neonmed": "neon"}.get(name, name)
+            base = {"hydrogen4": "hydrogen", "hydrogen2": "hydrogen", "neonmed": "neon", "neon4": "neon"}.get(name, name)
             if base not in answered_by:      # a fallback model answered: not this witness
                 continue
             for r in rec["rows"]:
@@ -188,13 +188,18 @@ CONFIGS = [
     ("ladder only", True, []),
     ("hydrogen only", False, ["hydrogen"]),
     ("hydrogen4 only", False, ["hydrogen4"]),
+    ("hydrogen2 only", False, ["hydrogen2"]),
     ("neon only", False, ["neon"]),
-    ("hydrogen + hydrogen4 + neon", False, ["hydrogen", "hydrogen4", "neon"]),
-    ("ladder + hydrogen + neon", True, ["hydrogen", "neon"]),
-    ("ladder + hydrogen + hydrogen4 + neon", True, ["hydrogen", "hydrogen4", "neon"]),
+    ("neon4 only", False, ["neon4"]),
+    ("v1: ladder + hydrogen + hydrogen4 + neon", True, ["hydrogen", "hydrogen4", "neon"]),
+    ("v2 without ladder: hydrogen4 + hydrogen2 + neon4", False, ["hydrogen4", "hydrogen2", "neon4"]),
+    ("v2: ladder + hydrogen4 + hydrogen2 + neon4", True, ["hydrogen4", "hydrogen2", "neon4"]),
 ]
-# The shipped system. Chosen on the tuning split (LEDGER rows 55, 59, 60).
-SYSTEM = ("ladder + hydrogen + hydrogen4 + neon", True, ["hydrogen", "hydrogen4", "neon"])
+# The shipped system (v2). v1 used Hydrogen and Neon at low resolution and 1 frame per second.
+# On the builder's phone takes the low-resolution Hydrogen witness credited one object's action to
+# another object, so every witness now sees medium resolution at 2 or 4 frames per second
+# (LEDGER rows 75 to 77). Reliabilities are refitted on the tuning split.
+SYSTEM = ("v2: ladder + hydrogen4 + hydrogen2 + neon4", True, ["hydrogen4", "hydrogen2", "neon4"])
 
 
 def main() -> None:

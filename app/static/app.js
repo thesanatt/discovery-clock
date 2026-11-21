@@ -440,7 +440,7 @@ function draw(view, res) {
       if (i > 0 && pct(t, dur) > 92) l.classList.add("end");   // keep the last label inside the strip
       axis.append(l);
     });
-    head.append(el("span", "idx", "No."), el("span", "what", "Step and status"), axis, el("span", "time", "Start, s"),
+    head.append(el("span", "idx", "No."), el("span", "what", "Step and status"), axis, el("span", "time", "Starts at, s"),
       el("span", "score", "P(done)"));
     view.rows = res.steps.map(() => { const b = el("button", "row"); b.type = "button"; return b; });
     view.run = res.run;

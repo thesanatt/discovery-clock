@@ -85,10 +85,12 @@ def split_ids(split: str) -> list[str]:
     "test2" is the next N_TEST2 ids in the same order: a fresh held-out set for changes made
     after the first test split had been scored.
     """
-    if split not in ("tune", "test", "test2"):
-        raise ValueError(f'split must be "tune", "test" or "test2", got {split!r}')
+    if split not in ("tune", "test", "test2", "test3"):
+        raise ValueError(f'split must be "tune", "test", "test2" or "test3", got {split!r}')
     if split == "test2":
         return eligible()[N_TUNE + N_TEST:N_TUNE + N_TEST + N_TEST2]
+    if split == "test3":   # the 100 ids after test2: for the witness settings changed after the field takes
+        return eligible()[N_TUNE + N_TEST + N_TEST2:N_TUNE + N_TEST + 2 * N_TEST2]
     rule = make_splits()
     if not SPLITS.exists():
         write_splits()
@@ -279,7 +281,7 @@ def main(argv: list[str] | None = None) -> int:
     sub = ap.add_subparsers(dest="cmd", required=True)
     sub.add_parser("split", help="write eval/splits.json from the fixed sha1 rule")
     f = sub.add_parser("fetch", help="download a split and write 360p copies")
-    f.add_argument("--split", choices=["tune", "test", "test2"], required=True)
+    f.add_argument("--split", choices=["tune", "test", "test2", "test3"], required=True)
     f.add_argument("--limit", type=int, default=None, help="only the first N ids of the split")
     f.add_argument("--workers", type=int, default=4)
     c = sub.add_parser("check", help="compare file durations with the labels")

@@ -1,0 +1,229 @@
+{
+ "split": "test3",
+ "clips": 100,
+ "steps": 508,
+ "systems": {
+  "ladder alone (Decisions API)": {
+   "steps_present": 308,
+   "steps_phantom": 200,
+   "skip_precision": 0.766,
+   "skip_recall": 0.8,
+   "skip_f1": 0.782,
+   "auroc": 0.905,
+   "timed": 259,
+   "within_2s": 0.519,
+   "within_5s": 0.64,
+   "median_abs_err_s": 1.28,
+   "interval_coverage": 0.826,
+   "within_1s": 0.328,
+   "latency": "1.1 s",
+   "clips": "100"
+  },
+  "Hydrogen 4 fps, one call": {
+   "steps_present": 308,
+   "steps_phantom": 200,
+   "skip_precision": 0.865,
+   "skip_recall": 0.895,
+   "skip_f1": 0.88,
+   "auroc": 0.902,
+   "timed": 280,
+   "within_2s": 0.701,
+   "within_5s": 0.802,
+   "median_abs_err_s": 0.48,
+   "interval_coverage": null,
+   "within_1s": 0.614,
+   "latency": "7.6 s (p90 12 s)",
+   "clips": "100"
+  },
+  "Hydrogen 2 fps, one call": {
+   "steps_present": 308,
+   "steps_phantom": 200,
+   "skip_precision": 0.817,
+   "skip_recall": 0.895,
+   "skip_f1": 0.854,
+   "auroc": 0.883,
+   "timed": 268,
+   "within_2s": 0.675,
+   "within_5s": 0.756,
+   "median_abs_err_s": 0.5,
+   "interval_coverage": null,
+   "within_1s": 0.61,
+   "latency": "7.0 s (p90 11 s)",
+   "clips": "100"
+  },
+  "Neon 4 fps, one call": {
+   "steps_present": 308,
+   "steps_phantom": 200,
+   "skip_precision": 0.8,
+   "skip_recall": 0.9,
+   "skip_f1": 0.847,
+   "auroc": 0.877,
+   "timed": 263,
+   "within_2s": 0.666,
+   "within_5s": 0.753,
+   "median_abs_err_s": 0.53,
+   "interval_coverage": null,
+   "within_1s": 0.591,
+   "latency": "11.7 s (p90 19 s)",
+   "clips": "100"
+  },
+  "FUSED v2: ladder + Hydrogen 4 fps + Hydrogen 2 fps + Neon 4 fps": {
+   "steps_present": 308,
+   "steps_phantom": 200,
+   "skip_precision": 0.857,
+   "skip_recall": 0.9,
+   "skip_f1": 0.878,
+   "auroc": 0.943,
+   "timed": 278,
+   "within_2s": 0.734,
+   "within_5s": 0.795,
+   "median_abs_err_s": 0.45,
+   "interval_coverage": 0.766,
+   "within_1s": 0.643,
+   "latency": "12.1 s (p90 19 s)",
+   "clips": "100"
+  },
+  "v2 witnesses without the ladder": {
+   "steps_present": 308,
+   "steps_phantom": 200,
+   "skip_precision": 0.84,
+   "skip_recall": 0.895,
+   "skip_f1": 0.867,
+   "auroc": 0.909,
+   "timed": 274,
+   "within_2s": 0.721,
+   "within_5s": 0.779,
+   "median_abs_err_s": 0.45,
+   "interval_coverage": 0.748,
+   "within_1s": 0.64,
+   "latency": "12.1 s (p90 19 s)",
+   "clips": "100"
+  }
+ },
+ "bootstrap": {
+  "Hydrogen 4 fps, one call": {
+   "skip_f1": [
+    -0.002,
+    -0.019,
+    0.018
+   ],
+   "within_2s": [
+    0.032,
+    0.006,
+    0.062
+   ]
+  },
+  "Hydrogen 2 fps, one call": {
+   "skip_f1": [
+    0.024,
+    0.006,
+    0.043
+   ],
+   "within_2s": [
+    0.059,
+    0.024,
+    0.099
+   ]
+  },
+  "Neon 4 fps, one call": {
+   "skip_f1": [
+    0.031,
+    0.012,
+    0.052
+   ],
+   "within_2s": [
+    0.068,
+    0.04,
+    0.097
+   ]
+  }
+ },
+ "calibration": {
+  "bins": [
+   {
+    "bin": "0.0-0.2",
+    "n": 195,
+    "mean_p": 0.038,
+    "share_real": 0.097
+   },
+   {
+    "bin": "0.2-0.4",
+    "n": 8,
+    "mean_p": 0.307,
+    "share_real": 0.75
+   },
+   {
+    "bin": "0.4-0.6",
+    "n": 11,
+    "mean_p": 0.486,
+    "share_real": 0.818
+   },
+   {
+    "bin": "0.6-0.8",
+    "n": 12,
+    "mean_p": 0.691,
+    "share_real": 1.0
+   },
+   {
+    "bin": "0.8-1.0",
+    "n": 282,
+    "mean_p": 0.977,
+    "share_real": 0.929
+   }
+  ],
+  "ece": 0.071,
+  "brier": 0.082
+ },
+ "failures": [
+  {
+   "label": "Moving object(s) around",
+   "wrong": 13,
+   "asked": 39
+  },
+  {
+   "label": "Holding something in a state",
+   "wrong": 12,
+   "asked": 18
+  },
+  {
+   "label": "Putting something on top of something",
+   "wrong": 10,
+   "asked": 36
+  },
+  {
+   "label": "Covering something with something",
+   "wrong": 8,
+   "asked": 13
+  },
+  {
+   "label": "Lifting something and placing it back down",
+   "wrong": 6,
+   "asked": 14
+  },
+  {
+   "label": "Closing something",
+   "wrong": 5,
+   "asked": 17
+  },
+  {
+   "label": "Launching something",
+   "wrong": 4,
+   "asked": 14
+  },
+  {
+   "label": "Rotating something",
+   "wrong": 4,
+   "asked": 11
+  },
+  {
+   "label": "Dropping something on top of something",
+   "wrong": 3,
+   "asked": 7
+  },
+  {
+   "label": "Showing something to the camera",
+   "wrong": 3,
+   "asked": 21
+  }
+ ]
+}

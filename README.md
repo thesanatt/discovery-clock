@@ -15,9 +15,9 @@ A single Gemini call can already watch a video and list which steps happened. Wh
 1. `clock/media.py` makes a small copy of the video with ffmpeg (short side 360 px, 10 frames per second).
 2. In parallel:
    - `clock/ladder.py` builds the question ladder and `clock/decide.py` sends it to `gemini-decision-1`. For 6 steps on a 25 second clip that is about 100 yes/no questions in one call. Isotonic regression makes each step's answers monotone; the half-rise point is the ladder's time estimate.
-   - `clock/witness.py` asks `gemini-4-hydrogen` (at 1 frame per second), `gemini-4-hydrogen` again (4 frames per second, medium resolution) and `gemini-4-neon` for a timeline: for each step, did it happen and at what second.
+   - `clock/witness.py` asks `gemini-4-hydrogen` at 4 frames per second, `gemini-4-hydrogen` again at 2 frames per second, and `gemini-4-neon` at 4 frames per second, all at medium media resolution, for a timeline: for each step, did it happen and at what second.
 3. `clock/fusion.py` combines them. For each step it compares two hypotheses, "happened, starting at time tau" and "never happened". Each witness contributes a likelihood: its hit rate, its false alarm rate, and a Laplace error around the true start time with a small share of gross errors. The ladder contributes a Gaussian score and its own time estimate. The posterior over tau gives the start time and its range. One temperature on the log odds corrects for the fact that the witnesses watch the same video and so make related mistakes.
-4. `clock/engine.py` runs all of this with a timeout on every call and a deadline for the whole read. A witness that fails or is late is left out. The Decisions ladder alone is the fallback and is shown as the "first read" while the others are still watching.
+4. `clock/engine.py` runs all of this with a timeout on every call and a deadline for the whole read. After 15 seconds it returns as soon as two witnesses have answered. A witness that fails or is late is left out. The Decisions ladder alone is the fallback and is shown as the "first read" while the others are still watching.
 5. `app/` is the web page: record on a phone or upload a file, type the checklist, read the step table. Each row shows the verdict, the start time with its range, the posterior curve on a shared time axis, what each witness said, and a 4 second clip.
 
 Model jobs:
@@ -25,7 +25,7 @@ Model jobs:
 | Model | Job |
 |-|-|
 | `gemini-decision-1` (Decisions API) | The ladder: steps x time points in one call. First read in about a second, and a graded score that the yes/no witnesses lack. |
-| `gemini-4-hydrogen` | Two fast timelines of the whole video, at 1 and at 4 frames per second. |
+| `gemini-4-hydrogen` | Two fast timelines of the whole video, at 4 and at 2 frames per second. |
 | `gemini-4-neon` | A third timeline from a stronger model. |
 | `gemini-4-carbon` | The baseline: one call at high thinking, asked for the same output. Not part of the system. |
 
@@ -37,9 +37,11 @@ The DeepMind Perception Test (validation split, CC BY 4.0): short phone videos f
 
 For each clip the checklist is the clip's own labeled actions plus two steps that never happen in it, picked by a hash of the clip id. The system must say which steps happened, when each started, and flag the two planted skips.
 
-Clips were assigned by a fixed rule before any model output existed (`eval/splits.json`): eligible clips sorted by the SHA-1 of their id; the first 30 are for tuning, the next 120 are the test split, the next 100 are a second test split.
+Clips were assigned by a fixed rule before any model output existed (`eval/splits.json`): eligible clips sorted by the SHA-1 of their id; the first 30 are for tuning, the next 120 are the first test split, and the next two blocks of 100 are the second and third test splits.
 
-### Results on the first test split (120 clips, 626 steps: 386 real, 240 planted skips)
+The system went through two versions today. Version 1 used Hydrogen and Neon witnesses at low resolution and 1 frame per second. Version 2, the one in this repository, gives every witness medium resolution and 2 or 4 frames per second. Each version was scored on clips it had never seen, and the tables below say which is which.
+
+### Version 1 on the first test split (120 clips, 626 steps: 386 real, 240 planted skips)
 
 Every parameter was fitted on the 30 tuning clips and frozen before this split was scored. "Skip F1" is for flagging steps that did not happen. Timing columns are the share of real steps whose start was placed within that distance of the label.
 
@@ -68,7 +70,7 @@ The fused probabilities were overconfident: of the steps it gave less than 20 pe
 
 Because I had already looked at the first test split, I scored the changed system once on a second split that had never been run.
 
-### Results on the second test split (99 clips, 506 steps)
+### Version 1 with the temperature, on the second test split (99 clips, 506 steps)
 
 | System | Skip F1 | Ranking (AUROC) | Within 1 s | Within 2 s | Within 5 s | Median time per clip |
 |-|-|-|-|-|-|-|
@@ -90,6 +92,33 @@ Calibration of the fused probability on this split: expected calibration error 0
 
 The reported time range contains the labeled start for 78 percent of timed steps.
 
+### What changed after the field takes: version 2
+
+I recorded a bag-packing checklist on a phone, with a known script per take (see `results/field.md`). On the take where the AirPods case was left out, version 1 was right in the live run and wrong in two re-runs of the same file: the Hydrogen witness at low resolution and 1 frame per second credited the Hello Panda box going into the bag to the AirPods case. Benchmark labels never name specific objects, so the benchmark could not show this.
+
+A check of witness settings on two takes (3 calls each) showed the low-resolution Hydrogen witness wrong on that take in 3 of 3 calls, and every witness at medium resolution and 2 or 4 frames per second right in 6 of 6. Version 2 replaces the low-resolution witnesses. Reliabilities and the temperature were refitted on the tuning clips. Nothing else changed.
+
+Version 2 was then scored once on a third split of 100 clips that had never been run.
+
+### Version 2 on the third test split (100 clips, 508 steps: 308 real, 200 planted skips)
+
+| System | Skip F1 | Ranking (AUROC) | Within 1 s | Within 2 s | Within 5 s | Median time per clip |
+|-|-|-|-|-|-|-|
+| Decisions ladder alone | 0.78 | 0.91 | 33% | 52% | 64% | 1.1 s |
+| Hydrogen at 4 fps, one call | 0.88 | none | 61% | 70% | 80% | 7.6 s |
+| Hydrogen at 2 fps, one call | 0.85 | none | 61% | 68% | 76% | 7.0 s |
+| Neon at 4 fps, one call | 0.85 | none | 59% | 67% | 75% | 11.7 s |
+| Fused system, version 2 | 0.88 | 0.94 | 64% | 73% | 80% | 12.1 s |
+
+Paired bootstrap over clips, fused minus single call, 95 percent interval:
+- against Hydrogen at 4 fps: skip F1 -0.002 [-0.019, +0.018]; within 2 s +0.032 [+0.006, +0.062]
+- against Hydrogen at 2 fps: skip F1 +0.024 [+0.006, +0.043]; within 2 s +0.059 [+0.024, +0.099]
+- against Neon at 4 fps: skip F1 +0.031 [+0.012, +0.052]; within 2 s +0.068 [+0.040, +0.097]
+
+Expected calibration error 0.071. Of the 282 steps given 0.8 or more, 93 percent had happened; of the 195 given under 0.2, 10 percent had. The reported range contains the labeled start for 77 percent of timed steps.
+
+The picture is the same on all three splits (319 held-out clips): the fused system ties the best single call on yes/no accuracy, places a few more steps within 1 and 2 seconds, and is the only one that gives a probability.
+
 ### The Carbon baseline
 
 One `gemini-4-carbon` call at high thinking, same prompt and output format. It is the most accurate single call on the clips it finished, and too slow to use live: about 110 seconds per clip at the median, and in my runs it timed out often enough that the wrapper fell back to Neon on a large share of clips. See `results/` for the exact counts at the time of the last run.
@@ -98,7 +127,8 @@ One `gemini-4-carbon` call at high thinking, same prompt and output format. It i
 
 - Vague labels. "Moving object(s) around" and "Holding something in a state" account for the largest share of errors on both test splits. These actions arguably happen through most of a clip, so their labeled start is hard to match. Without those two classes the fused system scores skip F1 0.90 and 79 percent within 2 seconds on the second split.
 - Steps every witness misses. When all four sources miss a real step the fused probability is near zero, and 13 percent of those steps were real. A person still has to check flagged steps.
-- The Decisions ladder on real phone footage. On a first field recording it scored three of five real steps low; the reasoning models carried the verdict.
+- The Decisions ladder on real phone footage. On the first field recording it scored three of five real steps low; the reasoning models carried the verdict.
+- Which object did it. At low resolution a witness can see that something went into the bag and credit the wrong item. Version 2 reduces this on my takes; it is not measured at scale.
 
 ### Things I tried that did not help (tuning split)
 
@@ -111,7 +141,7 @@ One `gemini-4-carbon` call at high thinking, same prompt and output format. It i
 
 ### Field check
 
-Recordings made at the event on a phone, with a known script, are listed in `results/field.md` when present. They are a small extra check on real footage, not part of the scores above.
+Recordings made at the event on a phone, with a known script, are in `results/field.md`. They are a small extra check on real footage, recorded by me, and not part of the scores above. Two of the takes were used to choose version 2, and the file says which.
 
 ## Run it
 
@@ -131,10 +161,10 @@ Reproduce the evaluation:
 ```
 python -m eval.pt_data fetch --split tune        (then test, test2: downloads the clips)
 python -m eval.run_eval --split tune --system ladder --run 3
-python -m eval.run_eval --split tune --system hydrogen     (then hydrogen4, neon)
+python -m eval.run_eval --split tune --system hydrogen4    (then hydrogen2, neon4)
 python -m eval.fit_fusion                        (fits clock/fusion_params.json on the tuning split)
-python -m eval.run_eval --split test --system ladder --run 1   (then hydrogen, hydrogen4, neon, carbon)
-python -m eval.final_report --split test
+python -m eval.run_eval --split test3 --system ladder --run 1  (then hydrogen4, hydrogen2, neon4)
+python -m eval.final_report --split test3
 ```
 
 Per-clip outputs of every run are in `results/`.

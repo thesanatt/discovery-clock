@@ -1,0 +1,1626 @@
+[
+ {
+  "take": "1",
+  "run": 1,
+  "desc": "all six steps, in order",
+  "note": "",
+  "file": "0598673be4fd.mp4",
+  "duration": 33.5,
+  "seconds": 15.18,
+  "order_issues": [],
+  "witness_calls": {
+   "hydrogen4": {
+    "ok": true,
+    "seconds": 8.61,
+    "model": "gemini-4-hydrogen"
+   },
+   "hydrogen2": {
+    "ok": true,
+    "seconds": 7.65,
+    "model": "gemini-4-hydrogen"
+   },
+   "neon4": {
+    "ok": false,
+    "error": "no answer before the deadline"
+   }
+  },
+  "rows": [
+   {
+    "step": "unzip the bag",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.943,
+    "time": 1.25,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 1.25
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 2.0
+     },
+     "ladder": {
+      "p": 0.48,
+      "time": 0.62
+     }
+    }
+   },
+   {
+    "step": "put the AirPods case in the bag",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.966,
+    "time": 6.25,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 6.25
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 6.5
+     },
+     "ladder": {
+      "p": 0.581,
+      "time": 6.05
+     }
+    }
+   },
+   {
+    "step": "put the Hello Panda box in the bag",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.879,
+    "time": 10.75,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 11.0
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 11.0
+     },
+     "ladder": {
+      "p": 0.437,
+      "time": 6.82
+     }
+    }
+   },
+   {
+    "step": "take off the watch and put it in the bag",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.972,
+    "time": 14.0,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 14.25
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 14.0
+     },
+     "ladder": {
+      "p": 0.718,
+      "time": 15.58
+     }
+    }
+   },
+   {
+    "step": "zip the bag closed",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.989,
+    "time": 23.0,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 23.0
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 23.0
+     },
+     "ladder": {
+      "p": 0.838,
+      "time": 23.81
+     }
+    }
+   },
+   {
+    "step": "knock on the table twice",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.677,
+    "time": 30.25,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 30.25
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 30.5
+     },
+     "ladder": {
+      "p": 0.332,
+      "time": null
+     }
+    }
+   }
+  ],
+  "wall": 15.2
+ },
+ {
+  "take": "1",
+  "run": 2,
+  "desc": "all six steps, in order",
+  "note": "",
+  "file": "0598673be4fd.mp4",
+  "duration": 33.5,
+  "seconds": 13.2,
+  "order_issues": [],
+  "witness_calls": {
+   "hydrogen4": {
+    "ok": true,
+    "seconds": 9.03,
+    "model": "gemini-4-hydrogen"
+   },
+   "hydrogen2": {
+    "ok": true,
+    "seconds": 6.87,
+    "model": "gemini-4-hydrogen"
+   },
+   "neon4": {
+    "ok": true,
+    "seconds": 12.14,
+    "model": "gemini-4-neon"
+   }
+  },
+  "rows": [
+   {
+    "step": "unzip the bag",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.99,
+    "time": 1.75,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 2.0
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 1.5
+     },
+     "neon4": {
+      "happened": true,
+      "start": 2.5
+     },
+     "ladder": {
+      "p": 0.48,
+      "time": 0.62
+     }
+    }
+   },
+   {
+    "step": "put the AirPods case in the bag",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.995,
+    "time": 6.25,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 6.5
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 6.5
+     },
+     "neon4": {
+      "happened": true,
+      "start": 6.75
+     },
+     "ladder": {
+      "p": 0.581,
+      "time": 6.05
+     }
+    }
+   },
+   {
+    "step": "put the Hello Panda box in the bag",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.979,
+    "time": 10.75,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 11.0
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 11.0
+     },
+     "neon4": {
+      "happened": true,
+      "start": 11.25
+     },
+     "ladder": {
+      "p": 0.437,
+      "time": 6.82
+     }
+    }
+   },
+   {
+    "step": "take off the watch and put it in the bag",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.996,
+    "time": 14.25,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 14.25
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 14.0
+     },
+     "neon4": {
+      "happened": true,
+      "start": 14.5
+     },
+     "ladder": {
+      "p": 0.718,
+      "time": 15.58
+     }
+    }
+   },
+   {
+    "step": "zip the bag closed",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.998,
+    "time": 22.75,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 22.5
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 22.5
+     },
+     "neon4": {
+      "happened": true,
+      "start": 23.5
+     },
+     "ladder": {
+      "p": 0.838,
+      "time": 23.81
+     }
+    }
+   },
+   {
+    "step": "knock on the table twice",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.933,
+    "time": 30.5,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 30.75
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 30.5
+     },
+     "neon4": {
+      "happened": true,
+      "start": 30.75
+     },
+     "ladder": {
+      "p": 0.332,
+      "time": null
+     }
+    }
+   }
+  ],
+  "wall": 13.2
+ },
+ {
+  "take": "1",
+  "run": 3,
+  "desc": "all six steps, in order",
+  "note": "",
+  "file": "0598673be4fd.mp4",
+  "duration": 33.5,
+  "seconds": 13.4,
+  "order_issues": [],
+  "witness_calls": {
+   "hydrogen4": {
+    "ok": true,
+    "seconds": 6.46,
+    "model": "gemini-4-hydrogen"
+   },
+   "hydrogen2": {
+    "ok": true,
+    "seconds": 7.55,
+    "model": "gemini-4-hydrogen"
+   },
+   "neon4": {
+    "ok": true,
+    "seconds": 12.21,
+    "model": "gemini-4-neon"
+   }
+  },
+  "rows": [
+   {
+    "step": "unzip the bag",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.989,
+    "time": 2.0,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 2.0
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 2.5
+     },
+     "neon4": {
+      "happened": true,
+      "start": 2.25
+     },
+     "ladder": {
+      "p": 0.48,
+      "time": 0.62
+     }
+    }
+   },
+   {
+    "step": "put the AirPods case in the bag",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.994,
+    "time": 6.5,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 6.5
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 7.0
+     },
+     "neon4": {
+      "happened": true,
+      "start": 6.75
+     },
+     "ladder": {
+      "p": 0.581,
+      "time": 6.05
+     }
+    }
+   },
+   {
+    "step": "put the Hello Panda box in the bag",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.979,
+    "time": 10.75,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 11.0
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 11.0
+     },
+     "neon4": {
+      "happened": true,
+      "start": 11.25
+     },
+     "ladder": {
+      "p": 0.437,
+      "time": 6.82
+     }
+    }
+   },
+   {
+    "step": "take off the watch and put it in the bag",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.995,
+    "time": 14.0,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 14.0
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 14.0
+     },
+     "neon4": {
+      "happened": true,
+      "start": 14.5
+     },
+     "ladder": {
+      "p": 0.718,
+      "time": 15.58
+     }
+    }
+   },
+   {
+    "step": "zip the bag closed",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.998,
+    "time": 23.25,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 23.0
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 23.5
+     },
+     "neon4": {
+      "happened": true,
+      "start": 23.5
+     },
+     "ladder": {
+      "p": 0.838,
+      "time": 23.81
+     }
+    }
+   },
+   {
+    "step": "knock on the table twice",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.926,
+    "time": 30.5,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 30.5
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 31.0
+     },
+     "neon4": {
+      "happened": true,
+      "start": 30.75
+     },
+     "ladder": {
+      "p": 0.332,
+      "time": null
+     }
+    }
+   }
+  ],
+  "wall": 13.4
+ },
+ {
+  "take": "2",
+  "run": 1,
+  "desc": "AirPods skipped",
+  "note": "",
+  "file": "59f28acbf16d.mp4",
+  "duration": 27.6,
+  "seconds": 12.72,
+  "order_issues": [],
+  "witness_calls": {
+   "hydrogen4": {
+    "ok": true,
+    "seconds": 6.37,
+    "model": "gemini-4-hydrogen"
+   },
+   "hydrogen2": {
+    "ok": true,
+    "seconds": 6.73,
+    "model": "gemini-4-hydrogen"
+   },
+   "neon4": {
+    "ok": true,
+    "seconds": 11.79,
+    "model": "gemini-4-neon"
+   }
+  },
+  "rows": [
+   {
+    "step": "unzip the bag",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.99,
+    "time": 0.75,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 1.0
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 0.5
+     },
+     "neon4": {
+      "happened": true,
+      "start": 1.75
+     },
+     "ladder": {
+      "p": 0.525,
+      "time": 0.5
+     }
+    }
+   },
+   {
+    "step": "put the AirPods case in the bag",
+    "truth": "skipped",
+    "status": "not_found",
+    "p_done": 0.09,
+    "time": null,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": false,
+      "start": null
+     },
+     "hydrogen2": {
+      "happened": false,
+      "start": null
+     },
+     "neon4": {
+      "happened": false,
+      "start": null
+     },
+     "ladder": {
+      "p": 0.467,
+      "time": 6.31
+     }
+    }
+   },
+   {
+    "step": "put the Hello Panda box in the bag",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.989,
+    "time": 6.25,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 6.5
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 6.0
+     },
+     "neon4": {
+      "happened": true,
+      "start": 6.5
+     },
+     "ladder": {
+      "p": 0.437,
+      "time": 6.47
+     }
+    }
+   },
+   {
+    "step": "take off the watch and put it in the bag",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.988,
+    "time": 9.5,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 10.0
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 9.0
+     },
+     "neon4": {
+      "happened": true,
+      "start": 9.75
+     },
+     "ladder": {
+      "p": 0.74,
+      "time": 0.99
+     }
+    }
+   },
+   {
+    "step": "zip the bag closed",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.993,
+    "time": 19.75,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 20.0
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 20.0
+     },
+     "neon4": {
+      "happened": true,
+      "start": 20.0
+     },
+     "ladder": {
+      "p": 0.741,
+      "time": 16.12
+     }
+    }
+   },
+   {
+    "step": "knock on the table twice",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.918,
+    "time": 24.75,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 25.0
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 25.0
+     },
+     "neon4": {
+      "happened": true,
+      "start": 25.0
+     },
+     "ladder": {
+      "p": 0.305,
+      "time": null
+     }
+    }
+   }
+  ],
+  "wall": 12.7
+ },
+ {
+  "take": "2",
+  "run": 2,
+  "desc": "AirPods skipped",
+  "note": "",
+  "file": "59f28acbf16d.mp4",
+  "duration": 27.6,
+  "seconds": 12.17,
+  "order_issues": [],
+  "witness_calls": {
+   "hydrogen4": {
+    "ok": true,
+    "seconds": 10.82,
+    "model": "gemini-4-hydrogen"
+   },
+   "hydrogen2": {
+    "ok": true,
+    "seconds": 5.95,
+    "model": "gemini-4-hydrogen"
+   },
+   "neon4": {
+    "ok": true,
+    "seconds": 11.17,
+    "model": "gemini-4-neon"
+   }
+  },
+  "rows": [
+   {
+    "step": "unzip the bag",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.991,
+    "time": 1.0,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 1.25
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 0.5
+     },
+     "neon4": {
+      "happened": true,
+      "start": 1.5
+     },
+     "ladder": {
+      "p": 0.525,
+      "time": 0.5
+     }
+    }
+   },
+   {
+    "step": "put the AirPods case in the bag",
+    "truth": "skipped",
+    "status": "not_found",
+    "p_done": 0.09,
+    "time": null,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": false,
+      "start": null
+     },
+     "hydrogen2": {
+      "happened": false,
+      "start": null
+     },
+     "neon4": {
+      "happened": false,
+      "start": null
+     },
+     "ladder": {
+      "p": 0.467,
+      "time": 6.31
+     }
+    }
+   },
+   {
+    "step": "put the Hello Panda box in the bag",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.988,
+    "time": 6.25,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 6.25
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 6.0
+     },
+     "neon4": {
+      "happened": true,
+      "start": 6.75
+     },
+     "ladder": {
+      "p": 0.437,
+      "time": 6.47
+     }
+    }
+   },
+   {
+    "step": "take off the watch and put it in the bag",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.989,
+    "time": 9.5,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 10.0
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 9.5
+     },
+     "neon4": {
+      "happened": true,
+      "start": 9.5
+     },
+     "ladder": {
+      "p": 0.74,
+      "time": 0.99
+     }
+    }
+   },
+   {
+    "step": "zip the bag closed",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.993,
+    "time": 19.75,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 20.0
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 20.0
+     },
+     "neon4": {
+      "happened": true,
+      "start": 20.0
+     },
+     "ladder": {
+      "p": 0.741,
+      "time": 16.12
+     }
+    }
+   },
+   {
+    "step": "knock on the table twice",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.916,
+    "time": 24.5,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 24.75
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 24.5
+     },
+     "neon4": {
+      "happened": true,
+      "start": 25.0
+     },
+     "ladder": {
+      "p": 0.305,
+      "time": null
+     }
+    }
+   }
+  ],
+  "wall": 12.2
+ },
+ {
+  "take": "2",
+  "run": 3,
+  "desc": "AirPods skipped",
+  "note": "",
+  "file": "59f28acbf16d.mp4",
+  "duration": 27.6,
+  "seconds": 11.94,
+  "order_issues": [],
+  "witness_calls": {
+   "hydrogen4": {
+    "ok": true,
+    "seconds": 5.8,
+    "model": "gemini-4-hydrogen"
+   },
+   "hydrogen2": {
+    "ok": true,
+    "seconds": 7.04,
+    "model": "gemini-4-hydrogen"
+   },
+   "neon4": {
+    "ok": true,
+    "seconds": 11.02,
+    "model": "gemini-4-neon"
+   }
+  },
+  "rows": [
+   {
+    "step": "unzip the bag",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.989,
+    "time": 0.75,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 1.0
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 0.5
+     },
+     "neon4": {
+      "happened": true,
+      "start": 2.0
+     },
+     "ladder": {
+      "p": 0.525,
+      "time": 0.5
+     }
+    }
+   },
+   {
+    "step": "put the AirPods case in the bag",
+    "truth": "skipped",
+    "status": "not_found",
+    "p_done": 0.09,
+    "time": null,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": false,
+      "start": null
+     },
+     "hydrogen2": {
+      "happened": false,
+      "start": null
+     },
+     "neon4": {
+      "happened": false,
+      "start": null
+     },
+     "ladder": {
+      "p": 0.467,
+      "time": 6.31
+     }
+    }
+   },
+   {
+    "step": "put the Hello Panda box in the bag",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.989,
+    "time": 6.25,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 6.5
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 6.0
+     },
+     "neon4": {
+      "happened": true,
+      "start": 6.5
+     },
+     "ladder": {
+      "p": 0.437,
+      "time": 6.47
+     }
+    }
+   },
+   {
+    "step": "take off the watch and put it in the bag",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.99,
+    "time": 9.25,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 9.5
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 9.0
+     },
+     "neon4": {
+      "happened": true,
+      "start": 9.5
+     },
+     "ladder": {
+      "p": 0.74,
+      "time": 0.99
+     }
+    }
+   },
+   {
+    "step": "zip the bag closed",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.993,
+    "time": 19.75,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 20.0
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 20.0
+     },
+     "neon4": {
+      "happened": true,
+      "start": 20.0
+     },
+     "ladder": {
+      "p": 0.741,
+      "time": 16.12
+     }
+    }
+   },
+   {
+    "step": "knock on the table twice",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.91,
+    "time": 24.75,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 24.5
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 25.0
+     },
+     "neon4": {
+      "happened": true,
+      "start": 25.0
+     },
+     "ladder": {
+      "p": 0.305,
+      "time": null
+     }
+    }
+   }
+  ],
+  "wall": 11.9
+ },
+ {
+  "take": "3",
+  "run": 1,
+  "desc": "Hello Panda skipped",
+  "note": "",
+  "file": "b8c33ec83154.mp4",
+  "duration": 28.7,
+  "seconds": 12.46,
+  "order_issues": [],
+  "witness_calls": {
+   "hydrogen4": {
+    "ok": true,
+    "seconds": 5.66,
+    "model": "gemini-4-hydrogen"
+   },
+   "hydrogen2": {
+    "ok": true,
+    "seconds": 8.07,
+    "model": "gemini-4-hydrogen"
+   },
+   "neon4": {
+    "ok": true,
+    "seconds": 11.42,
+    "model": "gemini-4-neon"
+   }
+  },
+  "rows": [
+   {
+    "step": "unzip the bag",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.993,
+    "time": 0.75,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 1.0
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 0.5
+     },
+     "neon4": {
+      "happened": true,
+      "start": 1.0
+     },
+     "ladder": {
+      "p": 0.541,
+      "time": 0.53
+     }
+    }
+   },
+   {
+    "step": "put the AirPods case in the bag",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.987,
+    "time": 6.0,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 6.5
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 6.0
+     },
+     "neon4": {
+      "happened": true,
+      "start": 6.5
+     },
+     "ladder": {
+      "p": 0.361,
+      "time": 5.63
+     }
+    }
+   },
+   {
+    "step": "put the Hello Panda box in the bag",
+    "truth": "skipped",
+    "status": "not_found",
+    "p_done": 0.019,
+    "time": null,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": false,
+      "start": null
+     },
+     "hydrogen2": {
+      "happened": false,
+      "start": null
+     },
+     "neon4": {
+      "happened": false,
+      "start": null
+     },
+     "ladder": {
+      "p": 0.303,
+      "time": null
+     }
+    }
+   },
+   {
+    "step": "take off the watch and put it in the bag",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.993,
+    "time": 10.25,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 10.25
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 10.5
+     },
+     "neon4": {
+      "happened": true,
+      "start": 10.5
+     },
+     "ladder": {
+      "p": 0.734,
+      "time": 12.99
+     }
+    }
+   },
+   {
+    "step": "zip the bag closed",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.997,
+    "time": 20.75,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 21.0
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 21.0
+     },
+     "neon4": {
+      "happened": true,
+      "start": 21.5
+     },
+     "ladder": {
+      "p": 0.794,
+      "time": 19.61
+     }
+    }
+   },
+   {
+    "step": "knock on the table twice",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.985,
+    "time": 26.25,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 26.5
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 26.0
+     },
+     "neon4": {
+      "happened": true,
+      "start": 26.8
+     },
+     "ladder": {
+      "p": 0.408,
+      "time": 24.83
+     }
+    }
+   }
+  ],
+  "wall": 12.5
+ },
+ {
+  "take": "3",
+  "run": 2,
+  "desc": "Hello Panda skipped",
+  "note": "",
+  "file": "b8c33ec83154.mp4",
+  "duration": 28.7,
+  "seconds": 11.48,
+  "order_issues": [],
+  "witness_calls": {
+   "hydrogen4": {
+    "ok": true,
+    "seconds": 9.34,
+    "model": "gemini-4-hydrogen"
+   },
+   "hydrogen2": {
+    "ok": true,
+    "seconds": 5.82,
+    "model": "gemini-4-hydrogen"
+   },
+   "neon4": {
+    "ok": true,
+    "seconds": 10.51,
+    "model": "gemini-4-neon"
+   }
+  },
+  "rows": [
+   {
+    "step": "unzip the bag",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.993,
+    "time": 0.5,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 0.75
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 0.5
+     },
+     "neon4": {
+      "happened": true,
+      "start": 1.0
+     },
+     "ladder": {
+      "p": 0.541,
+      "time": 0.53
+     }
+    }
+   },
+   {
+    "step": "put the AirPods case in the bag",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.977,
+    "time": 7.0,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 7.75
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 7.5
+     },
+     "neon4": {
+      "happened": true,
+      "start": 6.5
+     },
+     "ladder": {
+      "p": 0.361,
+      "time": 5.63
+     }
+    }
+   },
+   {
+    "step": "put the Hello Panda box in the bag",
+    "truth": "skipped",
+    "status": "not_found",
+    "p_done": 0.019,
+    "time": null,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": false,
+      "start": null
+     },
+     "hydrogen2": {
+      "happened": false,
+      "start": null
+     },
+     "neon4": {
+      "happened": false,
+      "start": null
+     },
+     "ladder": {
+      "p": 0.303,
+      "time": null
+     }
+    }
+   },
+   {
+    "step": "take off the watch and put it in the bag",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.994,
+    "time": 10.5,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 10.5
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 10.5
+     },
+     "neon4": {
+      "happened": true,
+      "start": 11.0
+     },
+     "ladder": {
+      "p": 0.734,
+      "time": 12.99
+     }
+    }
+   },
+   {
+    "step": "zip the bag closed",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.997,
+    "time": 21.25,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 21.5
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 21.5
+     },
+     "neon4": {
+      "happened": true,
+      "start": 21.5
+     },
+     "ladder": {
+      "p": 0.794,
+      "time": 19.61
+     }
+    }
+   },
+   {
+    "step": "knock on the table twice",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.985,
+    "time": 26.25,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 26.75
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 26.5
+     },
+     "neon4": {
+      "happened": true,
+      "start": 26.5
+     },
+     "ladder": {
+      "p": 0.408,
+      "time": 24.83
+     }
+    }
+   }
+  ],
+  "wall": 11.5
+ },
+ {
+  "take": "3",
+  "run": 3,
+  "desc": "Hello Panda skipped",
+  "note": "",
+  "file": "b8c33ec83154.mp4",
+  "duration": 28.7,
+  "seconds": 15.17,
+  "order_issues": [],
+  "witness_calls": {
+   "hydrogen4": {
+    "ok": true,
+    "seconds": 7.63,
+    "model": "gemini-4-hydrogen"
+   },
+   "hydrogen2": {
+    "ok": true,
+    "seconds": 6.21,
+    "model": "gemini-4-hydrogen"
+   },
+   "neon4": {
+    "ok": false,
+    "error": "no answer before the deadline"
+   }
+  },
+  "rows": [
+   {
+    "step": "unzip the bag",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.958,
+    "time": 0.5,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 0.75
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 0.5
+     },
+     "ladder": {
+      "p": 0.541,
+      "time": 0.53
+     }
+    }
+   },
+   {
+    "step": "put the AirPods case in the bag",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.896,
+    "time": 6.25,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 7.5
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 6.0
+     },
+     "ladder": {
+      "p": 0.361,
+      "time": 5.63
+     }
+    }
+   },
+   {
+    "step": "put the Hello Panda box in the bag",
+    "truth": "skipped",
+    "status": "not_found",
+    "p_done": 0.038,
+    "time": null,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": false,
+      "start": null
+     },
+     "hydrogen2": {
+      "happened": false,
+      "start": null
+     },
+     "ladder": {
+      "p": 0.303,
+      "time": null
+     }
+    }
+   },
+   {
+    "step": "take off the watch and put it in the bag",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.961,
+    "time": 10.25,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 10.5
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 10.0
+     },
+     "ladder": {
+      "p": 0.734,
+      "time": 12.99
+     }
+    }
+   },
+   {
+    "step": "zip the bag closed",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.982,
+    "time": 21.0,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 21.5
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 21.0
+     },
+     "ladder": {
+      "p": 0.794,
+      "time": 19.61
+     }
+    }
+   },
+   {
+    "step": "knock on the table twice",
+    "truth": "done",
+    "status": "done",
+    "p_done": 0.919,
+    "time": 26.25,
+    "correct": true,
+    "witnesses": {
+     "hydrogen4": {
+      "happened": true,
+      "start": 26.5
+     },
+     "hydrogen2": {
+      "happened": true,
+      "start": 26.5
+     },
+     "ladder": {
+      "p": 0.408,
+      "time": 24.83
+     }
+    }
+   }
+  ],
+  "wall": 15.2
+ }
+]
