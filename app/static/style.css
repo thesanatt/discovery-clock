@@ -1,4 +1,5 @@
-/* Discovery Clock. A plain instrument panel: flat colours, 1px rules, mono numerals. */
+/* Discovery Clock. The sign-off sheet of a witness: flat colours, 1px rules, a serif for names */
+/* and verdicts, a sans for labels and numbers. No fixed-width face. */
 /* Two themes. Dark is the default. Light is set with data-theme="light" on the html element. */
 
 :root {
@@ -38,8 +39,8 @@
   --qr: #ffffff;
   --qr-filter: brightness(0.9);
   --qr-pad: 0.6rem;
-  --mono: "IBM Plex Mono", ui-monospace, Consolas, "Courier New", monospace;
-  --sans: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --serif: "Sitka Text", "Sitka", "Newsreader", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --sans: "Segoe UI Variable Text", "Segoe UI", -apple-system, "SF Pro Text", Roboto, system-ui, sans-serif;
 }
 
 :root[data-theme="light"] {
@@ -83,6 +84,9 @@
 
 * { box-sizing: border-box; }
 
+/* Every number lines up in columns. The font shorthand resets this, so it is set for all elements. */
+* { font-variant-numeric: tabular-nums lining-nums !important; }
+
 html { font-size: 18px; }
 
 body {
@@ -116,9 +120,7 @@ body.watch h2 .num { display: none; }
 
 .top h1 {
   margin: 0;
-  font: 600 1.35rem var(--mono);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font: 600 1.5rem/1.2 var(--serif);
 }
 
 .top .what { margin: 0; flex: 1 1 22rem; color: var(--ink-2); }
@@ -129,7 +131,7 @@ body.watch h2 .num { display: none; }
   order: 1;
   min-height: 1.9rem;
   padding: 0.1rem 0.4rem;
-  font: 500 0.85rem var(--mono);
+  font: 500 0.88rem var(--sans);
   color: var(--ink-2);
   background: none;
   border: 0;
@@ -139,7 +141,7 @@ body.watch h2 .num { display: none; }
 
 .top .theme:hover { color: var(--ink); background: var(--hover); }
 
-.aid { margin: 0; font: 500 0.85rem var(--mono); }
+.aid { margin: 0; font: 500 0.88rem var(--sans); }
 
 .aid.bottom { margin-top: 1.5rem; padding-top: 0.5rem; border-top: 1px solid var(--rule); }
 
@@ -152,8 +154,8 @@ body.watch h2 .num { display: none; }
   background: var(--sample);
   color: var(--sample-ink);
   border-bottom: 2px solid var(--sample-line);
-  font: 600 1.05rem var(--mono);
-  letter-spacing: 0.04em;
+  font: 600 1.05rem var(--sans);
+  letter-spacing: 0.02em;
 }
 
 /* Two columns */
@@ -174,17 +176,17 @@ h2 {
   margin: 1rem 0 0.6rem;
   padding-bottom: 0.25rem;
   border-bottom: 1px solid var(--line);
-  font: 600 0.8rem var(--mono);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font: 600 1.15rem/1.25 var(--serif);
 }
 
 h2 .num {
   display: inline-block;
   min-width: 1.4rem;
-  margin-right: 0.4rem;
+  margin-right: 0.45rem;
   border: 1px solid var(--line);
+  font: 600 0.8rem/1.45 var(--sans);
   text-align: center;
+  vertical-align: 0.14em;
 }
 
 /* Video */
@@ -219,7 +221,7 @@ h2 .num {
   gap: 0.6rem;
   margin: 0;
   padding: 0.1rem 0.7rem;
-  font: 600 1.2rem var(--mono);
+  font: 600 1.2rem var(--sans);
   background: var(--panel);
   color: var(--ink);
   border: 2px solid var(--ink);
@@ -231,7 +233,7 @@ h2 .num {
 
 .capline { display: flex; align-items: center; gap: 0.6rem; margin: 0.3rem 0 0.5rem; }
 
-.caption { flex: 1 1 auto; margin: 0; font: 400 0.82rem var(--mono); color: var(--ink-2); overflow-wrap: anywhere; }
+.caption { flex: 1 1 auto; margin: 0; font: 400 0.86rem var(--sans); color: var(--ink-2); overflow-wrap: anywhere; }
 
 /* Controls */
 
@@ -263,9 +265,8 @@ button.record {
   display: block;
   width: 100%;
   min-height: 4.2rem;
-  font: 600 1.5rem var(--mono);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font: 600 1.35rem var(--sans);
+  letter-spacing: 0.01em;
 }
 
 button.record.live { background: var(--bad); border-color: var(--bad); color: var(--on-bad); }
@@ -289,7 +290,7 @@ input[type="file"] { display: block; width: 100%; min-width: 0; margin-top: 0.3r
 
 .len { flex: 1 1 12rem; display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 500; }
 
-.len output { min-width: 3.2rem; font: 600 1.1rem var(--mono); text-align: right; }
+.len output { min-width: 3.2rem; font: 600 1.1rem var(--sans); text-align: right; }
 
 .filebox { margin: 0.6rem 0; padding: 0.4rem 0; border-top: 1px solid var(--rule-2); font-size: 0.9rem; color: var(--ink-2); }
 
@@ -301,7 +302,7 @@ textarea { display: block; width: 100%; resize: vertical; line-height: 1.45; }
 
 .runbar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.8rem; margin-top: 0.7rem; }
 
-.status { flex: 1 1 10rem; margin: 0; min-height: 1.3rem; font: 500 0.95rem var(--mono); }
+.status { flex: 1 1 10rem; margin: 0; min-height: 1.3rem; font: 500 0.95rem var(--sans); }
 
 .status.err, .stage.err { color: var(--bad-ink); }
 
@@ -313,15 +314,15 @@ textarea { display: block; width: 100%; resize: vertical; line-height: 1.45; }
 
 .qr img { display: block; width: 100%; max-width: 20rem; height: auto; padding: var(--qr-pad); border: 1px solid var(--line); background: var(--qr); filter: var(--qr-filter); }
 
-.qr-words { margin: 0.6rem 0 0; font: 600 1.25rem var(--mono); line-height: 1.25; }
+.qr-words { margin: 0.6rem 0 0; font: 600 1.3rem var(--serif); line-height: 1.25; }
 
-.qr-url { margin: 0.2rem 0 0; font: 400 0.8rem var(--mono); color: var(--ink-2); overflow-wrap: anywhere; }
+.qr-url { margin: 0.2rem 0 0; font: 400 0.85rem var(--sans); color: var(--ink-2); overflow-wrap: anywhere; }
 
 /* Results */
 
 .summary { margin: 0 0 0.4rem; font-size: 1.05rem; }
 
-.stage { margin: 0; min-height: 1.4rem; font: 500 0.95rem var(--mono); }
+.stage { margin: 0; min-height: 1.4rem; font: 500 0.95rem var(--sans); }
 
 .stage + .results { margin-top: 0.5rem; }
 
@@ -336,10 +337,10 @@ textarea { display: block; width: 100%; resize: vertical; line-height: 1.45; }
   padding: 0.5rem 0.8rem;
   background: var(--bad);
   color: var(--on-bad);
-  font: 600 1.15rem var(--sans);
+  font: 600 1.2rem var(--serif);
 }
 
-.alarm strong { font: 600 1.7rem var(--mono); letter-spacing: 0.06em; }
+.alarm strong { font: 600 1.7rem var(--serif); letter-spacing: 0.08em; }
 
 .results:not(:empty) { border-top: 1px solid var(--line); background: var(--panel); }
 
@@ -357,8 +358,8 @@ textarea { display: block; width: 100%; resize: vertical; line-height: 1.45; }
   padding-top: 0.3rem;
   padding-bottom: 0.3rem;
   border-bottom: 1px solid var(--rule);
-  font: 500 0.72rem var(--mono);
-  letter-spacing: 0.08em;
+  font: 600 0.72rem var(--sans);
+  letter-spacing: 0.07em;
   text-transform: uppercase;
   color: var(--ink-2);
 }
@@ -394,15 +395,40 @@ textarea { display: block; width: 100%; resize: vertical; line-height: 1.45; }
 
 .row.not_found:focus-visible { outline-color: var(--on-bad); }
 
-.row .idx { font: 600 1.3rem var(--mono); }
+/* The step number sits like a line number in a ledger: small, right aligned, ruled off from the entry. */
 
-.txt { display: block; font-weight: 500; font-size: 1.02rem; overflow-wrap: anywhere; }
+.row .idx {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 0.45rem;
+  border-right: 1px solid var(--rule);
+  font: 500 1.05rem var(--sans);
+  color: var(--ink-2);
+}
 
-.st { display: inline-block; margin: 0.1rem 0.6rem 0 0; vertical-align: middle; font: 600 0.9rem var(--mono); letter-spacing: 0.04em; text-transform: uppercase; }
+.row.not_found .idx { color: var(--on-bad); border-right-color: var(--bad-sep); }
+
+.txt { display: block; font: 400 1.12rem/1.3 var(--serif); overflow-wrap: anywhere; }
+
+/* The verdict word is a stamp: serif capitals, letterspaced, in a thin ruled box of its own colour. */
+
+.st {
+  display: inline-block;
+  margin: 0.25rem 0.6rem 0 0;
+  padding: 0.14rem 0.38rem 0.04rem 0.5rem;
+  vertical-align: middle;
+  border: 1px solid currentColor;
+  border-radius: 1px;
+  font: 600 0.78rem/1.2 var(--serif);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
 
 .row.done .st { color: var(--ok); }
 .row.unsure .st { color: var(--warn); }
-.row.not_found .st { color: var(--on-bad); font-size: 1.35rem; }
+.row.not_found .st { color: var(--on-bad); font-size: 1.12rem; border-width: 2px; }
 
 .flag {
   display: inline-block;
@@ -412,7 +438,8 @@ textarea { display: block; width: 100%; resize: vertical; line-height: 1.45; }
   border: 2px solid var(--warn);
   background: var(--field);
   color: var(--warn);
-  font: 600 0.78rem var(--mono);
+  font: 600 0.76rem var(--sans);
+  letter-spacing: 0.03em;
   text-transform: uppercase;
 }
 
@@ -457,26 +484,25 @@ textarea { display: block; width: 100%; resize: vertical; line-height: 1.45; }
   display: flex;
   align-items: center;
   justify-content: center;
-  font: 600 1.3rem var(--mono);
-  letter-spacing: 0.14em;
+  font: 500 1rem var(--sans);
   color: var(--ink-2);
 }
 
-.row.not_found .track .none { color: var(--bad-ink); }
+.row.not_found .track .none { font: 600 1.2rem var(--serif); letter-spacing: 0.14em; color: var(--bad-ink); }
 
-.time .big { display: block; font: 600 1.5rem var(--mono); line-height: 1.15; }
+.time .big { display: block; font: 600 1.5rem var(--sans); line-height: 1.15; }
 
-.time .small { display: block; font: 400 0.78rem var(--mono); color: var(--ink-2); }
+.time .small { display: block; font: 400 0.82rem var(--sans); color: var(--ink-2); }
 
 .row.not_found .time .small { color: var(--on-bad); }
 
-.row .score { font: 600 1.3rem var(--mono); text-align: right; }
+.row .score { font: 600 1.3rem var(--sans); text-align: right; }
 
 .head .score { text-align: right; }
 
 /* What each source said, under the row */
 
-.wit { grid-column: 2 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 0.15rem 0.45rem; font: 400 0.8rem var(--mono); color: var(--ink-2); }
+.wit { grid-column: 2 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 0.15rem 0.45rem; font: 400 0.85rem var(--sans); color: var(--ink-2); }
 
 .row.not_found .wit { color: var(--on-bad); }
 
@@ -502,7 +528,7 @@ textarea { display: block; width: 100%; resize: vertical; line-height: 1.45; }
   border-left: 3px solid var(--line);
   background: var(--field);
   color: var(--ink);
-  font: 400 0.8rem var(--mono);
+  font: 400 0.86rem/1.45 var(--sans);
   overflow-wrap: anywhere;
 }
 
@@ -516,21 +542,53 @@ textarea { display: block; width: 100%; resize: vertical; line-height: 1.45; }
 
 .sheet { margin: 0.6rem 0 0; border: 1px solid var(--rule); background: var(--panel); }
 
-.sheet summary { padding: 0.4rem 0.6rem; font: 600 0.8rem var(--mono); letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; }
+.sheet summary { padding: 0.4rem 0.6rem; font: 600 1rem var(--serif); cursor: pointer; }
 
 .sheet summary:hover { background: var(--hover); }
 
-.sheet pre { margin: 0; padding: 0.5rem 0.6rem; border-top: 1px solid var(--rule); font: 400 0.8rem var(--mono); line-height: 1.5; white-space: pre-wrap; overflow-wrap: anywhere; }
+.sheet pre { margin: 0; padding: 0.5rem 0.6rem; border-top: 1px solid var(--rule); font: 400 0.86rem var(--sans); line-height: 1.5; white-space: pre-wrap; overflow-wrap: anywhere; }
 
 .legend { margin: 0.6rem 0 0; font-size: 0.85rem; color: var(--ink-2); max-width: 70rem; }
 
-.footer { margin: 0.4rem 0 0; min-height: 1.2rem; font: 500 0.88rem var(--mono); }
+.footer { margin: 0.4rem 0 0; min-height: 1.2rem; font: 400 0.86rem var(--sans); }
 
 /* One question */
 
 .ask { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.6rem; margin-bottom: 0.4rem; font-size: 1.1rem; font-weight: 500; }
 
 .ask input { flex: 1 1 14rem; min-width: 0; font-size: 1.05rem; }
+
+/* Use cases: one tab per kind of job. Each tab keeps its own checklist. */
+
+.cases { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0 0 0.45rem; }
+
+button.case {
+  min-height: 2.3rem;
+  padding: 0.2rem 0.6rem;
+  font: 500 0.9rem var(--sans);
+  color: var(--ink-2);
+  background: none;
+  border: 1px solid var(--rule);
+  border-bottom-width: 3px;
+}
+
+button.case:hover { color: var(--ink); background: var(--hover); }
+
+button.case[aria-pressed="true"] { color: var(--ink); background: var(--field); border-color: var(--line); border-bottom-color: var(--mark); font-weight: 600; }
+
+.case-line { margin: 0 0 0.5rem; font: 400 1.02rem/1.35 var(--serif); }
+
+.case-note { margin-left: 0.3rem; font: 400 0.86rem var(--sans); color: var(--ink-2); white-space: nowrap; }
+
+/* Sign-off line under a full read: two ruled blanks for the person who checked. */
+
+.signoff { display: flex; flex-wrap: wrap; gap: 0.6rem 2rem; max-width: 44rem; margin: 1.5rem 0 0; font: 400 1.05rem var(--serif); }
+
+.signoff .so { flex: 1 1 13rem; display: flex; align-items: flex-end; gap: 0.6rem; white-space: nowrap; }
+
+.signoff .blank { flex: 1 1 auto; min-width: 5rem; height: 1.7rem; border-bottom: 1px solid var(--line); }
+
+.signoff:not([hidden]) + .aid.bottom { margin-top: 0.7rem; padding-top: 0; border-top: 0; }
 
 /* When the results column is narrow, the strip moves under the step text. */
 
@@ -583,14 +641,15 @@ textarea { display: block; width: 100%; resize: vertical; line-height: 1.45; }
   body.watch .summary { font-size: 1.3rem; }
   body.watch .stage { display: inline-block; margin-right: 2.2rem; font-size: 1.15rem; min-height: 1.7rem; }
   body.watch .txt { font-size: 1.25rem; }
-  body.watch .st { font-size: 1.1rem; }
-  body.watch .row.not_found .st { font-size: 1.6rem; }
-  body.watch .time .big, body.watch .row .score, body.watch .row .idx { font-size: 1.8rem; }
+  body.watch .st { font-size: 0.92rem; }
+  body.watch .row.not_found .st { font-size: 1.3rem; }
+  body.watch .time .big, body.watch .row .score { font-size: 1.8rem; }
+  body.watch .row .idx { font-size: 1.3rem; }
   body.watch .time .small { font-size: 0.9rem; }
   body.watch .wit { font-size: 0.92rem; }
   body.watch .flag.disputed { font-size: 0.95rem; }
   body.watch .audx { font-size: 0.95rem; }
-  body.watch .sheet summary { font-size: 0.92rem; }
+  body.watch .sheet summary { font-size: 1.1rem; }
   body.watch .sheet pre { font-size: 0.95rem; }
   body.watch .track { height: 3.2rem; }
   body.watch .head .track { height: 1.2rem; }

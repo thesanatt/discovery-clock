@@ -57,7 +57,7 @@ CAPTIONS = [
     (3.8, ""),
 ]
 CAP_WRAP = 78        # characters per caption line
-MUSIC_MEAN_DB = -21.0
+MUSIC_MEAN_DB = -18.0
 ENC = ["-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p", "-r", str(FPS), "-an"]
 
 

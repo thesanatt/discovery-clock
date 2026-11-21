@@ -17,7 +17,7 @@
   document.documentElement.setAttribute("data-theme", t === "light" ? "light" : "dark");
 })();
 </script>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -47,7 +47,7 @@
     <div id="player" class="player">
       <div class="screen">
         <video id="video" playsinline aria-label="Camera preview, the full video, or the 4 second clip for a step"></video>
-        <p id="screen-note" class="screen-note">No video yet. Press Record, or choose a file.</p>
+        <p id="screen-note" class="screen-note">No video yet. Film the job, or choose a file.</p>
         <p id="countdown" class="countdown" hidden><span id="cd-word"></span><span id="cd-num"></span></p>
       </div>
       <div class="capline">
@@ -58,7 +58,7 @@
     </div>
 
     <div class="rec-only">
-      <button id="rec" type="button" class="primary record">Record</button>
+      <button id="rec" type="button" class="primary record">Film the packing</button>
       <div class="controls">
         <button id="flip" type="button">Use front camera</button>
         <label class="len" for="len">Length
@@ -72,19 +72,27 @@
       </div>
 
       <h2><span class="num">2</span> Checklist</h2>
+      <div id="cases" class="cases" role="group" aria-label="Kind of job">
+        <button type="button" class="case" data-case="packing" aria-pressed="true">Packing check</button>
+        <button type="button" class="case" data-case="handover" aria-pressed="false">Handover</button>
+        <button type="button" class="case" data-case="evidence" aria-pressed="false">Evidence bag</button>
+        <button type="button" class="case" data-case="lockout" aria-pressed="false">Lockout</button>
+        <button type="button" class="case" data-case="own" aria-pressed="false">Your own list</button>
+      </div>
+      <p class="case-line" aria-live="polite"><span id="case-role">For a seller: which item did not go in?</span> <span id="case-note" class="case-note">Measured on nine phone takes.</span></p>
       <label class="hint" for="steps">One step per line, in the order the job should be done. <span id="count"></span></label>
       <textarea id="steps" rows="5" spellcheck="false"
         placeholder="pour water into the cup&#10;stir with the spoon&#10;put the lid on"></textarea>
 
       <div class="runbar">
-        <button id="run" type="button" class="primary big">Run</button>
+        <button id="run" type="button" class="primary big">Check the packing</button>
         <p id="status" class="status" role="status"></p>
       </div>
     </div>
   </section>
 
   <section class="col right" aria-label="Results">
-    <h2 id="timeline-h"><span class="num">3</span> Step timeline</h2>
+    <h2 id="timeline-h"><span class="num">3</span> Witness sheet</h2>
     <p id="alarm" class="alarm" role="alert" hidden></p>
     <p id="summary" class="summary">No run yet. Each step gets a start time with a range, or "Not found".</p>
     <p id="line-fast" class="stage"></p>
@@ -97,6 +105,8 @@
     </details>
     <p id="legend" class="legend" hidden></p>
     <p id="footer" class="footer"></p>
+    <p id="signoff" class="signoff" hidden><span class="so">Checked by<span class="blank"></span></span><span class="so">Signed<span class="blank"></span></span></p>
+    <p class="aid bottom">Review aid. A person checks every flagged step and signs.</p>
 
     <div class="rec-only">
       <h2><span class="num">4</span> One question</h2>
@@ -113,8 +123,6 @@
       <p id="ask-audit" class="stage" hidden></p>
       <div id="answer" class="results"></div>
     </div>
-
-    <p class="aid bottom">Review aid. A person checks every flagged step and signs.</p>
   </section>
 
 </main>

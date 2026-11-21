@@ -7,9 +7,8 @@
 const $ = (id) => document.getElementById(id);
 const SVG_NS = "http://www.w3.org/2000/svg";
 const WATCH = new URLSearchParams(location.search).get("watch") === "1";
-// ?list=NAME keeps a second remembered checklist, so two tabs on one phone can hold two lists.
-const LIST = (new URLSearchParams(location.search).get("list") || "").replace(/[^a-z0-9]/gi, "").slice(0, 12);
-const STEPS_KEY = "clock.steps" + (LIST ? "." + LIST : "");
+// ?case=NAME opens one use-case tab: packing, handover, evidence, lockout or own.
+const CASE_PARAM = (new URLSearchParams(location.search).get("case") || "").toLowerCase();
 const POLL_MS = 500;
 const GIVE_UP_MS = 95000;     // the server calls a run an error at 75 s; the page waits a little longer
 const AUDIT_POLL_MS = 1000;   // the audit comes 45 to 70 s after the full read, so it is polled slowly
@@ -29,10 +28,10 @@ const state = { stream: null, camPending: null, facing: "environment", starting:
 
 const mainView = { box: $("results"), summary: $("summary"), alarm: $("alarm"), fast: $("line-fast"),
   full: $("line-full"), footer: $("footer"), legend: $("legend"), status: $("status"), rows: [], run: "",
-  audit: $("line-audit"), sheet: $("sheet"), sheetText: $("sheet-text") };
+  audit: $("line-audit"), sheet: $("sheet"), sheetText: $("sheet-text"), signoff: $("signoff") };
 const askView = { box: $("answer"), summary: $("answer-line"), alarm: null, fast: $("ask-fast"),
   full: $("ask-full"), footer: null, legend: null, status: $("ask-status"), rows: [], run: "", one: true,
-  audit: $("ask-audit"), sheet: null, sheetText: null };
+  audit: $("ask-audit"), sheet: null, sheetText: null, signoff: null };
 
 function el(tag, cls, text) {
   const n = document.createElement(tag);
@@ -70,6 +69,10 @@ function store(key, value) {
   return null;
 }
 
+function forget(key) {
+  try { localStorage.removeItem(key); } catch (e) { /* private mode: nothing was kept */ }
+}
+
 // ---------- theme: dark by default, light on request ----------
 
 function setTheme(name, keep) {
@@ -90,10 +93,80 @@ function readSteps() {
   return $("steps").value.split("\n").map((s) => s.trim()).filter(Boolean);
 }
 
-function stepsChanged() {
+function countSteps() {
   const n = readSteps().length;
   $("count").textContent = n ? n + (n === 1 ? " step." : " steps.") : "";
-  store(STEPS_KEY, $("steps").value);
+}
+
+// ---------- use cases: one tab per kind of job, each with its own remembered checklist ----------
+
+// Only the packing check and the handover were measured. The other lists are examples, and say so.
+const CASES = {
+  packing: { rec: "Film the packing", run: "Check the packing",
+    role: "For a seller: which item did not go in?", note: "Measured on nine phone takes.",
+    steps: ["put the AirPods case in the bag", "put the Hello Panda box in the bag", "put the watch in the bag",
+      "zip the bag closed", "knock on the table twice"] },
+  handover: { rec: "Film the handover", run: "Check the handover",
+    role: "For a receiver: was it handed to the right person?", note: "Measured on two short takes.",
+    steps: ["shake hands with the person wearing a white sweater", "shake hands with the person wearing an orange sweater"] },
+  evidence: { rec: "Film the sealing", run: "Check the seal",
+    role: "For a custodian: was it sealed before it left the table?", note: "Example list. Not measured.",
+    steps: ["put the item in the evidence bag", "seal the bag", "write on the bag label", "hand the bag to the second person"] },
+  lockout: { rec: "Film the lockout", run: "Check the lockout",
+    role: "For a supervisor: lock, tag, then try the switch.", note: "Example list. Not measured.",
+    steps: ["switch the machine off", "put the lock on the switch", "hang the tag on the lock", "try the switch"] },
+  own: { rec: "Film the job", run: "Check the list",
+    role: "Any job you can type, one step per line.", note: "", steps: [] },
+};
+const caseKey = (name) => "clock.steps." + name;
+const caseText = {};      // each tab's text, also held in memory, so a switch loses nothing in private mode
+let activeCase = "packing";
+let caseReady = false;    // false until the first tab is on screen, so the empty box is not saved over a list
+
+const recWord = () => CASES[activeCase].rec;
+const runWord = () => CASES[activeCase].run;
+
+// The text of the box stays with the tab it was typed in.
+function keepSteps() {
+  caseText[activeCase] = $("steps").value;
+  store(caseKey(activeCase), $("steps").value);
+}
+
+function stepsChanged() {
+  countSteps();
+  keepSteps();
+}
+
+// A tab's own text if it has any, else its starting list.
+function caseSteps(name) {
+  const held = typeof caseText[name] === "string" ? caseText[name] : store(caseKey(name));
+  return held && held.trim() ? held : CASES[name].steps.join("\n");
+}
+
+function setCase(name, keep) {
+  const next = CASES[name] ? name : "packing";
+  if (caseReady) keepSteps();
+  activeCase = next;
+  caseReady = true;
+  const c = CASES[next];
+  $("steps").value = caseSteps(next);
+  document.querySelectorAll("#cases button").forEach((b) => {
+    b.setAttribute("aria-pressed", b.dataset.case === next ? "true" : "false");
+  });
+  if ($("case-role")) $("case-role").textContent = c.role;   // absent in a cached older page
+  if ($("case-note")) $("case-note").textContent = c.note;
+  if (!state.recorder && !state.timer) $("rec").textContent = c.rec;   // while recording the button keeps its stop word
+  $("run").textContent = c.run;
+  if (keep) store("clock.case", next);
+  countSteps();
+}
+
+// The single list of the earlier page moves to the "Your own list" tab, once.
+function moveOldSteps() {
+  const old = store("clock.steps");
+  if (!old || !old.trim() || (store(caseKey("own")) || "").trim()) return;
+  store(caseKey("own"), old);
+  forget("clock.steps");
 }
 
 function clipLength() {
@@ -203,7 +276,7 @@ function endCountdown() {
   clearInterval(state.timer);
   state.timer = null;
   $("countdown").hidden = true;
-  $("rec").textContent = "Record";
+  $("rec").textContent = recWord();
   $("rec").classList.remove("live");
   $("flip").disabled = false;
 }
@@ -266,7 +339,7 @@ function startRecorder(length) {
     const type = (rec.mimeType || mime || "video/webm").split(";")[0];
     if (keep && chunks.length) {
       setVideo(new Blob(chunks, { type: type }), "recording." + (type.includes("mp4") ? "mp4" : "webm"));
-      say($("status"), "Recorded. Press Run.");
+      say($("status"), "Recorded. Now press \"" + runWord() + "\".");
     } else if (keep) showFull();
   };
   state.recorder = rec;
@@ -294,7 +367,7 @@ function pickFile() {
   cameraOff();
   $("filebox").classList.remove("point");
   setVideo(f, f.name || "video.mp4");
-  say($("status"), "Video chosen. Press Run.");
+  say($("status"), "Video chosen. Now press \"" + runWord() + "\".");
 }
 
 // ---------- network: every call has a timeout ----------
@@ -608,6 +681,7 @@ function show(view, p) {
   auditLine(view, p);
   auditSheet(view, p);
   if (!res) return;
+  if (view.signoff) view.signoff.hidden = !p.fused;   // the line to sign appears with the full read
   draw(view, res, audit);
   if (view.summary) view.summary.textContent = view.one ? answerLine(res, audit) : summarize(res, audit);
   if (view.alarm) {
@@ -642,6 +716,7 @@ function clearView(view, summary) {
   if (view.alarm) view.alarm.hidden = true;
   if (view.legend) view.legend.hidden = true;
   if (view.footer) view.footer.textContent = "";
+  if (view.signoff) view.signoff.hidden = true;
 }
 
 function markRow(btn) {
@@ -840,10 +915,13 @@ if (WATCH) {
   loadQr();
   watchLoop();
 } else {
-  $("steps").value = store(STEPS_KEY) || "";
+  moveOldSteps();
+  setCase(CASES[CASE_PARAM] ? CASE_PARAM : store("clock.case"), Boolean(CASES[CASE_PARAM]));
+  document.querySelectorAll("#cases button").forEach((b) => {
+    b.addEventListener("click", () => setCase(b.dataset.case, true));
+  });
   $("len").value = store("clock.len") || "25";
   clipLength();
-  stepsChanged();
   $("steps").addEventListener("input", stepsChanged);
   $("steps").addEventListener("keydown", (e) => { if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) runSteps(readSteps(), mainView); });
   $("len").addEventListener("input", () => store("clock.len", String(clipLength())));

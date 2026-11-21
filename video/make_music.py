@@ -34,21 +34,30 @@ No drums, no percussion, no build-up, no climax, no sudden changes. Very steady,
 [0:45 - 1:10] The piano thins out and the piece resolves gently and ends."""
 
 
-def one(client, n: int, out: Path) -> dict:
+JAZZ = """Instrumental only, no vocals, no lyrics. A relaxed, warm cool-jazz trio piece for a one-minute product film about a person carefully checking a list, step by step.
+Upright bass walking gently, brushed drums with a light swing, and a Rhodes electric piano playing a simple, friendly, slightly playful melody with a few jazz chords. About 96 BPM, medium swing. Confident, curious, late-evening lounge mood.
+No horns, no solos that take over, no sudden stops, no big build-up. Even volume throughout, so it can sit under on-screen text.
+[0:00 - 0:08] Intro: bass and brushes set the groove, Rhodes chords enter.
+[0:08 - 0:50] The Rhodes melody over the walking bass and brushes, with small variations.
+[0:50 - 1:10] The trio settles and ends on a soft, resolved chord."""
+STYLES = {"soft": PROMPT, "jazz": JAZZ}
+
+
+def one(client, n: int, out: Path, prompt: str = PROMPT, prefix: str = "music") -> dict:
     errors = []
     for attempt in range(2):
         t0 = time.time()
         try:
-            res = client.interactions.create(model=MODEL, input=PROMPT, response_format={"type": "audio"}, timeout=TIMEOUT_S)
+            res = client.interactions.create(model=MODEL, input=prompt, response_format={"type": "audio"}, timeout=TIMEOUT_S)
             audio = getattr(res, "output_audio", None)
             data = getattr(audio, "data", None)
             if not data:
                 raise RuntimeError("reply had no audio")
             raw = base64.b64decode(data) if isinstance(data, str) else bytes(data)
             ext = ".wav" if raw[:4] == b"RIFF" else ".mp3"
-            tmp = out / f"music_{n}.api{ext}"
+            tmp = out / f"{prefix}_{n}.api{ext}"
             tmp.write_bytes(raw)
-            dst = out / f"music_{n}.wav"
+            dst = out / f"{prefix}_{n}.wav"
             r = media._run(["-y", "-loglevel", "error", "-i", str(tmp), "-ar", "48000", "-ac", "2", "-c:a", "pcm_s16le", str(dst)])
             if r.returncode != 0 or not dst.exists():
                 raise RuntimeError("ffmpeg could not read the audio: " + r.stderr[-200:])
@@ -60,20 +69,22 @@ def one(client, n: int, out: Path) -> dict:
                     "notes": (text or "")[:400], "errors": errors}
         except Exception as e:  # noqa: BLE001
             errors.append(models._error_text(e))
-    return {"file": f"music_{n}.wav", "ok": False, "errors": errors}
+    return {"file": f"{prefix}_{n}.wav", "ok": False, "errors": errors}
 
 
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--takes", type=int, default=2)
     ap.add_argument("--out", default=str(ROOT / "video" / "out"))
+    ap.add_argument("--style", default="soft", choices=sorted(STYLES), help="soft: felt piano and pad; jazz: Rhodes, walking bass, brushes")
     args = ap.parse_args()
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
     client = decide.client(TIMEOUT_S * 1000)
+    prefix = "music" if args.style == "soft" else "music_" + args.style
     with ThreadPoolExecutor(max_workers=args.takes) as pool:
-        rows = list(pool.map(lambda n: one(client, n, out), range(1, args.takes + 1)))
-    (out / "music_report.json").write_text(json.dumps({"model": MODEL, "prompt": PROMPT, "takes": rows}, indent=1) + "\n", encoding="ascii", errors="replace")
+        rows = list(pool.map(lambda n: one(client, n, out, STYLES[args.style], prefix), range(1, args.takes + 1)))
+    (out / f"{prefix}_report.json").write_text(json.dumps({"model": MODEL, "style": args.style, "prompt": STYLES[args.style], "takes": rows}, indent=1) + "\n", encoding="ascii", errors="replace")
     for r in rows:
         print(json.dumps(r)[:600])
     return 0 if any(r["ok"] for r in rows) else 1
