@@ -245,6 +245,7 @@ Checklist steps. The person may have skipped some steps or done them in a differ
 Watch and listen to the whole video carefully. For every step, decide whether it happened at any point.
 - If it happened: happened = true, and start = the time in seconds from the start of the video at which the step begins, meaning the first moment the action is clearly under way. Use decimals if you can tell.
 - If it did not happen: happened = false and start = null. Do not mark a step as happened because it is on the list or because it usually goes with the other steps. Count only what you can see or hear.
+- A step counts only if it is carried through and its result is still in place at the end of the video. Reaching toward it, starting it and then stopping, or doing it and then undoing it does not count: for such a step happened = false and start = null. The one exception: a finished step still counts if a later step on the list is what reverses it.
 - If a step happens more than once, give the first time.
 
 Return one entry per step, in list order, with the same index numbers."""

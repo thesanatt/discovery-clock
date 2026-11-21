@@ -61,8 +61,11 @@ WITNESSES = {
 WITNESS_TIMEOUT_S = 30.0     # per model call
 FUSED_DEADLINE_S = 32.0      # the full read never waits longer than this for witnesses
 FUSED_SOFT_DEADLINE_S = 15.0 # after this, the full read returns as soon as two witnesses have answered
-FUSED_DONE_AT = 0.5
-FUSED_NOT_DONE_AT = 0.2
+# What the page shows. The benchmark scores use the plain 0.5 cut on P(done); these two cuts only
+# decide which of three words a row gets. They were set after looking at the calibration tables of
+# the held-out splits and the field takes: between 0.30 and 0.65 the witnesses usually disagree.
+FUSED_DONE_AT = 0.65
+FUSED_NOT_DONE_AT = 0.30
 
 
 def p_done(fit: ladder.Fit) -> float:

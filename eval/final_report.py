@@ -27,7 +27,8 @@ VAGUE = {"Moving object(s) around", "Holding something in a state"}
 def single_rows(split: str, name: str, strict: bool = True) -> tuple[list[dict], list[float], int, int]:
     """Rows from one model's own timeline. strict keeps only clips that model itself answered."""
     base = {"hydrogen4": "hydrogen", "hydrogen2": "hydrogen", "neonmed": "neon", "neon4": "neon"}.get(name, name)
-    path = OUT / f"{split}_{name}_run1.jsonl"
+    tag = fit_fusion.WITNESS_TAG if name in fit_fusion.TAGGED else ""
+    path = OUT / f"{split}_{name}{tag}_run1.jsonl"
     if not path.exists():
         return [], [], 0, 0
     recs = [r for r in score.load(str(path)) if "error" not in r]
@@ -91,7 +92,7 @@ def calibration(rows: list[dict], bins: int = 5) -> tuple[list[dict], float, flo
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--split", default="test", choices=["test", "test2", "test3", "tune"])
+    ap.add_argument("--split", default="test", choices=["test", "test2", "test3", "test4", "tune"])
     args = ap.parse_args()
     split = args.split
     params = dict(fusion.load_params(), ladder_mode="summary")
@@ -125,7 +126,10 @@ def main() -> None:
     # latency of the fused system: the slowest of its parallel calls, per clip
     per_clip = {}
     for name in FAST + ["ladder"]:
-        path = OUT / f"{split}_{name}_run{'3' if (split == 'tune' and name == 'ladder') else '1'}.jsonl"
+        tag = fit_fusion.WITNESS_TAG if name in fit_fusion.TAGGED else ""
+        path = OUT / f"{split}_{name}{tag}_run{'3' if (split == 'tune' and name == 'ladder') else '1'}.jsonl"
+        if not path.exists():
+            continue
         for r in score.load(str(path)):
             if "call" in r and r["call"].get("seconds") is not None:
                 per_clip.setdefault(r["id"], []).append(r["call"]["seconds"])

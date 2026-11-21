@@ -22,6 +22,10 @@ ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "runs" / "eval"
 WITNESSES = ["hydrogen", "neon", "carbon", "hydrogen4", "neonmed", "neon4", "hydrogen2"]
 ALL_WITNESSES = WITNESSES + ["zoom"]
+# Witness runs made with the completion rule in the prompt (version 3) are stored under this tag.
+# Runs without the tag are versions 1 and 2 and stay on disk for the earlier tables.
+WITNESS_TAG = "_v3"
+TAGGED = {"hydrogen4", "hydrogen2", "neon4"}
 MAX_POINTS = 20
 
 
@@ -38,7 +42,7 @@ def load_all(split: str = "tune", ladder_run: str = "run3") -> dict:
                                  "raw": r["raw"], "p_any": r["p_any"], "w": {}}
         data[rec["id"]] = {"duration": rec["duration"], "steps": steps}
     for name in WITNESSES:
-        path = OUT / f"{split}_{name}_run1.jsonl"
+        path = OUT / f"{split}_{name}{WITNESS_TAG if name in TAGGED else ''}_run1.jsonl"
         if not path.exists():
             continue
         for rec in score.load(str(path)):

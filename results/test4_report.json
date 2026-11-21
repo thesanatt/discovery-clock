@@ -1,0 +1,229 @@
+{
+ "split": "test4",
+ "clips": 99,
+ "steps": 537,
+ "systems": {
+  "ladder alone (Decisions API)": {
+   "steps_present": 339,
+   "steps_phantom": 198,
+   "skip_precision": 0.727,
+   "skip_recall": 0.808,
+   "skip_f1": 0.766,
+   "auroc": 0.902,
+   "timed": 279,
+   "within_2s": 0.519,
+   "within_5s": 0.655,
+   "median_abs_err_s": 1.22,
+   "interval_coverage": 0.846,
+   "within_1s": 0.351,
+   "latency": "1.4 s",
+   "clips": "99"
+  },
+  "Hydrogen 4 fps, one call": {
+   "steps_present": 343,
+   "steps_phantom": 200,
+   "skip_precision": 0.815,
+   "skip_recall": 0.97,
+   "skip_f1": 0.886,
+   "auroc": 0.921,
+   "timed": 299,
+   "within_2s": 0.72,
+   "within_5s": 0.784,
+   "median_abs_err_s": 0.5,
+   "interval_coverage": null,
+   "within_1s": 0.571,
+   "latency": "8.6 s (p90 12 s)",
+   "clips": "100"
+  },
+  "Hydrogen 2 fps, one call": {
+   "steps_present": 343,
+   "steps_phantom": 200,
+   "skip_precision": 0.784,
+   "skip_recall": 0.96,
+   "skip_f1": 0.863,
+   "auroc": 0.903,
+   "timed": 290,
+   "within_2s": 0.706,
+   "within_5s": 0.761,
+   "median_abs_err_s": 0.5,
+   "interval_coverage": null,
+   "within_1s": 0.583,
+   "latency": "8.5 s (p90 11 s)",
+   "clips": "100"
+  },
+  "Neon 4 fps, one call": {
+   "steps_present": 343,
+   "steps_phantom": 200,
+   "skip_precision": 0.789,
+   "skip_recall": 0.975,
+   "skip_f1": 0.872,
+   "auroc": 0.912,
+   "timed": 291,
+   "within_2s": 0.7,
+   "within_5s": 0.778,
+   "median_abs_err_s": 0.62,
+   "interval_coverage": null,
+   "within_1s": 0.557,
+   "latency": "14.7 s (p90 21 s)",
+   "clips": "100"
+  },
+  "FUSED v2: ladder + Hydrogen 4 fps + Hydrogen 2 fps + Neon 4 fps": {
+   "steps_present": 339,
+   "steps_phantom": 198,
+   "skip_precision": 0.809,
+   "skip_recall": 0.965,
+   "skip_f1": 0.88,
+   "auroc": 0.972,
+   "timed": 294,
+   "within_2s": 0.72,
+   "within_5s": 0.782,
+   "median_abs_err_s": 0.47,
+   "interval_coverage": 0.745,
+   "within_1s": 0.617,
+   "latency": "14.7 s (p90 21 s)",
+   "clips": "99"
+  },
+  "v2 witnesses without the ladder": {
+   "steps_present": 339,
+   "steps_phantom": 198,
+   "skip_precision": 0.803,
+   "skip_recall": 0.97,
+   "skip_f1": 0.879,
+   "auroc": 0.948,
+   "timed": 292,
+   "within_2s": 0.714,
+   "within_5s": 0.776,
+   "median_abs_err_s": 0.47,
+   "interval_coverage": 0.736,
+   "within_1s": 0.608,
+   "latency": "14.7 s (p90 21 s)",
+   "clips": "99"
+  }
+ },
+ "bootstrap": {
+  "Hydrogen 4 fps, one call": {
+   "skip_f1": [
+    -0.005,
+    -0.024,
+    0.015
+   ],
+   "within_2s": [
+    -0.001,
+    -0.027,
+    0.026
+   ]
+  },
+  "Hydrogen 2 fps, one call": {
+   "skip_f1": [
+    0.015,
+    0.0,
+    0.031
+   ],
+   "within_2s": [
+    0.012,
+    -0.007,
+    0.031
+   ]
+  },
+  "Neon 4 fps, one call": {
+   "skip_f1": [
+    0.008,
+    -0.012,
+    0.03
+   ],
+   "within_2s": [
+    0.02,
+    -0.007,
+    0.047
+   ]
+  }
+ },
+ "calibration": {
+  "bins": [
+   {
+    "bin": "0.0-0.2",
+    "n": 186,
+    "mean_p": 0.071,
+    "share_real": 0.102
+   },
+   {
+    "bin": "0.2-0.4",
+    "n": 35,
+    "mean_p": 0.258,
+    "share_real": 0.429
+   },
+   {
+    "bin": "0.4-0.6",
+    "n": 22,
+    "mean_p": 0.487,
+    "share_real": 0.818
+   },
+   {
+    "bin": "0.6-0.8",
+    "n": 6,
+    "mean_p": 0.726,
+    "share_real": 0.667
+   },
+   {
+    "bin": "0.8-1.0",
+    "n": 288,
+    "mean_p": 0.975,
+    "share_real": 0.983
+   }
+  ],
+  "ece": 0.04,
+  "brier": 0.068
+ },
+ "failures": [
+  {
+   "label": "Holding something in a state",
+   "wrong": 15,
+   "asked": 19
+  },
+  {
+   "label": "Moving object(s) around",
+   "wrong": 14,
+   "asked": 33
+  },
+  {
+   "label": "Putting something on top of something",
+   "wrong": 9,
+   "asked": 33
+  },
+  {
+   "label": "Putting something into something",
+   "wrong": 6,
+   "asked": 38
+  },
+  {
+   "label": "Opening something",
+   "wrong": 5,
+   "asked": 33
+  },
+  {
+   "label": "Covering something with something",
+   "wrong": 4,
+   "asked": 13
+  },
+  {
+   "label": "Closing something",
+   "wrong": 3,
+   "asked": 14
+  },
+  {
+   "label": "Hitting something against/with something",
+   "wrong": 3,
+   "asked": 16
+  },
+  {
+   "label": "Lifting something and placing it back down",
+   "wrong": 3,
+   "asked": 6
+  },
+  {
+   "label": "Pretending to put something into something",
+   "wrong": 3,
+   "asked": 7
+  }
+ ]
+}

@@ -15,7 +15,7 @@ A single Gemini call can already watch a video and list which steps happened. Wh
 1. `clock/media.py` makes a small copy of the video with ffmpeg (short side 360 px, 10 frames per second).
 2. In parallel:
    - `clock/ladder.py` builds the question ladder and `clock/decide.py` sends it to `gemini-decision-1`. For 6 steps on a 25 second clip that is about 100 yes/no questions in one call. Isotonic regression makes each step's answers monotone; the half-rise point is the ladder's time estimate.
-   - `clock/witness.py` asks `gemini-4-hydrogen` at 4 frames per second, `gemini-4-hydrogen` again at 2 frames per second, and `gemini-4-neon` at 4 frames per second, all at medium media resolution, for a timeline: for each step, did it happen and at what second.
+   - `clock/witness.py` asks `gemini-4-hydrogen` at 4 frames per second, `gemini-4-hydrogen` again at 2 frames per second, and `gemini-4-neon` at 4 frames per second, all at medium media resolution, for a timeline: for each step, did it happen and at what second. The prompt carries a completion rule: a step counts only if it is carried through and its result is still in place at the end, unless a later step on the list is what reverses it.
 3. `clock/fusion.py` combines them. For each step it compares two hypotheses, "happened, starting at time tau" and "never happened". Each witness contributes a likelihood: its hit rate, its false alarm rate, and a Laplace error around the true start time with a small share of gross errors. The ladder contributes a Gaussian score and its own time estimate. The posterior over tau gives the start time and its range. One temperature on the log odds corrects for the fact that the witnesses watch the same video and so make related mistakes.
 4. `clock/engine.py` runs all of this with a timeout on every call and a deadline for the whole read. After 15 seconds it returns as soon as two witnesses have answered. A witness that fails or is late is left out. The Decisions ladder alone is the fallback and is shown as the "first read" while the others are still watching.
 5. `app/` is the web page: record on a phone or upload a file, type the checklist, read the step table. Each row shows the verdict, the start time with its range, the posterior curve on a shared time axis, what each witness said, and a 4 second clip.
@@ -37,9 +37,9 @@ The DeepMind Perception Test (validation split, CC BY 4.0): short phone videos f
 
 For each clip the checklist is the clip's own labeled actions plus two steps that never happen in it, picked by a hash of the clip id. The system must say which steps happened, when each started, and flag the two planted skips.
 
-Clips were assigned by a fixed rule before any model output existed (`eval/splits.json`): eligible clips sorted by the SHA-1 of their id; the first 30 are for tuning, the next 120 are the first test split, and the next two blocks of 100 are the second and third test splits.
+Clips were assigned by a fixed rule before any model output existed (`eval/splits.json`): eligible clips sorted by the SHA-1 of their id; the first 30 are for tuning, the next 120 are the first test split, and the next three blocks of 100 are the second, third and fourth test splits.
 
-The system went through two versions today. Version 1 used Hydrogen and Neon witnesses at low resolution and 1 frame per second. Version 2, the one in this repository, gives every witness medium resolution and 2 or 4 frames per second. Each version was scored on clips it had never seen, and the tables below say which is which.
+The system went through three versions today. Version 1 used Hydrogen and Neon witnesses at low resolution and 1 frame per second. Version 2 gave every witness medium resolution and 2 or 4 frames per second. Version 3, the one in this repository, adds a completion rule to the witness prompt. Each version was scored once on clips it had never seen, and the tables below say which is which.
 
 ### Version 1 on the first test split (120 clips, 626 steps: 386 real, 240 planted skips)
 
@@ -117,7 +117,32 @@ Paired bootstrap over clips, fused minus single call, 95 percent interval:
 
 Expected calibration error 0.071. Of the 282 steps given 0.8 or more, 93 percent had happened; of the 195 given under 0.2, 10 percent had. The reported range contains the labeled start for 77 percent of timed steps.
 
-The picture is the same on all three splits (319 held-out clips): the fused system ties the best single call on yes/no accuracy, places a few more steps within 1 and 2 seconds, and is the only one that gives a probability.
+### What changed after the fake-out takes: version 3
+
+A step can be faked. In one field take the AirPods case was picked up, moved toward the bag and put back on the table. Version 2 called that step done in the live run and in 2 of 3 re-runs. A second fake-out with another object fooled it in 2 of 3 re-runs.
+
+Three fixes were tried in parallel on the field takes:
+- A completion rule in the witness prompt: a step counts only if it is carried through and its result is still in place at the end of the video, unless a later step on the list reverses it. On the fake-out take, 18 of 18 witness calls then said not done. An independent re-run agreed, also with the checklist reworded so it shared no nouns with the first.
+- An end-state check by a separate call. Neon on the whole video caught the fake-out 6 of 6 times with no false vetoes, at 15 to 20 seconds a call. Too slow, so the idea went into the wording of the rule instead.
+- Extra Decisions API questions about undoing and end state. No question separated a faked step from a real one.
+
+Version 3 ships the rule. Witness reliabilities and the temperature were refitted on the tuning clips with the new prompt, and the result was scored once on a fourth split that had never been run.
+
+### Version 3 on the fourth test split (99 clips, 537 steps: 339 real, 198 planted skips)
+
+| System | Skip F1 | Precision | Recall | Ranking (AUROC) | Within 1 s | Within 2 s | Median time per clip |
+|-|-|-|-|-|-|-|-|
+| Decisions ladder alone | 0.77 | 0.73 | 0.81 | 0.90 | 35% | 52% | 1.4 s |
+| Hydrogen at 4 fps, one call | 0.89 | 0.81 | 0.97 | none | 57% | 72% | 8.6 s |
+| Hydrogen at 2 fps, one call | 0.86 | 0.78 | 0.96 | none | 58% | 71% | 8.5 s |
+| Neon at 4 fps, one call | 0.87 | 0.79 | 0.97 | none | 56% | 70% | 14.7 s |
+| Fused system, version 3 | 0.88 | 0.81 | 0.96 | 0.97 | 62% | 72% | 14.7 s |
+
+Paired bootstrap, fused minus Hydrogen at 4 fps: skip F1 -0.005 [-0.024, +0.015]. Expected calibration error 0.040: of the 288 steps given 0.8 or more, 98 percent had happened; of the 186 given under 0.2, 10 percent had.
+
+The rule makes every witness stricter. Against version 2 on the third split, recall of planted skips rises from 0.90 to 0.96 and precision falls from 0.86 to 0.81: it flags more, and more of the flags are real steps. For a tool that tells a person where to look, that is the side to err on. Latency went up because Neon at 4 frames per second is the slowest call; in the app the full read returns after 15 seconds with whichever witnesses have answered.
+
+The picture is the same on all four splits (418 held-out clips): the fused system ties the best single call on yes/no accuracy, is level or a few points better on timing, and is the only one that gives a probability.
 
 ### The Carbon baseline
 
@@ -128,7 +153,9 @@ One `gemini-4-carbon` call at high thinking, same prompt and output format. It i
 - Vague labels. "Moving object(s) around" and "Holding something in a state" account for the largest share of errors on both test splits. These actions arguably happen through most of a clip, so their labeled start is hard to match. Without those two classes the fused system scores skip F1 0.90 and 79 percent within 2 seconds on the second split.
 - Steps every witness misses. When all four sources miss a real step the fused probability is near zero, and 13 percent of those steps were real. A person still has to check flagged steps.
 - The Decisions ladder on real phone footage. On the first field recording it scored three of five real steps low; the reasoning models carried the verdict.
-- Which object did it. At low resolution a witness can see that something went into the bag and credit the wrong item. Version 2 reduces this on my takes; it is not measured at scale.
+- Which object did it. At low resolution a witness can see that something went into the bag and credit the wrong item. Version 2 reduced this on my takes; it is not measured at scale.
+- A result that was already in place. In two field takes the bag was already open and was only touched, and "unzip the bag" was called done in every run. The system reads the state and credits the step.
+- An item packed out of order. In one field take the second item was packed before the first; under the completion rule the second item was wrongly flagged in 2 of 3 runs.
 
 ### Things I tried that did not help (tuning split)
 
@@ -141,7 +168,9 @@ One `gemini-4-carbon` call at high thinking, same prompt and output format. It i
 
 ### Field check
 
-Recordings made at the event on a phone, with a known script, are in `results/field.md`. They are a small extra check on real footage, recorded by me, and not part of the scores above. Two of the takes were used to choose version 2, and the file says which.
+Recordings made at the event on a phone, each with a known script, are in `results/field.md`: a six-step bag-packing checklist, 9 takes, 3 runs each under version 3. They are a small extra check on real footage, recorded by me, and not part of the scores above. Takes 1 and 2 were used to choose version 2 and take 6 to choose version 3; the file says which.
+
+Under version 3: 151 of 162 step verdicts right. Of 60 steps that were not done (never touched, faked, or put in and taken back out), 51 read "not found", 3 read "unsure" and 6 were wrongly read as done. Of 102 steps that were done, 100 read "done" and 2 were wrongly read as not found. All 6 wrong "done" verdicts are "unzip the bag" in two takes where the bag was already open and only touched. The 3 "unsure" are one fake-out where the 2 frames-per-second witness kept saying yes. The 2 wrong "not found" are an item packed out of order. The page shows three words from the fused probability: done at 0.65 or more, not found under 0.30, unsure between. The benchmark tables use the plain 0.5 cut.
 
 ## Run it
 
@@ -161,10 +190,11 @@ Reproduce the evaluation:
 ```
 python -m eval.pt_data fetch --split tune        (then test, test2: downloads the clips)
 python -m eval.run_eval --split tune --system ladder --run 3
-python -m eval.run_eval --split tune --system hydrogen4    (then hydrogen2, neon4)
+python -m eval.run_eval --split tune --system hydrogen4 --name v3   (then hydrogen2, neon4)
 python -m eval.fit_fusion                        (fits clock/fusion_params.json on the tuning split)
-python -m eval.run_eval --split test3 --system ladder --run 1  (then hydrogen4, hydrogen2, neon4)
-python -m eval.final_report --split test3
+python -m eval.run_eval --split test4 --system ladder --run 1
+python -m eval.run_eval --split test4 --system hydrogen4 --name v3  (then hydrogen2, neon4)
+python -m eval.final_report --split test4
 ```
 
 Per-clip outputs of every run are in `results/`.
@@ -189,6 +219,10 @@ Libraries: google-genai (Apache 2.0), FastAPI (MIT), Uvicorn (BSD), NumPy (BSD),
 ## Related work
 
 I found no published work that asks cumulative "had it started by time t" questions per step and fits a monotone curve to get start times with a range. The search was about 17 queries, mostly arXiv, and no patents, so this is a statement about that search. Close work: per-clip yes/no scoring for temporal grounding ("Your VLM Already Knows When", arXiv 2608.08315), prefix "is the task complete" probabilities (TOPReward, arXiv 2602.19313), zero-shot procedural mistake detection (ZeProM, arXiv 2606.21579), and products that check station video against work instructions with trained or tuned models. Combining several model reports with fitted reliabilities follows the Dawid-Skene line of work on noisy annotators.
+
+## Cost
+
+Median input tokens per call on a 20 to 30 second clip, from `runs/calls.jsonl`: Decisions ladder 11,900; Hydrogen at 4 fps 9,300; Hydrogen at 2 fps 5,400; Neon at 4 fps 9,300; each witness adds about 700 to 1,000 output and thinking tokens. At the list prices in the event's builder guide that is about 8 cents for a full read of one clip, and about a tenth of a cent for the first read alone. I did not measure cost on longer videos.
 
 ## Limits
 

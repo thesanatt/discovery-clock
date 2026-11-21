@@ -37,9 +37,10 @@ TAKES = {
     "3": ("Hello Panda skipped", [2], False, ""),
     "4": ("watch skipped", [3], False, ""),
     "5": ("Hello Panda before AirPods, knock skipped", [5], True, ""),
-    "6": ("bag not zipped", [4], False, ""),
-    "7": ("all six, Hello Panda before AirPods", [], True, ""),
-    "8": ("fake-out: AirPods picked up, moved toward the bag, put back on the table", [1], False, "hard negative"),
+    "6": ("fake-out: AirPods picked up, moved toward the bag, put back on the table; knock before zip", [1], True, "hard negative; used to choose the completion rule"),
+    "7": ("fake-out: Hello Panda moved toward the bag and put back; bag not zipped, no knock", [2, 4, 5], False, "hard negative"),
+    "8": ("watch fake-out only: starts to take the watch off, leaves it on; no other step done", [0, 1, 2, 3, 4, 5], False, "hard negative"),
+    "9": ("AirPods put in the bag, then taken back out; watch fiddled with but left on; no unzip, zip or knock", [0, 1, 2, 3, 4, 5], False, "hard negative"),
 }
 
 
@@ -60,10 +61,8 @@ def main() -> None:
             rows = []
             for s in res["steps"]:
                 truth_done = s["index"] not in not_done
-                said_done = s["status"] == "done"
                 rows.append({"step": s["text"], "truth": "done" if truth_done else "skipped", "status": s["status"],
-                             "p_done": s["p_done"], "time": s["time"], "correct": said_done == truth_done and s["status"] != "unsure",
-                             "witnesses": s["witnesses"]})
+                             "p_done": s["p_done"], "time": s["time"], "witnesses": s["witnesses"]})
             records.append({"take": take, "run": run, "desc": desc, "note": note, "file": Path(file).name,
                             "order_expected": swapped,
                             "duration": res["video"]["duration"], "seconds": res["seconds_total"],
@@ -76,6 +75,15 @@ def main() -> None:
     old = json.load(open(path, encoding="ascii")) if path.exists() else []
     keep = [r for r in old if (r["take"], r["run"]) not in {(x["take"], x["run"]) for x in records}]
     allrec = sorted(keep + records, key=lambda r: (r["take"], r["run"]))
+    json.dump(allrec, open(path, "w", encoding="ascii"), indent=1)
+
+    # The three words come from the page's cuts on P(done), applied here to every stored run,
+    # so the table always matches what the page would show now.
+    for r in allrec:
+        for x in r.get("rows", []):
+            p = x["p_done"]
+            x["status"] = "done" if p >= engine.FUSED_DONE_AT else ("not_found" if p < engine.FUSED_NOT_DONE_AT else "unsure")
+            x["correct"] = (x["status"] == "done") if x["truth"] == "done" else (x["status"] == "not_found")
     json.dump(allrec, open(path, "w", encoding="ascii"), indent=1)
 
     lines = ["# Field check", "",
@@ -104,8 +112,15 @@ def main() -> None:
         order_ok += got == expected
         lines.append(f"| {r['take']} | {r['desc']} | {r['run']} | {'; '.join(flagged) or 'none'} | {right} of {len(r['rows'])} | "
                      f"{'yes' if got else 'no'} ({'yes' if expected else 'no'}) | {r['seconds']} |")
-    lines += ["", f"Step verdicts right: {ok_steps} of {total_steps}. Skipped steps caught as not found: {caught} of {planted}. "
-              f"Order flag as expected: {order_ok} of {order_n} runs."]
+    nd = [x for r in allrec for x in r.get("rows", []) if x["truth"] == "skipped"]
+    dn = [x for r in allrec for x in r.get("rows", []) if x["truth"] == "done"]
+    lines += ["", f"Step verdicts right: {ok_steps} of {total_steps}.",
+              f"Steps that were not done ({len(nd)}): {sum(x['status'] == 'not_found' for x in nd)} read not found, "
+              f"{sum(x['status'] == 'unsure' for x in nd)} unsure, {sum(x['status'] == 'done' for x in nd)} wrongly read as done.",
+              f"Steps that were done ({len(dn)}): {sum(x['status'] == 'done' for x in dn)} read done, "
+              f"{sum(x['status'] == 'unsure' for x in dn)} unsure, {sum(x['status'] == 'not_found' for x in dn)} wrongly read as not found.",
+              f"Order flag as expected: {order_ok} of {order_n} runs.",
+              "", "The words come from the page's cuts on P(done): done at 0.65 or more, not found under 0.30, unsure between."]
     (OUT / "field.md").write_text("\n".join(lines) + "\n", encoding="ascii")
     print("written", OUT / "field.md")
 
