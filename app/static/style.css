@@ -305,6 +305,8 @@ textarea { display: block; width: 100%; resize: vertical; line-height: 1.45; }
 
 .status.err, .stage.err { color: var(--bad-ink); }
 
+.stage.quiet { color: var(--ink-2); font-weight: 400; }
+
 /* Watch view: the code a phone scans. The code stays dark on a light tile in both themes. */
 
 .qr { padding-top: 1rem; text-align: left; }
@@ -384,6 +386,8 @@ textarea { display: block; width: 100%; resize: vertical; line-height: 1.45; }
 
 .row.unsure, .row.unsure:disabled { border-left-color: var(--warn); }
 
+.row.disputed, .row.disputed:disabled { border-left-color: var(--warn); }
+
 .row.not_found, .row.not_found:disabled { background: var(--bad); color: var(--on-bad); border-color: var(--bad-rule) var(--bad) var(--bad-rule) var(--bad); }
 
 .row.not_found:hover:not(:disabled), .row.not_found:active:not(:disabled) { background: var(--bad-hover); }
@@ -411,6 +415,10 @@ textarea { display: block; width: 100%; resize: vertical; line-height: 1.45; }
   font: 600 0.78rem var(--mono);
   text-transform: uppercase;
 }
+
+/* A step read as done that the audit disputes: a filled amber tag beside the status word. */
+
+.flag.disputed { background: var(--warn); color: var(--paper); letter-spacing: 0.04em; }
 
 /* One strip per step on the shared time axis. First read: a range bar. Full read: a filled curve. */
 
@@ -482,6 +490,38 @@ textarea { display: block; width: 100%; resize: vertical; line-height: 1.45; }
 
 .wit .against .tag { margin-left: 0.4rem; text-transform: uppercase; letter-spacing: 0.04em; }
 
+/* The audit: a mark after the sources, and its notes under the row while the row is selected or focused */
+
+.wit .aud.dispute { padding: 0 0.35rem; border: 2px solid var(--warn); background: var(--field); color: var(--warn); font-weight: 600; }
+
+.audx {
+  display: none;
+  grid-column: 1 / -1;
+  padding: 0.35rem 0.6rem;
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--line);
+  background: var(--field);
+  color: var(--ink);
+  font: 400 0.8rem var(--mono);
+  overflow-wrap: anywhere;
+}
+
+.row.on .audx, .row:focus .audx { display: block; }
+
+.row.disputed .audx { border-left-color: var(--warn); }
+
+.audl { display: block; }
+
+.audl .k { font-weight: 600; color: var(--ink-2); }
+
+.sheet { margin: 0.6rem 0 0; border: 1px solid var(--rule); background: var(--panel); }
+
+.sheet summary { padding: 0.4rem 0.6rem; font: 600 0.8rem var(--mono); letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; }
+
+.sheet summary:hover { background: var(--hover); }
+
+.sheet pre { margin: 0; padding: 0.5rem 0.6rem; border-top: 1px solid var(--rule); font: 400 0.8rem var(--mono); line-height: 1.5; white-space: pre-wrap; overflow-wrap: anywhere; }
+
 .legend { margin: 0.6rem 0 0; font-size: 0.85rem; color: var(--ink-2); max-width: 70rem; }
 
 .footer { margin: 0.4rem 0 0; min-height: 1.2rem; font: 500 0.88rem var(--mono); }
@@ -498,6 +538,7 @@ textarea { display: block; width: 100%; resize: vertical; line-height: 1.45; }
   .head, .row { grid-template-columns: 1.8rem minmax(0, 1fr) 7.4rem 3.8rem; column-gap: 0.7rem; }
   .track { grid-column: 2 / -1; grid-row: 2; }
   .wit { grid-row: 3; }
+  .audx { grid-row: 4; }
 }
 
 /* Phone width: number, step and P(done) on the first line, then the start time, the strip, the sources. */
@@ -510,6 +551,7 @@ textarea { display: block; width: 100%; resize: vertical; line-height: 1.45; }
   .track { grid-column: 1 / -1; grid-row: 3; }
   .head .track { grid-row: 2; }
   .wit { grid-column: 1 / -1; grid-row: 4; }
+  .audx { grid-row: 5; }
 }
 
 /* Narrow screens: one column. Media queries count rem at 16px, so this is 900px. */
@@ -546,6 +588,10 @@ textarea { display: block; width: 100%; resize: vertical; line-height: 1.45; }
   body.watch .time .big, body.watch .row .score, body.watch .row .idx { font-size: 1.8rem; }
   body.watch .time .small { font-size: 0.9rem; }
   body.watch .wit { font-size: 0.92rem; }
+  body.watch .flag.disputed { font-size: 0.95rem; }
+  body.watch .audx { font-size: 0.95rem; }
+  body.watch .sheet summary { font-size: 0.92rem; }
+  body.watch .sheet pre { font-size: 0.95rem; }
   body.watch .track { height: 3.2rem; }
   body.watch .head .track { height: 1.2rem; }
   body.watch .head, body.watch .row { grid-template-columns: 2.4rem minmax(12rem, 1.9fr) minmax(12rem, 2fr) 9.6rem 5.2rem; padding-top: 0.35rem; padding-bottom: 0.35rem; }

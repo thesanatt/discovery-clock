@@ -39,7 +39,7 @@ The DeepMind Perception Test (validation split, CC BY 4.0): short phone videos f
 
 For each clip the checklist is the clip's own labeled actions plus two steps that never happen in it, picked by a hash of the clip id. The system must say which steps happened, when each started, and flag the two planted skips.
 
-Clips were assigned by a fixed rule before any model output existed (`eval/splits.json`): eligible clips sorted by the SHA-1 of their id; the first 30 are for tuning, the next 120 are the first test split, and the next three blocks of 100 are the second, third and fourth test splits.
+Clips were assigned by a fixed rule before any model output existed (`eval/splits.json`): eligible clips sorted by the SHA-1 of their id; the first 30 are for tuning, the next 120 are the first test split, and the next four blocks of 100 are the second, third, fourth and fifth test splits.
 
 The system went through three versions today. Version 1 used Hydrogen and Neon witnesses at low resolution and 1 frame per second. Version 2 gave every witness medium resolution and 2 or 4 frames per second. Version 3, the one in this repository, adds a completion rule to the witness prompt. Each version was scored once on clips it had never seen, and the tables below say which is which.
 
@@ -144,7 +144,25 @@ Paired bootstrap, fused minus Hydrogen at 4 fps: skip F1 -0.005 [-0.024, +0.015]
 
 The rule makes every witness stricter. Against version 2 on the third split, recall of planted skips rises from 0.90 to 0.96 and precision falls from 0.86 to 0.81: it flags more, and more of the flags are real steps. For a tool that tells a person where to look, that is the side to err on. Latency went up because Neon at 4 frames per second is the slowest call; in the app the full read returns after 15 seconds with whichever witnesses have answered.
 
-The picture is the same on all four splits (418 held-out clips): the fused system ties the best single call on yes/no accuracy, is level or a few points better on timing, and is the only one that gives a probability.
+### Replication: version 3 again, on a fifth split (100 clips, 513 steps: 313 real, 200 planted skips)
+
+The fourth split was scored once when version 3 was made. To see whether its numbers repeat, I ran the frozen version 3 once more on a fifth split that no system had touched. I wrote the plan down before running it and nothing was changed afterwards.
+
+| System | Skip F1 | Precision | Recall | Ranking (AUROC) | Within 1 s | Within 2 s | Median time per clip |
+|-|-|-|-|-|-|-|-|
+| Decisions ladder alone | 0.78 | 0.73 | 0.82 | 0.90 | 32% | 50% | 1.6 s |
+| Hydrogen at 4 fps, one call | 0.85 | 0.79 | 0.93 | none | 58% | 67% | 6.5 s |
+| Hydrogen at 2 fps, one call | 0.85 | 0.78 | 0.93 | none | 58% | 68% | 6.6 s |
+| Neon at 4 fps, one call | 0.85 | 0.77 | 0.94 | none | 58% | 69% | 13.0 s |
+| Fused system, version 3 | 0.86 | 0.81 | 0.91 | 0.95 | 61% | 71% | 13.1 s |
+
+Paired bootstrap, fused minus Hydrogen at 4 fps: skip F1 +0.004 [-0.014, +0.022]; steps within 2 seconds +0.035 [+0.007, +0.065]. Expected calibration error 0.053: of the 269 steps given 0.8 or more, 95 percent had happened; of the 197 given under 0.2, 12 percent had. With the Decisions ladder removed, the same three witnesses rank at 0.92 instead of 0.95.
+
+Every headline number is a little lower than on the fourth split (skip F1 0.88 to 0.86, ranking 0.97 to 0.95, "98 percent" to "95 percent"), so the fourth split was the kinder of the two. The pattern repeats: a tie with the best single call on yes/no, a ranking score the single calls do not have, and timing level or slightly better.
+
+The two version 3 splits pooled (199 clips, 1,050 steps: 652 real, 398 planted skips; `eval/pooled_v3.py`): fused skip F1 0.87 (precision 0.81, recall 0.94) against 0.87 for Hydrogen at 4 fps alone; ranking 0.96, and 0.93 with the ladder removed; 61 percent of steps within 1 second and 71 percent within 2, against 58 and 70 for Hydrogen at 4 fps. Expected calibration error 0.041: of the 557 steps given 0.8 or more, 97 percent had happened; of the 383 given under 0.2, 11 percent had. These pooled figures are the ones to quote for version 3.
+
+The picture is the same on all five splits (518 held-out clips): the fused system ties the best single call on yes/no accuracy, is level or a few points better on timing, and is the only one that gives a probability.
 
 ### Pushing length until it breaks
 
@@ -213,7 +231,23 @@ The one error class left on my takes is a step whose result was already in place
 - All 16 audits returned, all 16 carried a matching sandbox hash, and the local re-run of the rules agreed 16 of 16. Median 52 seconds, longest 67, about 81,000 tokens each at the median.
 - With `gemini-4-neon` driving the agent (3 audits) it took 86 to 162 seconds and confirmed one wrong verdict. Not used.
 
-This is 16 audits of nine recordings I made myself, so it is a check that the stage does no harm and catches the case it was built for when the camera sees it. It is not a benchmark score.
+This is 16 audits of nine recordings I made myself, so it is a check that the stage catches the case it was built for when the camera sees it. It is not a benchmark score.
+
+To see how often the audit objects when it should not, I also ran it on the first 30 clips of the fifth test split, one full read and one audit each (`eval/audit_bench.py`, `results/audit_bench_test5.json`):
+
+| Full read said | Truth | Steps | Audit disputes | Audit confirms | Audit cannot tell |
+|-|-|-|-|-|-|
+| done | done | 77 | 5 | 38 | 34 |
+| not found | not done | 55 | 1 | 20 | 34 |
+| not found | done | 5 | 0 | 1 | 4 |
+| unsure | not done | 5 | 2 | 0 | 3 |
+| unsure | done | 6 | 2 | 1 | 3 |
+
+- On benchmark clips the audit does dispute correct verdicts: 6 of 132, about 1 in 20. So "0 of 88" above is a property of my takes, not of the stage.
+- All 5 disputed "done" verdicts are actions that were undone before the clip ended: a book opened and closed again, a cloth unfolded and folded back, a backpack opened and zipped shut, a tea box opened and closed, letters shuffled back to the same order. The benchmark labels count those as done. The audit's rule asks for a result that is still in place at the end, and no later step on the list explains the reversal. Whether that is an error depends on the checklist: for "did this item end up in the box" it is the right objection.
+- The one disputed "not found" is a pencil case that ends up on top of a notebook in a clip where "dropping something on top of something" was a planted step.
+- No full read in these 30 clips credited a planted step, so this run says nothing about how often the audit catches a wrong "done". The field takes are the only evidence for that, and it is 2 of 5.
+- On these clips more results are visible in a frame than on the bag takes, so it confirms about half of the correct "done" verdicts. All 30 audits returned with a matching sandbox hash. Median 41 seconds, longest 65, about 62,000 tokens.
 
 ## Run it
 

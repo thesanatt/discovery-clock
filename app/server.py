@@ -10,6 +10,10 @@ read arrives (one Decisions call), then the full read (ladder plus three model t
 
 Set CLOCK_STUB=1 to get sample data without any model call. The page labels it as sample data.
 Set PUBLIC_URL to the public address of the app when it sits behind a tunnel (used for the QR code).
+
+After the full read is stored, an audit starts on its own thread (clock/auditor.py, a Gemini Managed
+Agent). It is optional: it never delays or changes the first read or the full read, and a failed
+audit only leaves a note on the run. Set CLOCK_AUDIT=0 to switch it off.
 """
 from __future__ import annotations
 
@@ -50,6 +54,11 @@ CLIP_LENGTH_S = 4.0
 EMPTY_CLIP_BYTES = 500      # ffmpeg writes a 261 byte file when the start is past the end
 STUB_FAST_S = 1.0
 STUB_FUSED_S = 4.0
+STUB_AUDIT_S = 6.0          # the sample audit arrives this long after the sample full read
+AUDIT_TIMEOUT_S = 110       # given to the auditor for its one managed-agent call (no retry: the slot must free up)
+AUDIT_DEADLINE_S = 125      # an audit with no answer by then is reported as failed
+AUDIT_KEYS = ("ok", "seconds", "model", "steps", "sheet", "agent_ran_code", "order_pairs", "rules_agree")
+AUDIT_STEP_KEYS = ("index", "text", "at_start", "at_end", "audit", "reason")
 VIDEO_EXTS = (".webm", ".mp4", ".mov", ".m4v", ".mkv")
 EXT_BY_TYPE = {"video/mp4": ".mp4", "video/quicktime": ".mov", "video/webm": ".webm",
                "video/x-matroska": ".mkv", "video/x-m4v": ".m4v"}
@@ -58,10 +67,15 @@ app = FastAPI(title="Discovery Clock")
 _runs: dict[str, dict] = {}     # run id -> state; insertion order is start order
 _runs_lock = threading.Lock()
 _clip_lock = threading.Lock()
+_audit_lock = threading.Lock()  # held while an audit runs: at most one at a time across the server
 
 
 def stub_on() -> bool:
     return os.environ.get("CLOCK_STUB") == "1"
+
+
+def audit_on() -> bool:
+    return os.environ.get("CLOCK_AUDIT") != "0"
 
 
 def parse_steps(raw: str) -> list[str]:
@@ -218,10 +232,100 @@ def stub_results(path: Path, steps: list[str]) -> tuple[dict, dict]:
     return fast, fused
 
 
+def stub_audit(fused: dict) -> dict:
+    """A sample audit in the auditor's shape, made without a model call.
+
+    One step read as done is disputed, one is confirmed, the rest are "cannot tell".
+    """
+    steps = fused["steps"]
+    done = [s["index"] for s in steps if s["status"] == "done"]
+    dispute = done[-1] if done else steps[0]["index"]
+    confirm = done[0] if len(done) > 1 else None
+    rows = []
+    for s in steps:
+        i = s["index"]
+        if i == dispute:
+            row = {"at_start": "yes: sample note, the result is already in place in the START frame",
+                   "at_end": "yes: sample note, the result is in place in the END frame", "audit": "dispute",
+                   "reason": "Sample reason: the lasting result was already in place at START, "
+                             "so the video does not show this step being done."}
+        elif i == confirm:
+            row = {"at_start": "no: sample note, the result is not in place in the START frame",
+                   "at_end": "yes: sample note, the result is in place in the END frame", "audit": "confirm",
+                   "reason": "Sample reason: absent at START and in place at END."}
+        else:
+            row = {"at_start": "cannot tell: sample note, the START frame does not show it",
+                   "at_end": "cannot tell: sample note, the END frame does not show it", "audit": "cannot tell",
+                   "reason": "Sample reason: the frames do not show this step's lasting result."}
+        rows.append(dict(row, index=i, text=s["text"]))
+    count = {v: sum(1 for r in rows if r["audit"] == v) for v in ("confirm", "dispute", "cannot tell")}
+    sheet = "\n".join([
+        "SAMPLE SIGN-OFF SHEET, not a real audit",
+        f"step {dispute + 1}: disputed" + (f"; step {confirm + 1}: confirmed" if confirm is not None else ""),
+        f"confirm {count['confirm']}, dispute {count['dispute']}, cannot tell {count['cannot tell']}"])
+    return {"ok": True, "seconds": STUB_AUDIT_S, "model": "sample", "steps": rows, "sheet": sheet,
+            "agent_ran_code": True, "error": None, "order_pairs": []}
+
+
+def audit_view(res: dict, stub: bool) -> dict:
+    """The audit as the page gets it: named fields only, so no frame data and no local path goes out."""
+    out = {k: res[k] for k in AUDIT_KEYS if k in res}
+    out["steps"] = [{k: s[k] for k in AUDIT_STEP_KEYS if k in s}
+                    for s in res.get("steps") or [] if isinstance(s, dict)]
+    out = json.loads(json.dumps(scrub(out), default=str))   # plain JSON types only
+    out["stub"] = stub
+    return out
+
+
 # ---------- runs ----------
 
 def _active_count() -> int:
     return sum(1 for r in _runs.values() if r["active"])
+
+
+def _audit_work(run: dict, path: Path, fused: dict, stub: bool) -> None:
+    """Runs on its own thread after the full read is stored. Every failure becomes a note on the run."""
+    state, view, note = "failed", None, "the audit did not finish"
+    try:
+        if stub:
+            time.sleep(STUB_AUDIT_S)
+            res = stub_audit(fused)
+        else:
+            from clock import auditor   # imported here, so a broken auditor cannot stop the server or a run
+            res = auditor.audit(path, fused, timeout_s=AUDIT_TIMEOUT_S, retries=0)
+        if isinstance(res, dict) and res.get("ok"):
+            view = audit_view(res, stub)
+            state, note = "done", None
+        else:
+            err = res.get("error") if isinstance(res, dict) else None
+            note = scrub(str(err or "the audit gave no answer"))[:300]
+    except BaseException as e:  # noqa: BLE001 - the audit is optional, so nothing it does may surface
+        note = "the audit failed: " + type(e).__name__
+    finally:
+        _audit_lock.release()
+        with _runs_lock:
+            if run["audit_state"] == "pending":     # after the audit deadline the run stays failed
+                run["audit_state"], run["audit"], run["audit_note"] = state, view, note
+                run["audit_t1"] = time.time()
+
+
+def _start_audit(run: dict, path: Path, fused: dict, stub: bool) -> None:
+    """Call with _runs_lock held, right after the full read is stored. Never raises, never waits."""
+    try:
+        if not audit_on():
+            run["audit_note"] = "the audit is switched off"
+            return
+        if not _audit_lock.acquire(blocking=False):
+            run["audit_note"] = "another audit was running"
+            return
+        run["audit_state"], run["audit_t0"] = "pending", time.time()
+        try:
+            threading.Thread(target=_audit_work, args=(run, path, fused, stub), daemon=True).start()
+        except BaseException:  # noqa: BLE001
+            _audit_lock.release()
+            run["audit_state"], run["audit_note"] = "failed", "the audit could not start"
+    except BaseException:  # noqa: BLE001
+        pass
 
 
 def _work(run_id: str, path: Path, steps: list[str], stub: bool) -> None:
@@ -246,6 +350,7 @@ def _work(run_id: str, path: Path, steps: list[str], stub: bool) -> None:
                 run["fused"] = public_view(fused, run_id, path.name, stub)
                 run["stage"] = "fused"
                 run["t1"] = time.time()
+                _start_audit(run, path, fused, stub)
     except Exception as e:  # noqa: BLE001 - every failure becomes one plain sentence
         with _runs_lock:
             if run["stage"] != "error":
@@ -277,7 +382,9 @@ async def api_run(video: UploadFile = File(...), steps: str = Form(...)) -> dict
             path.unlink(missing_ok=True)
             raise busy
         _runs[run_id] = {"stage": "pending", "fast": None, "fused": None, "error": None,
-                         "t0": time.time(), "t1": None, "active": True, "stub": stub}
+                         "t0": time.time(), "t1": None, "active": True, "stub": stub,
+                         "audit_state": "off", "audit": None, "audit_note": None,
+                         "audit_t0": None, "audit_t1": None}
         for old in [k for k, r in _runs.items() if not r["active"]][:max(0, len(_runs) - MAX_KEPT_RUNS)]:
             del _runs[old]
     threading.Thread(target=_work, args=(run_id, path, step_list, stub), daemon=True).start()
@@ -296,8 +403,15 @@ def api_result(run: str) -> dict:
             r["t1"] = r["t0"] + RUN_DEADLINE_S
             r["error"] = (f"No full read after {RUN_DEADLINE_S} seconds. "
                           + ("The first read is shown." if r["fast"] else "Try a shorter video or fewer steps."))
+        if r["audit_state"] == "pending" and now - r["audit_t0"] > AUDIT_DEADLINE_S:
+            r["audit_state"] = "failed"
+            r["audit_t1"] = r["audit_t0"] + AUDIT_DEADLINE_S
+            r["audit_note"] = f"no audit after {AUDIT_DEADLINE_S} seconds"
+        audit_s = round((r["audit_t1"] or now) - r["audit_t0"], 1) if r["audit_t0"] else None
         return {"run": run, "stage": r["stage"], "fast": r["fast"], "fused": r["fused"], "error": r["error"],
-                "elapsed": round((r["t1"] or now) - r["t0"], 2), "stub": r["stub"]}
+                "elapsed": round((r["t1"] or now) - r["t0"], 2), "stub": r["stub"],
+                "audit_state": r["audit_state"], "audit": r["audit"], "audit_note": r["audit_note"],
+                "audit_elapsed": audit_s}
 
 
 @app.get("/api/latest")

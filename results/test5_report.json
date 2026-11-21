@@ -1,0 +1,229 @@
+{
+ "split": "test5",
+ "clips": 100,
+ "steps": 513,
+ "systems": {
+  "ladder alone (Decisions API)": {
+   "steps_present": 313,
+   "steps_phantom": 200,
+   "skip_precision": 0.733,
+   "skip_recall": 0.825,
+   "skip_f1": 0.776,
+   "auroc": 0.899,
+   "timed": 253,
+   "within_2s": 0.498,
+   "within_5s": 0.623,
+   "median_abs_err_s": 1.3,
+   "interval_coverage": 0.858,
+   "within_1s": 0.323,
+   "latency": "1.6 s",
+   "clips": "100"
+  },
+  "Hydrogen 4 fps, one call": {
+   "steps_present": 313,
+   "steps_phantom": 200,
+   "skip_precision": 0.791,
+   "skip_recall": 0.925,
+   "skip_f1": 0.853,
+   "auroc": 0.884,
+   "timed": 264,
+   "within_2s": 0.671,
+   "within_5s": 0.754,
+   "median_abs_err_s": 0.5,
+   "interval_coverage": null,
+   "within_1s": 0.578,
+   "latency": "6.5 s (p90 9 s)",
+   "clips": "100"
+  },
+  "Hydrogen 2 fps, one call": {
+   "steps_present": 313,
+   "steps_phantom": 200,
+   "skip_precision": 0.781,
+   "skip_recall": 0.925,
+   "skip_f1": 0.847,
+   "auroc": 0.879,
+   "timed": 261,
+   "within_2s": 0.681,
+   "within_5s": 0.754,
+   "median_abs_err_s": 0.52,
+   "interval_coverage": null,
+   "within_1s": 0.581,
+   "latency": "6.6 s (p90 9 s)",
+   "clips": "100"
+  },
+  "Neon 4 fps, one call": {
+   "steps_present": 313,
+   "steps_phantom": 200,
+   "skip_precision": 0.767,
+   "skip_recall": 0.94,
+   "skip_f1": 0.845,
+   "auroc": 0.879,
+   "timed": 256,
+   "within_2s": 0.693,
+   "within_5s": 0.76,
+   "median_abs_err_s": 0.44,
+   "interval_coverage": null,
+   "within_1s": 0.575,
+   "latency": "13.0 s (p90 19 s)",
+   "clips": "100"
+  },
+  "FUSED v2: ladder + Hydrogen 4 fps + Hydrogen 2 fps + Neon 4 fps": {
+   "steps_present": 313,
+   "steps_phantom": 200,
+   "skip_precision": 0.809,
+   "skip_recall": 0.91,
+   "skip_f1": 0.856,
+   "auroc": 0.954,
+   "timed": 270,
+   "within_2s": 0.706,
+   "within_5s": 0.783,
+   "median_abs_err_s": 0.46,
+   "interval_coverage": 0.785,
+   "within_1s": 0.61,
+   "latency": "13.1 s (p90 19 s)",
+   "clips": "100"
+  },
+  "v2 witnesses without the ladder": {
+   "steps_present": 313,
+   "steps_phantom": 200,
+   "skip_precision": 0.795,
+   "skip_recall": 0.93,
+   "skip_f1": 0.857,
+   "auroc": 0.916,
+   "timed": 265,
+   "within_2s": 0.696,
+   "within_5s": 0.773,
+   "median_abs_err_s": 0.45,
+   "interval_coverage": 0.762,
+   "within_1s": 0.601,
+   "latency": "13.1 s (p90 19 s)",
+   "clips": "100"
+  }
+ },
+ "bootstrap": {
+  "Hydrogen 4 fps, one call": {
+   "skip_f1": [
+    0.004,
+    -0.014,
+    0.022
+   ],
+   "within_2s": [
+    0.035,
+    0.007,
+    0.065
+   ]
+  },
+  "Hydrogen 2 fps, one call": {
+   "skip_f1": [
+    0.01,
+    -0.006,
+    0.025
+   ],
+   "within_2s": [
+    0.026,
+    0.0,
+    0.055
+   ]
+  },
+  "Neon 4 fps, one call": {
+   "skip_f1": [
+    0.012,
+    -0.011,
+    0.037
+   ],
+   "within_2s": [
+    0.012,
+    -0.014,
+    0.039
+   ]
+  }
+ },
+ "calibration": {
+  "bins": [
+   {
+    "bin": "0.0-0.2",
+    "n": 197,
+    "mean_p": 0.075,
+    "share_real": 0.122
+   },
+   {
+    "bin": "0.2-0.4",
+    "n": 23,
+    "mean_p": 0.258,
+    "share_real": 0.609
+   },
+   {
+    "bin": "0.4-0.6",
+    "n": 11,
+    "mean_p": 0.494,
+    "share_real": 0.818
+   },
+   {
+    "bin": "0.6-0.8",
+    "n": 13,
+    "mean_p": 0.669,
+    "share_real": 0.769
+   },
+   {
+    "bin": "0.8-1.0",
+    "n": 269,
+    "mean_p": 0.97,
+    "share_real": 0.952
+   }
+  ],
+  "ece": 0.053,
+  "brier": 0.088
+ },
+ "failures": [
+  {
+   "label": "Moving object(s) around",
+   "wrong": 14,
+   "asked": 33
+  },
+  {
+   "label": "Holding something in a state",
+   "wrong": 12,
+   "asked": 22
+  },
+  {
+   "label": "Putting something on top of something",
+   "wrong": 9,
+   "asked": 36
+  },
+  {
+   "label": "Rotating something",
+   "wrong": 7,
+   "asked": 11
+  },
+  {
+   "label": "Covering something with something",
+   "wrong": 4,
+   "asked": 14
+  },
+  {
+   "label": "Opening something",
+   "wrong": 4,
+   "asked": 24
+  },
+  {
+   "label": "Turning something off",
+   "wrong": 4,
+   "asked": 13
+  },
+  {
+   "label": "Clicking something",
+   "wrong": 3,
+   "asked": 10
+  },
+  {
+   "label": "Launching something",
+   "wrong": 3,
+   "asked": 6
+  },
+  {
+   "label": "Turning something on",
+   "wrong": 3,
+   "asked": 18
+  }
+ ]
+}

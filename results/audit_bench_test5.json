@@ -1,0 +1,5743 @@
+{
+ "split": "test5",
+ "clips_asked": 30,
+ "model": "gemini-4-hydrogen",
+ "summary": {
+  "audits": 30,
+  "audits_failed": 0,
+  "code_ran": 30,
+  "rules_agree": 30,
+  "wrong_done": 0,
+  "wrong_done_disputed": 0,
+  "wrong_done_cannot_tell": 0,
+  "wrong_done_confirmed": 0,
+  "right_done": 77,
+  "right_done_disputed": 5,
+  "right_done_cannot_tell": 34,
+  "right_done_confirmed": 38,
+  "unsure_not_done": 5,
+  "unsure_not_done_disputed": 2,
+  "unsure_done": 6,
+  "unsure_done_disputed": 2,
+  "right_not_found": 55,
+  "right_not_found_disputed": 1,
+  "wrong_not_found": 5,
+  "wrong_not_found_disputed": 0,
+  "seconds_median": 40.5,
+  "seconds_max": 64.9
+ },
+ "records": [
+  {
+   "take": "video_10048",
+   "model": "gemini-4-hydrogen",
+   "run": 1,
+   "desc": "benchmark clip",
+   "labels": [
+    "Indicating a region with the hand",
+    "Moving object(s) around",
+    "Putting something on top of something",
+    "Pretending to unplug something from something",
+    "Pretending to mix"
+   ],
+   "not_done": [
+    3,
+    4
+   ],
+   "fused": {
+    "video": {
+     "duration": 26.2
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Indicating a region with the hand\"",
+      "status": "done",
+      "p_done": 0.994,
+      "time": 0.25,
+      "lo": 0.0,
+      "hi": 0.75
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Moving object(s) around\"",
+      "status": "done",
+      "p_done": 0.951,
+      "time": 6.5,
+      "lo": 5.25,
+      "hi": 7.5
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Putting something on top of something\"",
+      "status": "done",
+      "p_done": 0.984,
+      "time": 5.25,
+      "lo": 4.5,
+      "hi": 6.0
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Pretending to unplug something from something\"",
+      "status": "not_found",
+      "p_done": 0.053,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 4,
+      "text": "a person doing this action: \"Pretending to mix\"",
+      "status": "not_found",
+      "p_done": 0.193,
+      "time": null,
+      "lo": null,
+      "hi": null
+     }
+    ],
+    "order_issues": [],
+    "seconds_total": 13.55
+   },
+   "audit": {
+    "ok": true,
+    "seconds": 31.5,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Indicating a region with the hand\"",
+      "at_start": "cannot tell: Empty blue tray, hand moving above tray",
+      "at_end": "cannot tell: Tray holds egg, fork, pen, book, bottle",
+      "audit": "cannot tell",
+      "reason": "no lasting visual result to verify",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Moving object(s) around\"",
+      "at_start": "no: Blue tray is completely empty",
+      "at_end": "yes: Egg, fork, pen, book, and bottle on tray",
+      "audit": "confirm",
+      "reason": "lasting result absent at START and present at END",
+      "lasting": "objects in new positions on tray",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Putting something on top of something\"",
+      "at_start": "no: Blue tray is empty, nothing on top",
+      "at_end": "yes: Objects resting on top of the blue tray",
+      "audit": "confirm",
+      "reason": "lasting result absent at START and present at END",
+      "lasting": "object on top of tray",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Pretending to unplug something from something\"",
+      "at_start": "cannot tell: Empty blue tray, no plug visible",
+      "at_end": "cannot tell: Objects on tray, no plug visible",
+      "audit": "cannot tell",
+      "reason": "no lasting visual result to verify",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 4,
+      "text": "a person doing this action: \"Pretending to mix\"",
+      "at_start": "cannot tell: Empty blue tray, no mixing tools",
+      "at_end": "cannot tell: Objects on tray, no mixing",
+      "audit": "cannot tell",
+      "reason": "no lasting visual result to verify",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     }
+    ],
+    "sheet": "CHECKLIST AUDIT SIGN-OFF SHEET\n0. a person doing this action: \"Indicating a region with the hand\" | reported: done | audit: cannot tell | reason: no lasting visual result to verify\n1. a person doing this action: \"Moving object(s) around\" | reported: done | audit: confirm | reason: lasting result absent at START and present at END\n2. a person doing this action: \"Putting something on top of something\" | reported: done | audit: confirm | reason: lasting result absent at START and present at END\n3. a person doing this action: \"Pretending to unplug something from something\" | reported: not_found | audit: cannot tell | reason: no lasting visual result to verify\n4. a person doing this action: \"Pretending to mix\" | reported: not_found | audit: cannot tell | reason: no lasting visual result to verify\norder: out of order pairs [1, 2]\ncounts: confirm=2, dispute=0, cannot tell=3",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [
+     [
+      1,
+      2
+     ]
+    ],
+    "rules_agree": true,
+    "attempts": 1,
+    "local_order_pairs": [
+     [
+      1,
+      2
+     ]
+    ],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 62729
+   },
+   "ts": 1795291196.5152555
+  },
+  {
+   "take": "video_10241",
+   "model": "gemini-4-hydrogen",
+   "run": 1,
+   "desc": "benchmark clip",
+   "labels": [
+    "Moving object(s) around",
+    "Putting something on top of something",
+    "Pulling something",
+    "Snapping fingers"
+   ],
+   "not_done": [
+    2,
+    3
+   ],
+   "fused": {
+    "video": {
+     "duration": 16.9
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Moving object(s) around\"",
+      "status": "done",
+      "p_done": 0.996,
+      "time": 0.5,
+      "lo": 0.0,
+      "hi": 1.25
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Putting something on top of something\"",
+      "status": "done",
+      "p_done": 0.984,
+      "time": 1.5,
+      "lo": 0.5,
+      "hi": 2.5
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Pulling something\"",
+      "status": "not_found",
+      "p_done": 0.133,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Snapping fingers\"",
+      "status": "not_found",
+      "p_done": 0.04,
+      "time": null,
+      "lo": null,
+      "hi": null
+     }
+    ],
+    "order_issues": [],
+    "seconds_total": 13.65
+   },
+   "audit": {
+    "ok": true,
+    "seconds": 38.1,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Moving object(s) around\"",
+      "at_start": "no: two bun halves on tablecloth, toppings separate on plate",
+      "at_end": "yes: bun halves and toppings stacked together on plate",
+      "audit": "confirm",
+      "reason": "lasting result absent at START and present at END",
+      "lasting": "bun and toppings moved to new positions on plate",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Putting something on top of something\"",
+      "at_start": "no: bun halves and toppings lying separate and unstacked",
+      "at_end": "yes: ham and cheese stacked on bun on plate",
+      "audit": "confirm",
+      "reason": "lasting result absent at START and present at END",
+      "lasting": "sandwich items stacked on top of each other",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Pulling something\"",
+      "at_start": "cannot tell: table set with jar, plate, teapot, and bun halves",
+      "at_end": "cannot tell: tablecloth and teapot unmoved, sandwich stacked on plate",
+      "audit": "cannot tell",
+      "reason": "no lasting visual result or insufficient frame evidence",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Snapping fingers\"",
+      "at_start": "cannot tell: no hand visible in frame",
+      "at_end": "cannot tell: no hand visible in frame",
+      "audit": "cannot tell",
+      "reason": "no lasting visual result or insufficient frame evidence",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     }
+    ],
+    "sheet": "Checklist Audit Sign-Off Sheet\n0. a person doing this action: \"Moving object(s) around\" | reported: done | audit: confirm | lasting result absent at START and present at END\n1. a person doing this action: \"Putting something on top of something\" | reported: done | audit: confirm | lasting result absent at START and present at END\n2. a person doing this action: \"Pulling something\" | reported: not_found | audit: cannot tell | no lasting visual result or insufficient frame evidence\n3. a person doing this action: \"Snapping fingers\" | reported: not_found | audit: cannot tell | no lasting visual result or insufficient frame evidence\norder: no pairs out of order\ncounts: confirm=2, dispute=0, cannot tell=2",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [],
+    "rules_agree": true,
+    "attempts": 1,
+    "local_order_pairs": [],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 56320
+   },
+   "ts": 1795291438.9464796
+  },
+  {
+   "take": "video_10411",
+   "model": "gemini-4-hydrogen",
+   "run": 1,
+   "desc": "benchmark clip",
+   "labels": [
+    "Closing something",
+    "Opening something",
+    "Putting something into something",
+    "Turning something off",
+    "Turning something on"
+   ],
+   "not_done": [
+    3,
+    4
+   ],
+   "fused": {
+    "video": {
+     "duration": 19.2
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Closing something\"",
+      "status": "done",
+      "p_done": 0.988,
+      "time": 7.5,
+      "lo": 6.75,
+      "hi": 8.0
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Opening something\"",
+      "status": "done",
+      "p_done": 0.984,
+      "time": 4.25,
+      "lo": 3.75,
+      "hi": 5.0
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Putting something into something\"",
+      "status": "done",
+      "p_done": 0.994,
+      "time": 6.5,
+      "lo": 5.75,
+      "hi": 7.0
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Turning something off\"",
+      "status": "not_found",
+      "p_done": 0.039,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 4,
+      "text": "a person doing this action: \"Turning something on\"",
+      "status": "not_found",
+      "p_done": 0.035,
+      "time": null,
+      "lo": null,
+      "hi": null
+     }
+    ],
+    "order_issues": [
+     {
+      "earlier": 1,
+      "later": 0
+     }
+    ],
+    "seconds_total": 13.18
+   },
+   "audit": {
+    "ok": true,
+    "seconds": 44.95,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Closing something\"",
+      "at_start": "yes: yellow book lies closed on table",
+      "at_end": "yes: yellow book lies closed on table",
+      "audit": "cannot tell",
+      "reason": "credited, but start/end/before observations are inconclusive",
+      "lasting": "yellow book is closed",
+      "start_in_place": "yes",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [
+       1
+      ],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Opening something\"",
+      "at_start": "no: yellow book lies closed on table",
+      "at_end": "no: yellow book lies closed on table",
+      "audit": "dispute",
+      "reason": "credited, but its lasting result is absent at END and no later step on the list reverses it.",
+      "lasting": "yellow book is open",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [
+       0
+      ],
+      "local_audit": "dispute"
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Putting something into something\"",
+      "at_start": "no: money lies on table beside closed book",
+      "at_end": "yes: money sticks out from inside closed book",
+      "audit": "confirm",
+      "reason": "lasting result absent at START and present at END",
+      "lasting": "money inside yellow book",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Turning something off\"",
+      "at_start": "cannot tell: no switchable device visible on table",
+      "at_end": "cannot tell: no switchable device visible on table",
+      "audit": "cannot tell",
+      "reason": "no lasting visible result or both start and end are cannot tell",
+      "lasting": "device is off",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 4,
+      "text": "a person doing this action: \"Turning something on\"",
+      "at_start": "cannot tell: no switchable device visible on table",
+      "at_end": "cannot tell: no switchable device visible on table",
+      "audit": "cannot tell",
+      "reason": "no lasting visible result or both start and end are cannot tell",
+      "lasting": "device is on",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     }
+    ],
+    "sheet": "Checklist Audit Sign-Off Sheet\n0. a person doing this action: \"Closing something\" | reported: done | audit: cannot tell | reason: credited, but start/end/before observations are inconclusive\n1. a person doing this action: \"Opening something\" | reported: done | audit: dispute | reason: credited, but its lasting result is absent at END and no later step on the list reverses it.\n2. a person doing this action: \"Putting something into something\" | reported: done | audit: confirm | reason: lasting result absent at START and present at END\n3. a person doing this action: \"Turning something off\" | reported: not_found | audit: cannot tell | reason: no lasting visible result or both start and end are cannot tell\n4. a person doing this action: \"Turning something on\" | reported: not_found | audit: cannot tell | reason: no lasting visible result or both start and end are cannot tell\norder: pairs out of order: [0, 1], [0, 2]\ncounts: confirm=1, dispute=1, cannot tell=3",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ]
+    ],
+    "rules_agree": true,
+    "attempts": 1,
+    "local_order_pairs": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ]
+    ],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 67602
+   },
+   "ts": 1795291497.0755448
+  },
+  {
+   "take": "video_10412",
+   "model": "gemini-4-hydrogen",
+   "run": 1,
+   "desc": "benchmark clip",
+   "labels": [
+    "Closing something",
+    "Putting something into something",
+    "Pretending to break something",
+    "Holding something in a state"
+   ],
+   "not_done": [
+    2,
+    3
+   ],
+   "fused": {
+    "video": {
+     "duration": 31.3
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Closing something\"",
+      "status": "done",
+      "p_done": 0.976,
+      "time": 23.25,
+      "lo": 22.75,
+      "hi": 24.25
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Putting something into something\"",
+      "status": "done",
+      "p_done": 0.983,
+      "time": 2.25,
+      "lo": 1.75,
+      "hi": 3.0
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Pretending to break something\"",
+      "status": "not_found",
+      "p_done": 0.033,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Holding something in a state\"",
+      "status": "unsure",
+      "p_done": 0.604,
+      "time": 0.5,
+      "lo": 0.0,
+      "hi": 1.5
+     }
+    ],
+    "order_issues": [
+     {
+      "earlier": 1,
+      "later": 0
+     }
+    ],
+    "seconds_total": 13.82
+   },
+   "audit": {
+    "ok": true,
+    "seconds": 31.15,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Closing something\"",
+      "at_start": "no: black bag is open on the left",
+      "at_end": "yes: black bag is closed on the table",
+      "audit": "confirm",
+      "reason": "lasting result absent at START and present at END",
+      "lasting": "black bag closed",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Putting something into something\"",
+      "at_start": "no: phone, books, pen, sunglasses sit on table",
+      "at_end": "yes: phone, books, pen, sunglasses are gone from table",
+      "audit": "confirm",
+      "reason": "lasting result absent at START and present at END",
+      "lasting": "items removed from table into bag",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Pretending to break something\"",
+      "at_start": "cannot tell: no broken items visible on table",
+      "at_end": "cannot tell: no broken items visible on table",
+      "audit": "cannot tell",
+      "reason": "no lasting result visible in still frames",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Holding something in a state\"",
+      "at_start": "cannot tell: bag sits open, no one holding it",
+      "at_end": "cannot tell: bag sits closed, no one holding it",
+      "audit": "cannot tell",
+      "reason": "no lasting result visible in still frames",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     }
+    ],
+    "sheet": "Checklist Audit Sign-Off Sheet\n0. a person doing this action: \"Closing something\" | reported=done | audit=confirm | lasting result absent at START and present at END\n1. a person doing this action: \"Putting something into something\" | reported=done | audit=confirm | lasting result absent at START and present at END\n2. a person doing this action: \"Pretending to break something\" | reported=not_found | audit=cannot tell | no lasting result visible in still frames\n3. a person doing this action: \"Holding something in a state\" | reported=unsure | audit=cannot tell | no lasting result visible in still frames\norder: out of order pairs [[0, 1]]\ncounts: confirm=2, dispute=0, cannot tell=2",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [
+     [
+      0,
+      1
+     ]
+    ],
+    "rules_agree": true,
+    "attempts": 1,
+    "local_order_pairs": [
+     [
+      0,
+      1
+     ]
+    ],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "code_execution_call": 1,
+     "function_result": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 40783
+   },
+   "ts": 1795291448.4078076
+  },
+  {
+   "take": "video_10909",
+   "model": "gemini-4-hydrogen",
+   "run": 1,
+   "desc": "benchmark clip",
+   "labels": [
+    "Launching something",
+    "Putting something on top of something",
+    "Pretending to mix",
+    "Pretending to clap hands"
+   ],
+   "not_done": [
+    2,
+    3
+   ],
+   "fused": {
+    "video": {
+     "duration": 14.2
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Launching something\"",
+      "status": "unsure",
+      "p_done": 0.519,
+      "time": 4.0,
+      "lo": 2.5,
+      "hi": 6.0
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Putting something on top of something\"",
+      "status": "done",
+      "p_done": 0.974,
+      "time": 1.0,
+      "lo": 0.25,
+      "hi": 1.5
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Pretending to mix\"",
+      "status": "not_found",
+      "p_done": 0.129,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Pretending to clap hands\"",
+      "status": "not_found",
+      "p_done": 0.185,
+      "time": null,
+      "lo": null,
+      "hi": null
+     }
+    ],
+    "order_issues": [],
+    "seconds_total": 12.49
+   },
+   "audit": {
+    "ok": true,
+    "seconds": 32.46,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Launching something\"",
+      "at_start": "no: Green tennis ball is resting on the red table",
+      "at_end": "yes: Green tennis ball is gone from the red table",
+      "audit": "confirm",
+      "reason": "credited and lasting result appeared during the video",
+      "lasting": "green tennis ball gone from table",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Putting something on top of something\"",
+      "at_start": "no: Wooden board lies flat beside the brown notebook",
+      "at_end": "yes: Wooden board rests on top of the brown notebook",
+      "audit": "confirm",
+      "reason": "credited and lasting result appeared during the video",
+      "lasting": "wooden board on top of notebook",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Pretending to mix\"",
+      "at_start": "cannot tell: Pretending to mix leaves no visible lasting state",
+      "at_end": "cannot tell: Pretending to mix leaves no visible lasting state",
+      "audit": "cannot tell",
+      "reason": "no lasting visual state to verify",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Pretending to clap hands\"",
+      "at_start": "cannot tell: Pretending to clap leaves no visible lasting state",
+      "at_end": "cannot tell: Pretending to clap leaves no visible lasting state",
+      "audit": "cannot tell",
+      "reason": "no lasting visual state to verify",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     }
+    ],
+    "sheet": "Checklist Audit Sign-Off Sheet\n0. a person doing this action: \"Launching something\" | reported: unsure | audit: confirm | credited and lasting result appeared during the video\n1. a person doing this action: \"Putting something on top of something\" | reported: done | audit: confirm | credited and lasting result appeared during the video\n2. a person doing this action: \"Pretending to mix\" | reported: not_found | audit: cannot tell | no lasting visual state to verify\n3. a person doing this action: \"Pretending to clap hands\" | reported: not_found | audit: cannot tell | no lasting visual state to verify\norder: no pairs out of order\ncounts: confirm=2, dispute=0, cannot tell=2",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [],
+    "rules_agree": true,
+    "attempts": 1,
+    "local_order_pairs": [],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 56221
+   },
+   "ts": 1795291192.612538
+  },
+  {
+   "take": "video_11539",
+   "model": "gemini-4-hydrogen",
+   "run": 1,
+   "desc": "benchmark clip",
+   "labels": [
+    "Folding something",
+    "Moving object(s) around",
+    "Buttoning up a button",
+    "Ironing something"
+   ],
+   "not_done": [
+    2,
+    3
+   ],
+   "fused": {
+    "video": {
+     "duration": 20.4
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Folding something\"",
+      "status": "done",
+      "p_done": 0.995,
+      "time": 1.25,
+      "lo": 0.5,
+      "hi": 1.75
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Moving object(s) around\"",
+      "status": "done",
+      "p_done": 0.978,
+      "time": 12.5,
+      "lo": 11.75,
+      "hi": 13.0
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Buttoning up a button\"",
+      "status": "not_found",
+      "p_done": 0.035,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Ironing something\"",
+      "status": "not_found",
+      "p_done": 0.036,
+      "time": null,
+      "lo": null,
+      "hi": null
+     }
+    ],
+    "order_issues": [],
+    "seconds_total": 11.17
+   },
+   "audit": {
+    "ok": true,
+    "seconds": 34.83,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Folding something\"",
+      "at_start": "no: red shirt, pants, and paper lie flat unfolded",
+      "at_end": "yes: red shirt, pants, and paper are neatly folded",
+      "audit": "confirm",
+      "reason": "credited and lasting result appeared during the video",
+      "lasting": "clothes and paper folded",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "no",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Moving object(s) around\"",
+      "at_start": "no: pants in middle, paper at bottom of table",
+      "at_end": "yes: pants and paper moved closer to top",
+      "audit": "confirm",
+      "reason": "credited and lasting result appeared during the video",
+      "lasting": "objects at new positions on table",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Buttoning up a button\"",
+      "at_start": "cannot tell: no buttons visible on t-shirt or pants",
+      "at_end": "cannot tell: clothes folded, no buttons visible",
+      "audit": "cannot tell",
+      "reason": "no lasting result or both start and end are cannot tell",
+      "lasting": "button fastened",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Ironing something\"",
+      "at_start": "no: unfolded clothes have light creases, no iron",
+      "at_end": "no: folded clothes still have creases, no iron",
+      "audit": "confirm",
+      "reason": "not_found and lasting result did not appear",
+      "lasting": "clothes pressed smooth",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     }
+    ],
+    "sheet": "Checklist Audit Sign-Off Sheet\n0. a person doing this action: \"Folding something\" | reported=done | audit=confirm | credited and lasting result appeared during the video\n1. a person doing this action: \"Moving object(s) around\" | reported=done | audit=confirm | credited and lasting result appeared during the video\n2. a person doing this action: \"Buttoning up a button\" | reported=not_found | audit=cannot tell | no lasting result or both start and end are cannot tell\n3. a person doing this action: \"Ironing something\" | reported=not_found | audit=confirm | not_found and lasting result did not appear\norder: no pairs out of order\ncounts: confirm=3, dispute=0, cannot tell=1",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [],
+    "rules_agree": true,
+    "attempts": 1,
+    "local_order_pairs": [],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 54056
+   },
+   "ts": 1795291344.8751645
+  },
+  {
+   "take": "video_1658",
+   "model": "gemini-4-hydrogen",
+   "run": 1,
+   "desc": "benchmark clip",
+   "labels": [
+    "Pouring something from something into something",
+    "Showing something to the camera",
+    "Hitting something against/with something",
+    "Shuffling objects"
+   ],
+   "not_done": [
+    2,
+    3
+   ],
+   "fused": {
+    "video": {
+     "duration": 21.7
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Pouring something from something into something\"",
+      "status": "done",
+      "p_done": 0.989,
+      "time": 1.0,
+      "lo": 0.5,
+      "hi": 1.75
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Showing something to the camera\"",
+      "status": "done",
+      "p_done": 0.85,
+      "time": 15.75,
+      "lo": 15.25,
+      "hi": 16.5
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Hitting something against/with something\"",
+      "status": "not_found",
+      "p_done": 0.045,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Shuffling objects\"",
+      "status": "not_found",
+      "p_done": 0.048,
+      "time": null,
+      "lo": null,
+      "hi": null
+     }
+    ],
+    "order_issues": [],
+    "seconds_total": 9.22
+   },
+   "audit": {
+    "ok": true,
+    "seconds": 44.43,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Pouring something from something into something\"",
+      "at_start": "no: three empty glasses and water pitcher on table",
+      "at_end": "yes: left and right glasses now contain water",
+      "audit": "confirm",
+      "reason": "lasting result absent at START and present at END",
+      "lasting": "liquid poured into glass",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "no",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Showing something to the camera\"",
+      "at_start": "cannot tell: glasses and pitcher sit on dining table",
+      "at_end": "cannot tell: glasses with water sit on dining table",
+      "audit": "cannot tell",
+      "reason": "step leaves no lasting visual result",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Hitting something against/with something\"",
+      "at_start": "cannot tell: intact glasses and pitcher on table",
+      "at_end": "cannot tell: intact glasses and pitcher on table",
+      "audit": "cannot tell",
+      "reason": "step leaves no lasting visual result",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Shuffling objects\"",
+      "at_start": "cannot tell: glasses, bottle, jar, and pitcher on table",
+      "at_end": "cannot tell: glasses, bottle, jar, and pitcher on table",
+      "audit": "cannot tell",
+      "reason": "lasting result cannot be determined from start or end frame",
+      "lasting": "objects in rearranged positions",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     }
+    ],
+    "sheet": "Checklist Audit Sign-Off Sheet\n0. a person doing this action: \"Pouring something from something into something\" | reported: done | audit: confirm | lasting result absent at START and present at END\n1. a person doing this action: \"Showing something to the camera\" | reported: done | audit: cannot tell | step leaves no lasting visual result\n2. a person doing this action: \"Hitting something against/with something\" | reported: not_found | audit: cannot tell | step leaves no lasting visual result\n3. a person doing this action: \"Shuffling objects\" | reported: not_found | audit: cannot tell | lasting result cannot be determined from start or end frame\norder: no pairs out of order\ncounts: confirm=1, dispute=0, cannot tell=3",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [],
+    "rules_agree": true,
+    "attempts": 1,
+    "local_order_pairs": [],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 58645
+   },
+   "ts": 1795291346.2050316
+  },
+  {
+   "take": "video_1715",
+   "model": "gemini-4-hydrogen",
+   "run": 1,
+   "desc": "benchmark clip",
+   "labels": [
+    "Holding something in a state",
+    "Mixing something with something",
+    "Pouring something from something into something",
+    "Putting something into something",
+    "Shuffling objects",
+    "Taking something out of something",
+    "Hitting something against/with something",
+    "Dropping something on top of something"
+   ],
+   "not_done": [
+    6,
+    7
+   ],
+   "fused": {
+    "video": {
+     "duration": 35.2
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Holding something in a state\"",
+      "status": "unsure",
+      "p_done": 0.34,
+      "time": 3.0,
+      "lo": 1.25,
+      "hi": 18.25
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Mixing something with something\"",
+      "status": "done",
+      "p_done": 0.987,
+      "time": 26.75,
+      "lo": 26.0,
+      "hi": 27.5
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Pouring something from something into something\"",
+      "status": "done",
+      "p_done": 0.988,
+      "time": 19.0,
+      "lo": 18.25,
+      "hi": 19.75
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Putting something into something\"",
+      "status": "done",
+      "p_done": 0.951,
+      "time": 5.25,
+      "lo": 4.25,
+      "hi": 6.0
+     },
+     {
+      "index": 4,
+      "text": "a person doing this action: \"Shuffling objects\"",
+      "status": "done",
+      "p_done": 0.963,
+      "time": 7.0,
+      "lo": 6.25,
+      "hi": 8.0
+     },
+     {
+      "index": 5,
+      "text": "a person doing this action: \"Taking something out of something\"",
+      "status": "done",
+      "p_done": 0.974,
+      "time": 1.25,
+      "lo": 0.5,
+      "hi": 2.0
+     },
+     {
+      "index": 6,
+      "text": "a person doing this action: \"Hitting something against/with something\"",
+      "status": "not_found",
+      "p_done": 0.241,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 7,
+      "text": "a person doing this action: \"Dropping something on top of something\"",
+      "status": "not_found",
+      "p_done": 0.186,
+      "time": null,
+      "lo": null,
+      "hi": null
+     }
+    ],
+    "order_issues": [
+     {
+      "earlier": 2,
+      "later": 1
+     },
+     {
+      "earlier": 3,
+      "later": 1
+     },
+     {
+      "earlier": 4,
+      "later": 1
+     },
+     {
+      "earlier": 5,
+      "later": 1
+     },
+     {
+      "earlier": 3,
+      "later": 2
+     },
+     {
+      "earlier": 4,
+      "later": 2
+     },
+     {
+      "earlier": 5,
+      "later": 2
+     },
+     {
+      "earlier": 5,
+      "later": 3
+     },
+     {
+      "earlier": 5,
+      "later": 4
+     }
+    ],
+    "seconds_total": 15.36
+   },
+   "audit": {
+    "ok": true,
+    "seconds": 59.47,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Holding something in a state\"",
+      "at_start": "cannot tell: Hands rest on table; holding is transient",
+      "at_end": "cannot tell: Right hand holds spoon in mug; holding is transient",
+      "audit": "cannot tell",
+      "reason": "no lasting visible result or both START and END are cannot tell",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Mixing something with something\"",
+      "at_start": "cannot tell: Opaque mug from side; spoon lies on table",
+      "at_end": "cannot tell: Opaque mug from side; hand stirs with spoon",
+      "audit": "cannot tell",
+      "reason": "no lasting visible result or both START and END are cannot tell",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Pouring something from something into something\"",
+      "at_start": "cannot tell: Opaque white mug from side; interior not visible",
+      "at_end": "cannot tell: Opaque white mug from side; interior not visible",
+      "audit": "cannot tell",
+      "reason": "no lasting visible result or both START and END are cannot tell",
+      "lasting": "water in the mug",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Putting something into something\"",
+      "at_start": "no: No tea bag or wrapper outside yellow box",
+      "at_end": "yes: Wrapper on table; tea bag tag at mug",
+      "audit": "confirm",
+      "reason": "lasting result appeared during the video",
+      "lasting": "tea bag inside the mug",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 4,
+      "text": "a person doing this action: \"Shuffling objects\"",
+      "at_start": "no: Wooden letters on table read d M E",
+      "at_end": "no: Wooden letters on table still read d M E",
+      "audit": "dispute",
+      "reason": "credited, but lasting result is absent at END and not reversed later",
+      "lasting": "wooden letters rearranged from d-M-E",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "dispute"
+     },
+     {
+      "index": 5,
+      "text": "a person doing this action: \"Taking something out of something\"",
+      "at_start": "no: No tea bag or wrapper visible outside box",
+      "at_end": "yes: Yellow tea wrapper lies on table beside mug",
+      "audit": "confirm",
+      "reason": "lasting result appeared during the video",
+      "lasting": "tea bag packet out of yellow box",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 6,
+      "text": "a person doing this action: \"Hitting something against/with something\"",
+      "at_start": "cannot tell: Hitting leaves no lasting visible mark",
+      "at_end": "cannot tell: Hitting leaves no lasting visible mark",
+      "audit": "cannot tell",
+      "reason": "no lasting visible result or both START and END are cannot tell",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 7,
+      "text": "a person doing this action: \"Dropping something on top of something\"",
+      "at_start": "cannot tell: No specified dropped object identifiable",
+      "at_end": "cannot tell: No specified dropped object identifiable",
+      "audit": "cannot tell",
+      "reason": "no lasting visible result or both START and END are cannot tell",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     }
+    ],
+    "sheet": "Checklist Audit Sign-Off Sheet\n0. a person doing this action: \"Holding something in a state\" | reported: unsure | audit: cannot tell | no lasting visible result or both START and END are cannot tell\n1. a person doing this action: \"Mixing something with something\" | reported: done | audit: cannot tell | no lasting visible result or both START and END are cannot tell\n2. a person doing this action: \"Pouring something from something into something\" | reported: done | audit: cannot tell | no lasting visible result or both START and END are cannot tell\n3. a person doing this action: \"Putting something into something\" | reported: done | audit: confirm | lasting result appeared during the video\n4. a person doing this action: \"Shuffling objects\" | reported: done | audit: dispute | credited, but lasting result is absent at END and not reversed later\n5. a person doing this action: \"Taking something out of something\" | reported: done | audit: confirm | lasting result appeared during the video\n6. a person doing this action: \"Hitting something against/with something\" | reported: not_found | audit: cannot tell | no lasting visible result or both START and END are cannot tell\n7. a person doing this action: \"Dropping something on top of something\" | reported: not_found | audit: cannot tell | no lasting visible result or both START and END are cannot tell\norder: out of order pairs [[1, 2], [1, 3], [1, 4], [1, 5], [2, 3], [2, 4], [2, 5], [3, 5], [4, 5]]\ncounts: confirm=2, dispute=1, cannot tell=5",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      2,
+      5
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      4,
+      5
+     ]
+    ],
+    "rules_agree": true,
+    "attempts": 1,
+    "local_order_pairs": [
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      2,
+      5
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      4,
+      5
+     ]
+    ],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 94483
+   },
+   "ts": 1795291571.908584
+  },
+  {
+   "take": "video_2381",
+   "model": "gemini-4-hydrogen",
+   "run": 1,
+   "desc": "benchmark clip",
+   "labels": [
+    "Putting something on top of something",
+    "Shuffling objects",
+    "Opening something",
+    "Mixing something with something"
+   ],
+   "not_done": [
+    2,
+    3
+   ],
+   "fused": {
+    "video": {
+     "duration": 20.9
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Putting something on top of something\"",
+      "status": "done",
+      "p_done": 0.978,
+      "time": 10.25,
+      "lo": 9.5,
+      "hi": 10.75
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Shuffling objects\"",
+      "status": "done",
+      "p_done": 0.985,
+      "time": 3.5,
+      "lo": 2.75,
+      "hi": 4.0
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Opening something\"",
+      "status": "not_found",
+      "p_done": 0.151,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Mixing something with something\"",
+      "status": "not_found",
+      "p_done": 0.245,
+      "time": null,
+      "lo": null,
+      "hi": null
+     }
+    ],
+    "order_issues": [
+     {
+      "earlier": 1,
+      "later": 0
+     }
+    ],
+    "seconds_total": 12.44
+   },
+   "audit": {
+    "ok": true,
+    "seconds": 44.88,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Putting something on top of something\"",
+      "at_start": "yes: Fanned pile of cards is already on the table.",
+      "at_end": "yes: Five cards are laid out on the table.",
+      "audit": "cannot tell",
+      "reason": "credited, but start and end states do not conclusively confirm or dispute",
+      "lasting": "cards resting on top of the table",
+      "start_in_place": "yes",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Shuffling objects\"",
+      "at_start": "cannot tell: Fanned face-down cards sit next to a watch.",
+      "at_end": "cannot tell: Five cards are spread out on the table.",
+      "audit": "cannot tell",
+      "reason": "no visible lasting result in still frames",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Opening something\"",
+      "at_start": "no: Only cards and a watch are on the table.",
+      "at_end": "no: Only cards and a watch are on the table.",
+      "audit": "confirm",
+      "reason": "not_found and lasting result is absent at END",
+      "lasting": "an object or container open",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Mixing something with something\"",
+      "at_start": "no: Separate cards and watch on the table.",
+      "at_end": "no: Five separate cards and watch on the table.",
+      "audit": "confirm",
+      "reason": "not_found and lasting result is absent at END",
+      "lasting": "items or substances mixed together",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     }
+    ],
+    "sheet": "CHECKLIST AUDIT SIGN-OFF SHEET\nstep 0: a person doing this action: \"Putting something on top of something\" | reported=done | audit=cannot tell | credited, but start and end states do not conclusively confirm or dispute\nstep 1: a person doing this action: \"Shuffling objects\" | reported=done | audit=cannot tell | no visible lasting result in still frames\nstep 2: a person doing this action: \"Opening something\" | reported=not_found | audit=confirm | not_found and lasting result is absent at END\nstep 3: a person doing this action: \"Mixing something with something\" | reported=not_found | audit=confirm | not_found and lasting result is absent at END\norder: out-of-order pairs [[0, 1]]\ncounts: confirm=2, dispute=0, cannot tell=2",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [
+     [
+      0,
+      1
+     ]
+    ],
+    "rules_agree": true,
+    "attempts": 1,
+    "local_order_pairs": [
+     [
+      0,
+      1
+     ]
+    ],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 57828
+   },
+   "ts": 1795291628.2157316
+  },
+  {
+   "take": "video_2691",
+   "model": "gemini-4-hydrogen",
+   "run": 1,
+   "desc": "benchmark clip",
+   "labels": [
+    "Holding something in a state",
+    "Launching something",
+    "Moving object(s) around",
+    "Putting something on top of something",
+    "Buttoning up a button",
+    "Folding something"
+   ],
+   "not_done": [
+    4,
+    5
+   ],
+   "fused": {
+    "video": {
+     "duration": 21.8
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Holding something in a state\"",
+      "status": "not_found",
+      "p_done": 0.293,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Launching something\"",
+      "status": "done",
+      "p_done": 0.971,
+      "time": 13.75,
+      "lo": 13.0,
+      "hi": 14.25
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Moving object(s) around\"",
+      "status": "done",
+      "p_done": 0.995,
+      "time": 0.25,
+      "lo": 0.0,
+      "hi": 1.0
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Putting something on top of something\"",
+      "status": "done",
+      "p_done": 0.981,
+      "time": 2.75,
+      "lo": 2.0,
+      "hi": 3.5
+     },
+     {
+      "index": 4,
+      "text": "a person doing this action: \"Buttoning up a button\"",
+      "status": "not_found",
+      "p_done": 0.034,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 5,
+      "text": "a person doing this action: \"Folding something\"",
+      "status": "not_found",
+      "p_done": 0.039,
+      "time": null,
+      "lo": null,
+      "hi": null
+     }
+    ],
+    "order_issues": [
+     {
+      "earlier": 2,
+      "later": 1
+     },
+     {
+      "earlier": 3,
+      "later": 1
+     }
+    ],
+    "seconds_total": 11.8
+   },
+   "audit": {
+    "ok": true,
+    "seconds": 50.91,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Holding something in a state\"",
+      "at_start": "cannot tell: Two books stacked, third flat, tin in center, box on boot.",
+      "at_end": "cannot tell: Third book on stack, tin moved, boot gone, box on table.",
+      "audit": "cannot tell",
+      "reason": "no lasting visual state or cannot tell from start and end frames",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Launching something\"",
+      "at_start": "cannot tell: Pen lies on table; person's hands are near books.",
+      "at_end": "cannot tell: Pen lies on table; person's left hand is near book.",
+      "audit": "cannot tell",
+      "reason": "no lasting visual state or cannot tell from start and end frames",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Moving object(s) around\"",
+      "at_start": "no: Objects in initial spots: books, pen, tin, box on boot.",
+      "at_end": "yes: Book on stack, tin moved right, boot gone, box on table.",
+      "audit": "confirm",
+      "reason": "credited and lasting result appeared between START and END",
+      "lasting": "objects moved to new positions",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "no",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Putting something on top of something\"",
+      "at_start": "no: Third book lies flat on table beside two-book stack.",
+      "at_end": "yes: Third book rests on top of two-book stack.",
+      "audit": "confirm",
+      "reason": "credited and lasting result appeared between START and END",
+      "lasting": "book resting on top of book stack",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 4,
+      "text": "a person doing this action: \"Buttoning up a button\"",
+      "at_start": "cannot tell: Person wears plain sweater; no buttons visible.",
+      "at_end": "cannot tell: Person wears plain sweater; no buttons visible.",
+      "audit": "cannot tell",
+      "reason": "no lasting visual state or cannot tell from start and end frames",
+      "lasting": "button fastened",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 5,
+      "text": "a person doing this action: \"Folding something\"",
+      "at_start": "no: Books, pen, tin, box, and boot on table; nothing folded.",
+      "at_end": "no: Books, pen, tin, and tea box on table; nothing folded.",
+      "audit": "confirm",
+      "reason": "not_found and lasting result was absent at END with no later reversal",
+      "lasting": "object folded",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     }
+    ],
+    "sheet": "Checklist Audit Sign-off Sheet\n0. a person doing this action: \"Holding something in a state\" | reported: not_found | audit: cannot tell | no lasting visual state or cannot tell from start and end frames\n1. a person doing this action: \"Launching something\" | reported: done | audit: cannot tell | no lasting visual state or cannot tell from start and end frames\n2. a person doing this action: \"Moving object(s) around\" | reported: done | audit: confirm | credited and lasting result appeared between START and END\n3. a person doing this action: \"Putting something on top of something\" | reported: done | audit: confirm | credited and lasting result appeared between START and END\n4. a person doing this action: \"Buttoning up a button\" | reported: not_found | audit: cannot tell | no lasting visual state or cannot tell from start and end frames\n5. a person doing this action: \"Folding something\" | reported: not_found | audit: confirm | not_found and lasting result was absent at END with no later reversal\norder: out of order pairs [[1, 2], [1, 3]]\ncounts: confirm=3, dispute=0, cannot tell=3",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ]
+    ],
+    "rules_agree": true,
+    "attempts": 1,
+    "local_order_pairs": [
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ]
+    ],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 70088
+   },
+   "ts": 1795291570.8762662
+  },
+  {
+   "take": "video_3826",
+   "model": "gemini-4-hydrogen",
+   "run": 1,
+   "desc": "benchmark clip",
+   "labels": [
+    "Clapping hands",
+    "Lifting something and placing it back down",
+    "Plugging something into something",
+    "Putting something on top of something",
+    "Turning something on",
+    "Putting something into something",
+    "Drinking something from something"
+   ],
+   "not_done": [
+    5,
+    6
+   ],
+   "fused": {
+    "video": {
+     "duration": 32.5
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Clapping hands\"",
+      "status": "done",
+      "p_done": 0.98,
+      "time": 1.75,
+      "lo": 0.75,
+      "hi": 2.5
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Lifting something and placing it back down\"",
+      "status": "done",
+      "p_done": 0.839,
+      "time": 24.25,
+      "lo": 23.5,
+      "hi": 25.25
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Plugging something into something\"",
+      "status": "done",
+      "p_done": 0.984,
+      "time": 8.75,
+      "lo": 8.25,
+      "hi": 9.5
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Putting something on top of something\"",
+      "status": "done",
+      "p_done": 0.806,
+      "time": 12.5,
+      "lo": 11.5,
+      "hi": 13.25
+     },
+     {
+      "index": 4,
+      "text": "a person doing this action: \"Turning something on\"",
+      "status": "done",
+      "p_done": 0.961,
+      "time": 19.5,
+      "lo": 18.75,
+      "hi": 20.5
+     },
+     {
+      "index": 5,
+      "text": "a person doing this action: \"Putting something into something\"",
+      "status": "not_found",
+      "p_done": 0.153,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 6,
+      "text": "a person doing this action: \"Drinking something from something\"",
+      "status": "not_found",
+      "p_done": 0.055,
+      "time": null,
+      "lo": null,
+      "hi": null
+     }
+    ],
+    "order_issues": [
+     {
+      "earlier": 2,
+      "later": 1
+     },
+     {
+      "earlier": 3,
+      "later": 1
+     },
+     {
+      "earlier": 4,
+      "later": 1
+     }
+    ],
+    "seconds_total": 15.17
+   },
+   "audit": {
+    "ok": true,
+    "seconds": 53.24,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Clapping hands\"",
+      "at_start": "cannot tell: no person visible, table items untouched",
+      "at_end": "cannot tell: no person visible, gesture leaves no mark",
+      "audit": "cannot tell",
+      "reason": "no lasting visual result to verify in still frames",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Lifting something and placing it back down\"",
+      "at_start": "cannot tell: hair dryer rests on grey mat",
+      "at_end": "cannot tell: hair dryer still rests on grey mat",
+      "audit": "cannot tell",
+      "reason": "no lasting visual result to verify in still frames",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Plugging something into something\"",
+      "at_start": "no: hair dryer plug lies unplugged on grey mat",
+      "at_end": "yes: hair dryer plug is inserted in power strip",
+      "audit": "confirm",
+      "reason": "lasting result absent at START and present at END",
+      "lasting": "hair dryer plugged into power strip",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Putting something on top of something\"",
+      "at_start": "no: red book cover is empty, pens on mat",
+      "at_end": "yes: grey and black pens rest on red book",
+      "audit": "confirm",
+      "reason": "lasting result absent at START and present at END",
+      "lasting": "pens placed on top of book",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 4,
+      "text": "a person doing this action: \"Turning something on\"",
+      "at_start": "no: hair dryer is unplugged on grey mat",
+      "at_end": "cannot tell: hair dryer plugged in, no power indicator visible",
+      "audit": "cannot tell",
+      "reason": "lasting result state at START or END is inconclusive",
+      "lasting": "hair dryer switched on",
+      "start_in_place": "no",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 5,
+      "text": "a person doing this action: \"Putting something into something\"",
+      "at_start": "no: all table items visible outside containers",
+      "at_end": "no: same items still visible outside containers",
+      "audit": "confirm",
+      "reason": "lasting result absent at END and not reversed later",
+      "lasting": "item placed inside container",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 6,
+      "text": "a person doing this action: \"Drinking something from something\"",
+      "at_start": "no: orange-cap bottle about two-thirds full",
+      "at_end": "no: orange-cap bottle at same water level",
+      "audit": "confirm",
+      "reason": "lasting result absent at END and not reversed later",
+      "lasting": "lower water level in bottle",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     }
+    ],
+    "sheet": "CHECKLIST AUDIT SIGN-OFF SHEET\n0. a person doing this action: \"Clapping hands\" | reported: done | audit: cannot tell | no lasting visual result to verify in still frames\n1. a person doing this action: \"Lifting something and placing it back down\" | reported: done | audit: cannot tell | no lasting visual result to verify in still frames\n2. a person doing this action: \"Plugging something into something\" | reported: done | audit: confirm | lasting result absent at START and present at END\n3. a person doing this action: \"Putting something on top of something\" | reported: done | audit: confirm | lasting result absent at START and present at END\n4. a person doing this action: \"Turning something on\" | reported: done | audit: cannot tell | lasting result state at START or END is inconclusive\n5. a person doing this action: \"Putting something into something\" | reported: not_found | audit: confirm | lasting result absent at END and not reversed later\n6. a person doing this action: \"Drinking something from something\" | reported: not_found | audit: confirm | lasting result absent at END and not reversed later\norder: out of order pairs [[1, 2], [1, 3], [1, 4]]\ncounts: confirm=4, dispute=0, cannot tell=3",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      1,
+      4
+     ]
+    ],
+    "rules_agree": true,
+    "attempts": 1,
+    "local_order_pairs": [
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      1,
+      4
+     ]
+    ],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 84644
+   },
+   "ts": 1795291623.3406954
+  },
+  {
+   "take": "video_3896",
+   "model": "gemini-4-hydrogen",
+   "run": 1,
+   "desc": "benchmark clip",
+   "labels": [
+    "Mixing something with something",
+    "Pretending to pour from something into something",
+    "Putting something into something",
+    "Tearing something into pieces",
+    "Closing something",
+    "Browsing through something"
+   ],
+   "not_done": [
+    4,
+    5
+   ],
+   "fused": {
+    "video": {
+     "duration": 27.7
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Mixing something with something\"",
+      "status": "done",
+      "p_done": 0.992,
+      "time": 20.0,
+      "lo": 19.25,
+      "hi": 20.5
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Pretending to pour from something into something\"",
+      "status": "done",
+      "p_done": 0.975,
+      "time": 13.75,
+      "lo": 13.0,
+      "hi": 14.25
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Putting something into something\"",
+      "status": "done",
+      "p_done": 0.957,
+      "time": 6.75,
+      "lo": 5.0,
+      "hi": 8.0
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Tearing something into pieces\"",
+      "status": "done",
+      "p_done": 0.991,
+      "time": 3.5,
+      "lo": 2.75,
+      "hi": 4.25
+     },
+     {
+      "index": 4,
+      "text": "a person doing this action: \"Closing something\"",
+      "status": "not_found",
+      "p_done": 0.056,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 5,
+      "text": "a person doing this action: \"Browsing through something\"",
+      "status": "not_found",
+      "p_done": 0.044,
+      "time": null,
+      "lo": null,
+      "hi": null
+     }
+    ],
+    "order_issues": [
+     {
+      "earlier": 1,
+      "later": 0
+     },
+     {
+      "earlier": 2,
+      "later": 0
+     },
+     {
+      "earlier": 3,
+      "later": 0
+     },
+     {
+      "earlier": 2,
+      "later": 1
+     },
+     {
+      "earlier": 3,
+      "later": 1
+     },
+     {
+      "earlier": 3,
+      "later": 2
+     }
+    ],
+    "seconds_total": 13.62
+   },
+   "audit": {
+    "ok": true,
+    "seconds": 41.2,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Mixing something with something\"",
+      "at_start": "no: Plate is empty and ingredients sit in separate trays.",
+      "at_end": "cannot tell: Blue bowl blocks most of the plate from view.",
+      "audit": "cannot tell",
+      "reason": "Credited, but START/END observations do not confirm or dispute.",
+      "lasting": "ingredients mixed together on the plate",
+      "start_in_place": "no",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Pretending to pour from something into something\"",
+      "at_start": "cannot tell: Bottle stands on table; pretending leaves no lasting mark.",
+      "at_end": "cannot tell: Bottle stands on table; no poured liquid is visible.",
+      "audit": "cannot tell",
+      "reason": "No lasting photo-verifiable state or both START and END unclear.",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Putting something into something\"",
+      "at_start": "no: Plate is empty and carrot tray is full.",
+      "at_end": "yes: Carrot tray has fewer slices and plate has lettuce.",
+      "audit": "confirm",
+      "reason": "Absent at START and present at END as expected.",
+      "lasting": "food pieces placed into the plate",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Tearing something into pieces\"",
+      "at_start": "no: Plate is empty and lettuce sits whole in tray.",
+      "at_end": "yes: Torn green lettuce pieces are visible on the plate.",
+      "audit": "confirm",
+      "reason": "Absent at START and present at END as expected.",
+      "lasting": "torn lettuce pieces on the plate",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 4,
+      "text": "a person doing this action: \"Closing something\"",
+      "at_start": "cannot tell: Bottle top is out of frame; bowl is open.",
+      "at_end": "cannot tell: Bottle top is out of frame; bowl remains open.",
+      "audit": "cannot tell",
+      "reason": "No lasting photo-verifiable state or both START and END unclear.",
+      "lasting": "something closed",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 5,
+      "text": "a person doing this action: \"Browsing through something\"",
+      "at_start": "cannot tell: Browsing is a motion with no lasting photo state.",
+      "at_end": "cannot tell: Browsing leaves no lasting visible change in the scene.",
+      "audit": "cannot tell",
+      "reason": "No lasting photo-verifiable state or both START and END unclear.",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     }
+    ],
+    "sheet": "Checklist Audit Sign-Off Sheet\nStep 0: a person doing this action: \"Mixing something with something\" | reported=done | audit=cannot tell | Credited, but START/END observations do not confirm or dispute.\nStep 1: a person doing this action: \"Pretending to pour from something into something\" | reported=done | audit=cannot tell | No lasting photo-verifiable state or both START and END unclear.\nStep 2: a person doing this action: \"Putting something into something\" | reported=done | audit=confirm | Absent at START and present at END as expected.\nStep 3: a person doing this action: \"Tearing something into pieces\" | reported=done | audit=confirm | Absent at START and present at END as expected.\nStep 4: a person doing this action: \"Closing something\" | reported=not_found | audit=cannot tell | No lasting photo-verifiable state or both START and END unclear.\nStep 5: a person doing this action: \"Browsing through something\" | reported=not_found | audit=cannot tell | No lasting photo-verifiable state or both START and END unclear.\norder: [0, 1], [0, 2], [0, 3], [1, 2], [1, 3], [2, 3]\ncounts: confirm=2, dispute=0, cannot tell=4",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      3
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      2,
+      3
+     ]
+    ],
+    "rules_agree": true,
+    "attempts": 1,
+    "local_order_pairs": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      3
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      2,
+      3
+     ]
+    ],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 74909
+   },
+   "ts": 1795291450.0791316
+  },
+  {
+   "take": "video_4995",
+   "model": "gemini-4-hydrogen",
+   "run": 1,
+   "desc": "benchmark clip",
+   "labels": [
+    "Clapping hands",
+    "Folding something",
+    "Hitting something against/with something",
+    "Covering something with something",
+    "Snapping fingers"
+   ],
+   "not_done": [
+    3,
+    4
+   ],
+   "fused": {
+    "video": {
+     "duration": 11.6
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Clapping hands\"",
+      "status": "done",
+      "p_done": 0.986,
+      "time": 0.0,
+      "lo": 0.0,
+      "hi": 0.75
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Folding something\"",
+      "status": "done",
+      "p_done": 0.986,
+      "time": 7.25,
+      "lo": 6.75,
+      "hi": 8.0
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Hitting something against/with something\"",
+      "status": "done",
+      "p_done": 0.98,
+      "time": 3.25,
+      "lo": 2.5,
+      "hi": 3.75
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Covering something with something\"",
+      "status": "not_found",
+      "p_done": 0.129,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 4,
+      "text": "a person doing this action: \"Snapping fingers\"",
+      "status": "not_found",
+      "p_done": 0.12,
+      "time": null,
+      "lo": null,
+      "hi": null
+     }
+    ],
+    "order_issues": [
+     {
+      "earlier": 2,
+      "later": 1
+     }
+    ],
+    "seconds_total": 8.85
+   },
+   "audit": {
+    "ok": true,
+    "seconds": 31.5,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Clapping hands\"",
+      "at_start": "cannot tell: person clapping hands, paper flat and pen on table",
+      "at_end": "cannot tell: folded paper under left hand, pen on table",
+      "audit": "cannot tell",
+      "reason": "no lasting visual result to verify from still frames",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Folding something\"",
+      "at_start": "no: unfolded white paper lying flat on table",
+      "at_end": "yes: folded white paper on table under left hand",
+      "audit": "confirm",
+      "reason": "lasting result absent at START and present at END",
+      "lasting": "paper is folded",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Hitting something against/with something\"",
+      "at_start": "cannot tell: person clapping hands, paper flat and pen on table",
+      "at_end": "cannot tell: folded paper under left hand, pen on table",
+      "audit": "cannot tell",
+      "reason": "no lasting visual result to verify from still frames",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Covering something with something\"",
+      "at_start": "no: paper and pen uncovered on table",
+      "at_end": "no: folded paper and pen uncovered on table",
+      "audit": "confirm",
+      "reason": "not_found and lasting result absent at END",
+      "lasting": "object covered by another object",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 4,
+      "text": "a person doing this action: \"Snapping fingers\"",
+      "at_start": "cannot tell: person clapping hands, paper flat and pen on table",
+      "at_end": "cannot tell: folded paper under left hand, pen on table",
+      "audit": "cannot tell",
+      "reason": "no lasting visual result to verify from still frames",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     }
+    ],
+    "sheet": "AUDIT SIGN-OFF SHEET\n0. a person doing this action: \"Clapping hands\" | reported: done | audit: cannot tell | no lasting visual result to verify from still frames\n1. a person doing this action: \"Folding something\" | reported: done | audit: confirm | lasting result absent at START and present at END\n2. a person doing this action: \"Hitting something against/with something\" | reported: done | audit: cannot tell | no lasting visual result to verify from still frames\n3. a person doing this action: \"Covering something with something\" | reported: not_found | audit: confirm | not_found and lasting result absent at END\n4. a person doing this action: \"Snapping fingers\" | reported: not_found | audit: cannot tell | no lasting visual result to verify from still frames\norder: out of order pairs [1, 2]\ncounts: confirm=2, dispute=0, cannot tell=3",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [
+     [
+      1,
+      2
+     ]
+    ],
+    "rules_agree": true,
+    "attempts": 1,
+    "local_order_pairs": [
+     [
+      1,
+      2
+     ]
+    ],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 60502
+   },
+   "ts": 1795291292.5609152
+  },
+  {
+   "take": "video_5273",
+   "model": "gemini-4-hydrogen",
+   "run": 1,
+   "desc": "benchmark clip",
+   "labels": [
+    "Clicking something",
+    "Holding something in a state",
+    "Turning something off",
+    "Turning something on",
+    "Unplugging something from something",
+    "Opening something",
+    "Breaking something"
+   ],
+   "not_done": [
+    5,
+    6
+   ],
+   "fused": {
+    "video": {
+     "duration": 23.4
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Clicking something\"",
+      "status": "done",
+      "p_done": 0.971,
+      "time": 14.75,
+      "lo": 14.0,
+      "hi": 15.25
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Holding something in a state\"",
+      "status": "done",
+      "p_done": 0.99,
+      "time": 0.0,
+      "lo": 0.0,
+      "hi": 0.75
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Turning something off\"",
+      "status": "not_found",
+      "p_done": 0.291,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Turning something on\"",
+      "status": "not_found",
+      "p_done": 0.133,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 4,
+      "text": "a person doing this action: \"Unplugging something from something\"",
+      "status": "done",
+      "p_done": 0.994,
+      "time": 6.5,
+      "lo": 5.75,
+      "hi": 7.25
+     },
+     {
+      "index": 5,
+      "text": "a person doing this action: \"Opening something\"",
+      "status": "not_found",
+      "p_done": 0.047,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 6,
+      "text": "a person doing this action: \"Breaking something\"",
+      "status": "not_found",
+      "p_done": 0.047,
+      "time": null,
+      "lo": null,
+      "hi": null
+     }
+    ],
+    "order_issues": [
+     {
+      "earlier": 1,
+      "later": 0
+     },
+     {
+      "earlier": 4,
+      "later": 0
+     }
+    ],
+    "seconds_total": 13.59
+   },
+   "audit": {
+    "ok": true,
+    "seconds": 44.48,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Clicking something\"",
+      "at_start": "cannot tell: Person holds phone and hair dryer, no click state visible",
+      "at_end": "cannot tell: Person holds phone and hair dryer, no click state visible",
+      "audit": "cannot tell",
+      "reason": "no visible lasting result or start and end both cannot tell",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Holding something in a state\"",
+      "at_start": "cannot tell: Person holds phone and hair dryer in hands",
+      "at_end": "cannot tell: Person holds phone and hair dryer in hands",
+      "audit": "cannot tell",
+      "reason": "no visible lasting result or start and end both cannot tell",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Turning something off\"",
+      "at_start": "cannot tell: Hair dryer is plugged in, switch state not visible",
+      "at_end": "cannot tell: Hair dryer is unplugged, switch state not visible",
+      "audit": "cannot tell",
+      "reason": "no visible lasting result or start and end both cannot tell",
+      "lasting": "device switched off",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [
+       3
+      ],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Turning something on\"",
+      "at_start": "cannot tell: Hair dryer is plugged in, power state not visible",
+      "at_end": "no: Hair dryer is unplugged from wall outlet",
+      "audit": "cannot tell",
+      "reason": "not_found, but observations are inconclusive",
+      "lasting": "device turned on",
+      "start_in_place": "cannot tell",
+      "end_in_place": "no",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [
+       2,
+       4
+      ],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 4,
+      "text": "a person doing this action: \"Unplugging something from something\"",
+      "at_start": "no: Black plug is plugged into the wall outlet",
+      "at_end": "yes: Wall outlet is empty, plug rests on the floor",
+      "audit": "confirm",
+      "reason": "credited, absent at START, and present at END or reversed later",
+      "lasting": "plug removed from wall outlet",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 5,
+      "text": "a person doing this action: \"Opening something\"",
+      "at_start": "no: Blue ottoman box on the right is closed",
+      "at_end": "no: Blue ottoman box on the right is closed",
+      "audit": "confirm",
+      "reason": "not_found, and lasting result was already at START or absent at END without later reversal",
+      "lasting": "container or box open",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 6,
+      "text": "a person doing this action: \"Breaking something\"",
+      "at_start": "no: Brown egg on the floor is whole and intact",
+      "at_end": "no: Brown egg on the floor is whole and intact",
+      "audit": "confirm",
+      "reason": "not_found, and lasting result was already at START or absent at END without later reversal",
+      "lasting": "egg or object broken",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     }
+    ],
+    "sheet": "Checklist Audit Sign-Off Sheet\n0. a person doing this action: \"Clicking something\" | reported: done | audit: cannot tell | reason: no visible lasting result or start and end both cannot tell\n1. a person doing this action: \"Holding something in a state\" | reported: done | audit: cannot tell | reason: no visible lasting result or start and end both cannot tell\n2. a person doing this action: \"Turning something off\" | reported: not_found | audit: cannot tell | reason: no visible lasting result or start and end both cannot tell\n3. a person doing this action: \"Turning something on\" | reported: not_found | audit: cannot tell | reason: not_found, but observations are inconclusive\n4. a person doing this action: \"Unplugging something from something\" | reported: done | audit: confirm | reason: credited, absent at START, and present at END or reversed later\n5. a person doing this action: \"Opening something\" | reported: not_found | audit: confirm | reason: not_found, and lasting result was already at START or absent at END without later reversal\n6. a person doing this action: \"Breaking something\" | reported: not_found | audit: confirm | reason: not_found, and lasting result was already at START or absent at END without later reversal\norder: out of order pairs [[0, 1], [0, 4]]\ncounts: confirm=3, dispute=0, cannot tell=4",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      4
+     ]
+    ],
+    "rules_agree": true,
+    "attempts": 1,
+    "local_order_pairs": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      4
+     ]
+    ],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "code_execution_call": 2,
+     "code_execution_result": 2,
+     "function_result": 1,
+     "model_output": 1
+    },
+    "tokens": 67536
+   },
+   "ts": 1795291508.1560452
+  },
+  {
+   "take": "video_5347",
+   "model": "gemini-4-hydrogen",
+   "run": 1,
+   "desc": "benchmark clip",
+   "labels": [
+    "Browsing through something",
+    "Holding something in a state",
+    "Pretending to unplug something from something",
+    "Trying to turn something on but not working",
+    "Turning something on",
+    "Closing something",
+    "Mixing something with something"
+   ],
+   "not_done": [
+    5,
+    6
+   ],
+   "fused": {
+    "video": {
+     "duration": 27.1
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Browsing through something\"",
+      "status": "done",
+      "p_done": 0.973,
+      "time": 5.25,
+      "lo": 4.5,
+      "hi": 6.25
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Holding something in a state\"",
+      "status": "unsure",
+      "p_done": 0.363,
+      "time": 1.5,
+      "lo": 0.0,
+      "hi": 15.5
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Pretending to unplug something from something\"",
+      "status": "done",
+      "p_done": 0.797,
+      "time": 14.0,
+      "lo": 13.0,
+      "hi": 14.75
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Trying to turn something on but not working\"",
+      "status": "done",
+      "p_done": 0.945,
+      "time": 1.75,
+      "lo": 0.75,
+      "hi": 2.5
+     },
+     {
+      "index": 4,
+      "text": "a person doing this action: \"Turning something on\"",
+      "status": "done",
+      "p_done": 0.982,
+      "time": 22.25,
+      "lo": 21.5,
+      "hi": 23.0
+     },
+     {
+      "index": 5,
+      "text": "a person doing this action: \"Closing something\"",
+      "status": "unsure",
+      "p_done": 0.431,
+      "time": 9.75,
+      "lo": 5.5,
+      "hi": 11.5
+     },
+     {
+      "index": 6,
+      "text": "a person doing this action: \"Mixing something with something\"",
+      "status": "not_found",
+      "p_done": 0.059,
+      "time": null,
+      "lo": null,
+      "hi": null
+     }
+    ],
+    "order_issues": [
+     {
+      "earlier": 3,
+      "later": 0
+     },
+     {
+      "earlier": 3,
+      "later": 2
+     }
+    ],
+    "seconds_total": 19.42
+   },
+   "audit": {
+    "ok": true,
+    "seconds": 39.24,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Browsing through something\"",
+      "at_start": "cannot tell: Pink notebook is closed on desk, lamp is off.",
+      "at_end": "cannot tell: Pink notebook is closed on desk, lamp is on.",
+      "audit": "cannot tell",
+      "reason": "no lasting result visible in still frames",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Holding something in a state\"",
+      "at_start": "cannot tell: Hands rest on closed pink notebook, lamp is off.",
+      "at_end": "cannot tell: Notebook is closed, hand hovers nearby, lamp is on.",
+      "audit": "cannot tell",
+      "reason": "no lasting result visible in still frames",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Pretending to unplug something from something\"",
+      "at_start": "cannot tell: Black plug is plugged into wall outlet.",
+      "at_end": "cannot tell: Black plug is still plugged into wall outlet.",
+      "audit": "cannot tell",
+      "reason": "no lasting result visible in still frames",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Trying to turn something on but not working\"",
+      "at_start": "cannot tell: Red lamp is off, hands on closed notebook.",
+      "at_end": "cannot tell: Red lamp is on, notebook is closed.",
+      "audit": "cannot tell",
+      "reason": "no lasting result visible in still frames",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 4,
+      "text": "a person doing this action: \"Turning something on\"",
+      "at_start": "no: Red lamp is off on the wooden desk.",
+      "at_end": "yes: Red lamp is turned on and glowing brightly.",
+      "audit": "confirm",
+      "reason": "not in place at START and present at END",
+      "lasting": "lamp is on",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 5,
+      "text": "a person doing this action: \"Closing something\"",
+      "at_start": "yes: Pink notebook is closed flat on the desk.",
+      "at_end": "yes: Pink notebook is closed flat on the desk.",
+      "audit": "cannot tell",
+      "reason": "credited, but start/before/end state is inconclusive",
+      "lasting": "notebook is closed",
+      "start_in_place": "yes",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 6,
+      "text": "a person doing this action: \"Mixing something with something\"",
+      "at_start": "no: Only lamp, closed notebook, and pen on desk.",
+      "at_end": "no: Only lamp, closed notebook, and pen on desk.",
+      "audit": "confirm",
+      "reason": "not found, and lasting result is absent at END",
+      "lasting": "something mixed together",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     }
+    ],
+    "sheet": "Checklist Audit Sign-Off Sheet\n0. a person doing this action: \"Browsing through something\" | reported: done | audit: cannot tell | no lasting result visible in still frames\n1. a person doing this action: \"Holding something in a state\" | reported: unsure | audit: cannot tell | no lasting result visible in still frames\n2. a person doing this action: \"Pretending to unplug something from something\" | reported: done | audit: cannot tell | no lasting result visible in still frames\n3. a person doing this action: \"Trying to turn something on but not working\" | reported: done | audit: cannot tell | no lasting result visible in still frames\n4. a person doing this action: \"Turning something on\" | reported: done | audit: confirm | not in place at START and present at END\n5. a person doing this action: \"Closing something\" | reported: unsure | audit: cannot tell | credited, but start/before/end state is inconclusive\n6. a person doing this action: \"Mixing something with something\" | reported: not_found | audit: confirm | not found, and lasting result is absent at END\norder: out of order pairs [[0, 3], [2, 3]]\ncounts: confirm=2, dispute=0, cannot tell=5",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [
+     [
+      0,
+      3
+     ],
+     [
+      2,
+      3
+     ]
+    ],
+    "rules_agree": true,
+    "attempts": 1,
+    "local_order_pairs": [
+     [
+      0,
+      3
+     ],
+     [
+      2,
+      3
+     ]
+    ],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 87990
+   },
+   "ts": 1795291151.4610798
+  },
+  {
+   "take": "video_6020",
+   "model": "gemini-4-hydrogen",
+   "run": 1,
+   "desc": "benchmark clip",
+   "labels": [
+    "Holding something in a state",
+    "Moving object(s) around",
+    "Pretending to clap hands",
+    "Clicking something"
+   ],
+   "not_done": [
+    2,
+    3
+   ],
+   "fused": {
+    "video": {
+     "duration": 15.9
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Holding something in a state\"",
+      "status": "done",
+      "p_done": 0.912,
+      "time": 0.25,
+      "lo": 0.0,
+      "hi": 1.0
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Moving object(s) around\"",
+      "status": "done",
+      "p_done": 0.952,
+      "time": 2.25,
+      "lo": 1.25,
+      "hi": 3.0
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Pretending to clap hands\"",
+      "status": "not_found",
+      "p_done": 0.062,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Clicking something\"",
+      "status": "not_found",
+      "p_done": 0.064,
+      "time": null,
+      "lo": null,
+      "hi": null
+     }
+    ],
+    "order_issues": [],
+    "seconds_total": 15.1
+   },
+   "audit": {
+    "ok": true,
+    "seconds": 39.77,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Holding something in a state\"",
+      "at_start": "cannot tell: Hands hold blue notebook slightly above table.",
+      "at_end": "cannot tell: Blue notebook lies flat on table, no hands visible.",
+      "audit": "cannot tell",
+      "reason": "No lasting visual result to verify from still frames.",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Moving object(s) around\"",
+      "at_start": "no: Blue notebook lifted at right-center; no plum visible.",
+      "at_end": "yes: Notebook shifted flat left; small plum visible behind it.",
+      "audit": "confirm",
+      "reason": "Lasting result absent at START and present at END.",
+      "lasting": "object(s) in a new position",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Pretending to clap hands\"",
+      "at_start": "cannot tell: Hands hold blue notebook on table.",
+      "at_end": "cannot tell: No hands visible in frame.",
+      "audit": "cannot tell",
+      "reason": "No lasting visual result to verify from still frames.",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Clicking something\"",
+      "at_start": "cannot tell: Hands hold blue notebook on table.",
+      "at_end": "cannot tell: No hands visible in frame.",
+      "audit": "cannot tell",
+      "reason": "No lasting visual result to verify from still frames.",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     }
+    ],
+    "sheet": "Checklist Audit Sign-Off Sheet\n0. a person doing this action: \"Holding something in a state\" | reported: done | audit: cannot tell | No lasting visual result to verify from still frames.\n1. a person doing this action: \"Moving object(s) around\" | reported: done | audit: confirm | Lasting result absent at START and present at END.\n2. a person doing this action: \"Pretending to clap hands\" | reported: not_found | audit: cannot tell | No lasting visual result to verify from still frames.\n3. a person doing this action: \"Clicking something\" | reported: not_found | audit: cannot tell | No lasting visual result to verify from still frames.\norder: no pairs out of order\ncounts: confirm=1, dispute=0, cannot tell=3",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [],
+    "rules_agree": true,
+    "attempts": 1,
+    "local_order_pairs": [],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 54663
+   },
+   "ts": 1795291147.662662
+  },
+  {
+   "take": "video_6641",
+   "model": "gemini-4-hydrogen",
+   "run": 1,
+   "desc": "benchmark clip",
+   "labels": [
+    "Folding something",
+    "Putting something on top of something",
+    "Unfolding something",
+    "Working on a computer",
+    "Spreading something"
+   ],
+   "not_done": [
+    3,
+    4
+   ],
+   "fused": {
+    "video": {
+     "duration": 21.6
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Folding something\"",
+      "status": "done",
+      "p_done": 0.954,
+      "time": 13.25,
+      "lo": 12.5,
+      "hi": 13.75
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Putting something on top of something\"",
+      "status": "done",
+      "p_done": 0.987,
+      "time": 16.5,
+      "lo": 15.75,
+      "hi": 17.25
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Unfolding something\"",
+      "status": "done",
+      "p_done": 0.982,
+      "time": 7.75,
+      "lo": 7.25,
+      "hi": 8.5
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Working on a computer\"",
+      "status": "not_found",
+      "p_done": 0.033,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 4,
+      "text": "a person doing this action: \"Spreading something\"",
+      "status": "unsure",
+      "p_done": 0.52,
+      "time": 11.5,
+      "lo": 2.5,
+      "hi": 13.25
+     }
+    ],
+    "order_issues": [
+     {
+      "earlier": 2,
+      "later": 0
+     },
+     {
+      "earlier": 2,
+      "later": 1
+     }
+    ],
+    "seconds_total": 12.69
+   },
+   "audit": {
+    "ok": true,
+    "seconds": 45.3,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Folding something\"",
+      "at_start": "no: empty table foreground, no black cloth",
+      "at_end": "yes: folded black cloth on table under pink garment",
+      "audit": "confirm",
+      "reason": "absent at START and present at END",
+      "lasting": "black cloth folded on table",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "no",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Putting something on top of something\"",
+      "at_start": "no: empty table foreground, no cloth or garment",
+      "at_end": "yes: pink garment resting on folded black cloth",
+      "audit": "confirm",
+      "reason": "absent at START and present at END",
+      "lasting": "pink garment on top of black cloth",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Unfolding something\"",
+      "at_start": "no: empty table foreground, no black cloth",
+      "at_end": "no: black cloth is folded on table",
+      "audit": "dispute",
+      "reason": "credited, but its lasting result is absent at END and no later step on the list reverses it.",
+      "lasting": "black cloth unfolded",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [
+       0
+      ],
+      "local_audit": "dispute"
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Working on a computer\"",
+      "at_start": "cannot tell: no computer visible on table",
+      "at_end": "cannot tell: no computer visible on table",
+      "audit": "cannot tell",
+      "reason": "no lasting photo-visible result",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 4,
+      "text": "a person doing this action: \"Spreading something\"",
+      "at_start": "no: empty table foreground, no black cloth",
+      "at_end": "no: black cloth is folded, not spread out",
+      "audit": "dispute",
+      "reason": "credited, but its lasting result is absent at END and no later step on the list reverses it.",
+      "lasting": "black cloth spread out on table",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [
+       0
+      ],
+      "local_audit": "dispute"
+     }
+    ],
+    "sheet": "CHECKLIST AUDIT SIGN-OFF SHEET\n0. a person doing this action: \"Folding something\" | reported=done | audit=confirm | absent at START and present at END\n1. a person doing this action: \"Putting something on top of something\" | reported=done | audit=confirm | absent at START and present at END\n2. a person doing this action: \"Unfolding something\" | reported=done | audit=dispute | credited, but its lasting result is absent at END and no later step on the list reverses it.\n3. a person doing this action: \"Working on a computer\" | reported=not_found | audit=cannot tell | no lasting photo-visible result\n4. a person doing this action: \"Spreading something\" | reported=unsure | audit=dispute | credited, but its lasting result is absent at END and no later step on the list reverses it.\norder: out of order pairs [[0, 2], [1, 2]]\ncounts: confirm=2, dispute=2, cannot tell=1",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [
+     [
+      0,
+      2
+     ],
+     [
+      1,
+      2
+     ]
+    ],
+    "rules_agree": true,
+    "attempts": 1,
+    "local_order_pairs": [
+     [
+      0,
+      2
+     ],
+     [
+      1,
+      2
+     ]
+    ],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 72878
+   },
+   "ts": 1795291325.222961
+  },
+  {
+   "take": "video_686",
+   "model": "gemini-4-hydrogen",
+   "run": 1,
+   "desc": "benchmark clip",
+   "labels": [
+    "Showing something to the camera",
+    "Pretending to unplug something from something",
+    "Ironing something"
+   ],
+   "not_done": [
+    1,
+    2
+   ],
+   "fused": {
+    "video": {
+     "duration": 32.5
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Showing something to the camera\"",
+      "status": "done",
+      "p_done": 0.997,
+      "time": 1.25,
+      "lo": 0.75,
+      "hi": 1.75
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Pretending to unplug something from something\"",
+      "status": "not_found",
+      "p_done": 0.034,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Ironing something\"",
+      "status": "not_found",
+      "p_done": 0.033,
+      "time": null,
+      "lo": null,
+      "hi": null
+     }
+    ],
+    "order_issues": [],
+    "seconds_total": 13.19
+   },
+   "audit": {
+    "ok": true,
+    "seconds": 30.52,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Showing something to the camera\"",
+      "at_start": "cannot tell: closed laptop and red bottle on brown bed",
+      "at_end": "cannot tell: closed laptop and red bottle on bed, blur top right",
+      "audit": "cannot tell",
+      "reason": "step has no lasting visual result",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Pretending to unplug something from something\"",
+      "at_start": "cannot tell: closed laptop and red bottle on bed, power strip back",
+      "at_end": "cannot tell: closed laptop and red bottle on bed, top right obscured",
+      "audit": "cannot tell",
+      "reason": "step has no lasting visual result",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Ironing something\"",
+      "at_start": "cannot tell: closed laptop and red bottle on bed, no cloth visible",
+      "at_end": "cannot tell: closed laptop and red bottle on bed, no ironed cloth",
+      "audit": "cannot tell",
+      "reason": "start and end frames are both cannot tell",
+      "lasting": "cloth pressed smooth",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     }
+    ],
+    "sheet": "Checklist Audit Sign-Off Sheet\n0. a person doing this action: \"Showing something to the camera\" | reported: done | audit: cannot tell | reason: step has no lasting visual result\n1. a person doing this action: \"Pretending to unplug something from something\" | reported: not_found | audit: cannot tell | reason: step has no lasting visual result\n2. a person doing this action: \"Ironing something\" | reported: not_found | audit: cannot tell | reason: start and end frames are both cannot tell\norder: no pairs out of order\ncounts: confirm=0, dispute=0, cannot tell=3",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [],
+    "rules_agree": true,
+    "attempts": 1,
+    "local_order_pairs": [],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 47938
+   },
+   "ts": 1795291554.9206338
+  },
+  {
+   "take": "video_7230",
+   "model": "gemini-4-hydrogen",
+   "run": 1,
+   "desc": "benchmark clip",
+   "labels": [
+    "Launching something",
+    "Putting something on top of something",
+    "Rotating something",
+    "Ironing something"
+   ],
+   "not_done": [
+    2,
+    3
+   ],
+   "fused": {
+    "video": {
+     "duration": 19.3
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Launching something\"",
+      "status": "not_found",
+      "p_done": 0.254,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Putting something on top of something\"",
+      "status": "done",
+      "p_done": 0.975,
+      "time": 5.75,
+      "lo": 5.25,
+      "hi": 6.5
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Rotating something\"",
+      "status": "unsure",
+      "p_done": 0.376,
+      "time": 10.25,
+      "lo": 0.5,
+      "hi": 12.0
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Ironing something\"",
+      "status": "not_found",
+      "p_done": 0.054,
+      "time": null,
+      "lo": null,
+      "hi": null
+     }
+    ],
+    "order_issues": [],
+    "seconds_total": 15.42
+   },
+   "audit": {
+    "ok": true,
+    "seconds": 39.46,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Launching something\"",
+      "at_start": "cannot tell: Empty table with glass, spool, fork, and spoon",
+      "at_end": "cannot tell: Red toy car sits on a notebook on the table",
+      "audit": "cannot tell",
+      "reason": "No lasting visual result or cannot tell from start and end frames.",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Putting something on top of something\"",
+      "at_start": "no: No notebook or red toy car on the table",
+      "at_end": "yes: Red toy car is resting on top of notebook",
+      "audit": "confirm",
+      "reason": "credited, absent at START, and present at END.",
+      "lasting": "red toy car resting on top of notebook",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Rotating something\"",
+      "at_start": "cannot tell: No notebook or red toy car on the table",
+      "at_end": "cannot tell: Red toy car sits facing left on notebook",
+      "audit": "cannot tell",
+      "reason": "No lasting visual result or cannot tell from start and end frames.",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Ironing something\"",
+      "at_start": "no: No iron or fabric visible on the table",
+      "at_end": "no: Only notebook, toy car, glass, utensils, and spool",
+      "audit": "confirm",
+      "reason": "not_found, and lasting result is absent at END without being reversed later.",
+      "lasting": "item pressed smooth with an iron",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     }
+    ],
+    "sheet": "Checklist Audit Sign-Off Sheet\nStep 0: a person doing this action: \"Launching something\" | reported=not_found | audit=cannot tell | No lasting visual result or cannot tell from start and end frames.\nStep 1: a person doing this action: \"Putting something on top of something\" | reported=done | audit=confirm | credited, absent at START, and present at END.\nStep 2: a person doing this action: \"Rotating something\" | reported=unsure | audit=cannot tell | No lasting visual result or cannot tell from start and end frames.\nStep 3: a person doing this action: \"Ironing something\" | reported=not_found | audit=confirm | not_found, and lasting result is absent at END without being reversed later.\norder: no pairs out of order\ncounts: confirm=2, dispute=0, cannot tell=2",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [],
+    "rules_agree": true,
+    "attempts": 1,
+    "local_order_pairs": [],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 57703
+   },
+   "ts": 1795291147.6646612
+  },
+  {
+   "take": "video_7822",
+   "model": "gemini-4-hydrogen",
+   "run": 1,
+   "desc": "benchmark clip",
+   "labels": [
+    "Browsing through something",
+    "Holding something in a state",
+    "Turning something off",
+    "Turning something on",
+    "Pretending to mix",
+    "Indicating a region with the hand"
+   ],
+   "not_done": [
+    4,
+    5
+   ],
+   "fused": {
+    "video": {
+     "duration": 22.3
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Browsing through something\"",
+      "status": "done",
+      "p_done": 0.96,
+      "time": 0.25,
+      "lo": 0.0,
+      "hi": 1.25
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Holding something in a state\"",
+      "status": "unsure",
+      "p_done": 0.568,
+      "time": 16.0,
+      "lo": 0.5,
+      "hi": 17.5
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Turning something off\"",
+      "status": "unsure",
+      "p_done": 0.36,
+      "time": 16.75,
+      "lo": 10.75,
+      "hi": 19.0
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Turning something on\"",
+      "status": "unsure",
+      "p_done": 0.395,
+      "time": 18.0,
+      "lo": 10.75,
+      "hi": 20.0
+     },
+     {
+      "index": 4,
+      "text": "a person doing this action: \"Pretending to mix\"",
+      "status": "not_found",
+      "p_done": 0.075,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 5,
+      "text": "a person doing this action: \"Indicating a region with the hand\"",
+      "status": "not_found",
+      "p_done": 0.265,
+      "time": null,
+      "lo": null,
+      "hi": null
+     }
+    ],
+    "order_issues": [],
+    "seconds_total": 15.13
+   },
+   "audit": {
+    "ok": true,
+    "seconds": 36.88,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Browsing through something\"",
+      "at_start": "cannot tell: Open book and cloth on desk, hands resting on them.",
+      "at_end": "cannot tell: Open book and cloth on desk, left hand on lamp switch.",
+      "audit": "cannot tell",
+      "reason": "no lasting visual result to verify",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Holding something in a state\"",
+      "at_start": "cannot tell: Hands resting on open book and grey cloth.",
+      "at_end": "cannot tell: Left hand on lamp switch, right hand on grey cloth.",
+      "audit": "cannot tell",
+      "reason": "no lasting visual result to verify",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Turning something off\"",
+      "at_start": "yes: White desk lamp is unlit and off.",
+      "at_end": "yes: White desk lamp is still unlit and off.",
+      "audit": "dispute",
+      "reason": "the lasting result was already in place at START, so the video does not show this step being done.",
+      "lasting": "lamp is off",
+      "start_in_place": "yes",
+      "end_in_place": "yes",
+      "before": "yes",
+      "after": "yes",
+      "reversed_by": [
+       3
+      ],
+      "local_audit": "dispute"
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Turning something on\"",
+      "at_start": "no: White desk lamp is unlit and off.",
+      "at_end": "no: White desk lamp is unlit and off.",
+      "audit": "dispute",
+      "reason": "credited, but its lasting result is absent at END and no later step on the list reverses it.",
+      "lasting": "lamp is on",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "no",
+      "after": "no",
+      "reversed_by": [
+       2
+      ],
+      "local_audit": "dispute"
+     },
+     {
+      "index": 4,
+      "text": "a person doing this action: \"Pretending to mix\"",
+      "at_start": "cannot tell: Desk with lamp, open book, cloth, and spray bottles.",
+      "at_end": "cannot tell: Desk with lamp, open book, cloth, and spray bottles.",
+      "audit": "cannot tell",
+      "reason": "no lasting visual result to verify",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 5,
+      "text": "a person doing this action: \"Indicating a region with the hand\"",
+      "at_start": "cannot tell: Hands on open book and cloth on desk.",
+      "at_end": "cannot tell: Left hand on lamp switch, right hand on cloth.",
+      "audit": "cannot tell",
+      "reason": "no lasting visual result to verify",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     }
+    ],
+    "sheet": "Checklist Audit Sign-Off Sheet\n0. a person doing this action: \"Browsing through something\" | reported: done | audit: cannot tell | no lasting visual result to verify\n1. a person doing this action: \"Holding something in a state\" | reported: unsure | audit: cannot tell | no lasting visual result to verify\n2. a person doing this action: \"Turning something off\" | reported: unsure | audit: dispute | the lasting result was already in place at START, so the video does not show this step being done.\n3. a person doing this action: \"Turning something on\" | reported: unsure | audit: dispute | credited, but its lasting result is absent at END and no later step on the list reverses it.\n4. a person doing this action: \"Pretending to mix\" | reported: not_found | audit: cannot tell | no lasting visual result to verify\n5. a person doing this action: \"Indicating a region with the hand\" | reported: not_found | audit: cannot tell | no lasting visual result to verify\norder: no pairs out of order\ncounts: confirm=0, dispute=2, cannot tell=4",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [],
+    "rules_agree": true,
+    "attempts": 1,
+    "local_order_pairs": [],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 71159
+   },
+   "ts": 1795291199.6761234
+  },
+  {
+   "take": "video_7829",
+   "model": "gemini-4-hydrogen",
+   "run": 1,
+   "desc": "benchmark clip",
+   "labels": [
+    "Pulling something",
+    "Putting something on top of something",
+    "Covering something with something",
+    "Jingling something"
+   ],
+   "not_done": [
+    2,
+    3
+   ],
+   "fused": {
+    "video": {
+     "duration": 17.1
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Pulling something\"",
+      "status": "done",
+      "p_done": 0.994,
+      "time": 5.75,
+      "lo": 5.25,
+      "hi": 6.5
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Putting something on top of something\"",
+      "status": "done",
+      "p_done": 0.874,
+      "time": 9.0,
+      "lo": 8.25,
+      "hi": 9.5
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Covering something with something\"",
+      "status": "not_found",
+      "p_done": 0.044,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Jingling something\"",
+      "status": "not_found",
+      "p_done": 0.051,
+      "time": null,
+      "lo": null,
+      "hi": null
+     }
+    ],
+    "order_issues": [],
+    "seconds_total": 12.62
+   },
+   "audit": {
+    "ok": true,
+    "seconds": 50.18,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Pulling something\"",
+      "at_start": "no: Toy car and orange strap sit on left of board.",
+      "at_end": "yes: Toy car and orange strap sit on right of board.",
+      "audit": "confirm",
+      "reason": "Lasting result absent at START and present at END.",
+      "lasting": "toy car moved from starting spot",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Putting something on top of something\"",
+      "at_start": "yes: Toy car is already on top of cutting board.",
+      "at_end": "yes: Toy car is on right side of cutting board.",
+      "audit": "cannot tell",
+      "reason": "Already present at START, though absent in BEFORE frame.",
+      "lasting": "toy car on top of cutting board",
+      "start_in_place": "yes",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Covering something with something\"",
+      "at_start": "no: Onion on glass and car on board are uncovered.",
+      "at_end": "no: Onion on glass and car on board remain uncovered.",
+      "audit": "confirm",
+      "reason": "Not found, and lasting result is absent at END.",
+      "lasting": "an object covered by another object",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Jingling something\"",
+      "at_start": "cannot tell: Static frame cannot show if something was jingled.",
+      "at_end": "cannot tell: Static frame cannot show if something was jingled.",
+      "audit": "cannot tell",
+      "reason": "No lasting visual state can be verified from still frames.",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     }
+    ],
+    "sheet": "Checklist Audit Sign-Off Sheet\n0. a person doing this action: \"Pulling something\" | reported: done | audit: confirm | reason: Lasting result absent at START and present at END.\n1. a person doing this action: \"Putting something on top of something\" | reported: done | audit: cannot tell | reason: Already present at START, though absent in BEFORE frame.\n2. a person doing this action: \"Covering something with something\" | reported: not_found | audit: confirm | reason: Not found, and lasting result is absent at END.\n3. a person doing this action: \"Jingling something\" | reported: not_found | audit: cannot tell | reason: No lasting visual state can be verified from still frames.\norder: no pairs out of order\ncounts: confirm=2, dispute=0, cannot tell=2",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [],
+    "rules_agree": true,
+    "attempts": 1,
+    "local_order_pairs": [],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 63192
+   },
+   "ts": 1795291511.2052279
+  },
+  {
+   "take": "video_7900",
+   "model": "gemini-4-hydrogen",
+   "run": 1,
+   "desc": "benchmark clip",
+   "labels": [
+    "Lifting something and placing it back down",
+    "Taking something out of something",
+    "Putting something on top of something",
+    "Clapping hands"
+   ],
+   "not_done": [
+    2,
+    3
+   ],
+   "fused": {
+    "video": {
+     "duration": 18.1
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Lifting something and placing it back down\"",
+      "status": "done",
+      "p_done": 0.958,
+      "time": 12.0,
+      "lo": 11.25,
+      "hi": 12.5
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Taking something out of something\"",
+      "status": "done",
+      "p_done": 0.994,
+      "time": 3.5,
+      "lo": 2.75,
+      "hi": 4.0
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Putting something on top of something\"",
+      "status": "not_found",
+      "p_done": 0.166,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Clapping hands\"",
+      "status": "not_found",
+      "p_done": 0.032,
+      "time": null,
+      "lo": null,
+      "hi": null
+     }
+    ],
+    "order_issues": [
+     {
+      "earlier": 1,
+      "later": 0
+     }
+    ],
+    "seconds_total": 13.97
+   },
+   "audit": {
+    "ok": true,
+    "seconds": 41.72,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Lifting something and placing it back down\"",
+      "at_start": "cannot tell: Bag and notebook on table, no groceries out",
+      "at_end": "cannot tell: Bag and three grocery items sitting on table",
+      "audit": "cannot tell",
+      "reason": "no lasting visual result to verify",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Taking something out of something\"",
+      "at_start": "no: Bag on table, no items beside it",
+      "at_end": "yes: Three grocery items on table beside bag",
+      "audit": "confirm",
+      "reason": "lasting result absent at START and present at END",
+      "lasting": "item taken out of bag onto table",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Putting something on top of something\"",
+      "at_start": "no: Bag on table, groceries not stacked",
+      "at_end": "no: Three grocery items sit separately on table",
+      "audit": "confirm",
+      "reason": "not found and lasting result absent at END",
+      "lasting": "object placed on top of another",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Clapping hands\"",
+      "at_start": "cannot tell: No person visible in start frame",
+      "at_end": "cannot tell: No person visible in end frame",
+      "audit": "cannot tell",
+      "reason": "no lasting visual result to verify",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     }
+    ],
+    "sheet": "CHECKLIST AUDIT SIGN-OFF SHEET\nStep 0: a person doing this action: \"Lifting something and placing it back down\" | reported=done | audit=cannot tell | no lasting visual result to verify\nStep 1: a person doing this action: \"Taking something out of something\" | reported=done | audit=confirm | lasting result absent at START and present at END\nStep 2: a person doing this action: \"Putting something on top of something\" | reported=not_found | audit=confirm | not found and lasting result absent at END\nStep 3: a person doing this action: \"Clapping hands\" | reported=not_found | audit=cannot tell | no lasting visual result to verify\norder: out of order pairs [[0, 1]]\ncounts: confirm=2, dispute=0, cannot tell=2",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [
+     [
+      0,
+      1
+     ]
+    ],
+    "rules_agree": true,
+    "attempts": 1,
+    "local_order_pairs": [
+     [
+      0,
+      1
+     ]
+    ],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 56178
+   },
+   "ts": 1795291252.211441
+  },
+  {
+   "take": "video_8529",
+   "model": "gemini-4-hydrogen",
+   "run": 1,
+   "desc": "benchmark clip",
+   "labels": [
+    "Folding something",
+    "Putting something on top of something",
+    "Showing something to the camera",
+    "Pretending to write or draw on a piece of paper",
+    "Pretending to put something into something"
+   ],
+   "not_done": [
+    3,
+    4
+   ],
+   "fused": {
+    "video": {
+     "duration": 35.1
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Folding something\"",
+      "status": "done",
+      "p_done": 0.934,
+      "time": 23.0,
+      "lo": 22.25,
+      "hi": 24.0
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Putting something on top of something\"",
+      "status": "done",
+      "p_done": 0.966,
+      "time": 28.5,
+      "lo": 27.5,
+      "hi": 29.25
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Showing something to the camera\"",
+      "status": "done",
+      "p_done": 0.925,
+      "time": 2.5,
+      "lo": 1.75,
+      "hi": 3.25
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Pretending to write or draw on a piece of paper\"",
+      "status": "not_found",
+      "p_done": 0.05,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 4,
+      "text": "a person doing this action: \"Pretending to put something into something\"",
+      "status": "not_found",
+      "p_done": 0.197,
+      "time": null,
+      "lo": null,
+      "hi": null
+     }
+    ],
+    "order_issues": [
+     {
+      "earlier": 2,
+      "later": 0
+     },
+     {
+      "earlier": 2,
+      "later": 1
+     }
+    ],
+    "seconds_total": 15.37
+   },
+   "audit": {
+    "ok": true,
+    "seconds": 35.01,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Folding something\"",
+      "at_start": "no: Left side of table empty, no folded clothes visible",
+      "at_end": "yes: Folded blue jeans sit on the left side of table",
+      "audit": "confirm",
+      "reason": "lasting result absent at START and present at END",
+      "lasting": "folded blue jeans on the table",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Putting something on top of something\"",
+      "at_start": "no: Table is clear on the left, no boots or jeans",
+      "at_end": "yes: Two black boots rest on top of folded jeans",
+      "audit": "confirm",
+      "reason": "lasting result absent at START and present at END",
+      "lasting": "black boots on top of folded jeans",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Showing something to the camera\"",
+      "at_start": "cannot tell: No lasting state for showing an object to camera",
+      "at_end": "cannot tell: No lasting state for showing an object to camera",
+      "audit": "cannot tell",
+      "reason": "no lasting physical state to verify from still frames",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Pretending to write or draw on a piece of paper\"",
+      "at_start": "cannot tell: No lasting state for pretending to write or draw",
+      "at_end": "cannot tell: No lasting state for pretending to write or draw",
+      "audit": "cannot tell",
+      "reason": "no lasting physical state to verify from still frames",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 4,
+      "text": "a person doing this action: \"Pretending to put something into something\"",
+      "at_start": "cannot tell: No lasting state for pretending to put something in",
+      "at_end": "cannot tell: No lasting state for pretending to put something in",
+      "audit": "cannot tell",
+      "reason": "no lasting physical state to verify from still frames",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     }
+    ],
+    "sheet": "Checklist Audit Sign-Off Sheet\n0. a person doing this action: \"Folding something\" | reported=done | audit=confirm | lasting result absent at START and present at END\n1. a person doing this action: \"Putting something on top of something\" | reported=done | audit=confirm | lasting result absent at START and present at END\n2. a person doing this action: \"Showing something to the camera\" | reported=done | audit=cannot tell | no lasting physical state to verify from still frames\n3. a person doing this action: \"Pretending to write or draw on a piece of paper\" | reported=not_found | audit=cannot tell | no lasting physical state to verify from still frames\n4. a person doing this action: \"Pretending to put something into something\" | reported=not_found | audit=cannot tell | no lasting physical state to verify from still frames\norder: out of order pairs [0, 2], [1, 2]\ncounts: confirm=2, dispute=0, cannot tell=3",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [
+     [
+      0,
+      2
+     ],
+     [
+      1,
+      2
+     ]
+    ],
+    "rules_agree": true,
+    "attempts": 1,
+    "local_order_pairs": [
+     [
+      0,
+      2
+     ],
+     [
+      1,
+      2
+     ]
+    ],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 62955
+   },
+   "ts": 1795291395.260002
+  },
+  {
+   "take": "video_8803",
+   "model": "gemini-4-hydrogen",
+   "run": 1,
+   "desc": "benchmark clip",
+   "labels": [
+    "Closing something",
+    "Opening something",
+    "Putting something into something",
+    "Taking something out of something",
+    "Jingling something",
+    "Dropping something on top of something"
+   ],
+   "not_done": [
+    4,
+    5
+   ],
+   "fused": {
+    "video": {
+     "duration": 30.1
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Closing something\"",
+      "status": "done",
+      "p_done": 0.897,
+      "time": 13.75,
+      "lo": 13.0,
+      "hi": 14.5
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Opening something\"",
+      "status": "done",
+      "p_done": 0.941,
+      "time": 3.75,
+      "lo": 3.0,
+      "hi": 4.5
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Putting something into something\"",
+      "status": "done",
+      "p_done": 0.986,
+      "time": 5.25,
+      "lo": 4.5,
+      "hi": 5.75
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Taking something out of something\"",
+      "status": "done",
+      "p_done": 0.886,
+      "time": 17.25,
+      "lo": 16.5,
+      "hi": 18.25
+     },
+     {
+      "index": 4,
+      "text": "a person doing this action: \"Jingling something\"",
+      "status": "not_found",
+      "p_done": 0.073,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 5,
+      "text": "a person doing this action: \"Dropping something on top of something\"",
+      "status": "not_found",
+      "p_done": 0.224,
+      "time": null,
+      "lo": null,
+      "hi": null
+     }
+    ],
+    "order_issues": [
+     {
+      "earlier": 1,
+      "later": 0
+     },
+     {
+      "earlier": 2,
+      "later": 0
+     }
+    ],
+    "seconds_total": 15.26
+   },
+   "audit": {
+    "ok": true,
+    "seconds": 52.3,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Closing something\"",
+      "at_start": "no: Black backpack stands upright with top slightly open.",
+      "at_end": "yes: Black backpack lies flat on table and is zipped closed.",
+      "audit": "confirm",
+      "reason": "credited, absent at START, and present at END or reversed later",
+      "lasting": "backpack closed",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "no",
+      "reversed_by": [
+       1
+      ],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Opening something\"",
+      "at_start": "no: Backpack stands upright with only a small top gap.",
+      "at_end": "no: Backpack lies flat on table and is zipped closed.",
+      "audit": "dispute",
+      "reason": "credited, but its lasting result is absent at END and no later step on the list reverses it",
+      "lasting": "backpack open",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [
+       0
+      ],
+      "local_audit": "dispute"
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Putting something into something\"",
+      "at_start": "no: White laptop, notebook, and pencil case sit on table.",
+      "at_end": "yes: White laptop is gone from table and not visible anywhere.",
+      "audit": "confirm",
+      "reason": "credited, absent at START, and present at END or reversed later",
+      "lasting": "object inside backpack",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [
+       3
+      ],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Taking something out of something\"",
+      "at_start": "yes: Notebook, laptop, and pencil case are already out on table.",
+      "at_end": "yes: Notebook and pencil case are out on the table.",
+      "audit": "cannot tell",
+      "reason": "credited, but frame evidence does not confirm or dispute",
+      "lasting": "object removed from backpack",
+      "start_in_place": "yes",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [
+       2
+      ],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 4,
+      "text": "a person doing this action: \"Jingling something\"",
+      "at_start": "cannot tell: Still frame cannot show a jingling sound or motion.",
+      "at_end": "cannot tell: Still frame cannot show a jingling sound or motion.",
+      "audit": "cannot tell",
+      "reason": "no lasting visual result or both start and end are unclear",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 5,
+      "text": "a person doing this action: \"Dropping something on top of something\"",
+      "at_start": "no: Pencil case sits beside notebook, nothing stacked on another object.",
+      "at_end": "yes: Black pencil case is resting on top of the notebook.",
+      "audit": "dispute",
+      "reason": "the lasting result appeared during the video",
+      "lasting": "object resting on top of another",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "dispute"
+     }
+    ],
+    "sheet": "Checklist Audit Sign-Off Sheet\n0. a person doing this action: \"Closing something\" | reported: done | audit: confirm | reason: credited, absent at START, and present at END or reversed later\n1. a person doing this action: \"Opening something\" | reported: done | audit: dispute | reason: credited, but its lasting result is absent at END and no later step on the list reverses it\n2. a person doing this action: \"Putting something into something\" | reported: done | audit: confirm | reason: credited, absent at START, and present at END or reversed later\n3. a person doing this action: \"Taking something out of something\" | reported: done | audit: cannot tell | reason: credited, but frame evidence does not confirm or dispute\n4. a person doing this action: \"Jingling something\" | reported: not_found | audit: cannot tell | reason: no lasting visual result or both start and end are unclear\n5. a person doing this action: \"Dropping something on top of something\" | reported: not_found | audit: dispute | reason: the lasting result appeared during the video\norder: out of order pairs [[0, 1], [0, 2]]\ncounts: confirm=2, dispute=2, cannot tell=2",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ]
+    ],
+    "rules_agree": true,
+    "attempts": 1,
+    "local_order_pairs": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ]
+    ],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 79868
+   },
+   "ts": 1795291267.2330728
+  },
+  {
+   "take": "video_8837",
+   "model": "gemini-4-hydrogen",
+   "run": 1,
+   "desc": "benchmark clip",
+   "labels": [
+    "Showing something to the camera",
+    "Opening something",
+    "Tearing something into pieces"
+   ],
+   "not_done": [
+    1,
+    2
+   ],
+   "fused": {
+    "video": {
+     "duration": 35.2
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Showing something to the camera\"",
+      "status": "done",
+      "p_done": 0.997,
+      "time": 3.5,
+      "lo": 3.0,
+      "hi": 4.25
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Opening something\"",
+      "status": "not_found",
+      "p_done": 0.144,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Tearing something into pieces\"",
+      "status": "not_found",
+      "p_done": 0.035,
+      "time": null,
+      "lo": null,
+      "hi": null
+     }
+    ],
+    "order_issues": [],
+    "seconds_total": 9.7
+   },
+   "audit": {
+    "ok": true,
+    "seconds": 33.91,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Showing something to the camera\"",
+      "at_start": "cannot tell: Red hexagon, key fob, and yellow circle on wooden table.",
+      "at_end": "cannot tell: Red hexagon, key fob, and yellow circle on wooden table.",
+      "audit": "cannot tell",
+      "reason": "Step has no lasting visual result to verify.",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Opening something\"",
+      "at_start": "no: Table holds red hexagon, closed key fob, and yellow circle.",
+      "at_end": "no: Table holds red hexagon, closed key fob, and yellow circle.",
+      "audit": "confirm",
+      "reason": "not_found, and lasting result is absent at END without later reversal.",
+      "lasting": "something is open",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Tearing something into pieces\"",
+      "at_start": "no: No torn pieces visible on the wooden table.",
+      "at_end": "no: No torn pieces visible on the wooden table.",
+      "audit": "confirm",
+      "reason": "not_found, and lasting result is absent at END without later reversal.",
+      "lasting": "something torn into pieces",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     }
+    ],
+    "sheet": "AUDIT SIGN-OFF SHEET\n0. a person doing this action: \"Showing something to the camera\" | reported: done | audit: cannot tell | reason: Step has no lasting visual result to verify.\n1. a person doing this action: \"Opening something\" | reported: not_found | audit: confirm | reason: not_found, and lasting result is absent at END without later reversal.\n2. a person doing this action: \"Tearing something into pieces\" | reported: not_found | audit: confirm | reason: not_found, and lasting result is absent at END without later reversal.\norder: no pairs out of order\ncounts: confirm=2, dispute=0, cannot tell=1",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [],
+    "rules_agree": true,
+    "attempts": 1,
+    "local_order_pairs": [],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 45784
+   },
+   "ts": 1795291615.5320892
+  },
+  {
+   "take": "video_892",
+   "model": "gemini-4-hydrogen",
+   "run": 1,
+   "desc": "benchmark clip",
+   "labels": [
+    "Folding something",
+    "Hitting something against/with something",
+    "Juggling something",
+    "Mixing something with something",
+    "Clicking something"
+   ],
+   "not_done": [
+    3,
+    4
+   ],
+   "fused": {
+    "video": {
+     "duration": 25.9
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Folding something\"",
+      "status": "done",
+      "p_done": 0.996,
+      "time": 16.25,
+      "lo": 15.5,
+      "hi": 16.75
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Hitting something against/with something\"",
+      "status": "done",
+      "p_done": 0.992,
+      "time": 2.5,
+      "lo": 2.0,
+      "hi": 3.25
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Juggling something\"",
+      "status": "done",
+      "p_done": 0.981,
+      "time": 9.5,
+      "lo": 8.75,
+      "hi": 10.0
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Mixing something with something\"",
+      "status": "not_found",
+      "p_done": 0.044,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 4,
+      "text": "a person doing this action: \"Clicking something\"",
+      "status": "not_found",
+      "p_done": 0.164,
+      "time": null,
+      "lo": null,
+      "hi": null
+     }
+    ],
+    "order_issues": [
+     {
+      "earlier": 1,
+      "later": 0
+     },
+     {
+      "earlier": 2,
+      "later": 0
+     }
+    ],
+    "seconds_total": 13.28
+   },
+   "audit": {
+    "ok": true,
+    "seconds": 64.93,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Folding something\"",
+      "at_start": "no: unfolded white paper lies flat on the table",
+      "at_end": "yes: white paper is folded into a small square",
+      "audit": "confirm",
+      "reason": "credited and lasting result appeared during the video",
+      "lasting": "paper folded",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Hitting something against/with something\"",
+      "at_start": "cannot tell: two pens lie on the table",
+      "at_end": "cannot tell: two pens lie together on the table",
+      "audit": "cannot tell",
+      "reason": "no lasting visual result or start and end cannot tell",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Juggling something\"",
+      "at_start": "cannot tell: purple fruit sits on the wooden table",
+      "at_end": "cannot tell: purple fruit sits on the wooden table",
+      "audit": "cannot tell",
+      "reason": "no lasting visual result or start and end cannot tell",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Mixing something with something\"",
+      "at_start": "no: bowl holds remote and glass holds pen, nothing mixed",
+      "at_end": "no: bowl holds remote and glass holds pen, nothing mixed",
+      "audit": "confirm",
+      "reason": "not_found and lasting result remained absent at END",
+      "lasting": "things mixed together",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 4,
+      "text": "a person doing this action: \"Clicking something\"",
+      "at_start": "cannot tell: pens and remote sit on the table",
+      "at_end": "cannot tell: pens and remote sit on the table",
+      "audit": "cannot tell",
+      "reason": "no lasting visual result or start and end cannot tell",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     }
+    ],
+    "sheet": "CHECKLIST AUDIT SIGN-OFF SHEET\n0. a person doing this action: \"Folding something\" | reported: done | audit: confirm | reason: credited and lasting result appeared during the video\n1. a person doing this action: \"Hitting something against/with something\" | reported: done | audit: cannot tell | reason: no lasting visual result or start and end cannot tell\n2. a person doing this action: \"Juggling something\" | reported: done | audit: cannot tell | reason: no lasting visual result or start and end cannot tell\n3. a person doing this action: \"Mixing something with something\" | reported: not_found | audit: confirm | reason: not_found and lasting result remained absent at END\n4. a person doing this action: \"Clicking something\" | reported: not_found | audit: cannot tell | reason: no lasting visual result or start and end cannot tell\norder: pairs out of order [[0, 1], [0, 2]]\ncounts: confirm=2, dispute=0, cannot tell=3",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ]
+    ],
+    "rules_agree": true,
+    "attempts": 1,
+    "local_order_pairs": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ]
+    ],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 66902
+   },
+   "ts": 1795291403.4318676
+  },
+  {
+   "take": "video_9040",
+   "model": "gemini-4-hydrogen",
+   "run": 1,
+   "desc": "benchmark clip",
+   "labels": [
+    "Moving object(s) around",
+    "Putting something on top of something",
+    "Taking something out of something",
+    "Covering something with something"
+   ],
+   "not_done": [
+    2,
+    3
+   ],
+   "fused": {
+    "video": {
+     "duration": 21.4
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Moving object(s) around\"",
+      "status": "done",
+      "p_done": 0.972,
+      "time": 2.25,
+      "lo": 1.25,
+      "hi": 3.0
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Putting something on top of something\"",
+      "status": "not_found",
+      "p_done": 0.211,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Taking something out of something\"",
+      "status": "unsure",
+      "p_done": 0.33,
+      "time": 2.25,
+      "lo": 0.75,
+      "hi": 11.5
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Covering something with something\"",
+      "status": "not_found",
+      "p_done": 0.08,
+      "time": null,
+      "lo": null,
+      "hi": null
+     }
+    ],
+    "order_issues": [],
+    "seconds_total": 15.18
+   },
+   "audit": {
+    "ok": true,
+    "seconds": 44.12,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Moving object(s) around\"",
+      "at_start": "no: Only white bottle with flowers and fork on empty table",
+      "at_end": "yes: Four cups and mugs now arranged on the table",
+      "audit": "confirm",
+      "reason": "credited, absent at START, and present at END",
+      "lasting": "objects placed in new positions on the table",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Putting something on top of something\"",
+      "at_start": "no: Only bottle with flowers and fork on table",
+      "at_end": "no: Four cups sitting separately on table, nothing stacked",
+      "audit": "confirm",
+      "reason": "not_found and lasting result is absent at END without later reversal",
+      "lasting": "an object resting on top of another object",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Taking something out of something\"",
+      "at_start": "no: Bottle still holds flowers and fork, no emptied container",
+      "at_end": "no: Bottle still holds flowers and fork, no emptied container",
+      "audit": "dispute",
+      "reason": "credited, but its lasting result is absent at END and no later step on the list reverses it",
+      "lasting": "an object removed from inside a container",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "no",
+      "after": "no",
+      "reversed_by": [],
+      "local_audit": "dispute"
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Covering something with something\"",
+      "at_start": "no: Only bottle on bare table, nothing covered",
+      "at_end": "cannot tell: Upside-down orange cup on table, cannot tell if covering anything",
+      "audit": "cannot tell",
+      "reason": "not_found, but frame evidence is inconclusive",
+      "lasting": "an object covered by another object",
+      "start_in_place": "no",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     }
+    ],
+    "sheet": "CHECKLIST AUDIT SIGN-OFF SHEET\n0. a person doing this action: \"Moving object(s) around\" | reported: done | audit: confirm | credited, absent at START, and present at END\n1. a person doing this action: \"Putting something on top of something\" | reported: not_found | audit: confirm | not_found and lasting result is absent at END without later reversal\n2. a person doing this action: \"Taking something out of something\" | reported: unsure | audit: dispute | credited, but its lasting result is absent at END and no later step on the list reverses it\n3. a person doing this action: \"Covering something with something\" | reported: not_found | audit: cannot tell | not_found, but frame evidence is inconclusive\norder: no pairs out of order\ncounts: confirm=2, dispute=1, cannot tell=1",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [],
+    "rules_agree": true,
+    "attempts": 1,
+    "local_order_pairs": [],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 60205
+   },
+   "ts": 1795291674.8382664
+  },
+  {
+   "take": "video_9427",
+   "model": "gemini-4-hydrogen",
+   "run": 1,
+   "desc": "benchmark clip",
+   "labels": [
+    "Putting something on top of something",
+    "Writing or drawing something on a piece of paper",
+    "Plugging something into something",
+    "Pretending to put something into something"
+   ],
+   "not_done": [
+    2,
+    3
+   ],
+   "fused": {
+    "video": {
+     "duration": 28.4
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Putting something on top of something\"",
+      "status": "done",
+      "p_done": 0.995,
+      "time": 19.0,
+      "lo": 18.5,
+      "hi": 19.5
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Writing or drawing something on a piece of paper\"",
+      "status": "done",
+      "p_done": 0.997,
+      "time": 9.0,
+      "lo": 8.25,
+      "hi": 9.5
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Plugging something into something\"",
+      "status": "not_found",
+      "p_done": 0.03,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Pretending to put something into something\"",
+      "status": "not_found",
+      "p_done": 0.034,
+      "time": null,
+      "lo": null,
+      "hi": null
+     }
+    ],
+    "order_issues": [
+     {
+      "earlier": 1,
+      "later": 0
+     }
+    ],
+    "seconds_total": 11.05
+   },
+   "audit": {
+    "ok": true,
+    "seconds": 31.31,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Putting something on top of something\"",
+      "at_start": "no: Blank white paper with a pen on top, no matchsticks",
+      "at_end": "yes: Paper has ACT written and matchsticks spelling NIL on top",
+      "audit": "confirm",
+      "reason": "absent at START and present at END",
+      "lasting": "matchsticks placed on top of the paper",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Writing or drawing something on a piece of paper\"",
+      "at_start": "no: Blank white paper with a pen lying on it",
+      "at_end": "yes: Paper has ACT written in ink and matchsticks on top",
+      "audit": "confirm",
+      "reason": "absent at START and present at END",
+      "lasting": "writing on the piece of paper",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Plugging something into something\"",
+      "at_start": "no: Paper and pen on table, nothing plugged in",
+      "at_end": "no: Paper, matchsticks, and pen on table, nothing plugged in",
+      "audit": "confirm",
+      "reason": "not found and lasting result is absent at END",
+      "lasting": "something plugged into something",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Pretending to put something into something\"",
+      "at_start": "cannot tell: Paper and pen on table",
+      "at_end": "cannot tell: Paper with ACT, matchsticks, and pen on table",
+      "audit": "cannot tell",
+      "reason": "no lasting photo-visible result",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     }
+    ],
+    "sheet": "Checklist Audit Sign-Off Sheet\n0. a person doing this action: \"Putting something on top of something\" | reported: done | audit: confirm | reason: absent at START and present at END\n1. a person doing this action: \"Writing or drawing something on a piece of paper\" | reported: done | audit: confirm | reason: absent at START and present at END\n2. a person doing this action: \"Plugging something into something\" | reported: not_found | audit: confirm | reason: not found and lasting result is absent at END\n3. a person doing this action: \"Pretending to put something into something\" | reported: not_found | audit: cannot tell | reason: no lasting photo-visible result\norder: out of order pairs [[0, 1]]\ncounts: confirm=3, dispute=0, cannot tell=1",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [
+     [
+      0,
+      1
+     ]
+    ],
+    "rules_agree": true,
+    "attempts": 1,
+    "local_order_pairs": [
+     [
+      0,
+      1
+     ]
+    ],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "code_execution_call": 1,
+     "function_result": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 35322
+   },
+   "ts": 1795291234.9739013
+  },
+  {
+   "take": "video_9482",
+   "model": "gemini-4-hydrogen",
+   "run": 1,
+   "desc": "benchmark clip",
+   "labels": [
+    "Putting something on top of something",
+    "Plugging something into something",
+    "Putting something into something"
+   ],
+   "not_done": [
+    1,
+    2
+   ],
+   "fused": {
+    "video": {
+     "duration": 19.4
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Putting something on top of something\"",
+      "status": "done",
+      "p_done": 0.968,
+      "time": 3.0,
+      "lo": 2.5,
+      "hi": 3.5
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Plugging something into something\"",
+      "status": "not_found",
+      "p_done": 0.035,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Putting something into something\"",
+      "status": "not_found",
+      "p_done": 0.037,
+      "time": null,
+      "lo": null,
+      "hi": null
+     }
+    ],
+    "order_issues": [],
+    "seconds_total": 10.49
+   },
+   "audit": {
+    "ok": true,
+    "seconds": 30.49,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Putting something on top of something\"",
+      "at_start": "no: Grey surface with onion and spoon, no letters visible.",
+      "at_end": "yes: Letters AaBb placed on top of the grey surface.",
+      "audit": "confirm",
+      "reason": "credited, absent at START, and present at END.",
+      "lasting": "letters placed on top of the surface",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Plugging something into something\"",
+      "at_start": "no: Grey surface with onion and spoon, nothing plugged in.",
+      "at_end": "no: Same scene with letters AaBb, nothing plugged in.",
+      "audit": "confirm",
+      "reason": "not_found, and lasting result is absent at END with no later reversal.",
+      "lasting": "an object plugged into another object",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Putting something into something\"",
+      "at_start": "no: Grey surface with onion and spoon, no container visible.",
+      "at_end": "no: Same scene with letters AaBb, nothing inside anything.",
+      "audit": "confirm",
+      "reason": "not_found, and lasting result is absent at END with no later reversal.",
+      "lasting": "an object placed inside another object",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     }
+    ],
+    "sheet": "Checklist Audit Sign-Off Sheet\nStep 0: a person doing this action: \"Putting something on top of something\" | reported=done | audit=confirm | reason=credited, absent at START, and present at END.\nStep 1: a person doing this action: \"Plugging something into something\" | reported=not_found | audit=confirm | reason=not_found, and lasting result is absent at END with no later reversal.\nStep 2: a person doing this action: \"Putting something into something\" | reported=not_found | audit=confirm | reason=not_found, and lasting result is absent at END with no later reversal.\norder: no pairs out of order\ncounts: confirm=3, dispute=0, cannot tell=0",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [],
+    "rules_agree": true,
+    "attempts": 1,
+    "local_order_pairs": [],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 45364
+   },
+   "ts": 1795291387.1890688
+  },
+  {
+   "take": "video_9563",
+   "model": "gemini-4-hydrogen",
+   "run": 1,
+   "desc": "benchmark clip",
+   "labels": [
+    "Closing something",
+    "Mixing something with something",
+    "Opening something",
+    "Pretending to pour from something into something",
+    "Putting something into something",
+    "Taking something out of something",
+    "Tearing something into pieces",
+    "Jingling something"
+   ],
+   "not_done": [
+    6,
+    7
+   ],
+   "fused": {
+    "video": {
+     "duration": 28.7
+    },
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Closing something\"",
+      "status": "done",
+      "p_done": 0.971,
+      "time": 4.5,
+      "lo": 3.75,
+      "hi": 5.25
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Mixing something with something\"",
+      "status": "done",
+      "p_done": 0.995,
+      "time": 16.5,
+      "lo": 15.75,
+      "hi": 17.0
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Opening something\"",
+      "status": "done",
+      "p_done": 0.987,
+      "time": 2.75,
+      "lo": 2.25,
+      "hi": 3.25
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Pretending to pour from something into something\"",
+      "status": "done",
+      "p_done": 0.885,
+      "time": 8.25,
+      "lo": 7.5,
+      "hi": 8.75
+     },
+     {
+      "index": 4,
+      "text": "a person doing this action: \"Putting something into something\"",
+      "status": "done",
+      "p_done": 0.985,
+      "time": 5.25,
+      "lo": 4.5,
+      "hi": 5.75
+     },
+     {
+      "index": 5,
+      "text": "a person doing this action: \"Taking something out of something\"",
+      "status": "done",
+      "p_done": 0.99,
+      "time": 3.5,
+      "lo": 2.75,
+      "hi": 4.25
+     },
+     {
+      "index": 6,
+      "text": "a person doing this action: \"Tearing something into pieces\"",
+      "status": "not_found",
+      "p_done": 0.174,
+      "time": null,
+      "lo": null,
+      "hi": null
+     },
+     {
+      "index": 7,
+      "text": "a person doing this action: \"Jingling something\"",
+      "status": "not_found",
+      "p_done": 0.195,
+      "time": null,
+      "lo": null,
+      "hi": null
+     }
+    ],
+    "order_issues": [
+     {
+      "earlier": 2,
+      "later": 0
+     },
+     {
+      "earlier": 2,
+      "later": 1
+     },
+     {
+      "earlier": 3,
+      "later": 1
+     },
+     {
+      "earlier": 4,
+      "later": 1
+     },
+     {
+      "earlier": 5,
+      "later": 1
+     },
+     {
+      "earlier": 4,
+      "later": 3
+     },
+     {
+      "earlier": 5,
+      "later": 3
+     },
+     {
+      "earlier": 5,
+      "later": 4
+     }
+    ],
+    "seconds_total": 13.96
+   },
+   "audit": {
+    "ok": true,
+    "seconds": 49.93,
+    "model": "gemini-4-hydrogen",
+    "steps": [
+     {
+      "index": 0,
+      "text": "a person doing this action: \"Closing something\"",
+      "at_start": "yes: Tea box is closed on the counter",
+      "at_end": "yes: Tea box is closed on the counter",
+      "audit": "cannot tell",
+      "reason": "credited, but start/end/before state does not confirm or dispute",
+      "lasting": "tea box closed",
+      "start_in_place": "yes",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [
+       2
+      ],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 1,
+      "text": "a person doing this action: \"Mixing something with something\"",
+      "at_start": "cannot tell: Spoon on counter, inside of mug not visible",
+      "at_end": "cannot tell: Spoon in mug, inside of mug not visible",
+      "audit": "cannot tell",
+      "reason": "no lasting visible result or cannot tell from START and END",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 2,
+      "text": "a person doing this action: \"Opening something\"",
+      "at_start": "no: Tea box is closed on the counter",
+      "at_end": "no: Tea box is closed on the counter",
+      "audit": "dispute",
+      "reason": "credited, but its lasting result is absent at END and no later step on the list reverses it",
+      "lasting": "tea box open",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "no",
+      "after": "yes",
+      "reversed_by": [
+       0
+      ],
+      "local_audit": "dispute"
+     },
+     {
+      "index": 3,
+      "text": "a person doing this action: \"Pretending to pour from something into something\"",
+      "at_start": "cannot tell: Kettle sits closed on its base",
+      "at_end": "cannot tell: Kettle sits closed on its base",
+      "audit": "cannot tell",
+      "reason": "no lasting visible result or cannot tell from START and END",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 4,
+      "text": "a person doing this action: \"Putting something into something\"",
+      "at_start": "no: Spoon on counter, nothing visible in mug",
+      "at_end": "yes: Spoon is inside mug, gone from counter",
+      "audit": "confirm",
+      "reason": "absent at START and present at END or reversed later",
+      "lasting": "object inside mug",
+      "start_in_place": "no",
+      "end_in_place": "yes",
+      "before": "no",
+      "after": "cannot tell",
+      "reversed_by": [
+       5
+      ],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 5,
+      "text": "a person doing this action: \"Taking something out of something\"",
+      "at_start": "cannot tell: Tea box is closed, contents not visible",
+      "at_end": "cannot tell: Tea box is closed, contents not visible",
+      "audit": "cannot tell",
+      "reason": "no lasting visible result or cannot tell from START and END",
+      "lasting": "object removed from container",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [
+       4
+      ],
+      "local_audit": "cannot tell"
+     },
+     {
+      "index": 6,
+      "text": "a person doing this action: \"Tearing something into pieces\"",
+      "at_start": "no: All items intact, no torn pieces",
+      "at_end": "no: All items intact, no torn pieces",
+      "audit": "confirm",
+      "reason": "not_found and lasting result was already at START or absent at END",
+      "lasting": "object torn into pieces",
+      "start_in_place": "no",
+      "end_in_place": "no",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "confirm"
+     },
+     {
+      "index": 7,
+      "text": "a person doing this action: \"Jingling something\"",
+      "at_start": "cannot tell: Still photo cannot show sound",
+      "at_end": "cannot tell: Still photo cannot show sound",
+      "audit": "cannot tell",
+      "reason": "no lasting visible result or cannot tell from START and END",
+      "lasting": "none",
+      "start_in_place": "cannot tell",
+      "end_in_place": "cannot tell",
+      "before": "cannot tell",
+      "after": "cannot tell",
+      "reversed_by": [],
+      "local_audit": "cannot tell"
+     }
+    ],
+    "sheet": "Checklist Audit Sign-Off Sheet\n0. a person doing this action: \"Closing something\" | reported: done | audit: cannot tell | credited, but start/end/before state does not confirm or dispute\n1. a person doing this action: \"Mixing something with something\" | reported: done | audit: cannot tell | no lasting visible result or cannot tell from START and END\n2. a person doing this action: \"Opening something\" | reported: done | audit: dispute | credited, but its lasting result is absent at END and no later step on the list reverses it\n3. a person doing this action: \"Pretending to pour from something into something\" | reported: done | audit: cannot tell | no lasting visible result or cannot tell from START and END\n4. a person doing this action: \"Putting something into something\" | reported: done | audit: confirm | absent at START and present at END or reversed later\n5. a person doing this action: \"Taking something out of something\" | reported: done | audit: cannot tell | no lasting visible result or cannot tell from START and END\n6. a person doing this action: \"Tearing something into pieces\" | reported: not_found | audit: confirm | not_found and lasting result was already at START or absent at END\n7. a person doing this action: \"Jingling something\" | reported: not_found | audit: cannot tell | no lasting visible result or cannot tell from START and END\norder: [0, 2], [0, 5], [1, 2], [1, 3], [1, 4], [1, 5], [3, 4], [3, 5], [4, 5]\ncounts: confirm=2, dispute=1, cannot tell=5",
+    "agent_ran_code": true,
+    "error": null,
+    "order_pairs": [
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      4,
+      5
+     ]
+    ],
+    "rules_agree": true,
+    "attempts": 1,
+    "local_order_pairs": [
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      4,
+      5
+     ]
+    ],
+    "step_types": {
+     "thought": 2,
+     "function_call": 1,
+     "function_result": 1,
+     "code_execution_call": 1,
+     "code_execution_result": 1,
+     "model_output": 1
+    },
+    "tokens": 95034
+   },
+   "ts": 1795291298.8709514
+  }
+ ]
+}

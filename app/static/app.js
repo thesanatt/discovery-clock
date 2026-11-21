@@ -9,6 +9,9 @@ const SVG_NS = "http://www.w3.org/2000/svg";
 const WATCH = new URLSearchParams(location.search).get("watch") === "1";
 const POLL_MS = 500;
 const GIVE_UP_MS = 95000;     // the server calls a run an error at 75 s; the page waits a little longer
+const AUDIT_POLL_MS = 1000;   // the audit comes 45 to 70 s after the full read, so it is polled slowly
+const AUDIT_GIVE_UP_MS = 175000;
+const AUDIT_WORDS = { confirm: "confirms", dispute: "DISPUTES" };
 const LEAD_IN_S = 3;
 const VIDEO_BITS = 1200000;
 const MIMES = ["video/mp4", "video/webm;codecs=vp9", "video/webm"];
@@ -22,9 +25,11 @@ const state = { stream: null, camPending: null, facing: "environment", starting:
   recorder: null, timer: null, blob: null, name: "", fullUrl: "", busy: false };
 
 const mainView = { box: $("results"), summary: $("summary"), alarm: $("alarm"), fast: $("line-fast"),
-  full: $("line-full"), footer: $("footer"), legend: $("legend"), status: $("status"), rows: [], run: "" };
+  full: $("line-full"), footer: $("footer"), legend: $("legend"), status: $("status"), rows: [], run: "",
+  audit: $("line-audit"), sheet: $("sheet"), sheetText: $("sheet-text") };
 const askView = { box: $("answer"), summary: $("answer-line"), alarm: null, fast: $("ask-fast"),
-  full: $("ask-full"), footer: null, legend: null, status: $("ask-status"), rows: [], run: "", one: true };
+  full: $("ask-full"), footer: null, legend: null, status: $("ask-status"), rows: [], run: "", one: true,
+  audit: $("ask-audit"), sheet: null, sheetText: null };
 
 function el(tag, cls, text) {
   const n = document.createElement(tag);
@@ -394,15 +399,78 @@ function witnessMarks(s, res) {
   return box;
 }
 
-function fillRow(b, s, res, ticks, flags) {
+// ---------- audit: an optional second check that arrives after the full read ----------
+
+// The audit's verdicts by step index, or null. An older server sends no audit fields at all.
+function auditMap(p) {
+  const a = p && p.fused && p.audit_state === "done" ? p.audit : null;
+  if (!a || !Array.isArray(a.steps) || !a.steps.length) return null;
+  const map = {};
+  a.steps.forEach((r) => { if (r && typeof r.index === "number") map[r.index] = r; });
+  return map;
+}
+
+const disputedDone = (s, a) => Boolean(a && a.audit === "dispute" && s.status === "done");
+
+// The third status line. Empty and hidden until there is a full read and the server speaks of an audit.
+function auditLine(view, p) {
+  const node = view.audit;
+  if (!node) return;
+  const st = p && p.fused ? p.audit_state : undefined;
+  const map = auditMap(p);
+  let text = "";
+  let quiet = false;
+  if (st === "pending") {
+    text = "Audit: a Gemini Managed Agent is checking start and end frames in a sandbox ..." +
+      (typeof p.audit_elapsed === "number" ? " " + Math.round(p.audit_elapsed) + " s" : "");
+  } else if (st === "done" && map) {
+    const rows = Object.keys(map).map((k) => map[k].audit);
+    const yes = rows.filter((v) => v === "confirm").length;
+    const no = rows.filter((v) => v === "dispute").length;
+    text = "Audit: " + (typeof p.audit.seconds === "number" ? secs(p.audit.seconds) + ", " : "") + "Gemini Managed Agent, " +
+      (p.audit.agent_ran_code ? "rules run in a Google sandbox" : "sandbox run not confirmed") +
+      ". Confirmed " + yes + ", disputed " + no + ", could not tell " + (rows.length - yes - no) + ".";
+  } else if (typeof st === "string") {   // off, failed, or an audit with nothing usable in it
+    text = "Audit: not available for this run.";
+    quiet = true;
+  }
+  node.textContent = text;
+  node.hidden = !text;
+  node.classList.toggle("quiet", quiet);
+}
+
+function auditSheet(view, p) {
+  if (!view.sheet || !view.sheetText) return;
+  const text = auditMap(p) && typeof p.audit.sheet === "string" ? p.audit.sheet.trim() : "";
+  if (view.sheetText.textContent !== text) view.sheetText.textContent = text;
+  // The agent's sheet counts steps from 0 and the table counts from 1. The sample sheet counts from 1.
+  const head = view.sheet.querySelector("summary");
+  const label = "Sign-off sheet" + (text && !p.audit.stub ? " (the agent numbers steps from 0)" : "");
+  if (head && head.textContent !== label) head.textContent = label;
+  view.sheet.hidden = !text;
+}
+
+// The audit's notes for one step. Shown under the row while the row is selected or has the focus.
+function auditNotes(a) {
+  const box = el("span", "audx");
+  [["Audit reason", a.reason], ["At start", a.at_start], ["At end", a.at_end]].forEach((pair) => {
+    const line = el("span", "audl");
+    line.append(el("span", "k", pair[0] + ": "), document.createTextNode(String(pair[1] || "no note")));
+    box.append(line);
+  });
+  return box;
+}
+
+function fillRow(b, s, res, ticks, flags, aud) {
   const dur = res.video.duration;
   const fused = res.stage === "fused" && Array.isArray(s.taus) && s.taus.length > 1;
   const on = b.classList.contains("on");
-  b.className = "row " + s.status + (fused ? " fused" : "") + (on ? " on" : "");
+  b.className = "row " + s.status + (fused ? " fused" : "") + (disputedDone(s, aud) ? " disputed" : "") + (on ? " on" : "");
   const idx = el("span", "idx", String(s.index + 1));
 
   const what = el("span", "what");
   what.append(el("span", "txt", s.text), el("span", "st", WORDS[s.status] || s.status));
+  if (disputedDone(s, aud)) what.append(el("span", "flag disputed", "DISPUTED BY AUDIT"));
   flags.forEach((f) => what.append(el("span", "flag", f)));
 
   const track = el("span", "track");
@@ -415,9 +483,10 @@ function fillRow(b, s, res, ticks, flags) {
   if (s.time === null || s.time === undefined) {
     track.append(el("span", "none", s.status === "not_found" ? "NOT FOUND" : "no start time"));
     time.append(el("span", "big", "none"), el("span", "small", "no start time"));
-    b.disabled = true;
-    b.onclick = null;
-    b.removeAttribute("title");
+    b.disabled = !aud;   // with audit notes the row can be selected to read them; there is no clip to play
+    b.onclick = aud ? () => markRow(b.classList.contains("on") ? null : b) : null;
+    if (aud) b.title = "Show the audit notes for this step";
+    else b.removeAttribute("title");
   } else {
     const lo = s.lo === null ? s.time : s.lo;
     const hi = s.hi === null ? dur : s.hi;
@@ -435,13 +504,21 @@ function fillRow(b, s, res, ticks, flags) {
   }
   const score = el("span", "score", s.p_done.toFixed(2));
   const kids = [idx, what, track, time, score];
-  const marks = witnessMarks(s, res);
+  let marks = witnessMarks(s, res);
+  if (aud) {
+    if (marks) marks.append(el("span", "sep", "/"));
+    else marks = el("span", "wit");
+    // a step that was not found keeps its plain mark: the audit never softens that row
+    const loud = aud.audit === "dispute" && s.status !== "not_found";
+    marks.append(el("span", loud ? "w aud dispute" : "w aud", "Audit: " + (AUDIT_WORDS[aud.audit] || "cannot tell")));
+  }
   if (marks) kids.push(marks);
+  if (aud) kids.push(auditNotes(aud));
   b.replaceChildren(...kids);
 }
 
 // Draw a result into a view. The same row nodes are reused when the full read replaces the first read.
-function draw(view, res) {
+function draw(view, res, audit) {
   const dur = res.video.duration;
   const ticks = tickTimes(dur);
   const flags = orderFlags(res);
@@ -460,24 +537,25 @@ function draw(view, res) {
     view.run = res.run;
     view.box.replaceChildren(head, ...view.rows);
   }
-  res.steps.forEach((s, i) => fillRow(view.rows[i], s, res, ticks, flags[s.index] || []));
+  res.steps.forEach((s, i) => fillRow(view.rows[i], s, res, ticks, flags[s.index] || [], audit ? audit[s.index] || null : null));
 }
 
-function summarize(res) {
+function summarize(res, audit) {
   const n = res.steps.length;
   const count = (st) => res.steps.filter((s) => s.status === st).length;
   const flagged = [];
   res.steps.forEach((s) => {
     if (s.status !== "done") flagged.push("step " + (s.index + 1) + " " + (WORDS[s.status] || s.status).toLowerCase());
+    else if (audit && disputedDone(s, audit[s.index])) flagged.push("step " + (s.index + 1) + " done but disputed by the audit");
   });
   (res.order_issues || []).forEach((o) => flagged.push("step " + (o.earlier + 1) + " seen before step " + (o.later + 1)));
   return n + (n === 1 ? " step: " : " steps: ") + count("done") + " done, " + count("not_found") + " not found, " +
     count("unsure") + " unsure. " + (flagged.length ? "Flagged for review: " + flagged.join("; ") + "." : "No step flagged.");
 }
 
-function answerLine(res) {
+function answerLine(res, audit) {
   const s = res.steps[0];
-  const p = " P(done) " + s.p_done.toFixed(2) + ".";
+  const p = " P(done) " + s.p_done.toFixed(2) + "." + (audit && disputedDone(s, audit[s.index]) ? " Disputed by the audit: check it." : "");
   if (s.status === "not_found") return "Not found in this video." + p;
   if (s.time === null || s.time === undefined) return "Unsure, and no start time could be read." + p;
   return (s.status === "done" ? "It started at about " : "Unsure. Best estimate ") + secs(s.time) + ", range " + rangeText(s) + "." + p;
@@ -492,14 +570,15 @@ function witnessCount(res) {
   return n;
 }
 
-function legendText(res) {
+function legendText(res, audit) {
   const fused = res.stage === "fused";
   return "Each strip spans the video, 0 to " + secs(res.video.duration) + ". " +
     (fused ? "Filled curve: probability of each start time after all sources are combined. Line under it: the range. "
       : "Bar: the range of the start time from the first read. ") +
     "Tick: the estimate. P(done): 0 to 1 that the step happened at all. " +
     (fused ? "Under each row: what each source said, with a box around any source that goes against the verdict. " : "") +
-    "Select a row to play its 4 second clip.";
+    "Select a row to play its 4 second clip." +
+    (audit ? " Audit: a managed agent's check of still frames from the start and the end. Select a row to read its notes." : "");
 }
 
 // p is one answer from /api/result
@@ -522,9 +601,12 @@ function show(view, p) {
   } else {
     say(view.full, "Full read: running, " + el1);
   }
+  const audit = auditMap(p);
+  auditLine(view, p);
+  auditSheet(view, p);
   if (!res) return;
-  draw(view, res);
-  if (view.summary) view.summary.textContent = view.one ? answerLine(res) : summarize(res);
+  draw(view, res, audit);
+  if (view.summary) view.summary.textContent = view.one ? answerLine(res, audit) : summarize(res, audit);
   if (view.alarm) {
     const missing = res.steps.filter((s) => s.status === "not_found");
     view.alarm.hidden = !missing.length;
@@ -532,7 +614,7 @@ function show(view, p) {
       ...missing.map((s) => el("span", "", "Step " + (s.index + 1) + ": " + s.text)));
   }
   if (view.legend) {
-    view.legend.textContent = legendText(res);
+    view.legend.textContent = legendText(res, audit);
     view.legend.hidden = false;
   }
   if (view.footer) {
@@ -551,6 +633,8 @@ function clearView(view, summary) {
   view.box.replaceChildren();
   say(view.fast, "");
   say(view.full, "");
+  auditLine(view, null);
+  auditSheet(view, null);
   if (view.summary) view.summary.textContent = summary || "";
   if (view.alarm) view.alarm.hidden = true;
   if (view.legend) view.legend.hidden = true;
@@ -609,13 +693,34 @@ async function follow(runId, view) {
     }
     if (p) {
       show(view, p);
-      if (p.stage === "fused") { say(view.status, ""); return; }
+      if (p.stage === "fused") { say(view.status, ""); followAudit(runId, view, p); return; }
       if (p.stage === "error") { say(view.status, p.error || "The run failed.", true); return; }
       say(view.status, (p.stage === "fast" ? "First read is in. Full read running. " : "Running. ") + Math.round(p.elapsed) + " s");
     }
     if (Date.now() - t0 > GIVE_UP_MS) { say(view.status, "No result after 95 seconds. Run again.", true); return; }
     await sleep(POLL_MS);
   }
+}
+
+// The audit arrives after the full read. It is followed apart from the run, so the Run button is
+// free again as soon as the full read is in. Only the audit line moves until the audit is over.
+async function followAudit(runId, view, first) {
+  if (!first || first.audit_state !== "pending") return;   // no audit for this run, or an older server
+  const t0 = Date.now();
+  while (Date.now() - t0 < AUDIT_GIVE_UP_MS) {
+    await sleep(AUDIT_POLL_MS);
+    if (view.run !== runId) return;   // another run took over this view
+    let p = null;
+    try {
+      p = await fetchJson("/api/result?run=" + runId, {}, 8000, 0);
+    } catch (e) {
+      if (e.status === 404) break;
+    }
+    if (view.run !== runId) return;
+    if (p && p.audit_state !== "pending") { show(view, p); return; }
+    if (p) auditLine(view, p);
+  }
+  if (view.run === runId) auditLine(view, { fused: true, audit_state: "failed" });
 }
 
 // A server still running the earlier one-stage code answers /api/run with the whole first read.
@@ -681,6 +786,7 @@ async function watchLoop() {
   const WAITING = "Waiting for a recording. Results appear here as they arrive.";
   let run = "";
   let final = false;
+  let auditSince = 0;   // when this page first saw the run's audit pending
   let lastLatest = 0;
   clearView(mainView, WAITING);
   for (;;) {
@@ -692,20 +798,28 @@ async function watchLoop() {
         if (latest.run && latest.run !== run) {
           run = latest.run;
           final = false;
+          auditSince = 0;
           showFull();
           clearView(mainView, "A new recording arrived. Reading.");
         }
       }
       if (run && !final) {
         const p = await fetchJson("/api/result?run=" + run, {}, 8000, 0);
-        show(mainView, p);
-        final = p.stage === "fused" || p.stage === "error";
+        const waiting = p.stage === "fused" && p.audit_state === "pending";
+        if (waiting && auditSince) auditLine(mainView, p);   // the rows are drawn; only the audit line moves
+        else show(mainView, p);
+        if (waiting && !auditSince) auditSince = Date.now();
+        final = p.stage === "error" || (p.stage === "fused" && !waiting);
+        if (waiting && Date.now() - auditSince > AUDIT_GIVE_UP_MS) {
+          final = true;
+          auditLine(mainView, { fused: true, audit_state: "failed" });
+        }
       }
       say($("status"), "");
     } catch (e) {
-      if (e.status === 404) { run = ""; final = false; clearView(mainView, WAITING); }
+      if (e.status === 404) { run = ""; final = false; auditSince = 0; clearView(mainView, WAITING); }
     }
-    await sleep(run && !final ? POLL_MS : 1000);
+    await sleep(run && !final ? (auditSince ? AUDIT_POLL_MS : POLL_MS) : 1000);
   }
 }
 
