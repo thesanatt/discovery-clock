@@ -25,3 +25,7 @@ data/
 
 # Run outputs and call logs
 runs/
+
+# Rendered demo video and working files (the scripts that make it are kept)
+video/out/
+video/assets/

@@ -13,8 +13,8 @@ const LEAD_IN_S = 3;
 const VIDEO_BITS = 1200000;
 const MIMES = ["video/mp4", "video/webm;codecs=vp9", "video/webm"];
 const WORDS = { done: "Done", not_found: "Not found", unsure: "Unsure" };
-const WITNESS_NAMES = { ladder: "Decisions", hydrogen: "Hydrogen", hydrogen4: "Hydrogen 4 fps", neon: "Neon", carbon: "Carbon" };
-const WITNESS_ORDER = ["ladder", "hydrogen", "hydrogen4", "neon"];
+const WITNESS_NAMES = { ladder: "Decisions", hydrogen: "Hydrogen", hydrogen4: "Hydrogen 4 fps", hydrogen2: "Hydrogen 2 fps", neon: "Neon", neon4: "Neon 4 fps", carbon: "Carbon" };
+const WITNESS_ORDER = ["ladder", "hydrogen4", "hydrogen2", "neon4", "hydrogen", "neon"];
 const narrow = window.matchMedia("(max-width: 900px)");
 
 const video = $("video");
