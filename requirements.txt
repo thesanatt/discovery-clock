@@ -1,0 +1,10 @@
+google-genai>=3.6
+fastapi>=0.165
+uvicorn>=0.54
+python-multipart>=0.0.34
+python-dotenv>=1.2
+numpy>=2.4
+scikit-learn>=1.9
+imageio-ffmpeg>=0.8
+remotezip>=0.12
+segno>=1.6

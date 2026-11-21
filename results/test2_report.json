@@ -1,0 +1,229 @@
+{
+ "split": "test2",
+ "clips": 99,
+ "steps": 506,
+ "systems": {
+  "ladder alone (Decisions API)": {
+   "steps_present": 308,
+   "steps_phantom": 198,
+   "skip_precision": 0.773,
+   "skip_recall": 0.859,
+   "skip_f1": 0.813,
+   "auroc": 0.902,
+   "timed": 258,
+   "within_2s": 0.513,
+   "within_5s": 0.62,
+   "median_abs_err_s": 1.25,
+   "interval_coverage": 0.868,
+   "within_1s": 0.354,
+   "latency": "1.1 s",
+   "clips": "99"
+  },
+  "Hydrogen, one call": {
+   "steps_present": 309,
+   "steps_phantom": 200,
+   "skip_precision": 0.811,
+   "skip_recall": 0.925,
+   "skip_f1": 0.864,
+   "auroc": 0.893,
+   "timed": 266,
+   "within_2s": 0.699,
+   "within_5s": 0.761,
+   "median_abs_err_s": 0.53,
+   "interval_coverage": null,
+   "within_1s": 0.599,
+   "latency": "6.8 s (p90 9 s)",
+   "clips": "100"
+  },
+  "Hydrogen 4 fps, one call": {
+   "steps_present": 309,
+   "steps_phantom": 200,
+   "skip_precision": 0.853,
+   "skip_recall": 0.925,
+   "skip_f1": 0.887,
+   "auroc": 0.911,
+   "timed": 277,
+   "within_2s": 0.718,
+   "within_5s": 0.77,
+   "median_abs_err_s": 0.54,
+   "interval_coverage": null,
+   "within_1s": 0.605,
+   "latency": "7.0 s (p90 10 s)",
+   "clips": "100"
+  },
+  "Neon, one call": {
+   "steps_present": 309,
+   "steps_phantom": 200,
+   "skip_precision": 0.816,
+   "skip_recall": 0.955,
+   "skip_f1": 0.88,
+   "auroc": 0.908,
+   "timed": 266,
+   "within_2s": 0.718,
+   "within_5s": 0.777,
+   "median_abs_err_s": 0.46,
+   "interval_coverage": null,
+   "within_1s": 0.628,
+   "latency": "10.3 s (p90 14 s)",
+   "clips": "100"
+  },
+  "FUSED: ladder + Hydrogen x2 + Neon": {
+   "steps_present": 308,
+   "steps_phantom": 198,
+   "skip_precision": 0.84,
+   "skip_recall": 0.929,
+   "skip_f1": 0.882,
+   "auroc": 0.956,
+   "timed": 273,
+   "within_2s": 0.727,
+   "within_5s": 0.782,
+   "median_abs_err_s": 0.5,
+   "interval_coverage": 0.777,
+   "within_1s": 0.627,
+   "latency": "10.8 s (p90 15 s)",
+   "clips": "99"
+  },
+  "witnesses only: Hydrogen x2 + Neon": {
+   "steps_present": 308,
+   "steps_phantom": 198,
+   "skip_precision": 0.845,
+   "skip_recall": 0.939,
+   "skip_f1": 0.89,
+   "auroc": 0.932,
+   "timed": 274,
+   "within_2s": 0.724,
+   "within_5s": 0.786,
+   "median_abs_err_s": 0.5,
+   "interval_coverage": 0.766,
+   "within_1s": 0.643,
+   "latency": "10.8 s (p90 15 s)",
+   "clips": "99"
+  }
+ },
+ "bootstrap": {
+  "Hydrogen, one call": {
+   "skip_f1": [
+    0.02,
+    0.003,
+    0.037
+   ],
+   "within_2s": [
+    0.03,
+    0.011,
+    0.049
+   ]
+  },
+  "Hydrogen 4 fps, one call": {
+   "skip_f1": [
+    -0.004,
+    -0.019,
+    0.012
+   ],
+   "within_2s": [
+    0.01,
+    -0.024,
+    0.046
+   ]
+  },
+  "Neon, one call": {
+   "skip_f1": [
+    0.003,
+    -0.023,
+    0.03
+   ],
+   "within_2s": [
+    0.009,
+    -0.022,
+    0.044
+   ]
+  }
+ },
+ "calibration": {
+  "bins": [
+   {
+    "bin": "0.0-0.2",
+    "n": 203,
+    "mean_p": 0.034,
+    "share_real": 0.133
+   },
+   {
+    "bin": "0.2-0.4",
+    "n": 12,
+    "mean_p": 0.269,
+    "share_real": 0.333
+   },
+   {
+    "bin": "0.4-0.6",
+    "n": 8,
+    "mean_p": 0.502,
+    "share_real": 0.75
+   },
+   {
+    "bin": "0.6-0.8",
+    "n": 5,
+    "mean_p": 0.724,
+    "share_real": 0.8
+   },
+   {
+    "bin": "0.8-1.0",
+    "n": 278,
+    "mean_p": 0.981,
+    "share_real": 0.96
+   }
+  ],
+  "ece": 0.057,
+  "brier": 0.08
+ },
+ "failures": [
+  {
+   "label": "Moving object(s) around",
+   "wrong": 23,
+   "asked": 49
+  },
+  {
+   "label": "Holding something in a state",
+   "wrong": 8,
+   "asked": 15
+  },
+  {
+   "label": "Covering something with something",
+   "wrong": 6,
+   "asked": 14
+  },
+  {
+   "label": "Putting something on top of something",
+   "wrong": 6,
+   "asked": 38
+  },
+  {
+   "label": "Showing something to the camera",
+   "wrong": 5,
+   "asked": 25
+  },
+  {
+   "label": "Putting something into something",
+   "wrong": 4,
+   "asked": 27
+  },
+  {
+   "label": "Pretending to cover something",
+   "wrong": 3,
+   "asked": 7
+  },
+  {
+   "label": "Closing something",
+   "wrong": 2,
+   "asked": 14
+  },
+  {
+   "label": "Hitting something against/with something",
+   "wrong": 2,
+   "asked": 13
+  },
+  {
+   "label": "Lifting something and placing it back down",
+   "wrong": 2,
+   "asked": 8
+  }
+ ]
+}

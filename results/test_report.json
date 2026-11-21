@@ -1,0 +1,257 @@
+{
+ "split": "test",
+ "clips": 120,
+ "steps": 626,
+ "systems": {
+  "ladder alone (Decisions API)": {
+   "steps_present": 386,
+   "steps_phantom": 240,
+   "skip_precision": 0.76,
+   "skip_recall": 0.817,
+   "skip_f1": 0.787,
+   "auroc": 0.893,
+   "timed": 324,
+   "within_2s": 0.523,
+   "within_5s": 0.658,
+   "median_abs_err_s": 1.33,
+   "interval_coverage": 0.84,
+   "within_1s": 0.352,
+   "latency": "1.4 s",
+   "clips": "120"
+  },
+  "Hydrogen, one call": {
+   "steps_present": 386,
+   "steps_phantom": 240,
+   "skip_precision": 0.797,
+   "skip_recall": 0.933,
+   "skip_f1": 0.86,
+   "auroc": 0.893,
+   "timed": 329,
+   "within_2s": 0.674,
+   "within_5s": 0.751,
+   "median_abs_err_s": 0.62,
+   "interval_coverage": null,
+   "within_1s": 0.554,
+   "latency": "6.8 s (p90 10 s)",
+   "clips": "120"
+  },
+  "Hydrogen 4 fps, one call": {
+   "steps_present": 386,
+   "steps_phantom": 240,
+   "skip_precision": 0.838,
+   "skip_recall": 0.925,
+   "skip_f1": 0.879,
+   "auroc": 0.907,
+   "timed": 343,
+   "within_2s": 0.684,
+   "within_5s": 0.764,
+   "median_abs_err_s": 0.67,
+   "interval_coverage": null,
+   "within_1s": 0.549,
+   "latency": "7.2 s (p90 10 s)",
+   "clips": "120"
+  },
+  "Neon, one call": {
+   "steps_present": 386,
+   "steps_phantom": 240,
+   "skip_precision": 0.752,
+   "skip_recall": 0.963,
+   "skip_f1": 0.845,
+   "auroc": 0.883,
+   "timed": 310,
+   "within_2s": 0.666,
+   "within_5s": 0.725,
+   "median_abs_err_s": 0.54,
+   "interval_coverage": null,
+   "within_1s": 0.549,
+   "latency": "11.3 s (p90 17 s)",
+   "clips": "120"
+  },
+  "Carbon high thinking, one call": {
+   "steps_present": 70,
+   "steps_phantom": 58,
+   "skip_precision": 0.812,
+   "skip_recall": 0.966,
+   "skip_f1": 0.882,
+   "auroc": 0.89,
+   "timed": 57,
+   "within_2s": 0.729,
+   "within_5s": 0.771,
+   "median_abs_err_s": 0.3,
+   "interval_coverage": null,
+   "within_1s": 0.7,
+   "latency": "113.1 s (p90 314 s)",
+   "clips": "29 (15 fell back)"
+  },
+  "FUSED: ladder + Hydrogen x2 + Neon": {
+   "steps_present": 386,
+   "steps_phantom": 240,
+   "skip_precision": 0.823,
+   "skip_recall": 0.929,
+   "skip_f1": 0.873,
+   "auroc": 0.961,
+   "timed": 338,
+   "within_2s": 0.699,
+   "within_5s": 0.769,
+   "median_abs_err_s": 0.54,
+   "interval_coverage": 0.74,
+   "within_1s": 0.604,
+   "latency": "11.7 s (p90 18 s)",
+   "clips": "120"
+  },
+  "witnesses only: Hydrogen x2 + Neon": {
+   "steps_present": 386,
+   "steps_phantom": 240,
+   "skip_precision": 0.799,
+   "skip_recall": 0.942,
+   "skip_f1": 0.864,
+   "auroc": 0.948,
+   "timed": 329,
+   "within_2s": 0.679,
+   "within_5s": 0.751,
+   "median_abs_err_s": 0.53,
+   "interval_coverage": 0.736,
+   "within_1s": 0.588,
+   "latency": "11.7 s (p90 18 s)",
+   "clips": "120"
+  }
+ },
+ "bootstrap": {
+  "Hydrogen, one call": {
+   "skip_f1": [
+    0.013,
+    -0.005,
+    0.03
+   ],
+   "within_2s": [
+    0.026,
+    0.0,
+    0.055
+   ]
+  },
+  "Hydrogen 4 fps, one call": {
+   "skip_f1": [
+    -0.006,
+    -0.027,
+    0.011
+   ],
+   "within_2s": [
+    0.016,
+    -0.01,
+    0.043
+   ]
+  },
+  "Neon, one call": {
+   "skip_f1": [
+    0.029,
+    0.004,
+    0.052
+   ],
+   "within_2s": [
+    0.034,
+    0.008,
+    0.058
+   ]
+  },
+  "Carbon high thinking, one call": {
+   "skip_f1": [
+    0.007,
+    -0.054,
+    0.074
+   ],
+   "within_2s": [
+    0.071,
+    0.0,
+    0.153
+   ]
+  }
+ },
+ "calibration": {
+  "bins": [
+   {
+    "bin": "0.0-0.2",
+    "n": 246,
+    "mean_p": 0.04,
+    "share_real": 0.13
+   },
+   {
+    "bin": "0.2-0.4",
+    "n": 16,
+    "mean_p": 0.3,
+    "share_real": 0.438
+   },
+   {
+    "bin": "0.4-0.6",
+    "n": 17,
+    "mean_p": 0.49,
+    "share_real": 0.882
+   },
+   {
+    "bin": "0.6-0.8",
+    "n": 21,
+    "mean_p": 0.696,
+    "share_real": 0.81
+   },
+   {
+    "bin": "0.8-1.0",
+    "n": 326,
+    "mean_p": 0.979,
+    "share_real": 0.966
+   }
+  ],
+  "ece": 0.06,
+  "brier": 0.079
+ },
+ "failures": [
+  {
+   "label": "Moving object(s) around",
+   "wrong": 16,
+   "asked": 40
+  },
+  {
+   "label": "Holding something in a state",
+   "wrong": 14,
+   "asked": 27
+  },
+  {
+   "label": "Putting something on top of something",
+   "wrong": 9,
+   "asked": 39
+  },
+  {
+   "label": "Covering something with something",
+   "wrong": 7,
+   "asked": 16
+  },
+  {
+   "label": "Launching something",
+   "wrong": 7,
+   "asked": 14
+  },
+  {
+   "label": "Lifting something and placing it back down",
+   "wrong": 7,
+   "asked": 11
+  },
+  {
+   "label": "Putting something into something",
+   "wrong": 5,
+   "asked": 35
+  },
+  {
+   "label": "Rotating something",
+   "wrong": 5,
+   "asked": 19
+  },
+  {
+   "label": "Showing something to the camera",
+   "wrong": 5,
+   "asked": 33
+  },
+  {
+   "label": "Opening something",
+   "wrong": 4,
+   "asked": 31
+  }
+ ]
+}
