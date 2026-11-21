@@ -1,26 +1,89 @@
 /* Discovery Clock. A plain instrument panel: flat colours, 1px rules, mono numerals. */
+/* Two themes. Dark is the default. Light is set with data-theme="light" on the html element. */
 
 :root {
-  --paper: #efede6;
-  --panel: #faf9f5;
-  --white: #ffffff;
-  --ink: #14181b;
-  --ink-2: #474e54;
-  --rule: #b8b4a8;
-  --rule-2: #dcd9cf;
-  --ok: #0a5c41;
-  --warn: #7a4a00;
-  --bad: #a1241a;
-  --mark: #0d4a7c;
-  --band: #a9c3da;
-  --sample: #f0cf7a;
+  color-scheme: dark;
+  --paper: #15171a;
+  --panel: #1c1f23;
+  --field: #23272c;
+  --track: #15171a;
+  --ink: #e6e2d8;
+  --ink-2: #a8a59b;
+  --line: #6b7179;
+  --rule: #3b4047;
+  --rule-2: #2b2f35;
+  --hover: #2b2f35;
+  --tick: #454b53;
+  --sep: #6b7179;
+  --placeholder: #9a978e;
+  --ok: #6dbb93;
+  --warn: #d6a144;
+  --bad: #b23a30;
+  --bad-hover: #9f3229;
+  --bad-ink: #f08a7e;
+  --bad-rule: #15171a;
+  --bad-sep: #e3b3ab;
+  --on-bad: #fbf1ec;
+  --mark: #78b0e0;
+  --band: #2e4f70;
+  --accent: #78b0e0;
+  --primary: #2b5a86;
+  --primary-hover: #346a9c;
+  --primary-ink: #f2efe8;
+  --sample: #2a2414;
+  --sample-ink: #e3bb5c;
+  --sample-line: #e3bb5c;
+  --screen: #0d0e10;
+  --screen-ink: #c9c6bd;
+  --qr: #ffffff;
+  --qr-filter: brightness(0.9);
+  --qr-pad: 0.6rem;
   --mono: "IBM Plex Mono", ui-monospace, Consolas, "Courier New", monospace;
   --sans: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
 }
 
+:root[data-theme="light"] {
+  color-scheme: light;
+  --paper: #efede6;
+  --panel: #faf9f5;
+  --field: #ffffff;
+  --track: #ffffff;
+  --ink: #14181b;
+  --ink-2: #474e54;
+  --line: #14181b;
+  --rule: #b8b4a8;
+  --rule-2: #dcd9cf;
+  --hover: #dcd9cf;
+  --tick: #dcd9cf;
+  --sep: #b8b4a8;
+  --placeholder: #6b7075;
+  --ok: #0a5c41;
+  --warn: #7a4a00;
+  --bad: #a1241a;
+  --bad-hover: #8c1f16;
+  --bad-ink: #a1241a;
+  --bad-rule: #ffffff;
+  --bad-sep: #b8b4a8;
+  --on-bad: #ffffff;
+  --mark: #0d4a7c;
+  --band: #a9c3da;
+  --accent: #14181b;
+  --primary: #14181b;
+  --primary-hover: #30383e;
+  --primary-ink: #faf9f5;
+  --sample: #f0cf7a;
+  --sample-ink: #14181b;
+  --sample-line: #14181b;
+  --screen: #14181b;
+  --screen-ink: #d5d9dc;
+  --qr: #ffffff;
+  --qr-pad: 0;
+  --qr-filter: none;
+}
+
 * { box-sizing: border-box; }
 
-html { font-size: 18px; color-scheme: light; }
+html { font-size: 18px; }
 
 body {
   margin: 0;
@@ -48,7 +111,7 @@ body.watch h2 .num { display: none; }
   gap: 0.3rem 1.5rem;
   padding: 0.65rem 1.25rem;
   background: var(--panel);
-  border-bottom: 2px solid var(--ink);
+  border-bottom: 2px solid var(--line);
 }
 
 .top h1 {
@@ -59,6 +122,22 @@ body.watch h2 .num { display: none; }
 }
 
 .top .what { margin: 0; flex: 1 1 22rem; color: var(--ink-2); }
+
+/* Theme switch: plain underlined text at the end of the strip */
+
+.top .theme {
+  order: 1;
+  min-height: 1.9rem;
+  padding: 0.1rem 0.4rem;
+  font: 500 0.85rem var(--mono);
+  color: var(--ink-2);
+  background: none;
+  border: 0;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.top .theme:hover { color: var(--ink); background: var(--hover); }
 
 .aid { margin: 0; font: 500 0.85rem var(--mono); }
 
@@ -71,7 +150,8 @@ body.watch h2 .num { display: none; }
   margin: 0;
   padding: 0.35rem 1.25rem;
   background: var(--sample);
-  border-bottom: 2px solid var(--ink);
+  color: var(--sample-ink);
+  border-bottom: 2px solid var(--sample-line);
   font: 600 1.05rem var(--mono);
   letter-spacing: 0.04em;
 }
@@ -93,7 +173,7 @@ body.watch h2 .num { display: none; }
 h2 {
   margin: 1rem 0 0.6rem;
   padding-bottom: 0.25rem;
-  border-bottom: 1px solid var(--ink);
+  border-bottom: 1px solid var(--line);
   font: 600 0.8rem var(--mono);
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -103,7 +183,7 @@ h2 .num {
   display: inline-block;
   min-width: 1.4rem;
   margin-right: 0.4rem;
-  border: 1px solid var(--ink);
+  border: 1px solid var(--line);
   text-align: center;
 }
 
@@ -112,11 +192,11 @@ h2 .num {
 .screen {
   position: relative;
   aspect-ratio: 16 / 9;
-  background: var(--ink);
-  border: 1px solid var(--ink);
+  background: var(--screen);
+  border: 1px solid var(--line);
 }
 
-.screen video { display: block; width: 100%; height: 100%; object-fit: contain; background: var(--ink); }
+.screen video { display: block; width: 100%; height: 100%; object-fit: contain; background: var(--screen); }
 
 .screen-note {
   position: absolute;
@@ -126,7 +206,7 @@ h2 .num {
   justify-content: center;
   margin: 0;
   padding: 1rem;
-  color: #d5d9dc;
+  color: var(--screen-ink);
   text-align: center;
 }
 
@@ -147,7 +227,7 @@ h2 .num {
 
 .countdown #cd-num { font-size: 4.2rem; line-height: 1; font-variant-numeric: tabular-nums; }
 
-.countdown.rec { background: var(--bad); color: var(--white); border-color: var(--white); }
+.countdown.rec { background: var(--bad); color: var(--on-bad); border-color: var(--on-bad); }
 
 .capline { display: flex; align-items: center; gap: 0.6rem; margin: 0.3rem 0 0.5rem; }
 
@@ -163,17 +243,17 @@ button {
   font: 500 1rem var(--sans);
   color: var(--ink);
   background: var(--panel);
-  border: 1px solid var(--ink);
+  border: 1px solid var(--line);
   border-radius: 2px;
   cursor: pointer;
   transition: background-color 0.12s;
 }
 
-button:hover { background: var(--rule-2); }
+button:hover { background: var(--hover); }
 
-button.primary { background: var(--ink); color: var(--panel); }
+button.primary { background: var(--primary); border-color: var(--primary); color: var(--primary-ink); }
 
-button.primary:hover { background: #30383e; }
+button.primary:hover { background: var(--primary-hover); }
 
 button.big { min-width: 8rem; min-height: 3.2rem; font-weight: 600; font-size: 1.2rem; }
 
@@ -188,20 +268,22 @@ button.record {
   text-transform: uppercase;
 }
 
-button.record.live { background: var(--bad); border-color: var(--bad); color: var(--white); }
+button.record.live { background: var(--bad); border-color: var(--bad); color: var(--on-bad); }
 
 button:disabled, button.primary:disabled { color: var(--ink-2); background: var(--rule-2); border-color: var(--rule); cursor: not-allowed; }
 
 input, textarea {
   font: 400 1rem var(--sans);
   color: var(--ink);
-  background: var(--white);
-  border: 1px solid var(--ink);
+  background: var(--field);
+  border: 1px solid var(--line);
   border-radius: 2px;
   padding: 0.4rem 0.5rem;
 }
 
-input[type="range"] { flex: 1 1 6rem; min-width: 5rem; height: 2.7rem; padding: 0; border: 0; background: none; accent-color: var(--ink); }
+input::placeholder, textarea::placeholder { color: var(--placeholder); opacity: 1; }
+
+input[type="range"] { flex: 1 1 6rem; min-width: 5rem; height: 2.7rem; padding: 0; border: 0; background: none; accent-color: var(--accent); }
 
 input[type="file"] { display: block; width: 100%; min-width: 0; margin-top: 0.3rem; font-size: 0.9rem; border-color: var(--rule); }
 
@@ -211,7 +293,7 @@ input[type="file"] { display: block; width: 100%; min-width: 0; margin-top: 0.3r
 
 .filebox { margin: 0.6rem 0; padding: 0.4rem 0; border-top: 1px solid var(--rule-2); font-size: 0.9rem; color: var(--ink-2); }
 
-.filebox.point { padding: 0.4rem 0.5rem; border: 2px solid var(--bad); color: var(--ink); }
+.filebox.point { padding: 0.4rem 0.5rem; border: 2px solid var(--bad-ink); color: var(--ink); }
 
 .hint { display: block; margin-bottom: 0.3rem; font-size: 0.9rem; color: var(--ink-2); }
 
@@ -221,13 +303,13 @@ textarea { display: block; width: 100%; resize: vertical; line-height: 1.45; }
 
 .status { flex: 1 1 10rem; margin: 0; min-height: 1.3rem; font: 500 0.95rem var(--mono); }
 
-.status.err, .stage.err { color: var(--bad); }
+.status.err, .stage.err { color: var(--bad-ink); }
 
-/* Watch view: the code a phone scans */
+/* Watch view: the code a phone scans. The code stays dark on a light tile in both themes. */
 
 .qr { padding-top: 1rem; text-align: left; }
 
-.qr img { display: block; width: 100%; max-width: 20rem; height: auto; border: 1px solid var(--ink); background: var(--white); }
+.qr img { display: block; width: 100%; max-width: 20rem; height: auto; padding: var(--qr-pad); border: 1px solid var(--line); background: var(--qr); filter: var(--qr-filter); }
 
 .qr-words { margin: 0.6rem 0 0; font: 600 1.25rem var(--mono); line-height: 1.25; }
 
@@ -251,13 +333,13 @@ textarea { display: block; width: 100%; resize: vertical; line-height: 1.45; }
   margin: 0 0 0.6rem;
   padding: 0.5rem 0.8rem;
   background: var(--bad);
-  color: var(--white);
+  color: var(--on-bad);
   font: 600 1.15rem var(--sans);
 }
 
 .alarm strong { font: 600 1.7rem var(--mono); letter-spacing: 0.06em; }
 
-.results:not(:empty) { border-top: 1px solid var(--ink); background: var(--panel); }
+.results:not(:empty) { border-top: 1px solid var(--line); background: var(--panel); }
 
 .head, .row {
   display: grid;
@@ -292,15 +374,21 @@ textarea { display: block; width: 100%; resize: vertical; line-height: 1.45; }
   text-align: left;
 }
 
-.row:hover:not(:disabled) { background: var(--white); }
+.row:hover:not(:disabled), .row:active:not(:disabled) { background: var(--field); }
 
-.row.on { background: var(--white); border-left-color: var(--mark); }
+.row.on { background: var(--field); border-left-color: var(--mark); }
+
+.row:focus-visible { outline-offset: -3px; }
 
 .row:disabled { background: var(--panel); color: var(--ink); border-color: var(--rule) var(--rule) var(--rule) transparent; cursor: default; }
 
 .row.unsure, .row.unsure:disabled { border-left-color: var(--warn); }
 
-.row.not_found, .row.not_found:disabled { background: var(--bad); color: var(--white); border-color: var(--white) var(--bad) var(--white) var(--bad); }
+.row.not_found, .row.not_found:disabled { background: var(--bad); color: var(--on-bad); border-color: var(--bad-rule) var(--bad) var(--bad-rule) var(--bad); }
+
+.row.not_found:hover:not(:disabled), .row.not_found:active:not(:disabled) { background: var(--bad-hover); }
+
+.row.not_found:focus-visible { outline-color: var(--on-bad); }
 
 .row .idx { font: 600 1.3rem var(--mono); }
 
@@ -310,7 +398,7 @@ textarea { display: block; width: 100%; resize: vertical; line-height: 1.45; }
 
 .row.done .st { color: var(--ok); }
 .row.unsure .st { color: var(--warn); }
-.row.not_found .st { color: var(--white); font-size: 1.35rem; }
+.row.not_found .st { color: var(--on-bad); font-size: 1.35rem; }
 
 .flag {
   display: inline-block;
@@ -318,7 +406,7 @@ textarea { display: block; width: 100%; resize: vertical; line-height: 1.45; }
   padding: 0.05rem 0.4rem;
   vertical-align: middle;
   border: 2px solid var(--warn);
-  background: var(--white);
+  background: var(--field);
   color: var(--warn);
   font: 600 0.78rem var(--mono);
   text-transform: uppercase;
@@ -330,14 +418,14 @@ textarea { display: block; width: 100%; resize: vertical; line-height: 1.45; }
   position: relative;
   display: block;
   height: 3rem;
-  background: var(--white);
-  border-left: 1px solid var(--ink);
-  border-right: 1px solid var(--ink);
+  background: var(--track);
+  border-left: 1px solid var(--line);
+  border-right: 1px solid var(--line);
 }
 
 .head .track { height: 1.1rem; background: none; border-color: transparent; }
 
-.tick { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--rule-2); }
+.tick { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--tick); }
 
 .ticklabel { position: absolute; top: 0; transform: translateX(-50%); white-space: nowrap; text-transform: none; }
 
@@ -366,13 +454,13 @@ textarea { display: block; width: 100%; resize: vertical; line-height: 1.45; }
   color: var(--ink-2);
 }
 
-.row.not_found .track .none { color: var(--bad); }
+.row.not_found .track .none { color: var(--bad-ink); }
 
 .time .big { display: block; font: 600 1.5rem var(--mono); line-height: 1.15; }
 
 .time .small { display: block; font: 400 0.78rem var(--mono); color: var(--ink-2); }
 
-.row.not_found .time .small { color: var(--white); }
+.row.not_found .time .small { color: var(--on-bad); }
 
 .row .score { font: 600 1.3rem var(--mono); text-align: right; }
 
@@ -382,13 +470,15 @@ textarea { display: block; width: 100%; resize: vertical; line-height: 1.45; }
 
 .wit { grid-column: 2 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 0.15rem 0.45rem; font: 400 0.8rem var(--mono); color: var(--ink-2); }
 
-.row.not_found .wit { color: var(--white); }
+.row.not_found .wit { color: var(--on-bad); }
 
-.wit .sep { color: var(--rule); }
+.wit .sep { color: var(--sep); }
+
+.row.not_found .wit .sep { color: var(--bad-sep); }
 
 .wit .silent { font-style: italic; }
 
-.wit .against { padding: 0 0.35rem; border: 2px solid var(--bad); background: var(--white); color: var(--bad); font-weight: 600; }
+.wit .against { padding: 0 0.35rem; border: 2px solid var(--bad-ink); background: var(--field); color: var(--bad-ink); font-weight: 600; }
 
 .wit .against .tag { margin-left: 0.4rem; text-transform: uppercase; letter-spacing: 0.04em; }
 
@@ -430,13 +520,15 @@ textarea { display: block; width: 100%; resize: vertical; line-height: 1.45; }
   .col { padding-left: 1rem; padding-right: 1rem; }
   .top { padding: 0.5rem 1rem; }
   .top .what { flex-basis: 100%; font-size: 0.9rem; }
+  /* the theme switch sits beside the title, so the strip keeps its height */
+  .top .theme { order: 0; margin-left: auto; }
   .sample { padding: 0.3rem 1rem; font-size: 0.95rem; }
-  button.record { min-height: 4.6rem; }
+  button.record { min-height: 5rem; }
   /* the Run button stays in thumb reach while the recorder is on screen */
-  .runbar { position: sticky; bottom: 0; z-index: 3; margin: 0.7rem -1rem 0; padding: 0.5rem 1rem; background: var(--panel); border-top: 2px solid var(--ink); }
-  .runbar .big { flex: 1 1 100%; min-height: 3.6rem; }
+  .runbar { position: sticky; bottom: 0; z-index: 3; margin: 0.7rem -1rem 0; padding: 0.5rem 1rem; background: var(--panel); border-top: 2px solid var(--line); }
+  .runbar .big { flex: 1 1 100%; min-height: 4rem; }
   /* a clip plays on top of the table instead of far above it */
-  .player.float { position: fixed; top: 0; left: 0; right: 0; z-index: 7; padding: 0 0 0.2rem; background: var(--panel); border-bottom: 2px solid var(--ink); }
+  .player.float { position: fixed; top: 0; left: 0; right: 0; z-index: 7; padding: 0 0 0.2rem; background: var(--panel); border-bottom: 2px solid var(--line); }
   .player.float .screen { aspect-ratio: auto; height: 30vh; border-width: 0 0 1px; }
   .player.float .capline { margin: 0.3rem 0.6rem 0.1rem; }
 }

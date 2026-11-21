@@ -1,11 +1,12 @@
 """Field check of the auditor: the nine phone takes, one fused read and one audit each.
 
   python -m eval.audit_field [--takes 1,4,6,8,9] [--model gemini-4-hydrogen] [--budget 18]
-                             [--workers 4] [--reuse-fused]
+                             [--workers 4] [--reuse-fused] [--run 2]
 
 For each take: engine.run_fused once with the six-step checklist of eval/field.py, then
-clock.auditor.audit once on that result. Writes results/audit_field.json (one record per take and
-model; a rerun replaces the records it repeats) and prints a table and the counts.
+clock.auditor.audit once on that result. Writes results/audit_field.json (one record per take,
+model and run number; a rerun replaces the records it repeats) and prints a table and the counts.
+--run N stores a repeat under run number N, so the same take can be audited more than once.
 
 --budget is the largest number of managed-agent interactions this run may create, retries included.
 --reuse-fused takes the fused read stored for the same take by an earlier run instead of a new one,
@@ -124,6 +125,7 @@ def main() -> None:
     auditor.CALL_BUDGET = int(_arg("--budget", "18"))
     workers = int(_arg("--workers", "4"))
     reuse = "--reuse-fused" in sys.argv
+    run = int(_arg("--run", "1"))
     old = _load()
     stored = {r["take"]: r["fused"] for r in old["records"] if r.get("fused")}
 
@@ -145,16 +147,16 @@ def main() -> None:
             continue
         print(f"take {take}: fused read ready ({fused.get('seconds_total')} s), audit started", flush=True)
         jobs[take] = pool.submit(auditor.audit, video, fused, model, 180, 1, f"audit_field:{take}")
-        records.append({"take": take, "model": model, "file": FILES[take], "desc": desc, "not_done": not_done,
+        records.append({"take": take, "model": model, "run": run, "file": FILES[take], "desc": desc, "not_done": not_done,
                         "fused": fused, "ts": time.time()})
     for r in records:
         r["audit"] = jobs[r["take"]].result()
         print(f"take {r['take']}: audit {'ok' if r['audit']['ok'] else 'FAILED'} in {r['audit']['seconds']} s", flush=True)
     pool.shutdown()
 
-    done = {(r["take"], r["model"]) for r in records}
-    allrec = [r for r in old["records"] if (r["take"], r["model"]) not in done] + records
-    allrec.sort(key=lambda r: (r["model"], r["take"]))
+    done = {(r["take"], r["model"], r["run"]) for r in records}
+    allrec = [r for r in old["records"] if (r["take"], r["model"], r.get("run", 1)) not in done] + records
+    allrec.sort(key=lambda r: (r["model"], r["take"], r.get("run", 1)))
     summary = {m: summarize([r for r in allrec if r["model"] == m]) for m in sorted({r["model"] for r in allrec})}
     OUT.parent.mkdir(exist_ok=True)
     json.dump({"steps": STEPS, "summary": summary, "interactions_created_this_run": auditor.CALLS_MADE,
@@ -164,7 +166,7 @@ def main() -> None:
     print("\n".join(table(records)))
     c = summarize(records)
     print()
-    print(f"auditor model {model}; takes {','.join(takes)}; managed-agent interactions created by this run: {auditor.CALLS_MADE}")
+    print(f"auditor model {model}; run {run}; takes {','.join(takes)}; managed-agent interactions created by this run: {auditor.CALLS_MADE}")
     print(f"(a) fused 'done' verdicts that are wrong: {c['wrong_done']}; the audit disputes {c['wrong_done_disputed']}, "
           f"cannot tell {c['wrong_done_cannot_tell']}, confirms {c['wrong_done_confirmed']}")
     print(f"(b) fused 'done' verdicts that are right: {c['right_done']}; the audit wrongly disputes {c['right_done_disputed']}, "
@@ -177,6 +179,10 @@ def main() -> None:
     print(f"(d) audits that failed or gave no usable JSON: {c['audits_failed']} of {c['audits']}")
     print(f"(e) audits where the returned SHA-256 proof matched (the sandbox run happened): {c['code_ran']} of "
           f"{c['audits'] - c['audits_failed']}; agent rule code agreed with the local rules in {c['rules_agree']}")
+    t = summary[model]
+    print(f"all stored runs of {model}: {t['audits']} audits; wrong 'done' verdicts {t['wrong_done']}, disputed {t['wrong_done_disputed']}; "
+          f"right 'done' verdicts {t['right_done']}, wrongly disputed {t['right_done_disputed']}; "
+          f"seconds median {t['seconds_median']}, max {t['seconds_max']}; failed {t['audits_failed']}")
     print("written", OUT)
 
 

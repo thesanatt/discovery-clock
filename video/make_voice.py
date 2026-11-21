@@ -64,7 +64,7 @@ PEAK_DB = -1.0    # ... unless that would push its loudest sample above this
 LINES = [
     "This order shipped without the watch. The packing video already knew.",
     "Sellers film every order. Nobody watches the footage until a customer says an item is missing.",
-    "Discovery Clock checks a video against a checklist. The first read takes about two seconds: "
+    "Discovery Clock checks a video against a checklist. The first read takes a few seconds: "
     "one call to the Gemini Decisions API, asking seventy yes or no questions about when each "
     "step started.",
     "Then three Gemini 4 calls write their own timelines. Bayes' rule weighs each witness by "

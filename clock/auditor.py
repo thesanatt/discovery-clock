@@ -373,6 +373,8 @@ def audit(video_path: str | Path, result: dict, model: str = "gemini-4-hydrogen"
            "error": None, "order_pairs": [], "rules_agree": None, "attempts": 0, "frames": []}
     try:
         video_path = Path(video_path)
+        if not isinstance(result, dict) or not result.get("steps"):
+            raise ValueError("the fused result has no steps to audit")
         shots = frames(video_path, result)
         out["frames"] = [label for label, _ in shots]
         if not any(label.startswith("START") for label, _ in shots) or not any(label.startswith("END") for label, _ in shots):

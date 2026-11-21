@@ -26,9 +26,9 @@ FF = media.FFMPEG
 OUT = ROOT / "video" / "out"
 ASSETS = ROOT / "video" / "assets"
 W, H, FPS = 1280, 720, 30
-PAPER = "0xefede6"
-INK = "0x14181b"
-BAD = "0xa1241a"
+PAPER = "0x15171a"
+INK = "0xe6e2d8"
+BAD = "0xf08a7e"
 MONO = "C\\:/Windows/Fonts/consolab.ttf"
 SANS = "C\\:/Windows/Fonts/segoeui.ttf"
 SANSB = "C\\:/Windows/Fonts/seguisb.ttf"
@@ -95,7 +95,7 @@ def main() -> None:
         if not f.exists():
             sys.exit(f"missing voice line {f}")
     d = [media.duration_s(f) + GAP for f in vo]          # picture length for each line
-    app = ASSETS / "app_1600x900.png"
+    app = ASSETS / "app_dark_1600x900.png"
     footage = ASSETS / "phone.mp4"
     res = json.load(open(ASSETS / "take4_result.json", encoding="ascii"))["fused"]
     steps = res["steps"]
@@ -115,7 +115,7 @@ def main() -> None:
         (f"Step {skipped['index'] + 1} never happens.", 250 + 44 * len(steps) + 30, 34, SANSB, BAD),
     ])
     # 3. the whole result page
-    still(app, seg / "03.mp4", d[2], zoom_to=1.10)
+    still(app, seg / "03.mp4", d[2], zoom_to=1.0)
     # 4. how it works, animated from the same result
     retime(OUT / "s4_math.mp4", seg / "04.mp4", d[3])
     # 5 + 6. results on held-out clips

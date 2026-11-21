@@ -38,14 +38,14 @@ FRAMES = OUT / "frames"
 
 W, H, FPS = 1280, 720, 30
 
-PAPER = "#efede6"
-PANEL = "#faf9f5"
-INK = "#14181b"
-RULE = "#b8b4a8"
-GREEN = "#0a5c41"
-RED = "#a1241a"
-BLUE = "#0d4a7c"
-BAND = "#a9c3da"
+PAPER = "#15171a"   # matches the app's dark theme
+PANEL = "#1c1f23"
+INK = "#e6e2d8"
+RULE = "#3b4047"
+GREEN = "#6dbb93"
+RED = "#f08a7e"
+BLUE = "#78b0e0"
+BAND = "#2e4f70"
 
 _F = "C:/Windows/Fonts/"
 MONO = font_manager.FontProperties(fname=_F + "consola.ttf")

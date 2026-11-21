@@ -62,6 +62,20 @@ function store(key, value) {
   return null;
 }
 
+// ---------- theme: dark by default, light on request ----------
+
+function setTheme(name, keep) {
+  const theme = name === "light" ? "light" : "dark";
+  const other = theme === "dark" ? "Light" : "Dark";
+  document.documentElement.setAttribute("data-theme", theme);
+  const b = $("theme");
+  if (b) {
+    b.textContent = other;
+    b.title = "Switch to the " + other.toLowerCase() + " theme";
+  }
+  if (keep) store("clock.theme", theme);
+}
+
 // ---------- checklist ----------
 
 function readSteps() {
@@ -697,6 +711,10 @@ async function watchLoop() {
 
 // ---------- start ----------
 
+setTheme(document.documentElement.getAttribute("data-theme"), false);
+if ($("theme")) {   // absent in a cached older page
+  $("theme").addEventListener("click", () => setTheme(document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light", true));
+}
 $("full").addEventListener("click", showFull);
 
 if (WATCH) {

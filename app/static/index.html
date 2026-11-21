@@ -5,6 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Discovery Clock</title>
 <link rel="icon" href="data:,">
+<script>
+// Theme: dark unless ?theme=light or an earlier choice says light. Set before the page paints.
+(function () {
+  var t = null;
+  try {
+    t = new URLSearchParams(location.search).get("theme");
+    if (t === "light" || t === "dark") localStorage.setItem("clock.theme", t);
+    else t = localStorage.getItem("clock.theme");
+  } catch (e) { /* private mode: the default theme is used */ }
+  document.documentElement.setAttribute("data-theme", t === "light" ? "light" : "dark");
+})();
+</script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -12,6 +24,7 @@
 
 <header class="top">
   <h1>Discovery Clock</h1>
+  <button id="theme" type="button" class="theme">Light</button>
   <p class="what">Film a checklist job and type the steps. Read when each step started, or that it was not found.</p>
   <p class="aid">Review aid. A person checks every flagged step and signs.</p>
 </header>
